@@ -20,6 +20,38 @@ namespace CodeExercise
         }
 
 
+        /// <summary>
+        ///       _______3______
+        ///      /              \
+        ///   ___5__          ___1__
+        ///  /      \        /      \
+        ///  6      _2       0       8
+        ///        /  \
+        ///        7   4
+        /// </summary>
+        static void Run_LowestCommonAncestorINBTree()
+        {
+            TreeNode root = new TreeNode(3);
+            root.left = new TreeNode(5);
+            root.left.left = new TreeNode(6);
+            root.left.right = new TreeNode(2);
+            root.left.right.left = new TreeNode(7);
+            root.left.right.right = new TreeNode(4);
+
+            root.right = new TreeNode(1);
+            root.right.left = new TreeNode(0);
+            root.right.right = new TreeNode(8);
+
+            TreeNode p6 = new TreeNode(6);
+            TreeNode q0 = new TreeNode(0);
+            TreeNode ans1 = CodeExercise.Tree.LowestCommonAncestor.FindCommonAncestor(root, p6, q0);
+
+            TreeNode p5 = new TreeNode(5);
+            TreeNode q7 = new TreeNode(7);
+            TreeNode ans2 = CodeExercise.Tree.LowestCommonAncestor.FindCommonAncestor(root, p5, q7);
+
+        }
+
         static void Run_EditDistanceQuestion()
         {
             string s1 = "abcfg";
@@ -35,8 +67,27 @@ namespace CodeExercise
             EditDistance.FindDistanceAndPrint(str1, str2);
         }
 
+        static void Run_permuteIntArray()
+        {
+            int testlengh = 4;
+            int[] arr = new int[testlengh];
+            for (int i = 0; i< testlengh; i++)
+            {
+                arr[i] = i + 1;
+            }
+
+            IList<IList<int>> permutation = PermutationIntArray.Permute(arr);
+
+            foreach (var intList in permutation)
+            {
+                Console.WriteLine(string.Join(",", intList));
+            }
+        }
+
         static void Main(string[] args)
         {
+            Run_LowestCommonAncestorINBTree();
+            Run_permuteIntArray();
             Run_EditDistanceQuestion();
             Run_KMP_Question();
         }

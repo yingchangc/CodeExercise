@@ -45,8 +45,12 @@
   <ItemGroup>
     <Compile Include="EditDistance.cs" />
     <Compile Include="KMPSubstringSearch.cs" />
+    <Compile Include="MedianOfTwoSortedArray.cs" />
+    <Compile Include="PermutationIntArray.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tree\LowestCommonAncestor.cs" />
+    <Compile Include="Tree\TreeNode.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
