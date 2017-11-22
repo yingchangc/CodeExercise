@@ -84,8 +84,15 @@ namespace CodeExercise
             }
         }
 
+        static void Run_CombinationSumAllowDuplicate()
+        {
+            int[] candidates = { 2, 7, 3, 6 };
+            CombineSum.CombinationSumAllowDuplicate(candidates, 7);
+        }
+
         static void Main(string[] args)
         {
+            Run_CombinationSumAllowDuplicate();
             Run_LowestCommonAncestorINBTree();
             Run_permuteIntArray();
             Run_EditDistanceQuestion();
