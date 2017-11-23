@@ -98,8 +98,17 @@ namespace CodeExercise
             CombineSum.CombinationSum2(candidates, 8);
         }
 
+        //78. Subsets 
+        static void Run_SubSets()
+        {
+            int[] candidates = { 1, 2, 3 };
+            SubSets.FindSubsets(candidates);
+        }
+
         static void Main(string[] args)
         {
+            // 78
+            Run_SubSets();
             //39
             Run_CombinationSumAllowDuplicate();
             //40
