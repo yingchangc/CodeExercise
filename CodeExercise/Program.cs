@@ -105,9 +105,33 @@ namespace CodeExercise
             SubSets.FindSubsets(candidates);
         }
 
+        //79. Subsets with dup element
+        static void Run_SubSetsWithDup()
+        {
+            //int[] candidates = { 1, 2, 2 };
+            int[] candidates = { 4,4,1,4 };
+            SubSets.SubsetsWithDup(candidates);
+        }
+
+        // 47. 
+        static void Run_PermuteUnique()
+        {
+            int[] nums = { 2,2,1,1 };
+            IList<IList<int>> results = PermutationIntArray.PermuteUnique(nums);
+
+            foreach (var intList in results)
+            {
+                Console.WriteLine(string.Join(",", intList));
+            }
+        }
+
         static void Main(string[] args)
         {
-            // 78
+            //47
+            Run_PermuteUnique();
+            //79
+            Run_SubSetsWithDup();
+            //78
             Run_SubSets();
             //39
             Run_CombinationSumAllowDuplicate();
