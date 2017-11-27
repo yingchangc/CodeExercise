@@ -125,8 +125,42 @@ namespace CodeExercise
             }
         }
 
+        //267
+        static void Run_PalindromePermutation()
+        {
+            string test1 = "careac";
+            bool canPermute = PalindromePermutation.CanPalidromePermute(test1);
+            string test2 = "aaabbcccc";
+            canPermute = PalindromePermutation.CanPalidromePermute(test2);
+        }
+
+        //131. Palindrome Partitioning 
+        static void Run_Palindrome_Partitioning()
+        {
+            string test1 = "cbbbcc";
+            IList<IList<string>> results = DP.PalindromePartition.Partition(test1);
+            foreach (var result in results)
+            {
+                Console.WriteLine(string.Join(",", result));
+            }
+        }
+
+        // 409. Longest Palindrome 
+        static void Run_Longest_Palindrome()
+        {
+            string test = "civilwartestingwhetherthatnaptionoranynartionsoconceivedandsodedicatedcanlongendureWeareqmetonagreatbattlefiemldoftzhatwarWehavecometodedicpateaportionofthatfieldasafinalrestingplaceforthosewhoheregavetheirlivesthatthatnationmightliveItisaltogetherfangandproperthatweshoulddothisButinalargersensewecannotdedicatewecannotconsecratewecannothallowthisgroundThebravelmenlivinganddeadwhostruggledherehaveconsecrateditfaraboveourpoorponwertoaddordetractTgheworldadswfilllittlenotlenorlongrememberwhatwesayherebutitcanneverforgetwhattheydidhereItisforusthelivingrathertobededicatedheretotheulnfinishedworkwhichtheywhofoughtherehavethusfarsonoblyadvancedItisratherforustobeherededicatedtothegreattdafskremainingbeforeusthatfromthesehonoreddeadwetakeincreaseddevotiontothatcauseforwhichtheygavethelastpfullmeasureofdevotionthatweherehighlyresolvethatthesedeadshallnothavediedinvainthatthisnationunsderGodshallhaveanewbirthoffreedomandthatgovernmentofthepeoplebythepeopleforthepeopleshallnotperishfromtheearth";
+            int ans = DP.LongestPalindrome.LongestPalindromeSize(test);
+        }
+
+
         static void Main(string[] args)
         {
+            // 409
+            Run_Longest_Palindrome();
+            //131
+            Run_Palindrome_Partitioning();
+            //267
+            Run_PalindromePermutation();
             //47
             Run_PermuteUnique();
             //79

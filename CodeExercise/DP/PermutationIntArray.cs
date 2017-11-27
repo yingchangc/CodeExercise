@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace CodeExercise
 {
+    //https://leetcode.com/problems/combination-sum/discuss/
+
     public class PermutationIntArray
     {
         public static IList<IList<int>> Permute(int[] nums)
