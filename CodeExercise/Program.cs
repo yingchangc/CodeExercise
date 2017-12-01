@@ -152,9 +152,41 @@ namespace CodeExercise
             int ans = DP.LongestPalindrome.LongestPalindromeSize(test);
         }
 
+        // 132. PalindromePartitioning min cut
+        static void Run_Palindrome_Partitioning_II()
+        {
+            string test = "bbcxcbm";
+
+            int res = DP.PalindromePartition.MinCut(test);
+        }
+
+        // 55. Jump Game
+        static void Run_JumpGame()
+        {
+            int[] nums1 = { 2, 3, 1, 1, 4 };
+            bool canjump=DP.JumpGame.CanJump(nums1);
+
+            int[] nums2 = { 3,2,1,0,4};
+            canjump = DP.JumpGame.CanJump(nums2);
+        }
+
+        // 45. min Jump Game
+        static void Run_MinJumpGame()
+        {
+            int[] nums1 = { 2,3,1,1,4 };
+            int minjump = DP.JumpGame.Jump(nums1);
+
+            
+        }
 
         static void Main(string[] args)
         {
+            //45
+            Run_MinJumpGame();
+            // 55
+            Run_JumpGame();
+            //132
+            Run_Palindrome_Partitioning_II();
             // 409
             Run_Longest_Palindrome();
             //131
