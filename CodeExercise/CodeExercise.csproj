@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DP\AnagramSubstring.cs" />
+    <Compile Include="DP\AssignCookies.cs" />
     <Compile Include="DP\CombineSum.cs" />
     <Compile Include="DP\JumpGame.cs" />
     <Compile Include="DP\LongestPalindrome.cs" />

@@ -178,9 +178,32 @@ namespace CodeExercise
 
             
         }
+        // 455.assign cookies
+        static void Run_AssignCookies()
+        {
+            int[] children = { 1, 2, 3 };
+            int[] cookies = { 1, 2, 2 };
+            int contentChildren = DP.AssignCookies.FindContentChildren(children, cookies);
+        }
+
+        // 438. Find All Anagrams in a String 
+        static void Run_AnagramSubstring()
+        {
+            string s = "cbaebabacd";
+            string p = "abc";
+
+            IList<int> res = DP.AnagramSubstring.FindAnagrams(s, p);
+
+        }
+
+        
 
         static void Main(string[] args)
         {
+            //438 
+            Run_AnagramSubstring();
+            //455
+            Run_AssignCookies();
             //45
             Run_MinJumpGame();
             // 55
