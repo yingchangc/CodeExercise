@@ -196,10 +196,20 @@ namespace CodeExercise
 
         }
 
-        
+        // 3.
+        static void Run_LongestSubstringWithoutRepeatingCharacters()
+        {
+            var test = new DP.LongestSubstringWithoutRepeatingCharacters();
+            int maxLength = test.LengthOfLongestSubstring("abc");
+
+            maxLength = test.LengthOfLongestSubstring("tmmzuxt");
+        }
 
         static void Main(string[] args)
         {
+            //3
+            Run_LongestSubstringWithoutRepeatingCharacters();
+
             //438 
             Run_AnagramSubstring();
             //455

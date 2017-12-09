@@ -48,6 +48,7 @@
     <Compile Include="DP\CombineSum.cs" />
     <Compile Include="DP\JumpGame.cs" />
     <Compile Include="DP\LongestPalindrome.cs" />
+    <Compile Include="DP\LongestSubstringWithoutRepeatingCharacters.cs" />
     <Compile Include="DP\PalindromePartition.cs" />
     <Compile Include="DP\PalindromePermutation.cs" />
     <Compile Include="EditDistance.cs" />

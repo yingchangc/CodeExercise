@@ -10,6 +10,11 @@ namespace CodeExercise.DP
     /// https://www.youtube.com/watch?v=lFG63nc9zrQ
     /// https://leetcode.com/problems/find-all-anagrams-in-a-string/discuss/  
     /// 
+    /// https://leetcode.com/problems/minimum-window-substring/
+    /// https://leetcode.com/problems/longest-substring-without-repeating-characters/
+    /// https://leetcode.com/problems/substring-with-concatenation-of-all-words/
+    /// https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-characters/
+    /// https://leetcode.com/problems/find-all-anagrams-in-a-string/
     /// 
     /// TODO 
     /// gas station
@@ -47,7 +52,8 @@ namespace CodeExercise.DP
             int end = 0;
 
             while (end < s.Length)
-            {       
+            {     
+                // [1]perform substract part  
                 if (lookupCounts.ContainsKey(s[end]))
                 {
                     lookupCounts[s[end]]--;
@@ -58,13 +64,14 @@ namespace CodeExercise.DP
                         count--;
                     }
 
-                    // find a result (compare p.length)?
-                    if ((end - start + 1) == p.Length && count == 0)
+                    // find a result (compare p.length)?  no need to check length
+                    if (count == 0)
                     {
                         results.Add(start);
                     }
                 }
 
+                // [2]perform move.
                 // should we also move start or just end only?
                 if ((end - start + 1) == p.Length)
                 {
