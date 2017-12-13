@@ -51,6 +51,7 @@
     <Compile Include="DP\LongestSubstringWithoutRepeatingCharacters.cs" />
     <Compile Include="DP\PalindromePartition.cs" />
     <Compile Include="DP\PalindromePermutation.cs" />
+    <Compile Include="DP\SubStringRelated.cs" />
     <Compile Include="EditDistance.cs" />
     <Compile Include="KMPSubstringSearch.cs" />
     <Compile Include="MedianOfTwoSortedArray.cs" />

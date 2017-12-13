@@ -205,8 +205,28 @@ namespace CodeExercise
             maxLength = test.LengthOfLongestSubstring("tmmzuxt");
         }
 
+        // 159
+        static void Run_lengthOfLongestSubstringTwoDistinct()
+        {
+            var test = new DP.SubStringRelated();
+            int maxlength = test.lengthOfLongestSubstringTwoDistinct("eceba");
+        }
+
+        // 76
+        static void Run_Minimum_Window_Substring()
+        {
+            var test = new DP.SubStringRelated();
+            string minSubstring = test.MinWindow("ADOBECODEBANC", "ABC");    //ans : BANC
+
+        }
+
         static void Main(string[] args)
         {
+            // 76
+            Run_Minimum_Window_Substring();
+
+            //159   Not run in leetcode
+            Run_lengthOfLongestSubstringTwoDistinct();
             //3
             Run_LongestSubstringWithoutRepeatingCharacters();
 
