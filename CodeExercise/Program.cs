@@ -220,8 +220,35 @@ namespace CodeExercise
 
         }
 
+        // 79
+        static void Run_WordSearch()
+        {
+            char[,] board = { {'A','B','C','E'},
+                              {'S','F','C','S'},
+                              {'A','D','E','E' }
+                };
+
+            matrixQuestion.WordSearch question = new matrixQuestion.WordSearch();
+            bool isExist = question.Exist(board, "ABCCED");
+        }
+
+        //49 
+        static void Run_GroupAnagrams()
+        {
+            string[] input = { "eat", "tea", "tan", "ate", "nat", "bat" };
+            DP.GroupAnagrams question = new DP.GroupAnagrams();
+            var result = question.FindAnagrams(input);
+
+        }
+
         static void Main(string[] args)
         {
+            //49
+            Run_GroupAnagrams();
+
+            // 79
+            Run_WordSearch();
+
             // 76
             Run_Minimum_Window_Substring();
 

@@ -47,6 +47,7 @@
     <Compile Include="DP\AssignCookies.cs" />
     <Compile Include="DP\CombineSum.cs" />
     <Compile Include="DP\ContainerWithMostWater.cs" />
+    <Compile Include="DP\GroupAnagrams.cs" />
     <Compile Include="DP\JumpGame.cs" />
     <Compile Include="DP\LongestPalindrome.cs" />
     <Compile Include="DP\LongestSubstringWithoutRepeatingCharacters.cs" />
@@ -55,8 +56,10 @@
     <Compile Include="DP\SubStringRelated.cs" />
     <Compile Include="EditDistance.cs" />
     <Compile Include="KMPSubstringSearch.cs" />
+    <Compile Include="matrixQuestion\WordSearch.cs" />
     <Compile Include="MedianOfTwoSortedArray.cs" />
     <Compile Include="DP\PermutationIntArray.cs" />
+    <Compile Include="Number\MergeSortedArray.cs" />
     <Compile Include="Number\ReverseInteger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
