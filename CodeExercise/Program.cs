@@ -241,8 +241,47 @@ namespace CodeExercise
 
         }
 
+        // 139&140
+        static void Run_WordBreak()
+        {
+            string test = "catsanddog";
+
+            // pre test code
+            string subleft = test.Substring(0, 0);
+            string subRight = test.Substring(test.Length);  // Note will be empty string
+
+            string[] worddict = { "cat", "cats", "and", "sand", "dog"};
+            DP.WordBreak question = new DP.WordBreak();
+            //139
+            bool canBreak = question.CheckWordBreak(test,worddict);
+
+            var ans2_1 = question.CheckWordBreakv2(test, worddict);
+            string test2 = "aaaaaaa";
+            string[] worddict2 = { "aaaa", "aa", "a" };
+
+            //140
+            var ans2_2 = question.CheckWordBreakv2(test2, worddict2);
+        }
+
+        //121
+        static void Run_BestTimeBuySellStock()
+        {
+            int[] test = { 7, 1, 5, 3, 6, 4 };
+
+            DP.BestTimeBuySellStock question = new DP.BestTimeBuySellStock();
+            int profit = question.MaxProfit(test);
+
+            // diff (price(I) = price(I-1)) from test
+            int[] diff = { 0, -6, 4, -2, 3, -2 };
+            profit = question.MaxProfitFromDiff(diff);
+        }
+
         static void Main(string[] args)
         {
+            //121
+            Run_BestTimeBuySellStock();
+            //139,140
+            Run_WordBreak();
             //49
             Run_GroupAnagrams();
 

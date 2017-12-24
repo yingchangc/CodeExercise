@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="DP\AnagramSubstring.cs" />
     <Compile Include="DP\AssignCookies.cs" />
+    <Compile Include="DP\BestTimeBuySellStock.cs" />
     <Compile Include="DP\CombineSum.cs" />
     <Compile Include="DP\ContainerWithMostWater.cs" />
     <Compile Include="DP\GroupAnagrams.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="DP\PalindromePartition.cs" />
     <Compile Include="DP\PalindromePermutation.cs" />
     <Compile Include="DP\SubStringRelated.cs" />
+    <Compile Include="DP\WordBreak.cs" />
     <Compile Include="EditDistance.cs" />
     <Compile Include="KMPSubstringSearch.cs" />
     <Compile Include="matrixQuestion\WordSearch.cs" />
