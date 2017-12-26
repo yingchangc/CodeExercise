@@ -52,6 +52,8 @@
     <Compile Include="DP\JumpGame.cs" />
     <Compile Include="DP\LongestPalindrome.cs" />
     <Compile Include="DP\LongestSubstringWithoutRepeatingCharacters.cs" />
+    <Compile Include="DP\MajorityElement.cs" />
+    <Compile Include="DP\MinCostClimbingStairs.cs" />
     <Compile Include="DP\PalindromePartition.cs" />
     <Compile Include="DP\PalindromePermutation.cs" />
     <Compile Include="DP\SubStringRelated.cs" />

@@ -276,8 +276,29 @@ namespace CodeExercise
             profit = question.MaxProfitFromDiff(diff);
         }
 
+        //746
+        static void Run_MinCostClimbingStairs()
+        {
+            int[] cost = { 1, 100, 1, 1, 1, 100, 1, 1, 100, 1 };
+            DP.MinCostClimbingStairs question = new DP.MinCostClimbingStairs();
+            int ans = question.MinCostClimbingStairsSolver(cost);
+        }
+
+        static void Run_MajorityElement()
+        {
+            int[] nums = { 1, 4, 5, 7, 1, 3, 1, 3, 3, 1, 1,1,1 };
+            //int[] nums = { 1,1,1,3,3 };
+            DP.MajorityElement question = new DP.MajorityElement();
+            int majornum = question.MajorityElementSolver(nums);
+        }
+
         static void Main(string[] args)
         {
+            //141
+            Run_MajorityElement();
+            // 746
+            Run_MinCostClimbingStairs();
+
             //121
             Run_BestTimeBuySellStock();
             //139,140
