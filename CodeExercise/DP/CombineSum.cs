@@ -11,8 +11,155 @@ namespace CodeExercise
     public class CombineSum
     {
         /// <summary>
+        /// 216. Combination Sum III
+        /// Find all possible combinations of k numbers that add up to a number n, given that only numbers from 1 to 9 can be used and each combination should be a unique set of numbers.
+        ///        Example 1:
+        ///Input: k = 3, n = 7
+        ///Output: 
+        ///
+        ///[[1,2,4]]
+        ///
+        ///
+        ///Example 2:
+        ///Input: k = 3, n = 9
+        ///Output: 
+        ///
+        ///[[1,2,6], [1,3,5], [2,3,4]]
+        /// </summary>
+        /// <param name="k"></param>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public static IList<IList<int>> CombinationSum3(int k, int n)
+        {
+            List<List<int>> answers = new List<List<int>>();
+            List<int> currPath = new List<int>();
+
+            CombinationSum3Helper(1, k, n, answers, currPath);
+
+            return answers.ToArray();
+        }
+
+        private static void CombinationSum3Helper(int startNum, int leftSizeK, int n, List<List<int>> answers, List<int> currPath)
+        {
+            if (leftSizeK == 0)
+            {
+                if (n == 0)
+                {
+                    List<int> ans = new List<int>(currPath);
+                    answers.Add(ans); 
+                }
+                return;
+            }
+
+            for (int i = startNum; i <= 9; i++)
+            {
+                int newNum = n - i;
+                if (newNum < 0)
+                {
+                    continue;
+                }
+
+                currPath.Add(i);
+                CombinationSum3Helper(i+1, leftSizeK - 1, newNum, answers, currPath);  // use startNum, to prevent target=3  [1,1,1] [1,2]      [2,1]   
+                currPath.RemoveAt(currPath.Count - 1);   // note remove the last insert
+            }
+        }
+
+        /// <summary>
+        /// 377
+        /// Given an integer array with all positive numbers and no duplicates, find the number of possible combinations that add up to a positive integer target.
+        ///        Example: 
+        ///nums = [1, 2, 3]
+        ///        target = 4
+        ///
+        ///The possible combination ways are:
+        ///(1, 1, 1, 1)
+        ///(1, 1, 2)
+        ///(1, 2, 1)
+        ///(1, 3)
+        ///(2, 1, 1)
+        ///(2, 2)
+        ///(3, 1)
+        ///
+        ///Note that different sequences are counted as different combinations.
+        ///
+        ///not like q39 q40 the answer does not require unique combination 
+        /// 
+        ///Therefore the output is 7.
+        ///
+        ///Follow up:
+        ///What if negative numbers are allowed in the given array?
+        ///How does it change the problem?
+        ///What limitation we need to add to the question to allow negative numbers?
+        ///
+        ///The problem with negative numbers is that now the combinations could be potentially of infinite length. Think about nums = [-1, 1] and target = 1. We can have all sequences of arbitrary length that follow the patterns -1, 1, -1, 1, ..., -1, 1, 1 and 1, -1, 1, -1, ..., 1, -1, 1 (there are also others, of course, just to give an example). So we should limit the length of the combination sequence, so as to give a bound to the problem.
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public static int CombinationSum4(int[] nums, int target)
+        {
+            if (target == 0)
+            {
+                return 0;
+            }
+
+            Dictionary<int, int> memo = new Dictionary<int, int>();
+
+            int ans=  CombinenaitonSum4Helper(nums, target, memo);
+            return ans;
+        }
+
+        private static int CombinenaitonSum4Helper(int[] num, int target, Dictionary<int, int> memo)
+        {
+            // stop condition
+            if (memo.ContainsKey(target))
+            {
+                return memo[target];
+            }
+
+            if (target == 0)
+            {
+                return 1;
+            }
+
+            int currentTargetAns = 0;
+
+            // unlike q39 and q40  this quesiton can contain like  target=4,  [1,1,2] and [2,1,1] and [1,2,1].  
+            // this can get repeat the same num 1,1,1,1  and also give diff combination
+            // input [1,2,3]   target = 4
+            // [1],1,1,1    [1],1,2,     [1],2,1      [1],3   =>   memo[1] = 1  memo[2]  = 2, memo[3] = 4
+
+            // note at first iteration [1], we have collect memo for diff target count, but currentans =4  since target =3 
+
+            // [2],1,1      [2],2              direct return memo[2]
+            // [3],1                           direct return memo[1]
+            
+            for (int i = 0; i < num.Length; i++)
+            {
+                
+                int newTarget = target - num[i];
+                if (newTarget < 0)
+                {
+                    continue;
+                }
+
+                currentTargetAns += CombinenaitonSum4Helper(num, newTarget, memo);
+            }
+
+            memo[target] = currentTargetAns;
+
+            return currentTargetAns;
+        }
+
+        /// <summary>
         /// 40
         /// https://leetcode.com/problems/combination-sum-ii/description/
+        /// Given a collection of candidate numbers (C) and a target number (T), find all unique combinations in C where the candidate numbers sums to T. 
+        ///         Each number in C may only be used once in the combination.
+        ///         Note:
+        /// All numbers (including target) will be positive integers.
+        /// The solution set must not contain duplicate combinations.
         /// No duplicate 
         /// For example, given candidate set [10, 1, 2, 7, 6, 1, 5] and target 8, 
         ///    A solution set is: 
@@ -80,6 +227,11 @@ namespace CodeExercise
 
         /// <summary>
         /// 39 https://leetcode.com/problems/combination-sum/description/
+        /// Given a set of candidate numbers (C) (without duplicates) and a target number (T), find all unique combinations in C where the candidate numbers sums to T. 
+        ///         The same repeated number may be chosen from C unlimited number of times.
+        ///         Note:
+        /// All numbers(including target) will be positive integers.
+        /// The solution set must not contain duplicate combinations.
         /// given candidate set [2, 3, 6, 7] and target 7, 
         /// A solution set is: 
         ///        [
@@ -100,7 +252,7 @@ namespace CodeExercise
         public static IList<IList<int>> CombinationSumAllowDuplicate(int[] candidates, int target)
         {
             Array.Sort(candidates, new Comparison<int>(
-                            (i1, i2) => i1.CompareTo(i2)
+                            (i1, i2) => i2.CompareTo(i1)
                     ));   // small to large,
 
             List<List<int>> results = new List<List<int>>();

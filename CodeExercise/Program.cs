@@ -84,6 +84,19 @@ namespace CodeExercise
             }
         }
 
+        //216
+        static void Run_CombinationSum3()
+        {
+            var answers = CombineSum.CombinationSum3(3, 9);
+        }
+
+        // 377
+        static void Run_CombinationSum4()
+        {
+            int[] candidates = { 1, 2, 3 };
+            int ans = CombineSum.CombinationSum4(candidates, 4);
+        }
+
         // 39
         static void Run_CombinationSumAllowDuplicate()
         {
@@ -292,8 +305,16 @@ namespace CodeExercise
             int majornum = question.MajorityElementSolver(nums);
         }
 
+        
+
         static void Main(string[] args)
         {
+            //216
+            Run_CombinationSum3();
+    
+            //377
+                Run_CombinationSum4();
+    
             //141
             Run_MajorityElement();
             // 746
