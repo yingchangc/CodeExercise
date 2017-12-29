@@ -297,6 +297,7 @@ namespace CodeExercise
             int ans = question.MinCostClimbingStairsSolver(cost);
         }
 
+        //169
         static void Run_MajorityElement()
         {
             int[] nums = { 1, 4, 5, 7, 1, 3, 1, 3, 3, 1, 1,1,1 };
@@ -305,17 +306,31 @@ namespace CodeExercise
             int majornum = question.MajorityElementSolver(nums);
         }
 
-        
+        // 198 & 740
+        static void Run_HouseRobber_DeleteAndEarn()
+        {
+            DP.HouseRobber_DeleteAndEarn question = new DP.HouseRobber_DeleteAndEarn();
+
+            // 198 rob
+            int[] nums1 = { 2, 3, 7, 8, 4};
+            int ans1 = question.Rob(nums1);   // should be rob 2 +7 +4
+
+            // 740 Delete and Earn
+            int[] nums2 = { 2, 2, 2, 2, 4, 4, 4, 5, 5, 1 };   // should be [1(1), 2(8), 4(12), 5(10)] -> 8 + 12
+            int ans2 = question.DeleteAndEarn(nums2);
+        }
 
         static void Main(string[] args)
         {
+            // 198 and 740
+            Run_HouseRobber_DeleteAndEarn();
             //216
             Run_CombinationSum3();
     
             //377
-                Run_CombinationSum4();
+            Run_CombinationSum4();
     
-            //141
+            //169
             Run_MajorityElement();
             // 746
             Run_MinCostClimbingStairs();
