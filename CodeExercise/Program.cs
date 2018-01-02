@@ -320,8 +320,39 @@ namespace CodeExercise
             int ans2 = question.DeleteAndEarn(nums2);
         }
 
+        //64
+        static void Run_MinimumPathSum()
+        {
+            int[,] grid = { {1,3,1},
+                            {1,5,1},
+                            {4,2,1 } };
+
+            DP.MinimumPathSum question = new DP.MinimumPathSum();
+            int ans = question.MinPathSumSolver(grid);
+        }
+
+        // 674
+        static void Run_LongestContinuousIncreasingSubsequence()
+        {
+            int[] nums = { 1, 3, 5, 4, 7 };
+
+            //674
+            DP.LongestContinuousIncreasingSubsequence question = new DP.LongestContinuousIncreasingSubsequence();
+            int ans = question.FindLengthOfLCIS(nums);
+
+            // 673
+            int[] num2 = { 1, 2, 4, 3, 5, 4, 7, 2};
+            //int[] num2 = {3,4,-1,0,6,2,3 };
+            DP.LongestIncreasingSubsequence q2 = new DP.LongestIncreasingSubsequence();
+            int ans2 = q2.FindNumberOfLIS(num2);
+        }
+
         static void Main(string[] args)
         {
+            //674
+            Run_LongestContinuousIncreasingSubsequence();
+            //64
+            Run_MinimumPathSum();
             // 198 and 740
             Run_HouseRobber_DeleteAndEarn();
             //216
