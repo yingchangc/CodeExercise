@@ -345,6 +345,14 @@ namespace CodeExercise
             //int[] num2 = {3,4,-1,0,6,2,3 };
             DP.LongestIncreasingSubsequence q2 = new DP.LongestIncreasingSubsequence();
             int ans2 = q2.FindNumberOfLIS(num2);
+
+            // 300   should be 5 [1 2 3 3 4 4 5]
+            int ans3 = q2.LengthOfLIS(num2);
+
+            //128
+            DP.LongestConsecutiveSequence q3 = new DP.LongestConsecutiveSequence();
+            int[] nums3 = { 100, 4, 200, 1, 3, 2 };
+            int ans4 = q3.LongestConsecutiveSolver(nums3);
         }
 
         static void Main(string[] args)
