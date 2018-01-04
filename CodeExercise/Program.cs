@@ -355,8 +355,23 @@ namespace CodeExercise
             int ans4 = q3.LongestConsecutiveSolver(nums3);
         }
 
+        //153
+        static void Run_FindMinimumInRotatedSortedArray()
+        {
+            DP.FindMinimumInRotatedSortedArray question = new DP.FindMinimumInRotatedSortedArray();
+            int[] nums = { 4, 5, 6, 7, 0, 1, 2 };
+            int ans = question.FindMin(nums);
+
+
+            int[] nums2 = { 10, 1, 10, 10, 10 };
+            int ans2 = question.FindMinWithDupInArray(nums2);
+        }
+
         static void Main(string[] args)
         {
+            //153
+            Run_FindMinimumInRotatedSortedArray();
+
             //674
             Run_LongestContinuousIncreasingSubsequence();
             //64
