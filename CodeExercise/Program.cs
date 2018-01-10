@@ -95,6 +95,10 @@ namespace CodeExercise
         {
             int[] candidates = { 1, 2, 3 };
             int ans = CombineSum.CombinationSum4(candidates, 4);
+
+            //optional
+            int[] candidates2 = { 1, 2, 5 };    
+            ans = CombineSum.CombinationSum4_1NoDupCombination(candidates2, 12);
         }
 
         // 39
@@ -276,9 +280,10 @@ namespace CodeExercise
             var ans2_2 = question.CheckWordBreakv2(test2, worddict2);
         }
 
-        //121
+        //121, 309
         static void Run_BestTimeBuySellStock()
         {
+            //121
             int[] test = { 7, 1, 5, 3, 6, 4 };
 
             DP.BestTimeBuySellStock question = new DP.BestTimeBuySellStock();
@@ -287,6 +292,10 @@ namespace CodeExercise
             // diff (price(I) = price(I-1)) from test
             int[] diff = { 0, -6, 4, -2, 3, -2 };
             profit = question.MaxProfitFromDiff(diff);
+
+            // 309
+            int[] prices = { 1, 2, 3, 0, 2 };
+            profit = question.MaxProfitWithCooldown(prices);
         }
 
         //746
@@ -367,8 +376,30 @@ namespace CodeExercise
             int ans2 = question.FindMinWithDupInArray(nums2);
         }
 
+        //322
+        static void Run_CointChange()
+        {
+            int[] nums = { 1, 2, 5 };
+            DP.CoinChange question = new DP.CoinChange();
+            int ans = question.CoinChangeSolverSlow(nums, 11);
+
+            ans = question.MinCoinChangeSolver(nums, 11);
+            //int[] nums2 = { 3, 7, 405, 436};
+            //ans = question.CoinChangeSolverSlow(nums2, 8839);
+            //ans = question.MinCoinChangeSolver(nums2, 8839);
+        }
+
         static void Main(string[] args)
         {
+            //121, 309
+            Run_BestTimeBuySellStock();
+            //322
+            Run_CointChange();
+
+            //377
+            Run_CombinationSum4();
+
+            
             //153
             Run_FindMinimumInRotatedSortedArray();
 
@@ -381,16 +412,12 @@ namespace CodeExercise
             //216
             Run_CombinationSum3();
     
-            //377
-            Run_CombinationSum4();
-    
             //169
             Run_MajorityElement();
             // 746
             Run_MinCostClimbingStairs();
 
-            //121
-            Run_BestTimeBuySellStock();
+            
             //139,140
             Run_WordBreak();
             //49

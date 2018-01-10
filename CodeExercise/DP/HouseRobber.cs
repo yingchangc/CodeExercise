@@ -25,6 +25,10 @@ namespace CodeExercise.DP
         /// when reach 1  the max value is from 2+7,  not from 3+1
         /// pre1 =9, pre2=9
         /// 
+        /// 
+        /// Brute force O(2^n)
+        /// 
+        /// sol below  O(n)
         /// <param name="nums"></param>
         /// <returns></returns>
         public int Rob(int[] nums)

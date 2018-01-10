@@ -46,6 +46,7 @@
     <Compile Include="DP\AnagramSubstring.cs" />
     <Compile Include="DP\AssignCookies.cs" />
     <Compile Include="DP\BestTimeBuySellStock.cs" />
+    <Compile Include="DP\CoinChange.cs" />
     <Compile Include="DP\CombineSum.cs" />
     <Compile Include="DP\ContainerWithMostWater.cs" />
     <Compile Include="DP\FindMinimumInRotatedSortedArray.cs" />

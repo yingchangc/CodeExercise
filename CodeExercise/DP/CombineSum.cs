@@ -66,6 +66,69 @@ namespace CodeExercise
         }
 
         /// <summary>
+        /// https://www.youtube.com/watch?v=jaNZ83Q3QGc
+        /// </summary>
+        /// You are given coins of different denominations and a total amount of money.
+        /// Write a function to compute the number of combinations that make up that amount. 
+        /// 
+        /// (1,2,3)  target 4
+        /// 
+        /// ans = 4
+        /// ->
+        /// [1 1 1 1]
+        /// [1 1 2]
+        /// [1 3]
+        /// [2 2]
+        /// 
+        /// 
+        /// sol:                                                                       amount
+        /// 
+        ///       0 1 2 3 4             for each new coin seleciton     orig + (how many combine before current coin)
+        ///init   1 0 0 0 0
+        ///give 1   1 a b 1              a = arr[2]_orig_b4_coin1 + arr[2-1] = 1    b =arr[3]+arr[3-1]= 1    
+        ///give 2     c d e              c=  arr[2] + arr[2-1] = 1+1  d =arr[3]+arr[3-2]=1+1=2   e= arr[4]+arr[4-2]=1+2=3
+        /// <param name="nums"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public static int CombinationSum4_1NoDupCombination(int[] coins, int target)
+        {
+            int[] ansArr = new int[target + 1];   // put 0 as 1 for padding purpose and a[0] = 1 
+            ansArr[0] = 1;
+
+            foreach(int coin in coins)
+            {
+                for(int currentTarget = 0; currentTarget <= target; currentTarget++)
+                {
+                    if (currentTarget >= coin)
+                    {
+                        ansArr[currentTarget] += ansArr[currentTarget - coin];    //inital currAns before having the coin + ways if having the current coin
+                    }
+                }
+
+                Print4_1ForEachCoin(ansArr, coin, target);
+            }
+
+            return ansArr[target];
+        }
+
+        private static void Print4_1ForEachCoin(int[] ansArr, int currentCoint, int target)
+        {
+            Console.WriteLine("Add coin :" + currentCoint + " ");
+
+            for (int i = 0; i <= target; i++)
+            {
+                Console.Write(i + "   ");
+            }
+            Console.WriteLine();
+
+            for (int i = 0; i<=target; i++)
+            {
+                Console.Write(ansArr[i] + "   ");
+            }
+            Console.WriteLine();
+        }
+
+        /// <summary>
         /// 377
         /// Given an integer array with all positive numbers and no duplicates, find the number of possible combinations that add up to a positive integer target.
         ///        Example: 
@@ -135,6 +198,8 @@ namespace CodeExercise
             // [2],1,1      [2],2              direct return memo[2]
             // [3],1                           direct return memo[1]
             
+
+            // has to be start fomr 0,   sort and make it start with StartIndex will not work for unique combinaiton!, this sol is for random all combination
             for (int i = 0; i < num.Length; i++)
             {
                 
