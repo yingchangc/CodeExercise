@@ -58,6 +58,11 @@ namespace CodeExercise.DP
             }
         }
 
+        /// <summary>
+        /// 154. Find Minimum in Rotated Sorted Array II
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
         public int FindMinWithDupInArray(int[] nums)
         {
             return FindMin2Helper(nums, 0, nums.Length - 1);

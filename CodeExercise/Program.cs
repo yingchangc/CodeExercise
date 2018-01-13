@@ -389,8 +389,35 @@ namespace CodeExercise
             //ans = question.MinCoinChangeSolver(nums2, 8839);
         }
 
+        //494
+        static void Run_TargetSum()
+        {
+            int[] nums = { 1, 1, 1, 1, 1 };
+            var question = new DP.TargetSum();
+            int ans = question.FindTargetSumWays(nums, 3);
+        }
+
+        //737 
+        static void Run_Sentence_Similarity()
+        {
+            string[] words1 = { "great", "acting", "skills", "yic", "talent" };
+            string[] words2 = { "fine", "drama", "smart", "yic", "talent" };
+            List<Tuple<string, string>> paris = new List<Tuple<string, string>>();
+            paris.Add(Tuple.Create("great", "fine"));
+            paris.Add(Tuple.Create("acting", "drama"));
+            paris.Add(Tuple.Create("skills", "talent"));
+            paris.Add(Tuple.Create("talent", "smart"));
+
+            DV.Sentence_Similarity quesiton = new DV.Sentence_Similarity();
+            bool ans = quesiton.AreSentencesSimilarTwo(words1, words2, paris);
+        }
+
         static void Main(string[] args)
         {
+            //737
+            Run_Sentence_Similarity();
+            //494
+            Run_TargetSum();
             //121, 309
             Run_BestTimeBuySellStock();
             //322
