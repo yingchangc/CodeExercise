@@ -66,7 +66,7 @@ namespace CodeExercise.DP
         /// <returns></returns>
         public int FindTargetSumWays(int[] nums, int S)
         {
-            Dictionary<int, Dictionary<int, int>> memo = new Dictionary<int, Dictionary<int, int>>();
+            Dictionary<int, Dictionary<int, int>> memo = new Dictionary<int, Dictionary<int, int>>();  // (indexLevel-> (presum, Ways))
             InitMemoization(nums, memo);
 
             int[] operatorArr = new int[2];

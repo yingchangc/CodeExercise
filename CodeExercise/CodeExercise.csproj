@@ -49,6 +49,7 @@
     <Compile Include="DP\CoinChange.cs" />
     <Compile Include="DP\CombineSum.cs" />
     <Compile Include="DP\ContainerWithMostWater.cs" />
+    <Compile Include="DP\DecodeWays.cs" />
     <Compile Include="DP\FindMinimumInRotatedSortedArray.cs" />
     <Compile Include="DP\GroupAnagrams.cs" />
     <Compile Include="DP\HouseRobber.cs" />
@@ -70,6 +71,8 @@
     <Compile Include="matrixQuestion\WordSearch.cs" />
     <Compile Include="MedianOfTwoSortedArray.cs" />
     <Compile Include="DP\PermutationIntArray.cs" />
+    <Compile Include="Number\FindPivotIndex.cs" />
+    <Compile Include="Number\LargestNumberAtLeastTwiceOthers.cs" />
     <Compile Include="Number\MergeSortedArray.cs" />
     <Compile Include="Number\ReverseInteger.cs" />
     <Compile Include="Program.cs" />

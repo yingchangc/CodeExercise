@@ -412,8 +412,52 @@ namespace CodeExercise
             bool ans = quesiton.AreSentencesSimilarTwo(words1, words2, paris);
         }
 
+        // 91
+        static void Run_DecodeWays()
+        {
+            string EncodeStr = "12";
+            DP.DecodeWays question = new DP.DecodeWays();
+            int ans = question.NumDecodings(EncodeStr);
+
+            // there are 5 ways
+            ans = question.NumDecodings("1227");
+
+            ans = question.NumDecodings("102213");
+        }
+
+        //747
+        static void Run_LargestNumberAtLeastTwiceOthers()
+        {
+            int[] nums = { 3, 6, 1, 0 };
+            Number.LargestNumberAtLeastTwiceOthers question = new Number.LargestNumberAtLeastTwiceOthers();
+            int ans = question.DominantIndex(nums);
+
+            int[] nums2 = { 1, 2, 3, 4 };  // no ans
+            ans = question.DominantIndex(nums2);
+
+            int[] nums3 = { 7, 6, 5, 4 };  // no ans
+            ans = question.DominantIndex(nums3);
+        }
+
+        // 724
+        static void Run_FindPivotIndex()
+        {
+            int[] nums1 = { 1, 7, 3, 6, 5, 6 };
+            Number.FindPivotIndex question = new Number.FindPivotIndex();
+            int ans = question.PivotIndexHelper(nums1);
+
+            int[] nums2 = { 1, 2, 3, 4 };
+            ans = question.PivotIndexHelper(nums2);
+        }
+
         static void Main(string[] args)
         {
+            //724
+            Run_FindPivotIndex();
+            //747
+            Run_LargestNumberAtLeastTwiceOthers();
+            //91
+            Run_DecodeWays();
             //737
             Run_Sentence_Similarity();
             //494

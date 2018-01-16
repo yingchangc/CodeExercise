@@ -9,6 +9,9 @@ namespace CodeExercise.DV
     class Sentence_Similarity
     {
         // to check
+        // link to sol http://zxi.mytechroad.com/blog/hashtable/leetcode-737-sentence-similarity-ii/
+
+
         //http://www.jiuzhang.com/article/cFRngC/
         //http://zxi.mytechroad.com/blog/hashtable/leetcode-737-sentence-similarity-ii/
         //https://www.usenix.org/system/files/conference/hotcloud13/hotcloud13-wang.pdf
