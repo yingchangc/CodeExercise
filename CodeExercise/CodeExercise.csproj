@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BinarySearch\SearchInsertPosition.cs" />
     <Compile Include="DP\AnagramSubstring.cs" />
     <Compile Include="DP\AssignCookies.cs" />
     <Compile Include="DP\BestTimeBuySellStock.cs" />
@@ -58,12 +59,14 @@
     <Compile Include="DP\LongestPalindrome.cs" />
     <Compile Include="DP\LongestSubstringWithoutRepeatingCharacters.cs" />
     <Compile Include="DP\MajorityElement.cs" />
+    <Compile Include="DP\MaximumSubarray.cs" />
     <Compile Include="DP\MinCostClimbingStairs.cs" />
     <Compile Include="DP\MinimumPathSum.cs" />
     <Compile Include="DP\PalindromePartition.cs" />
     <Compile Include="DP\PalindromePermutation.cs" />
     <Compile Include="DP\SubStringRelated.cs" />
     <Compile Include="DP\TargetSum.cs" />
+    <Compile Include="DP\UniquePath.cs" />
     <Compile Include="DP\WordBreak.cs" />
     <Compile Include="DV\Sentence_Similarity.cs" />
     <Compile Include="EditDistance.cs" />

@@ -298,12 +298,16 @@ namespace CodeExercise
             profit = question.MaxProfitWithCooldown(prices);
         }
 
-        //746
+        //746, 70
         static void Run_MinCostClimbingStairs()
         {
+            // 746
             int[] cost = { 1, 100, 1, 1, 1, 100, 1, 1, 100, 1 };
             DP.MinCostClimbingStairs question = new DP.MinCostClimbingStairs();
             int ans = question.MinCostClimbingStairsSolver(cost);
+
+            // 70
+            ans = question.ClimbStairs(6);
         }
 
         //169
@@ -450,8 +454,54 @@ namespace CodeExercise
             ans = question.PivotIndexHelper(nums2);
         }
 
+        //35
+        static void Run_SearchInsertPosition()
+        {
+            int[] nums = { 1, 3, 5, 6 };
+
+            BinarySearch.SearchInsertPosition question = new BinarySearch.SearchInsertPosition();
+            int ans = question.SearchInsert(nums, 5);
+            ans = question.SearchInsert(nums, 2);
+            ans = question.SearchInsert(nums, 7);
+            ans = question.SearchInsert(nums, 0);
+        }
+
+        //62, 63
+        static void Run_UniquePaths()
+        {
+            //62
+            DP.UniquePath question = new DP.UniquePath();
+            int ans = question.NumofUniquePaths(2,2);
+
+            int[,] grid = { {0,0,0},
+                            {0,1,0},
+                            {0,0,0 } };
+            ans = question.UniquePathsWithObstacles(grid);
+
+            int[,] grid2 = { { 1} };
+            ans = question.UniquePathsWithObstacles(grid2);
+        }
+
+        // 53
+        static void Run_MaxSumSubarray()
+        {
+            int[] nums = { -2, 1, -3, 4, -1, 2, 1, -5, 4 };
+            DP.MaximumSubarray question = new DP.MaximumSubarray();
+            int ans = question.MaxSubArraySolver(nums);
+        }
+
         static void Main(string[] args)
         {
+            //62,63
+            Run_UniquePaths();
+            //53
+            Run_MaxSumSubarray();
+            
+            //// 746, 70
+            Run_MinCostClimbingStairs();
+
+            //35
+            Run_SearchInsertPosition();
             //724
             Run_FindPivotIndex();
             //747
@@ -485,8 +535,7 @@ namespace CodeExercise
     
             //169
             Run_MajorityElement();
-            // 746
-            Run_MinCostClimbingStairs();
+            
 
             
             //139,140
