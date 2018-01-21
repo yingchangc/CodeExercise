@@ -60,6 +60,7 @@
     <Compile Include="DP\LongestSubstringWithoutRepeatingCharacters.cs" />
     <Compile Include="DP\MajorityElement.cs" />
     <Compile Include="DP\MaximumSubarray.cs" />
+    <Compile Include="DP\MaxProductArray.cs" />
     <Compile Include="DP\MinCostClimbingStairs.cs" />
     <Compile Include="DP\MinimumPathSum.cs" />
     <Compile Include="DP\PalindromePartition.cs" />

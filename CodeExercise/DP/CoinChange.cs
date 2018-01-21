@@ -9,6 +9,116 @@ namespace CodeExercise.DP
     class CoinChange
     {
         /// <summary>
+        /// Question: 
+        ///   CleanCodeHandbook_v1.0.3.pdf  #47
+        /// There are n coins in a line. (Assume n is even). Two players take turns to take a coin from one of 
+        /// the ends of the line until there are no more coins left.The player with the larger amount of money wins. 1.
+        /// Would you rather go first or second? Does it matter? 2. Assume that you go first, describe an algorithm to compute 
+        /// the maximum amount of money you can win.
+        /// 
+        /// 
+        /// sol:
+        /// Let us look one extra step ahead this time by considering the two coins the opponent will possibly take, Ai+1 and Aj. 
+        /// If the opponent takes Ai+1, the remaining coins are { Ai+2 … Aj }, which our maximum is denoted by P(i + 2, j). 
+        /// On the other hand, if the opponent takes Aj, our maximum is P(i + 1, j – 1). Since the opponent is as smart as you, 
+        /// he would have chosen the choice that yields the minimum amount to you. Therefore, the maximum amount you can get when 
+        /// you choose Ai is: 
+        /// Therefore, the maximum amount you can get when you choose Ai is: 
+        /// 𝑃1 = 𝐴𝑖 + 𝑚𝑖𝑛(𝑃(𝑖 + 2,𝑗),𝑃(𝑖 + 1,𝑗 − 1)) 
+        /// Similarly, the maximum amount you can get when you choose Aj is: 
+        /// 𝑃2 = 𝐴𝑗 + 𝑚𝑖𝑛(𝑃(𝑖 + 1,𝑗 − 1),𝑃(𝑖,𝑗 − 2)) 
+        /// 
+        /// P(i,j) = Max(P1, P2) 
+        /// 
+        /// O(n^2) time and takes O(n^2) space
+        /// 
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public int CoinsInALine(int[] nums)
+        {
+            int len = nums.Length;
+
+            if (len == 0)
+            {
+                return 0;
+            }
+
+            int[,] memo = new int[len, len];
+
+            return CoinsInALineHelper(nums, 0, len - 1, memo);
+        }
+
+        private int CoinsInALineHelper(int[] nums, int i, int j, int[,] memo)
+        {
+            // base condition
+            if ((j - i) <= 1)    // can be even or odd
+            {
+                int maxV = Math.Max(nums[i], nums[j]);
+                memo[i, j] = maxV;
+                return maxV;
+            }
+
+            if (memo[i,j] > 0)
+            {
+                return memo[i, j];
+            }
+                       
+            // Choose i, opponent can smart choose num[i+1]  or num[j] that is bigger, so  for me use min
+            int Pi = nums[i] + Math.Min(CoinsInALineHelper(nums, i + 1, j - 1, memo), CoinsInALineHelper(nums, i + 2, j, memo));
+
+            // Choose j, opponent can choose num[i]  or num[j-1]
+            int Pj = nums[j] + Math.Min(CoinsInALineHelper(nums, i + 1, j - 1, memo), CoinsInALineHelper(nums, i, j-2, memo));
+
+            int currLevelMax = Math.Max(Pi, Pj);
+            memo[i, j] = currLevelMax;
+
+            return currLevelMax;
+
+        }
+
+        /// <summary>
+        /// 518
+        /// u are given coins of different denominations and a total amount of money. Write a function to compute the number of combinations that make up that amount. You may assume that you have infinite number of each kind of coin. 
+        /// Note: You can assume that 
+        /// 0 ge amount le 5000
+        /// 1 ge coin le 5000
+        /// the number of coins is less than 500 
+        /// the answer is guaranteed to fit into signed 32-bit integer
+        /// 
+        /// {1,2,5}  target = 5
+        /// 
+        /// memo 
+        ///  idx 0  1  2  3  4  5
+        ///  v   1  0  0  0  0  0
+        ///  
+        ///  1   1 "1"            because use 1-1 = 0   mem[0] = 1   so  mem[1]+=mem[0] 
+        /// 
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <param name="coins"></param>
+        /// <returns></returns>
+        public int CoinChange2(int amount, int[] coins)
+        {
+            int[] memo = new int[amount + 1];
+
+            memo[0] = 1;    
+
+            foreach(int coin in coins)
+            {
+                for (int currentTarget = 0; currentTarget <= amount; currentTarget++)
+                {
+                    if (currentTarget >= coin)
+                    {
+                        memo[currentTarget] += memo[currentTarget - coin];
+                    }
+                }
+            }
+
+            return memo[amount];
+        }
+
+        /// <summary>
         /// 322
         /// You are given coins of different denominations and a total amount of money amount. Write a function to compute the fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return -1. 
         ///   Example 1:

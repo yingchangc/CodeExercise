@@ -387,10 +387,19 @@ namespace CodeExercise
             DP.CoinChange question = new DP.CoinChange();
             int ans = question.CoinChangeSolverSlow(nums, 11);
 
+            // #coin change 1
             ans = question.MinCoinChangeSolver(nums, 11);
             //int[] nums2 = { 3, 7, 405, 436};
             //ans = question.CoinChangeSolverSlow(nums2, 8839);
             //ans = question.MinCoinChangeSolver(nums2, 8839);
+
+            // #Coins in a line and can choose left for right most
+
+            int[] nums2 = { 1, 2, 3 };
+            ans = question.CoinsInALine(nums2);
+
+            // Coin change 2
+            ans = question.CoinChange2(5, nums);
         }
 
         //494
@@ -476,6 +485,8 @@ namespace CodeExercise
             int[,] grid = { {0,0,0},
                             {0,1,0},
                             {0,0,0 } };
+
+            //63
             ans = question.UniquePathsWithObstacles(grid);
 
             int[,] grid2 = { { 1} };
@@ -490,8 +501,21 @@ namespace CodeExercise
             int ans = question.MaxSubArraySolver(nums);
         }
 
+        //152
+        static void Run_MaxProductArray()
+        {
+            int[] nums = { 2, 3, -2, 4 };
+            DP.MaxProductArray question = new DP.MaxProductArray();
+            int ans = question.MaxProduct(nums);
+        }
+
         static void Main(string[] args)
         {
+            //322
+            Run_CointChange();
+
+            //152
+            Run_MaxProductArray();
             //62,63
             Run_UniquePaths();
             //53
@@ -514,8 +538,7 @@ namespace CodeExercise
             Run_TargetSum();
             //121, 309
             Run_BestTimeBuySellStock();
-            //322
-            Run_CointChange();
+            
 
             //377
             Run_CombinationSum4();
