@@ -8,6 +8,7 @@ namespace CodeExercise.DP
 {
     /// <summary>
     /// 3   
+    /// https://leetcode.com/problems/longest-substring-without-repeating-characters/description/
     /// Given a string, find the length of the longest substring without repeating characters.
     /// Examples:
     /// Given "abcabcbb", the answer is "abc", which the length is 3.
@@ -18,27 +19,30 @@ namespace CodeExercise.DP
     {
         public int LengthOfLongestSubstring(string s)
         {
-            Dictionary<char, int> locationDict = new Dictionary<char, int>();
-            int maxLength = 0;
-            int end = 0;
-            int start = 0;
-            while(end < s.Length)
+            bool[] memo = new bool[256];  // map from character's ASCII to its last occured index
+
+            int j = 0;
+            int currLen = 0;
+            int maxLen = 0;
+
+            for (int i = 0; i < s.Length; i++)
             {
-                char c = s[end];
-                if (locationDict.ContainsKey(c) && (locationDict[c] + 1 > start ))   //yic   tm[mzuxt]   t exist but is behund start 
+                while (j < s.Length && memo[s[j]] == false)   // yic note is s[j]
                 {
-                    start = locationDict[c] + 1;   // fast move forward ex  so far "startbg" next found 'b'  . then just move to g because have compute length earlier
-                    
+                    memo[s[j++]] = true;
+                    currLen++;
                 }
 
-                locationDict[c] = end;    // update location of the char
-                maxLength = Math.Max(maxLength, end - start + 1);
+                maxLen = Math.Max(maxLen, currLen);
 
-                // always move end
-                end++;
+                // now i can move forward
+                currLen--;
+                memo[s[i]] = false;
             }
 
-            return maxLength;
+            return maxLen;
         }
+        
+
     }
 }

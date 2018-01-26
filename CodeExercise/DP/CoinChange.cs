@@ -94,6 +94,31 @@ namespace CodeExercise.DP
         ///  
         ///  1   1 "1"            because use 1-1 = 0   mem[0] = 1   so  mem[1]+=mem[0] 
         /// 
+        /// 
+        /// there will be 4 ways
+        /// 1 1 1 1 1
+        /// 1 1 1 2
+        /// 1 2 2
+        /// 5
+        /// 
+        /// 
+        /// Example 1: 
+        ///         Input: amount = 5, coins = [1, 2, 5]
+        ///         Output: 4
+        /// Explanation: there are four ways to make up the amount:
+        /// 5=5
+        /// 5=2+2+1
+        /// 5=2+1+1+1
+        /// 5=1+1+1+1+1
+        /// 
+        /// Example 2: 
+        /// Input: amount = 3, coins = [2]
+        ///         Output: 0
+        /// Explanation: the amount of 3 cannot be made up just with coins of 2.
+        /// 
+        /// Example 3: 
+        /// Input: amount = 10, coins = [10]
+        ///         Output: 1
         /// </summary>
         /// <param name="amount"></param>
         /// <param name="coins"></param>

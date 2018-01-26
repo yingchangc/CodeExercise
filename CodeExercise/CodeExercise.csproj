@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinarySearch\SearchInsertPosition.cs" />
+    <Compile Include="DataStructure\KthSmallestElementInMatrix.cs" />
     <Compile Include="DP\AnagramSubstring.cs" />
     <Compile Include="DP\AssignCookies.cs" />
     <Compile Include="DP\BestTimeBuySellStock.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="DP\JumpGame.cs" />
     <Compile Include="DP\LongestContinuousIncreasingSubsequence.cs" />
     <Compile Include="DP\LongestPalindrome.cs" />
+    <Compile Include="DP\LongestSubstringAtMostKDistinctChar.cs" />
     <Compile Include="DP\LongestSubstringWithoutRepeatingCharacters.cs" />
     <Compile Include="DP\MajorityElement.cs" />
     <Compile Include="DP\MaximumSubarray.cs" />
@@ -85,6 +87,7 @@
     <Compile Include="Tree\DiameterOfBT.cs" />
     <Compile Include="Tree\LowestCommonAncestor.cs" />
     <Compile Include="Tree\TreeNode.cs" />
+    <Compile Include="Window\MinimumSizeSubarraySum.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

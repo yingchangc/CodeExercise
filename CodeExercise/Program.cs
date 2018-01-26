@@ -220,6 +220,7 @@ namespace CodeExercise
             int maxLength = test.LengthOfLongestSubstring("abc");
 
             maxLength = test.LengthOfLongestSubstring("tmmzuxt");
+
         }
 
         // 159
@@ -509,15 +510,59 @@ namespace CodeExercise
             int ans = question.MaxProduct(nums);
         }
 
+
+        //209
+        static void Run_MinSuzeSubArraySum()
+        {
+            int[] nums = { 2, 3, 1, 2, 4, 3 };
+            Window.MinimumSizeSubarraySum question = new Window.MinimumSizeSubarraySum();
+            int ans = question.MinSubArrayLen(7, nums);
+
+        }
+
+        //378 
+        static void Run_KthSmallestElementInMatrix()
+        {
+            DataStructure.KthSmallestElementInMatrix question = new DataStructure.KthSmallestElementInMatrix();
+
+            int[,] matrix = {
+                 { 1,  5,  9 },
+                 { 10, 11, 13 },
+                 { 12, 13, 15 }
+            };
+
+
+            var ans = question.KthSmallest(matrix, 2);
+        }
+
+        //340
+        static void Run_LongestSubstringAtMostKDistinctChar()
+        {
+            DP.LongestSubstringAtMostKDistinctChar question = new DP.LongestSubstringAtMostKDistinctChar();
+            int ans = question.LengthOfLongestSubstringKDistinct("eceba", 3);
+        }
+
         static void Main(string[] args)
         {
+            //62,63
+            Run_UniquePaths();
+            //340
+            Run_LongestSubstringAtMostKDistinctChar();
+            //3
+            Run_LongestSubstringWithoutRepeatingCharacters();
+            //209
+            Run_MinSuzeSubArraySum();
+
+            //378
+            Run_KthSmallestElementInMatrix();
+            
+            
             //322
             Run_CointChange();
 
             //152
             Run_MaxProductArray();
-            //62,63
-            Run_UniquePaths();
+            
             //53
             Run_MaxSumSubarray();
             
@@ -574,8 +619,7 @@ namespace CodeExercise
 
             //159   Not run in leetcode
             Run_lengthOfLongestSubstringTwoDistinct();
-            //3
-            Run_LongestSubstringWithoutRepeatingCharacters();
+            
 
             //438 
             Run_AnagramSubstring();
