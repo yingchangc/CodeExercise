@@ -24,21 +24,54 @@ namespace CodeExercise.DP
         /// O(n)
         /// <param name="nums"></param>
         /// <returns></returns>
+        /// A = [2, 3, 1, 1, 4], return true. 
+        /// A = [3, 2, 1, 0, 4], return false. 
+        /// http://www.lintcode.com/en/problem/jump-game/
         public static bool CanJump(int[] nums)
         {
-            int maxReachLoc = 0;
-            for (int i = 0; i<nums.Length; i++)
+            int len = nums.Length;
+            int maxCanReach = 0;
+            for (int i = 0; i < len; i++)
             {
-                if (i > maxReachLoc)
+                if (maxCanReach < i)
                 {
                     return false;
                 }
 
-                maxReachLoc = Math.Max(maxReachLoc, i + nums[i]);
+                maxCanReach = Math.Max(maxCanReach, i + nums[i]);
             }
 
             return true;
         }
+
+
+
+        // version 1: Dynamic Programming
+        // 这个方法，复杂度是 O(n^2) 可能会超时，但是依然需要掌握。
+        //{ 2, 3, 1, 1, 4 };  
+        // { 3,2,1,0,4};
+        public static bool canJumpDP(int[] nums)
+        {
+            int len = nums.Length;
+            bool[] memo = new bool[len];
+            memo[0] = true;
+
+            for (int j = 0; j < len; j++)
+            {
+                for (int i = 0; i < j; i++)
+                {
+                    if (memo[i] && (i + nums[i]) >= j)    // i can jump to and then can jump ge to j
+                    {
+                        memo[j] = true;
+                    }
+                }
+            }
+
+            return memo[len - 1];
+        }
+
+
+        
 
         //45
         /// https://www.youtube.com/watch?v=cETfFsSTGJI

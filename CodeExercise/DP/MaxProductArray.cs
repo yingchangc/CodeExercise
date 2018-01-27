@@ -39,5 +39,38 @@ namespace CodeExercise.DP
 
             return maxV;
         }
+
+        //For example, given the array [2,3,-2,4], the contiguous subarray [2,3] has the largest product = 6.
+        // space O(1)  time O(n)
+        //http://www.lintcode.com/en/problem/maximum-product-subarray/
+        public int maxProductNoMemo(int[] nums)
+        {
+            
+            int len = nums.Length;
+
+            if (len == 0 || nums == null)
+            {
+                return 0;
+            }
+
+            int minPre = nums[0];
+            int maxPre = nums[0];
+            int ans = nums[0];
+            
+            for (int i = 1; i < len; i++)
+            {
+                int currMin = Math.Min(nums[i], 
+                                  Math.Min(nums[i] * minPre, nums[i] * maxPre));    // p*p  vs n*n    note cannot update minPre here because it will be use next.
+
+                int currMax = Math.Max(nums[i],
+                                  Math.Max(nums[i] * minPre, nums[i] * maxPre));    // p*p  vs n*n
+
+                ans = Math.Max(ans, currMax);
+                minPre = currMin;
+                maxPre = currMax;
+            }
+
+            return ans;
+        }
     }
 }

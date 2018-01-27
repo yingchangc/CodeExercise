@@ -185,6 +185,9 @@ namespace CodeExercise
 
             int[] nums2 = { 3,2,1,0,4};
             canjump = DP.JumpGame.CanJump(nums2);
+
+            canjump = DP.JumpGame.canJumpDP(nums1);
+            canjump = DP.JumpGame.canJumpDP(nums2);
         }
 
         // 45. min Jump Game
@@ -394,6 +397,10 @@ namespace CodeExercise
             //ans = question.CoinChangeSolverSlow(nums2, 8839);
             //ans = question.MinCoinChangeSolver(nums2, 8839);
 
+            ans = question.coinChange(nums, 11);
+
+            int[] numsWrong = { 2 };
+            ans = question.coinChange(numsWrong, 3);
             // #Coins in a line and can choose left for right most
 
             int[] nums2 = { 1, 2, 3 };
@@ -508,6 +515,8 @@ namespace CodeExercise
             int[] nums = { 2, 3, -2, 4 };
             DP.MaxProductArray question = new DP.MaxProductArray();
             int ans = question.MaxProduct(nums);
+
+            ans = question.maxProductNoMemo(nums);
         }
 
 
@@ -544,6 +553,17 @@ namespace CodeExercise
 
         static void Main(string[] args)
         {
+            // 55
+            Run_JumpGame();
+            //45
+            Run_MinJumpGame();
+            //49
+            Run_GroupAnagrams();
+
+            //152
+            Run_MaxProductArray();
+            //322
+            Run_CointChange();
             //62,63
             Run_UniquePaths();
             //340
@@ -556,12 +576,7 @@ namespace CodeExercise
             //378
             Run_KthSmallestElementInMatrix();
             
-            
-            //322
-            Run_CointChange();
-
-            //152
-            Run_MaxProductArray();
+    
             
             //53
             Run_MaxSumSubarray();
@@ -604,12 +619,10 @@ namespace CodeExercise
             //169
             Run_MajorityElement();
             
-
-            
+      
             //139,140
             Run_WordBreak();
-            //49
-            Run_GroupAnagrams();
+            
 
             // 79
             Run_WordSearch();
@@ -625,10 +638,7 @@ namespace CodeExercise
             Run_AnagramSubstring();
             //455
             Run_AssignCookies();
-            //45
-            Run_MinJumpGame();
-            // 55
-            Run_JumpGame();
+            
             //132
             Run_Palindrome_Partitioning_II();
             // 409
