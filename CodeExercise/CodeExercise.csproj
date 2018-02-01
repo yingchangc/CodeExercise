@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="BinarySearch\SearchInsertPosition.cs" />
     <Compile Include="DataStructure\KthSmallestElementInMatrix.cs" />
+    <Compile Include="DataStructure\NumberOfIsland.cs" />
     <Compile Include="DP\AnagramSubstring.cs" />
     <Compile Include="DP\AssignCookies.cs" />
     <Compile Include="DP\BestTimeBuySellStock.cs" />

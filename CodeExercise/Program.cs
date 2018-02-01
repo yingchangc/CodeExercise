@@ -529,7 +529,7 @@ namespace CodeExercise
 
         }
 
-        //378 
+        //378   lintcode 465
         static void Run_KthSmallestElementInMatrix()
         {
             DataStructure.KthSmallestElementInMatrix question = new DataStructure.KthSmallestElementInMatrix();
@@ -542,6 +542,12 @@ namespace CodeExercise
 
 
             var ans = question.KthSmallest(matrix, 2);
+
+            int[] arrA = { 1, 3, 5 };
+            int[] arrB = { 2, 4, 6 };
+            ans = question.kthSmallestSumPQ(arrA, arrB, 3);
+            ans = question.kthSmallestSumPQ(arrA, arrB, 4);
+            ans = question.kthSmallestSumPQ(arrA, arrB, 8);
         }
 
         //340
@@ -551,8 +557,34 @@ namespace CodeExercise
             int ans = question.LengthOfLongestSubstringKDistinct("eceba", 3);
         }
 
+        static void Run_NumberOfIsland()
+        {
+            char[,] grid = {
+                 { '1', '1',  '0' },
+                 { '0',  '0',  '1' }
+            };
+
+            int m = grid.GetLength(0);
+            int n = grid.GetLength(1);
+
+            DataStructure.NumberOfIsland question = new DataStructure.NumberOfIsland();
+            int ans = question.NumIslandsBFS(grid);
+            ans = question.NumIslandsUF(grid);
+
+            char[,] grid2= {
+                 { '1', '1',  '0' },
+                 { '1',  '1',  '1' }
+            };
+
+            ans = question.NumIslandsUF(grid2);
+        }
+
         static void Main(string[] args)
         {
+            //200
+            Run_NumberOfIsland();
+            //378
+            Run_KthSmallestElementInMatrix();
             // 55
             Run_JumpGame();
             //45
@@ -573,8 +605,7 @@ namespace CodeExercise
             //209
             Run_MinSuzeSubArraySum();
 
-            //378
-            Run_KthSmallestElementInMatrix();
+            
             
     
             

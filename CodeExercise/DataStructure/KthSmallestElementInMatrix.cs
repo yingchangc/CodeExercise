@@ -9,6 +9,85 @@ namespace CodeExercise.DataStructure
     class KthSmallestElementInMatrix
     {
         /// <summary>
+        /// 465. Kth Smallest Sum In Two Sorted Arrays
+        /// http://www.lintcode.com/en/problem/kth-smallest-sum-in-two-sorted-arrays/
+        /// Given two integer arrays sorted in ascending order and an integer k. Define sum = a + b, 
+        /// where a is an element from the first array and b is an element from the second one. Find the kth smallest sum out of all possible sums.
+        /// 
+        /// 
+        /// Example
+        ///  Given[1, 7, 11] and[2, 4, 6].
+        /// 
+        /// For k = 3, return 7.
+        /// 
+        /// For k = 4, return 9.
+        /// 
+        /// For k = 8, return 15
+        /// 
+        /// Do it in either of the following time complexity:
+        /// 
+        ///O(k log min(n, m, k)). where n is the size of A, and m is the size of B.
+        /// </summary>
+        /// <param name="arrA"></param>
+        /// <param name="arrB"></param>
+        /// <param name="k"></param>
+        /// <returns></returns>
+        public int kthSmallestSumPQ(int[] arrA, int[] arrB, int k)
+        {  
+            SortedDictionary<int, List<Location>> pq = new SortedDictionary<int, List<Location>>(); // (sum, LocaitonS)
+
+            List<Location> initLocaitons = new List<Location>() { new Location(0, 0) }; //List because [1 3 5]   [2,4,6]   sum == 5 has (1,4), (2,5)
+            bool[,] visited = new bool[arrA.Length, arrB.Length];     
+            pq.Add(arrA[0] + arrB[0], initLocaitons);
+            visited[0, 0] = true;
+
+            List<Location> deltas = new List<Location>() { new Location(0, 1), new Location(1, 0) };    
+            
+            int ans = 0;
+
+            for (int i = 0; i < k; i++)
+            {
+                ans = pq.Keys.First();
+
+                var locations = pq.Values.First();
+                var location = locations[0];
+
+                foreach(var delta in deltas)
+                {
+                    int newLocX = location.x + delta.x;   // A index
+                    int newLocY = location.y + delta.y;   // B index
+
+                    if (newLocX < arrA.Length && newLocY < arrB.Length && visited[newLocX, newLocY] == false)     // YIC  boundary condition
+                    {
+                        visited[newLocX, newLocY] = true;
+                        var newSum = arrA[newLocX] + arrB[newLocY];
+                        
+                        if (pq.ContainsKey(newSum))
+                        {
+                            pq[newSum].Add(new Location(newLocX, newLocY));
+                        }
+                        else
+                        {
+                            pq.Add(newSum, new List<Location>() { new Location(newLocX, newLocY) });
+                        }
+                    }
+                }
+
+                if (locations.Count == 1)
+                {
+                    pq.Remove(ans);
+                }
+                else
+                {
+                    locations.RemoveAt(0);  // remove first locaiton wth the same key
+                }     
+            }
+
+            return ans;
+        }
+
+
+        /// <summary>
         /// 378. Kth Smallest Element in a Sorted Matrix
         /// Given a n x n matrix where each of the rows and columns are sorted in ascending order, find the kth smallest element in the matrix.
         /// 

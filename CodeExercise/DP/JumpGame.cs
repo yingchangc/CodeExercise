@@ -63,6 +63,7 @@ namespace CodeExercise.DP
                     if (memo[i] && (i + nums[i]) >= j)    // i can jump to and then can jump ge to j
                     {
                         memo[j] = true;
+                        break;
                     }
                 }
             }
