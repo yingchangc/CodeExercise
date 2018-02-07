@@ -49,6 +49,7 @@
     <Compile Include="DataStructure\NumberOfIsland.cs" />
     <Compile Include="DataStructure\NumberOfIsland2.cs" />
     <Compile Include="DataStructure\Trie.cs" />
+    <Compile Include="DataStructure\WordDictionarySearch.cs" />
     <Compile Include="DP\AnagramSubstring.cs" />
     <Compile Include="DP\AssignCookies.cs" />
     <Compile Include="DP\BestTimeBuySellStock.cs" />
@@ -77,7 +78,7 @@
     <Compile Include="DP\WordBreak.cs" />
     <Compile Include="DV\Sentence_Similarity.cs" />
     <Compile Include="EditDistance.cs" />
-    <Compile Include="GraphValidTree.cs" />
+    <Compile Include="DataStructure\GraphValidTree.cs" />
     <Compile Include="KMPSubstringSearch.cs" />
     <Compile Include="matrixQuestion\WordSearch.cs" />
     <Compile Include="MedianOfTwoSortedArray.cs" />

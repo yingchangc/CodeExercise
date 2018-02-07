@@ -689,8 +689,49 @@ namespace CodeExercise
             ans = cg.query();
         }
 
+        //261
+        static void Run_GraphValidTree()
+        {
+            int[,] validPositions = { { 0, 1 }, { 0, 2 }, { 0, 3 }, { 1, 4 } };
+
+            GraphValidTree question = new GraphValidTree();
+            var ans = question.ValidTree(5, validPositions);
+
+            int[,] inValidTreepositions = { { 0, 1 }, { 1, 2 }, { 2, 3 }, { 1, 3 }, { 1, 4 } };
+            ans = question.ValidTree(5, inValidTreepositions);
+
+            int[,] inValidTreepositions2 = { { 0, 1 }, { 2, 3 } };
+            ans = question.ValidTree(4, inValidTreepositions2);
+        }
+
+        //211
+        static void Run_WordDictionary()
+        {
+            DataStructure.WordDictionary question = new DataStructure.WordDictionary();
+            //addWord("bad")
+            //addWord("dad")
+            //addWord("mad")
+            //search("pad")-> false
+            //search("bad")-> true
+            //search(".ad")-> true
+            //search("b..")-> true
+
+            question.AddWord("bad");
+            question.AddWord("dad");
+            question.AddWord("mad");
+            var ans = question.Search("pad");
+            ans = question.Search("bad");
+            ans = question.Search(".ad");
+            ans = question.Search("b..");
+
+        }
+
         static void Main(string[] args)
         {
+            //211
+            Run_WordDictionary();
+            //261
+            Run_GraphValidTree();
             //305
             Run_NumberOfIsland2();
 
