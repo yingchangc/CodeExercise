@@ -60,7 +60,7 @@ namespace CodeExercise
 
             int distance = resArray[s1.Length, s2.Length];
             Console.WriteLine();
-            
+
             // demo all
             String str1 = "azced";
             String str2 = "abcdef";
@@ -71,7 +71,7 @@ namespace CodeExercise
         {
             int testlengh = 4;
             int[] arr = new int[testlengh];
-            for (int i = 0; i< testlengh; i++)
+            for (int i = 0; i < testlengh; i++)
             {
                 arr[i] = i + 1;
             }
@@ -97,7 +97,7 @@ namespace CodeExercise
             int ans = CombineSum.CombinationSum4(candidates, 4);
 
             //optional
-            int[] candidates2 = { 1, 2, 5 };    
+            int[] candidates2 = { 1, 2, 5 };
             ans = CombineSum.CombinationSum4_1NoDupCombination(candidates2, 12);
         }
 
@@ -111,7 +111,7 @@ namespace CodeExercise
         // 40
         static void Run_CombinationSumNoDuplicate()
         {
-            int[] candidates = { 10, 1, 2, 7, 6, 1, 5};
+            int[] candidates = { 10, 1, 2, 7, 6, 1, 5 };
             CombineSum.CombinationSum2(candidates, 8);
         }
 
@@ -126,14 +126,14 @@ namespace CodeExercise
         static void Run_SubSetsWithDup()
         {
             //int[] candidates = { 1, 2, 2 };
-            int[] candidates = { 4,4,1,4 };
+            int[] candidates = { 4, 4, 1, 4 };
             SubSets.SubsetsWithDup(candidates);
         }
 
         // 47. 
         static void Run_PermuteUnique()
         {
-            int[] nums = { 2,2,1,1 };
+            int[] nums = { 2, 2, 1, 1 };
             IList<IList<int>> results = PermutationIntArray.PermuteUnique(nums);
 
             foreach (var intList in results)
@@ -181,9 +181,9 @@ namespace CodeExercise
         static void Run_JumpGame()
         {
             int[] nums1 = { 2, 3, 1, 1, 4 };
-            bool canjump=DP.JumpGame.CanJump(nums1);
+            bool canjump = DP.JumpGame.CanJump(nums1);
 
-            int[] nums2 = { 3,2,1,0,4};
+            int[] nums2 = { 3, 2, 1, 0, 4 };
             canjump = DP.JumpGame.CanJump(nums2);
 
             canjump = DP.JumpGame.canJumpDP(nums1);
@@ -193,10 +193,10 @@ namespace CodeExercise
         // 45. min Jump Game
         static void Run_MinJumpGame()
         {
-            int[] nums1 = { 2,3,1,1,4 };
+            int[] nums1 = { 2, 3, 1, 1, 4 };
             int minjump = DP.JumpGame.Jump(nums1);
 
-            
+
         }
         // 455.assign cookies
         static void Run_AssignCookies()
@@ -271,10 +271,10 @@ namespace CodeExercise
             string subleft = test.Substring(0, 0);
             string subRight = test.Substring(test.Length);  // Note will be empty string
 
-            string[] worddict = { "cat", "cats", "and", "sand", "dog"};
+            string[] worddict = { "cat", "cats", "and", "sand", "dog" };
             DP.WordBreak question = new DP.WordBreak();
             //139
-            bool canBreak = question.CheckWordBreak(test,worddict);
+            bool canBreak = question.CheckWordBreak(test, worddict);
 
             var ans2_1 = question.CheckWordBreakv2(test, worddict);
             string test2 = "aaaaaaa";
@@ -317,7 +317,7 @@ namespace CodeExercise
         //169
         static void Run_MajorityElement()
         {
-            int[] nums = { 1, 4, 5, 7, 1, 3, 1, 3, 3, 1, 1,1,1 };
+            int[] nums = { 1, 4, 5, 7, 1, 3, 1, 3, 3, 1, 1, 1, 1 };
             //int[] nums = { 1,1,1,3,3 };
             DP.MajorityElement question = new DP.MajorityElement();
             int majornum = question.MajorityElementSolver(nums);
@@ -329,7 +329,7 @@ namespace CodeExercise
             DP.HouseRobber_DeleteAndEarn question = new DP.HouseRobber_DeleteAndEarn();
 
             // 198 rob
-            int[] nums1 = { 2, 3, 7, 8, 4};
+            int[] nums1 = { 2, 3, 7, 8, 4 };
             int ans1 = question.Rob(nums1);   // should be rob 2 +7 +4
 
             // 740 Delete and Earn
@@ -358,7 +358,7 @@ namespace CodeExercise
             int ans = question.FindLengthOfLCIS(nums);
 
             // 673
-            int[] num2 = { 1, 2, 4, 3, 5, 4, 7, 2};
+            int[] num2 = { 1, 2, 4, 3, 5, 4, 7, 2 };
             //int[] num2 = {3,4,-1,0,6,2,3 };
             DP.LongestIncreasingSubsequence q2 = new DP.LongestIncreasingSubsequence();
             int ans2 = q2.FindNumberOfLIS(num2);
@@ -488,7 +488,7 @@ namespace CodeExercise
         {
             //62
             DP.UniquePath question = new DP.UniquePath();
-            int ans = question.NumofUniquePaths(2,2);
+            int ans = question.NumofUniquePaths(2, 2);
 
             int[,] grid = { {0,0,0},
                             {0,1,0},
@@ -497,7 +497,7 @@ namespace CodeExercise
             //63
             ans = question.UniquePathsWithObstacles(grid);
 
-            int[,] grid2 = { { 1} };
+            int[,] grid2 = { { 1 } };
             ans = question.UniquePathsWithObstacles(grid2);
         }
 
@@ -557,6 +557,7 @@ namespace CodeExercise
             int ans = question.LengthOfLongestSubstringKDistinct("eceba", 3);
         }
 
+        //200
         static void Run_NumberOfIsland()
         {
             char[,] grid = {
@@ -571,7 +572,7 @@ namespace CodeExercise
             int ans = question.NumIslandsBFS(grid);
             ans = question.NumIslandsUF(grid);
 
-            char[,] grid2= {
+            char[,] grid2 = {
                  { '1', '1',  '0' },
                  { '1',  '1',  '1' }
             };
@@ -579,8 +580,134 @@ namespace CodeExercise
             ans = question.NumIslandsUF(grid2);
         }
 
+        //lintcode 434   leetcode 305
+        static void Run_NumberOfIsland2()
+        {
+            // Given n = 3, m = 3, array of pair A = [(0, 0),(0,1),(2,2),(2,1)].
+            //return [1, 1, 2, 2].
+            var paris = new List<DataStructure.Point> { new DataStructure.Point(0, 0),
+                                                        new DataStructure.Point(0, 1),
+                                                        new DataStructure.Point(2, 2),
+                                                        new DataStructure.Point(2, 1)};
+            DataStructure.NumberOfIsland2 question = new DataStructure.NumberOfIsland2();
+            var ans = question.NumIslands2(3, 3, paris.ToArray());
+
+
+            var paris2 = new List<DataStructure.Point> { new DataStructure.Point(1, 1),
+                                                        new DataStructure.Point(0, 1),
+                                                        new DataStructure.Point(3, 3),
+                                                        new DataStructure.Point(3, 4)};
+            //4
+            //5
+            //[[1, 1],[0,1],[3,3],[3,4]]
+            //Expected
+            //[1, 1, 2, 2]
+            ans = question.NumIslands2(5, 4, paris2.ToArray());
+
+
+
+            int[,] positions = { { 0, 0 }, { 0,1 }, { 1,2 }, { 2,1 } };
+
+            //[[0, 0], [0, 1], [1, 2], [2, 1]].
+            var ans2 = question.NumIslands2LeetCode(3,3, positions);
+
+        }
+
+        //lint code 589
+        static void Run_ConnectingGraph()
+        {
+            ///5 // n = 5
+            ///query(1, 2) return false
+            ///connect(1, 2)
+            ///query(1, 3) return false
+            ///connect(2, 4)
+            ///query(1, 4) return true
+            int n = 5;
+            DataStructure.ConnectingGraph cg = new DataStructure.ConnectingGraph(n);
+            bool ans = cg.query(1, 2);
+            cg.connect(1, 2);
+            ans = cg.query(1, 3);
+            cg.connect(2,4);
+            ans = cg.query(1, 4);
+
+        }
+
+        // lint code 442
+        static void Run_Trie()
+        {
+            DataStructure.Trie trie = new DataStructure.Trie();
+            trie.insert("lintcode");
+            var ans = trie.search("code");
+            ans = trie.startsWith("lint");
+            ans = trie.startsWith("linterror");
+            trie.insert("linterror");
+            ans = trie.search("lintcod");
+            ans = trie.startsWith("linterror");
+        }
+
+        //lint code 590
+        static void Run_ConnectingGraph2()
+        {
+            /// 5 // n = 5
+            /// query(1) return 1
+            /// connect(1, 2)
+            /// query(1) return 2
+            /// connect(2, 4)
+            /// query(1) return 3
+            /// connect(1, 4)
+            /// query(1) return 3
+            int n = 5;
+            DataStructure.ConnectingGraph2 cg = new DataStructure.ConnectingGraph2(n);
+            int ans = cg.query(1);
+            cg.connect(1, 2);
+            ans = cg.query(2);
+            cg.connect(2, 4);
+            ans = cg.query(1);
+            cg.connect(1, 4);
+            ans = cg.query(1);
+        }
+
+        //lint code 591
+        static void Run_ConnectingGraph3()
+        {
+            ///5 // n = 5
+            ///query() return 5
+            ///connect(1, 2)
+            ///query() return 4
+            ///connect(2, 4)
+            ///query() return 3
+            ///connect(1, 4)
+            ///query() return 3
+            int n = 5;
+            DataStructure.ConnectingGraph3 cg = new DataStructure.ConnectingGraph3(n);
+            int ans = cg.query();
+            cg.connect(1, 2);
+            ans = cg.query();
+            cg.connect(2, 4);
+            ans = cg.query();
+            cg.connect(1, 4);
+            ans = cg.query();
+        }
+
         static void Main(string[] args)
         {
+            //305
+            Run_NumberOfIsland2();
+
+            // lintcode 422
+            Run_Trie();
+            
+            // Lintcode 591
+            Run_ConnectingGraph3();
+
+            //Lintcode 589
+            Run_ConnectingGraph();
+
+            // Lintcode 590
+            Run_ConnectingGraph2();
+
+            
+
             //200
             Run_NumberOfIsland();
             //378
