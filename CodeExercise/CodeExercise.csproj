@@ -46,6 +46,7 @@
     <Compile Include="BinarySearch\SearchInsertPosition.cs" />
     <Compile Include="DataStructure\ConnectingGraph.cs" />
     <Compile Include="DataStructure\KthSmallestElementInMatrix.cs" />
+    <Compile Include="DataStructure\NumberConnectedComponentsInUG.cs" />
     <Compile Include="DataStructure\NumberOfIsland.cs" />
     <Compile Include="DataStructure\NumberOfIsland2.cs" />
     <Compile Include="DataStructure\Trie.cs" />

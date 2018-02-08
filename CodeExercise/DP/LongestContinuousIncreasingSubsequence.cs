@@ -25,34 +25,65 @@ namespace CodeExercise.DP
         public int FindLengthOfLCIS(int[] nums)
         {
             int len = nums.Length;
+
             if (len == 0)
             {
                 return 0;
             }
 
-            int maxLen = 1;
-            int currLen = 1;
-            int pre = nums[0];
-
-            for (int i =1; i<nums.Length; i++)
+            int ans = 1;
+            int j=0;
+            for (int i = 0; i< len; i++)
             {
-                if(pre < nums[i])
+                while(j < len)
                 {
-                    currLen++;
-                    maxLen = Math.Max(maxLen, currLen);     
+                    if ((j+1) < len && nums[j] < nums[j + 1])
+                    {
+                        ans = Math.Max(ans, (j + 1) - i + 1);
+                        j++;
+                    }
+                    else
+                    {
+                        j++;
+                        break;
+                    }
                 }
-                else
-                {
-                    // reset 
-                    currLen = 1;
-                }
-
-                // update pre
-                pre = nums[i];
             }
+            return ans;
 
-            return maxLen;
+            //int startIndex = 0;
 
+            //int ans = 1;
+
+            //for (int i = 1; i < len; i++)
+            //{
+            //    if (nums[i] > nums[i - 1])
+            //    {
+            //        ans = Math.Max(ans, i - startIndex + 1);
+            //    }
+            //    else
+            //    {
+            //        startIndex = i;
+            //    }
+            //}
+
+            // if left and right need to be considered
+            //startIndex = 0;
+            //for (int i = 1; i < len; i++)
+            //{
+            //    if (nums[i] < nums[i - 1])
+            //    {
+            //        ans = Math.Max(ans, i - startIndex + 1);
+            //    }
+            //    else
+            //    {
+            //        startIndex = i;
+            //    }
+            //}
+
+            //return ans;
+
+            
         }
     }
 

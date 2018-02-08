@@ -28,72 +28,90 @@ namespace CodeExercise.matrixQuestion
         {
             int m = board.GetLength(0);
             int n = board.GetLength(1);
+
             bool[,] visited = new bool[m, n];
 
             for (int i = 0; i < m; i++)
             {
                 for (int j = 0; j < n; j++)
                 {
-                    if (existHelper(board, visited,word,0,i,j))
+                    if (exitHelper(board, word, 0, i, j, visited, m, n))
+
                     {
                         return true;
                     }
                 }
             }
-
             return false;
         }
 
-        private bool existHelper(char[,] board, bool[,] visited, string word, int index, int currentM, int currentN)
+        private bool exitHelper(char[,] board, string word, int index, int i, int j, bool[,] visited, int M, int N)
         {
-            // stop condition
             if (index == word.Length)
             {
                 return true;
             }
-            
-            // check out of bound
-            if (currentM < 0 || currentM >= board.GetLength(0))   // note >=
-            {
-                return false;
-            }
-            if (currentN < 0 || currentN >= board.GetLength(1))
+
+            if (i < 0 || i >= M)
             {
                 return false;
             }
 
-            // check not visited from parent
-            if (visited[currentM, currentN])
+            if (j < 0 || j >= N)
             {
                 return false;
             }
 
-            // check not the same current char
-            if (board[currentM, currentN] != word[index])
+            if (visited[i, j])
             {
                 return false;
             }
 
-            // to prevent child visit again only
-            visited[currentM, currentN] = true;
-
-            // Up, left, right, down
-            if ((existHelper(board, visited, word, index+1, currentM, currentN-1)) ||    // note index+1   not index++
-                (existHelper(board, visited, word, index+1, currentM-1, currentN)) ||
-                (existHelper(board, visited, word, index+1, currentM+1, currentN)) ||
-                (existHelper(board, visited, word, index+1, currentM, currentN+1)))
+            if (word[index] != board[i, j])
             {
+                return false;
+            }
 
-                // pop the visited at this level.
-                //visited[currentM, currentN] = false;
+            visited[i, j] = true;
+
+            if (exitHelper(board, word, index + 1, i - 1, j, visited, M, N) || exitHelper(board, word, index + 1, i + 1, j, visited, M, N)
+               || exitHelper(board, word, index + 1, i, j - 1, visited, M, N) || exitHelper(board, word, index + 1, i, j + 1, visited, M, N))
+            {
                 return true;
-
             }
 
+            visited[i, j] = false;
 
-            // pop the visited at this level.
-            visited[currentM, currentN] = false;
             return false;
         }
+
+    }
+
+    class WordSearch2
+    {
+        /// <summary>
+        /// Given a 2D board and a list of words from the dictionary, find all words in the board.
+        ///        Each word must be constructed from letters of sequentially adjacent cell, where "adjacent" cells are those horizontally or vertically neighboring.The same letter cell may not be used more than once in a word.
+        ///
+        ///       For example,
+        ///       Given words = ["oath", "pea", "eat", "rain"] and board =
+        ///
+        ///       [   
+        ///         ['o','a','a','n'],
+        ///         ['e','t','a','e'],
+        ///         ['i','h','k','r'],
+        ///         ['i','f','l','v']
+        ///       ]
+        ///Return["eat", "oath"].
+        ///Note:
+        ///You may assume that all inputs are consist of lowercase letters a-z.
+        /// </summary>
+        /// <param name="board"></param>
+        /// <param name="words"></param>
+        /// <returns></returns>
+        //public IList<string> FindWords(char[,] board, string[] words)
+        //{
+
+        //}
     }
 }

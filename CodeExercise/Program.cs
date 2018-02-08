@@ -351,7 +351,7 @@ namespace CodeExercise
         // 674
         static void Run_LongestContinuousIncreasingSubsequence()
         {
-            int[] nums = { 1, 3, 5, 4, 7 };
+            int[] nums = { 1,3,5,4,7 };
 
             //674
             DP.LongestContinuousIncreasingSubsequence question = new DP.LongestContinuousIncreasingSubsequence();
@@ -606,10 +606,10 @@ namespace CodeExercise
 
 
 
-            int[,] positions = { { 0, 0 }, { 0,1 }, { 1,2 }, { 2,1 } };
+            int[,] positions = { { 0, 0 }, { 0, 1 }, { 1, 2 }, { 2, 1 } };
 
             //[[0, 0], [0, 1], [1, 2], [2, 1]].
-            var ans2 = question.NumIslands2LeetCode(3,3, positions);
+            var ans2 = question.NumIslands2LeetCode(3, 3, positions);
 
         }
 
@@ -627,7 +627,7 @@ namespace CodeExercise
             bool ans = cg.query(1, 2);
             cg.connect(1, 2);
             ans = cg.query(1, 3);
-            cg.connect(2,4);
+            cg.connect(2, 4);
             ans = cg.query(1, 4);
 
         }
@@ -726,8 +726,28 @@ namespace CodeExercise
 
         }
 
+        //323
+        static void Run_NumberConnectedComponentsInUG()
+        {
+            DataStructure.NumberConnectedComponentsInUG question = new DataStructure.NumberConnectedComponentsInUG();
+            //Given n = 5 and edges = [[0, 1], [1, 2], [3, 4]], return 2.
+            //Given n = 5 and edges = [[0, 1], [1, 2], [2, 3], [3, 4]], return 1.
+
+            int[,] edges1 = { { 0, 1 }, { 1, 2 }, { 3, 4 } };
+            int[,] edges2 = { {2,3 }, { 1, 2 }, { 1, 3 }};
+
+            var ans = question.CountComponents(5, edges1);
+            ans = question.CountComponents(4, edges2);
+
+            ans = question.CountComponents2(4, edges2);
+        }
+
         static void Main(string[] args)
         {
+            //674
+            Run_LongestContinuousIncreasingSubsequence();
+            //323
+            Run_NumberConnectedComponentsInUG();
             //211
             Run_WordDictionary();
             //261
@@ -806,8 +826,7 @@ namespace CodeExercise
             //153
             Run_FindMinimumInRotatedSortedArray();
 
-            //674
-            Run_LongestContinuousIncreasingSubsequence();
+           
             //64
             Run_MinimumPathSum();
             // 198 and 740

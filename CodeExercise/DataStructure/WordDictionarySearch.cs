@@ -93,12 +93,12 @@ namespace CodeExercise.DataStructure
                 return false;
             }
 
-            if ((word.Length-1) == index)
+            if ((word.Length-1) == index)     // I am current node of index char at last
             {
                 return curr.hasWord;
             }
 
-            char nextC = word[index+1];  
+            char nextC = word[index+1];     // yic dont forget to +1
 
             if (nextC == '.')
             {
