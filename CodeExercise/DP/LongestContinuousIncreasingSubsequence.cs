@@ -31,41 +31,21 @@ namespace CodeExercise.DP
                 return 0;
             }
 
+            int startIndex = 0;
+
             int ans = 1;
-            int j=0;
-            for (int i = 0; i< len; i++)
+
+            for (int i = 1; i < len; i++)
             {
-                while(j < len)
+                if (nums[i] > nums[i - 1])
                 {
-                    if ((j+1) < len && nums[j] < nums[j + 1])
-                    {
-                        ans = Math.Max(ans, (j + 1) - i + 1);
-                        j++;
-                    }
-                    else
-                    {
-                        j++;
-                        break;
-                    }
+                    ans = Math.Max(ans, i - startIndex + 1);
+                }
+                else
+                {
+                    startIndex = i;
                 }
             }
-            return ans;
-
-            //int startIndex = 0;
-
-            //int ans = 1;
-
-            //for (int i = 1; i < len; i++)
-            //{
-            //    if (nums[i] > nums[i - 1])
-            //    {
-            //        ans = Math.Max(ans, i - startIndex + 1);
-            //    }
-            //    else
-            //    {
-            //        startIndex = i;
-            //    }
-            //}
 
             // if left and right need to be considered
             //startIndex = 0;
@@ -81,9 +61,9 @@ namespace CodeExercise.DP
             //    }
             //}
 
-            //return ans;
+            return ans;
 
-            
+
         }
     }
 

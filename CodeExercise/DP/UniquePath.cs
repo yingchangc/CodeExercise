@@ -105,11 +105,95 @@ namespace CodeExercise.DP
         /// 
         /// O(mn) runtime, O(mn) space – Dynamic programming: 
         /// 
-        /// Note: YIC need to check if curr indexM indexN is obstacle before check index(0,0) case
+        /// Note: this is space O(N) case
+        /// 
+        /// check  UniquePathsWithObstaclesWOOptimize original code
         /// </summary>
         /// <param name="obstacleGrid"></param>
         /// <returns></returns>
         public int UniquePathsWithObstacles(int[,] obstacleGrid)
+        {
+            int M = obstacleGrid.GetLength(0);
+            int N = obstacleGrid.GetLength(1);
+
+            int[,] memo = new int[2, N];
+
+            memo[0, 0] = 1;
+            int i = 0;
+            int j = 0;
+            for (j = 0; j < M; j++)
+            {
+                for (i =0; i < N; i++)
+                {
+                    if (obstacleGrid[j,i] == 1)
+                    {
+                        memo[j%2, i] = 0;
+                    }
+                    else
+                    {
+                        // check left
+                        if ((i - 1) >= 0 && (j - 1) >= 0)
+                        {
+                            memo[j%2, i] = memo[j%2, i - 1] + memo[(j - 1) % 2, i];
+                        }
+                        else if ((i-1) >=0)
+                        {
+                            memo[j % 2, i] = memo[j % 2, i - 1];
+                        }
+                        else if ((j - 1) >= 0)
+                        {
+                            memo[j % 2, i] = memo[(j - 1) % 2, i];
+                        }
+                    }
+                    
+                }
+            }
+
+            return memo[(j-1)%2, N - 1];
+
+        }
+
+        public int UniquePathsWithObstaclesWOOptimize(int[,] obstacleGrid)
+        {
+            int M = obstacleGrid.GetLength(0);
+            int N = obstacleGrid.GetLength(1);
+
+            int[,] memo = new int[M, N];
+            memo[0, 0] = 1;
+
+            for (int j = 0; j < M; j++)
+            {
+                for (int i = 0; i < N; i++)
+                {
+                    if (obstacleGrid[j, i] == 1)
+                    {
+                        memo[j, i] = 0;
+                    }
+                    else
+                    {
+                        // check left
+                        if ((i - 1) >= 0 && (j - 1) >= 0)
+                        {
+                            memo[j, i] = memo[j, i - 1] + memo[j - 1, i];
+                        }
+                        else if ((i - 1) >= 0)
+                        {
+                            memo[j, i] = memo[j, i - 1];
+                        }
+                        else if ((j - 1) >= 0)
+                        {
+                            memo[j, i] += memo[j - 1, i];
+                        }
+                    }
+
+                }
+            }
+
+            return memo[M - 1, N - 1];
+
+        }
+
+        public int UniquePathsWithObstaclesOld(int[,] obstacleGrid)
         {
             Dictionary<int, int> memo = new Dictionary<int, int>();   //(loc, ways)
             int M = obstacleGrid.GetLength(0);
@@ -119,6 +203,8 @@ namespace CodeExercise.DP
 
             return ans;
         }
+
+
 
         private int UniquePathsWithObstaclesHelper(int[,] obstacleGrid, int indexM, int indexN, int M, int N, Dictionary<int, int> memo)
         {

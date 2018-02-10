@@ -109,9 +109,129 @@ namespace CodeExercise.matrixQuestion
         /// <param name="board"></param>
         /// <param name="words"></param>
         /// <returns></returns>
-        //public IList<string> FindWords(char[,] board, string[] words)
-        //{
+        public IList<string> FindWords(char[,] board, string[] words)
+        {
+            int M = board.GetLength(0);
+            int N = board.GetLength(1);
 
-        //}
+            bool[,] visited = new bool[M, N];
+            HashSet<string> ans = new HashSet<string>();
+
+            WordSearchTries trie = new WordSearchTries();
+            foreach(string word in words)
+            {
+                trie.insert(word);
+            }
+
+            TreeNode root = trie.root;
+
+            for(int i = 0; i < M; i ++)
+            {
+                for (int j = 0; j < N; j++)
+                {
+                    char c = board[i, j];
+                    if (root.children[c-'a'] != null)
+                    {
+                        FindWordsHelper(board, i, j, M, N, root.children[c - 'a'], visited, ans);
+                    }
+                }
+            }
+
+            return ans.ToArray();
+        }
+
+        private void FindWordsHelper(char[,] board, int i, int j, int M, int N, TreeNode curr, bool[,] visited, HashSet<string> ans)
+        {
+            if (visited[i,j])
+            {
+                return;
+            }
+
+            visited[i, j] = true;
+
+            if (curr.hasWord)
+            {
+                ans.Add(curr.word);
+            }
+
+            var deltasI = new int[] { 1, 0, -1, 0 };
+            var deltasJ = new int[] { 0, 1, 0, -1 };
+
+            for(int k = 0; k < 4; k++)
+            {
+                int nI = i + deltasI[k];
+                int nJ = j + deltasJ[k];
+                if (!(nI < 0 || nI >= M || nJ < 0 || nJ >= N))
+                {
+                    char nextC = board[nI, nJ];
+                    if (curr.children[nextC-'a'] != null)
+                    {
+                        FindWordsHelper(board, nI, nJ, M, N, curr.children[nextC - 'a'], visited, ans);
+                    }
+                }          
+            }
+
+            visited[i, j] = false;
+            
+
+        }
+
+        class TreeNode
+        {
+            public bool hasWord;
+
+            public string word;
+
+            public TreeNode[] children;
+
+            public TreeNode()
+            {
+                hasWord = false;
+                children = new TreeNode[26];
+            }
+        }
+
+        class WordSearchTries
+        {
+            public TreeNode root;
+
+            public WordSearchTries()
+            {
+                root = new TreeNode();
+            }
+
+            public void insert(string word)
+            {
+                TreeNode curr = root;
+
+                foreach(char c in word)
+                {
+                    if(curr.children[c-'a'] == null)
+                    {
+                        curr.children[c - 'a'] = new TreeNode();
+                    }
+                    curr = curr.children[c - 'a'];
+                }
+
+                curr.hasWord = true;
+                curr.word = word;
+            }
+
+            public bool Search(string word)
+            {
+                TreeNode curr = root;
+                foreach(char c in word)
+                {
+                    if (curr.children[c-'a'] == null)
+                    {
+                        return false;
+                    }
+                    curr = curr.children[c - 'a'];
+                }
+
+                return curr.hasWord;
+            }
+        }
+
     }
 }

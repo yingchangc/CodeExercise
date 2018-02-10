@@ -251,10 +251,21 @@ namespace CodeExercise
 
             matrixQuestion.WordSearch question = new matrixQuestion.WordSearch();
             bool isExist = question.Exist(board, "ABCCED");
+
+            matrixQuestion.WordSearch2 question2 = new matrixQuestion.WordSearch2();
+
+            char[,] board2 = {  {'o','a','a','n'},
+                                {'e','t','a','e'},
+                                {'i','h','k','r' },
+                                { 'i','f','l','v' }  };
+
+            string[] words = { "oath", "pea", "eat", "rain" };
+            var ans = question2.FindWords(board2, words);
+
         }
 
-        //49 
-        static void Run_GroupAnagrams()
+    //49 
+    static void Run_GroupAnagrams()
         {
             string[] input = { "eat", "tea", "tan", "ate", "nat", "bat" };
             DP.GroupAnagrams question = new DP.GroupAnagrams();
@@ -410,6 +421,21 @@ namespace CodeExercise
             ans = question.CoinChange2(5, nums);
         }
 
+        //361
+        static void Run_BombEnemy()
+        {
+            DP.BonbEnemy question = new DP.BonbEnemy();
+
+            char[,] grid = { { '0' ,'E', '0', '0' },
+                             { 'E' ,'0', 'W', 'E' },
+                             { '0' ,'E', '0', '0' }};
+
+            var ans = question.MaxKilledEnemies(grid);
+
+            char[,] grid2 = { { 'E' }, { 'E' }, { 'E' }  };
+            ans = question.MaxKilledEnemies(grid2);
+        }
+
         //494
         static void Run_TargetSum()
         {
@@ -431,6 +457,13 @@ namespace CodeExercise
 
             DV.Sentence_Similarity quesiton = new DV.Sentence_Similarity();
             bool ans = quesiton.AreSentencesSimilarTwo(words1, words2, paris);
+        }
+
+        //338
+        static void Run_CountingBits()
+        {
+            DP.CountingBits question = new DP.CountingBits();
+            var ans = question.CountBitsSolver(5);
         }
 
         // 91
@@ -744,6 +777,18 @@ namespace CodeExercise
 
         static void Main(string[] args)
         {
+            //361
+            Run_BombEnemy();
+            //338
+            Run_CountingBits();
+            //64
+            Run_MinimumPathSum();
+
+            //62,63
+            Run_UniquePaths();
+            // 79
+            Run_WordSearch();
+
             //674
             Run_LongestContinuousIncreasingSubsequence();
             //323
@@ -784,8 +829,7 @@ namespace CodeExercise
             Run_MaxProductArray();
             //322
             Run_CointChange();
-            //62,63
-            Run_UniquePaths();
+            
             //340
             Run_LongestSubstringAtMostKDistinctChar();
             //3
@@ -827,8 +871,7 @@ namespace CodeExercise
             Run_FindMinimumInRotatedSortedArray();
 
            
-            //64
-            Run_MinimumPathSum();
+            
             // 198 and 740
             Run_HouseRobber_DeleteAndEarn();
             //216
@@ -842,8 +885,7 @@ namespace CodeExercise
             Run_WordBreak();
             
 
-            // 79
-            Run_WordSearch();
+            
 
             // 76
             Run_Minimum_Window_Substring();
