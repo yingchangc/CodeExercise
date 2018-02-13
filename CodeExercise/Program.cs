@@ -264,8 +264,8 @@ namespace CodeExercise
 
         }
 
-    //49 
-    static void Run_GroupAnagrams()
+        //49 
+        static void Run_GroupAnagrams()
         {
             string[] input = { "eat", "tea", "tan", "ate", "nat", "bat" };
             DP.GroupAnagrams question = new DP.GroupAnagrams();
@@ -340,7 +340,8 @@ namespace CodeExercise
             DP.HouseRobber_DeleteAndEarn question = new DP.HouseRobber_DeleteAndEarn();
 
             // 198 rob
-            int[] nums1 = { 2, 3, 7, 8, 4 };
+            //int[] nums1 = { 2, 3, 7, 8, 4 };
+            int[] nums1 = { 3,8,4};
             int ans1 = question.Rob(nums1);   // should be rob 2 +7 +4
 
             // 740 Delete and Earn
@@ -362,7 +363,7 @@ namespace CodeExercise
         // 674
         static void Run_LongestContinuousIncreasingSubsequence()
         {
-            int[] nums = { 1,3,5,4,7 };
+            int[] nums = { 1, 3, 5, 4, 7 };
 
             //674
             DP.LongestContinuousIncreasingSubsequence question = new DP.LongestContinuousIncreasingSubsequence();
@@ -432,7 +433,7 @@ namespace CodeExercise
 
             var ans = question.MaxKilledEnemies(grid);
 
-            char[,] grid2 = { { 'E' }, { 'E' }, { 'E' }  };
+            char[,] grid2 = { { 'E' }, { 'E' }, { 'E' } };
             ans = question.MaxKilledEnemies(grid2);
         }
 
@@ -767,7 +768,7 @@ namespace CodeExercise
             //Given n = 5 and edges = [[0, 1], [1, 2], [2, 3], [3, 4]], return 1.
 
             int[,] edges1 = { { 0, 1 }, { 1, 2 }, { 3, 4 } };
-            int[,] edges2 = { {2,3 }, { 1, 2 }, { 1, 3 }};
+            int[,] edges2 = { { 2, 3 }, { 1, 2 }, { 1, 3 } };
 
             var ans = question.CountComponents(5, edges1);
             ans = question.CountComponents(4, edges2);
@@ -775,8 +776,30 @@ namespace CodeExercise
             ans = question.CountComponents2(4, edges2);
         }
 
+        // 256
+        static void Run_PaintHouse()
+        {
+            //Given costs = [[14, 2, 11],[11, 14, 5],[14, 3, 10]] return 10
+            // house 0 is blue, house 1 is green, house 2 is blue, 2 + 5 + 3 = 10
+
+            int[,] costs = { { 14, 2, 11 }, { 11, 14, 5 }, { 14, 3, 10 } };
+
+            DP.PaintHouse question = new DP.PaintHouse();
+
+            var ans = question.MinCost(costs);
+
+            ans = question.MinCostOptimizeSpace(costs);
+        }
+
         static void Main(string[] args)
         {
+            // 198 and 740
+            Run_HouseRobber_DeleteAndEarn();
+
+            //91
+            Run_DecodeWays();
+            //256
+            Run_PaintHouse();
             //361
             Run_BombEnemy();
             //338
@@ -853,8 +876,7 @@ namespace CodeExercise
             Run_FindPivotIndex();
             //747
             Run_LargestNumberAtLeastTwiceOthers();
-            //91
-            Run_DecodeWays();
+            
             //737
             Run_Sentence_Similarity();
             //494
@@ -872,8 +894,7 @@ namespace CodeExercise
 
            
             
-            // 198 and 740
-            Run_HouseRobber_DeleteAndEarn();
+            
             //216
             Run_CombinationSum3();
     

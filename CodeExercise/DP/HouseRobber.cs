@@ -33,6 +33,71 @@ namespace CodeExercise.DP
         /// <returns></returns>
         public int Rob(int[] nums)
         {
+            int N = nums.Length;
+            int[,] F = new int[2, 2];   // steal or not
+
+            // 0 house cost 0
+            int now = 0;
+            int old = 1;
+
+            F[now, 0] = 0;
+            F[now, 1] = 0;
+
+            for (int i=1; i <= N; i++)
+            {
+                now = 1 - now;
+                old = 1 - old;
+                for (int ShouldSteal = 0; ShouldSteal < 2; ShouldSteal++)
+                {
+                    if (ShouldSteal == 1)
+                    {
+                        // should steal the pre i houses, (i-1)th,  then pre i-1 houses we ask for no steal 
+                        F[now, ShouldSteal] = F[old, 0] + nums[i - 1];
+                    }
+                    else
+                    {
+                        // should steal = 0
+                        F[now, ShouldSteal] = Math.Max(F[old, 0], F[old, 1]);
+                    }
+                }
+            }
+
+            return Math.Max(F[now, 0], F[now, 1]);
+             
+        }
+
+        public int Rob_withoutOptimizeSpace(int[] nums)
+        {
+            int N = nums.Length;
+            int[,] F = new int[N + 1, 2];   // steal or not
+
+            // 0 house cost 0
+            F[0, 0] = 0;
+            F[0, 1] = 0;
+
+            for (int i = 1; i <= N; i++)
+            {
+                for (int ShouldSteal = 0; ShouldSteal < 2; ShouldSteal++)
+                {
+                    if (ShouldSteal == 1)
+                    {
+                        // should steal the pre i houses, (i-1)th,  then pre i-1 houses we ask for no steal 
+                        F[i, ShouldSteal] = F[i - 1, 0] + nums[i - 1];
+                    }
+                    else
+                    {
+                        // should steal = 0
+                        F[i, ShouldSteal] = Math.Max(F[i - 1, 0], F[i - 1, 1]);
+                    }
+                }
+            }
+
+            return Math.Max(F[N, 0], F[N, 1]);
+
+        }
+
+        public int Rob_old(int[] nums)
+        {
             int pre1 = 0;
             int pre2 = 0;
 

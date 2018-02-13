@@ -20,7 +20,66 @@ namespace CodeExercise.DP
         ///Given an encoded message containing digits, determine the total number of ways to decode it.
         ///For example,
         ///Given encoded message "12", it could be decoded as "AB" (1 2) or "L" (12). 
-        ///The number of ways decoding "12" is 2. 
+        ///The number of ways decoding "12" is 2.  
+        public int NumDecodings(string s)
+        {
+            if (string.IsNullOrEmpty(s))
+            {
+                return 1;
+            }
+
+            int[] F = new int[(s.Length + 1)];
+            F[0] = 1;     // empty string as 1 decode ways
+
+            for (int i = 1; i <= s.Length; i++)
+            {
+
+                F[i] = 0;
+
+                if ((i-2) >=0 && isValid2Char(s, i-2))
+                {
+                    F[i] += F[i - 2];
+                }
+
+                if (isValid1Char(s, i-1))
+                {
+                    F[i] += F[i - 1];
+                }
+            }
+
+            return F[s.Length];
+
+        }
+
+        private bool isValid1Char(string s, int startIndex)
+        {
+            char first = s[startIndex];
+            if ((first - '1') >= 0 && (first - '0') <= 9)   // 1~9
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool isValid2Char(string s, int startIndex)
+        {
+            char first = s[startIndex];
+            char second = s[startIndex+1];
+
+            if ((first - '1') == 0)    //10 ~19
+            {
+                return (second - '0') >= 0 && (second - '9') <= 0;
+            }
+
+            if ((first - '2') == 0)    //20 ~26
+            {
+                return (second - '0') >= 0 && (second - '6') <= 0;
+            }
+
+            return false;
+        }
+
         /// just like fib  https://www.ics.uci.edu/~eppstein/161/960109.html   and HouseRobber question
         /// "102213"
         /// memo array   each loc means the ways can decode so far
@@ -30,7 +89,7 @@ namespace CodeExercise.DP
         /// if curr[i]  valid  only,    ex "*01"   cannot take * "01"   so memo[i] = memo[i-1]                                                                                   
         /// if "curr[i-1]curr[i]" valid only,    ex "*10"   cannot take "*1" 0   so  memo[i] = memo[i-1]
         /// if curr[i] and curr[i-1]curr[i]  both not valid  "*00"  return 0 cannot decode
-        public int NumDecodings(string s)
+        public int NumDecodings_old(string s)
         {
             if (string.IsNullOrEmpty(s) || !isValidNum(s, 0, 0))   // cannot have "" or "012"
             {
