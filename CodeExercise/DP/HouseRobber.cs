@@ -9,6 +9,77 @@ namespace CodeExercise.DP
     class HouseRobber_DeleteAndEarn
     {
         /// <summary>
+        /// 213. House Robber II
+        /// https://leetcode.com/problems/house-robber-ii/description/
+        /// After robbing those houses on that street, the thief has found himself a new place for his thievery so that he will not get too much attention. This time, all houses at this place are arranged in a circle. That means the first house is the neighbor of the last one. Meanwhile, the security system for these houses remain the same as for those in the previous street.
+        ///
+        /// Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public int Rob2(int[] nums)
+        {
+            if (nums.Length == 0)     // yic easy for get wrong here
+            {
+                return 0;
+            }
+            if (nums.Length == 1)   // yic easy for get wrong here   cut head and tail will have problem if not handle here
+            {
+                return nums[0];
+            }
+
+            int gain1 = Rob2HelperStartFirstHouseAndSkipLast(nums);
+            int gain2 = Rob2HelperSkipFirstHouseAndIncludeLast(nums);
+
+            return Math.Max(gain1, gain2);
+        }
+
+
+        private int Rob2HelperStartFirstHouseAndSkipLast(int[] nums)
+        {
+            int N = nums.Length;
+            int[,] F = new int[2, 2];
+
+            int now = 0;
+            int old = 1;
+
+            F[0, 0] = 0;
+            F[0, 1] = 0;
+            for (int i = 1; i < N; i++)
+            {
+                now = 1 - now;
+                old = 1 - old;
+                F[now, 0] = Math.Max(F[old, 0], F[old, 1]);
+                F[now, 1] = F[old, 0] + nums[i-1];
+            }  
+            
+            return Math.Max(F[now,0], F[now,1]);  
+        }
+        private int Rob2HelperSkipFirstHouseAndIncludeLast(int[] nums)
+        {
+            int N = nums.Length;
+            int[,] F = new int[N+1, 2];
+
+            F[0, 0] = 0;
+            F[0, 1] = 0;
+            F[1, 0] = 0;
+            F[1, 1] = 0;
+
+            int now = 1;
+            int old = 0;
+
+            for (int i = 2; i <= N; i++)
+            {
+                now = 1 - now;
+                old = 1 - old;
+                F[now, 0] = Math.Max(F[old, 0], F[old, 1]);
+                F[now, 1] = F[old, 0] + nums[i-1];
+            }
+
+            return Math.Max(F[now, 0], F[now, 1]);
+        }
+
+        /// <summary>
         /// 198  related to 740
         /// https://leetcode.com/problems/house-robber/description/
         /// You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security system connected and it will automatically contact the police if two adjacent houses were broken into on the same night.

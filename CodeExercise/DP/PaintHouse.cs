@@ -107,5 +107,121 @@ namespace CodeExercise.DP
 
             return Math.Min(F[now, 0], Math.Min(F[now, 1], F[now, 2]));
         }
+
+
+        /// <summary>
+        /// 265 paint  house 2
+        /// https://leetcode.com/problems/paint-house-ii/description/
+        /// There are a row of n houses, each house can be painted with one of the k colors. The cost of painting each house with a certain color is different. You have to paint all the houses such that no two adjacent houses have the same color.
+        //The cost of painting each house with a certain color is represented by a n x k cost matrix.For example, costs[0][0] is the cost of painting house 0 with color 0; costs[1][2] is the cost of painting house 1 with color 2, and so on...Find the minimum cost to paint all houses.
+        /// </summary>
+        /// <param name="costs"></param>
+        /// <returns></returns>
+        public int MinCostII(int[,] costs)
+        {
+            int N = costs.GetLength(0);
+            int colors = costs.GetLength(1);
+
+            if (N == 0)
+            {
+                return 0;
+            }
+
+            int[,] F = new int[N + 1, colors];
+
+            // init F[0,X]
+            for (int k = 0; k <colors; k++)
+            {
+                F[0, k] = 0;
+            }
+
+            for (int i= 1; i <=N; i++)
+            {
+                for (int j = 0; j < colors; j++)
+                {
+                    int minPre = Int32.MaxValue;
+                    for (int k = 0; k < colors; k++)
+                    {
+                        if (j!=k)
+                        {
+                            minPre = Math.Min(minPre, F[i - 1, k]);
+                        }  
+                    }
+
+                    if (minPre == Int32.MaxValue)           // Note [[8]] case
+                    {
+                        minPre = 0;
+                    }
+
+                    F[i, j] = minPre + costs[i-1,j];
+                }
+
+            }
+
+            int ans = Int32.MaxValue;
+
+            for (int i =0; i<colors; i++)
+            {
+                ans = Math.Min(F[N, i], ans);
+            }
+
+            return ans;
+        }
+
+        public int MinCostIIOptimizeSpace(int[,] costs)
+        {
+            int N = costs.GetLength(0);
+            int colors = costs.GetLength(1);
+
+            if (N == 0)
+            {
+                return 0;
+            }
+
+            int[,] F = new int[2, colors];
+
+            // init F[0,X]
+            int now = 0;
+            int old = 1;
+
+            for (int k = 0; k < colors; k++)
+            {
+                F[now, k] = 0;
+            }
+
+            for (int i = 1; i <= N; i++)
+            {
+                now = 1 - now;
+                old = 1 - old;
+                for (int j = 0; j < colors; j++)
+                {
+                    int minPre = Int32.MaxValue;
+                    for (int k = 0; k < colors; k++)
+                    {
+                        if (j != k)
+                        {
+                            minPre = Math.Min(minPre, F[old, k]);
+                        }
+                    }
+
+                    if (minPre == Int32.MaxValue)           // Note [[8]] case
+                    {
+                        minPre = 0;
+                    }
+
+                    F[now, j] = minPre + costs[i-1, j];
+                }
+
+            }
+
+            int ans = Int32.MaxValue;
+
+            for (int i = 0; i < colors; i++)
+            {
+                ans = Math.Min(F[now, i], ans);
+            }
+
+            return ans;
+        }
     }
 }

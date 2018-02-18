@@ -132,44 +132,92 @@ namespace CodeExercise.DP
         ///        Given[10, 9, 2, 5, 3, 7, 101, 18],
         ///        The longest increasing subsequence is [2, 3, 7, 101], therefore the length is 4. Note that there may be more than one LIS combination, it is only necessary for you to return the length.
         ///Your algorithm should run in O(n2) complexity.
-        ///Follow up: Could you improve it to O(n log n) time complexity? 
+        ///
+        /// Sol
+        /// F[j] = max (1 self,    f[i+1] if a[j] > a[i] 
+        /// 
+        /// 
+        ///Follow up: Could you improve it to O(n log n) time complexity?   check the next sol  LengthOfLIS_ONlongN
         /// </summary>
         /// <param name="nums"></param>
         /// <returns></returns>
         public int LengthOfLIS(int[] nums)
         {
-            int len = nums.Length;
-
-            if (len == 0)
+            int N = nums.Length;
+            if (N==0)
             {
                 return 0;
             }
 
-            int[] lengths = new int[len];
+            int[] F = new int[N];     // this question use 0~N-1 
+            int ans = 1;              // at least one length
 
-            int longestLen = 1;
-
-            // initial lenght with ans =1
-            for (int i = 0; i < len; i++)
+            for (int j = 0; j < N; j++)
             {
-                lengths[i] = 1;
-            }
+                F[j] = 1;   // init
 
-            for (int j = 0; j<len; j++)
-            {
-                for (int i = 0; i <j; i++)
+                for (int i = 0; i < j; i++)
                 {
-                    if (nums[i] < nums[j])
+                    if (nums[j] > nums[i])
                     {
-                        lengths[j] = Math.Max(lengths[j], lengths[i] + 1);    // since lenghts[i] for sure has been done
+                        F[j] = Math.Max(F[j], F[i] + 1);
 
-                        longestLen = Math.Max(longestLen, lengths[j]);
+                        ans = Math.Max(F[j], ans);
                     }
-                }
+                }  
             }
 
-            return longestLen;
+            return ans;
+        }
 
+        //Sol
+        /// 
+        public int LengthOfLIS_ONlongN(int[] nums)
+        {
+            int N = nums.Length;
+            if (N == 0)
+            {
+                return 0;
+            }
+
+            int[] F = new int[N+1];
+            F[0] = Int32.MinValue;
+
+            int AnsLast = 0;       
+
+            for (int j = 1; j <= N; j++)
+            {
+                // inserting new Aj
+                int Aj = nums[j - 1];
+
+                int start = 0;
+                int last = AnsLast;
+
+                // find the last Fi < Aj   and insert/replace to F i+1 // relplace i +1  because its value is smaller and lengh contributation is the same.
+                while (start <= last)
+                {
+                    int midIdx = start + (last - start) / 2;
+                    int midV = F[midIdx];
+                    if (Aj <= midV)
+                    {
+                        last = midIdx - 1;
+                    }
+                    else
+                    {
+                        start = midIdx + 1;
+                    }
+
+                }
+                F[last + 1] = Aj;     
+
+                if ((last+1) > AnsLast)
+                {
+                    AnsLast = last+1;
+                }
+
+            }
+
+            return AnsLast;
         }
 
         /// <summary>

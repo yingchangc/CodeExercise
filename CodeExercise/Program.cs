@@ -295,7 +295,7 @@ namespace CodeExercise
             var ans2_2 = question.CheckWordBreakv2(test2, worddict2);
         }
 
-        //121, 309
+        //121, 151, 309, 188 
         static void Run_BestTimeBuySellStock()
         {
             //121
@@ -308,9 +308,23 @@ namespace CodeExercise
             int[] diff = { 0, -6, 4, -2, 3, -2 };
             profit = question.MaxProfitFromDiff(diff);
 
+
+            //151
+            int[] prices151 = { 4, 4, 6, 1, 1, 4, 2, 5 };
+            profit = question.MaxProfit3(prices151);
+
+            //188
+            int[] prices188 = { 2, 1, 2, 0, 1 };
+            profit = question.MaxProfit4(2, prices188);
+
             // 309
-            int[] prices = { 1, 2, 3, 0, 2 };
+            int[] prices = { 2,6,8,7,8,7,9,4,1,2,4,5,8};
             profit = question.MaxProfitWithCooldown(prices);
+            profit = question.MaxProfit5(prices);
+
+            //714
+            int[] prices714 = { 1, 3, 2, 8, 4, 9 };
+            profit = question.MaxProfit6WithFee(prices714, 2);
         }
 
         //746, 70
@@ -339,10 +353,15 @@ namespace CodeExercise
         {
             DP.HouseRobber_DeleteAndEarn question = new DP.HouseRobber_DeleteAndEarn();
 
+            
+
             // 198 rob
             //int[] nums1 = { 2, 3, 7, 8, 4 };
             int[] nums1 = { 3,8,4};
             int ans1 = question.Rob(nums1);   // should be rob 2 +7 +4
+
+            //213 rob2
+            int ans213 = question.Rob2(nums1);
 
             // 740 Delete and Earn
             int[] nums2 = { 2, 2, 2, 2, 4, 4, 4, 5, 5, 1 };   // should be [1(1), 2(8), 4(12), 5(10)] -> 8 + 12
@@ -377,6 +396,10 @@ namespace CodeExercise
 
             // 300   should be 5 [1 2 3 3 4 4 5]
             int ans3 = q2.LengthOfLIS(num2);
+
+            ans3 = q2.LengthOfLIS_ONlongN(num2);
+            int[] num22 = { 2,2 };
+            ans3 = q2.LengthOfLIS_ONlongN(num22);
 
             //128
             DP.LongestConsecutiveSequence q3 = new DP.LongestConsecutiveSequence();
@@ -776,7 +799,7 @@ namespace CodeExercise
             ans = question.CountComponents2(4, edges2);
         }
 
-        // 256
+        // 256 265
         static void Run_PaintHouse()
         {
             //Given costs = [[14, 2, 11],[11, 14, 5],[14, 3, 10]] return 10
@@ -789,17 +812,28 @@ namespace CodeExercise
             var ans = question.MinCost(costs);
 
             ans = question.MinCostOptimizeSpace(costs);
+
+
+            /////265 paint  house 2
+            ans = question.MinCostII(costs);
         }
 
         static void Main(string[] args)
         {
+            //121, 151,  309
+            Run_BestTimeBuySellStock();
+
+            //674, 300
+            Run_LongestContinuousIncreasingSubsequence();
+            //256  I  265 II
+            Run_PaintHouse();
+
             // 198 and 740
             Run_HouseRobber_DeleteAndEarn();
 
             //91
             Run_DecodeWays();
-            //256
-            Run_PaintHouse();
+            
             //361
             Run_BombEnemy();
             //338
@@ -812,8 +846,7 @@ namespace CodeExercise
             // 79
             Run_WordSearch();
 
-            //674
-            Run_LongestContinuousIncreasingSubsequence();
+            
             //323
             Run_NumberConnectedComponentsInUG();
             //211
@@ -881,8 +914,7 @@ namespace CodeExercise
             Run_Sentence_Similarity();
             //494
             Run_TargetSum();
-            //121, 309
-            Run_BestTimeBuySellStock();
+            
             
 
             //377
