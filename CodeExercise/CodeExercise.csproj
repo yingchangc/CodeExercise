@@ -49,13 +49,16 @@
     <Compile Include="DataStructure\NumberConnectedComponentsInUG.cs" />
     <Compile Include="DataStructure\NumberOfIsland.cs" />
     <Compile Include="DataStructure\NumberOfIsland2.cs" />
+    <Compile Include="DataStructure\TrapRainWater.cs" />
     <Compile Include="DataStructure\Trie.cs" />
     <Compile Include="DataStructure\WordDictionarySearch.cs" />
     <Compile Include="DP\AnagramSubstring.cs" />
     <Compile Include="DP\AssignCookies.cs" />
+    <Compile Include="DP\Backpack.cs" />
     <Compile Include="DP\BestTimeBuySellStock.cs" />
     <Compile Include="DP\BonbEnemy.cs" />
     <Compile Include="DP\CoinChange.cs" />
+    <Compile Include="DP\CoinsInALine.cs" />
     <Compile Include="DP\CombineSum.cs" />
     <Compile Include="DP\ContainerWithMostWater.cs" />
     <Compile Include="DP\CountingBits.cs" />
@@ -76,6 +79,7 @@
     <Compile Include="DP\PaintHouse.cs" />
     <Compile Include="DP\PalindromePartition.cs" />
     <Compile Include="DP\PalindromePermutation.cs" />
+    <Compile Include="DP\PerfectSquare.cs" />
     <Compile Include="DP\SubStringRelated.cs" />
     <Compile Include="DP\TargetSum.cs" />
     <Compile Include="DP\UniquePath.cs" />

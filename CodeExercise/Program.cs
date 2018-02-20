@@ -818,8 +818,60 @@ namespace CodeExercise
             ans = question.MinCostII(costs);
         }
 
+        //lint 92
+        static void Run_Backpack()
+        {
+            DP.Backpack question = new DP.Backpack();
+
+            //92 backpack 
+            int[] weight92 = new int[] { 2, 3, 5, 7 };
+            var ans = question.BackPack1_optSpace(11, weight92);
+
+            //563 backback V
+            int[] value563 = new int[] { 1, 2, 3, 3, 7 };
+            ans = question.BackPackV_OptSpace(value563, 7);
+
+            //564 backpack VI
+            int[] value564 = {1,2,4 };
+            ans = question.BackPackVI(value564, 4);
+        }
+
+        static void Run_TrapRainWater()
+        {
+            int[] heights = { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 };
+            DataStructure.TrapRainWater question = new DataStructure.TrapRainWater();
+            var ans = question.TrapRainWaterSolution(heights);
+        }
+
+        //367, 279
+        static void Run_PerfectSquare()
+        {
+            DP.PerfectSquare question = new DP.PerfectSquare();
+            var ans = question.IsPerfectSquare(16);
+            ans = question.IsPerfectSquare(14);
+            ans = question.IsPerfectSquare(2147395600);
+
+            //279
+            var ans279 = question.NumSquares(13);
+            
+        }
+
+        // Lint 394
+        static void Run_CoinseInALine()
+        {
+            DP.CoinsInALine question = new DP.CoinsInALine();
+            var ans394 = question.firstWillWin(7);
+        }
         static void Main(string[] args)
         {
+            //394
+            Run_CoinseInALine();
+            //367
+            Run_PerfectSquare();
+            // 42
+            Run_TrapRainWater();
+            // lint 92 backpack
+            Run_Backpack();
             //121, 151,  309
             Run_BestTimeBuySellStock();
 
