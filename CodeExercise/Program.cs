@@ -862,8 +862,35 @@ namespace CodeExercise
             DP.CoinsInALine question = new DP.CoinsInALine();
             var ans394 = question.firstWillWin(7);
         }
+
+        //lint 437
+        static void Run_CopyBooks()
+        {
+            DP.CopyBooks question = new DP.CopyBooks();
+
+            int[] pages = { 3, 2, 4 };
+            var ans = question.copyBooksSolver(pages, 2);
+        }
+
+        static void Run_MyQueue()
+        {
+            DataStructure.MyQueue queue = new DataStructure.MyQueue();
+            queue.push(1);
+            var ans = queue.pop();
+            queue.push(2);
+            queue.push(3);
+            ans = queue.top();
+            ans = queue.pop();
+        }
+
         static void Main(string[] args)
         {
+            Run_MyQueue();
+            //437
+            Run_CopyBooks();
+            //132
+            Run_Palindrome_Partitioning_II();
+
             //394
             Run_CoinseInALine();
             //367
@@ -1004,8 +1031,7 @@ namespace CodeExercise
             //455
             Run_AssignCookies();
             
-            //132
-            Run_Palindrome_Partitioning_II();
+            
             // 409
             Run_Longest_Palindrome();
             //131

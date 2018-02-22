@@ -18,7 +18,17 @@ namespace CodeExercise.DP
         /// <returns></returns>
         public bool firstWillWin(int n)
         {
-            bool[] F = new bool[n+1];
+            
+            if (n == 0 || n ==3)
+            {
+                return false;
+            }
+            if (n== 1 || n == 2 || n==4)
+            {
+                return true;
+            }
+
+            bool[] F = new bool[n + 1];
             F[0] = false;   // no coin to choose, loose
             F[1] = true;
             F[2] = true;

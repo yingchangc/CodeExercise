@@ -134,7 +134,7 @@ namespace CodeExercise.DP
         ///Your algorithm should run in O(n2) complexity.
         ///
         /// Sol
-        /// F[j] = max (1 self,    f[i+1] if a[j] > a[i] 
+        /// F[j] = max (1 self,    f[i]+1 if a[j] > a[i] 
         /// 
         /// 
         ///Follow up: Could you improve it to O(n log n) time complexity?   check the next sol  LengthOfLIS_ONlongN

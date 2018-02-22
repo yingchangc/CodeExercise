@@ -14,11 +14,72 @@ namespace CodeExercise.DP
         ///        Return the minimum cuts needed for a palindrome partitioning of s.
         ///        For example, given s = "aab",
         ///Return 1 since the palindrome partitioning["aa", "b"] could be produced using 1 cut.
+        ///
+        /// Sol  F[j] = min (F[i] where i: 0~j-1 and i to j is palindrome ) +1
+        /// 
+        /// O(n^2)
+        /// 
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
         /// 
         public static int MinCut(string s)
+        {
+            int len = s.Length;
+
+            bool[,] calPalindrome = computePalindrome(s);
+
+            int[] F = new int[len+1];    // pre j how many segments, add padding for no char
+
+            F[0] = 0;   
+
+            for (int j = 1; j <= len; j++)
+            {
+                F[j] = Int32.MaxValue;
+                for (int i=0; i <= j-1; i++)
+                {
+                    if (calPalindrome[i,j-1])
+                    {
+                        F[j] = Math.Min(F[i] + 1, F[j]);   // F[i] can never be int32.max  because it has been update to at mose number of chars
+                    }  
+                }
+            }
+
+            return F[len] - 1;  
+        }
+
+        private static bool[,] computePalindrome(string s)
+        {
+            int len = s.Length;
+            bool[,] memo = new bool[len, len];   // init to all false
+            for (int i = 0; i <len; i++)
+            {
+                // odd
+                int mid = i;
+                int left = mid;
+                int right = mid;
+                while(left >= 0 && right <len && s[left] == s[right])
+                {
+                    memo[left, right] |= true;
+                    left--;
+                    right++;
+                }
+
+                // even
+                left = mid;
+                right = mid+1;
+                while (left >= 0 && right < len && s[left] == s[right])
+                {
+                    memo[left, right] |= true;
+                    left--;
+                    right++;
+                }
+            }
+
+            return memo;   
+        }
+
+        public static int MinCut_old(string s)
         {
             bool[,] memorizationIsPalindromeArray = new bool[s.Length, s.Length];
 

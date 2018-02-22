@@ -46,6 +46,8 @@
     <Compile Include="BinarySearch\SearchInsertPosition.cs" />
     <Compile Include="DataStructure\ConnectingGraph.cs" />
     <Compile Include="DataStructure\KthSmallestElementInMatrix.cs" />
+    <Compile Include="DataStructure\MinStack.cs" />
+    <Compile Include="DataStructure\MyQueue.cs" />
     <Compile Include="DataStructure\NumberConnectedComponentsInUG.cs" />
     <Compile Include="DataStructure\NumberOfIsland.cs" />
     <Compile Include="DataStructure\NumberOfIsland2.cs" />
@@ -61,6 +63,7 @@
     <Compile Include="DP\CoinsInALine.cs" />
     <Compile Include="DP\CombineSum.cs" />
     <Compile Include="DP\ContainerWithMostWater.cs" />
+    <Compile Include="DP\CopyBooks.cs" />
     <Compile Include="DP\CountingBits.cs" />
     <Compile Include="DP\DecodeWays.cs" />
     <Compile Include="DP\FindMinimumInRotatedSortedArray.cs" />
