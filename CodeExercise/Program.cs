@@ -883,8 +883,26 @@ namespace CodeExercise
             ans = queue.pop();
         }
 
+        //575
+        static void Run_ExpandExpression()
+        {
+            DataStructure.ExpandExpression question = new DataStructure.ExpandExpression();
+            var ans = question.ExpressionExpandSolver("abc3[a]");
+            ans = question.ExpressionExpandSolver("3[abc]");
+            ans = question.ExpressionExpandSolver("4[ac]dy");
+            ans = question.ExpressionExpandSolver("3[2[ad]3[pf]]xyz");
+
+            if (ans == "adadpfpfpfadadpfpfpfadadpfpfpfxyz")
+            {
+                Console.WriteLine("pass");
+            }
+        }
+
         static void Main(string[] args)
         {
+            // lint 575
+            Run_ExpandExpression();
+
             Run_MyQueue();
             //437
             Run_CopyBooks();

@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="BinarySearch\SearchInsertPosition.cs" />
     <Compile Include="DataStructure\ConnectingGraph.cs" />
+    <Compile Include="DataStructure\ExpandExpression.cs" />
     <Compile Include="DataStructure\KthSmallestElementInMatrix.cs" />
     <Compile Include="DataStructure\MinStack.cs" />
     <Compile Include="DataStructure\MyQueue.cs" />
