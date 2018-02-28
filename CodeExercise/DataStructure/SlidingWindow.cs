@@ -65,6 +65,20 @@ namespace CodeExercise.DataStructure
         }
 
         // O(n)
+        // use dequeue 
+        /// <summary>
+        /// 
+        /// window size =3
+        ///  [4 5 6]   is actually need to store 6  
+        ///  
+        ///  when 7 insert, replace 6,   and try remove 4 if is there (not because 5 and 6 insertion has removed it)
+        ///  
+        /// [7] 5 4 3    insert 5 and 4 as usual,   insert 3, remove 7
+        /// 
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <param name="k"></param>
+        /// <returns></returns>
         public int[] MaxSlidingWindow_DEQUEU(int[] nums, int k)
         {
             int N = nums.GetLength(0);
