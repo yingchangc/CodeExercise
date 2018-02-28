@@ -36,7 +36,7 @@ namespace CodeExercise.DataStructure
         {  
             SortedDictionary<int, List<Location>> pq = new SortedDictionary<int, List<Location>>(); // (sum, LocaitonS)
 
-            List<Location> initLocaitons = new List<Location>() { new Location(0, 0) }; //List because [1 3 5]   [2,4,6]   sum == 5 has (1,4), (2,5)
+            List<Location> initLocaitons = new List<Location>() { new Location(0, 0) }; //use List because: [1 3 5]   [2,4,6]   sum == 5 has (1,4), (2,5)
             bool[,] visited = new bool[arrA.Length, arrB.Length];     
             pq.Add(arrA[0] + arrB[0], initLocaitons);
             visited[0, 0] = true;

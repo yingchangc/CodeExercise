@@ -836,11 +836,20 @@ namespace CodeExercise
             ans = question.BackPackVI(value564, 4);
         }
 
+        //42, 407
         static void Run_TrapRainWater()
         {
             int[] heights = { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 };
             DataStructure.TrapRainWater question = new DataStructure.TrapRainWater();
             var ans = question.TrapRainWaterSolution(heights);
+
+            int[,] heightMap = {
+                                 { 1,4,3,1,3,2 },
+                                 { 3,2,1,3,2,4 },
+                                 { 2,3,3,2,3,1 }
+            };
+
+            ans = question.TrapRainWater2(heightMap);
         }
 
         //367, 279
@@ -898,8 +907,62 @@ namespace CodeExercise
             }
         }
 
+        //84, 85
+        static void Run_LargestRectangle()
+        {
+            //84
+            DataStructure.LargestRectangleInHistogram question= new DataStructure.LargestRectangleInHistogram();
+            int[] heights = {2,1,5,6,2,3 };
+            var ans = question.LargestRectangleArea(heights);
+
+            //85
+            //1 0 1 0 0
+            /// 1 0 1 1 1
+            /// 1 1 1 1 1
+            /// 1 0 0 1 0
+            DataStructure.MaxRectangle question2 = new DataStructure.MaxRectangle();
+
+            char[,] matrix = {
+                               {'1', '0', '1', '0', '0'},
+                               {'1', '0', '1', '1', '1'},
+                               {'1', '1', '1', '1', '1'},
+                               {'1', '0', '0', '1', '0'},
+                            };
+
+            var ans2 = question2.MaximalRectangle(matrix);
+
+        }
+
+        // 480
+        static void Run_SlidingWindow()
+        {
+            DataStructure.SlidingWindow question = new DataStructure.SlidingWindow();
+            int[] array4 = { 2147483647, 2147483647 };
+            var ans = question.MedianSlidingWindow(array4, 2);
+
+            int[] array = { 1, 3, -1, -3, 5, 3, 6, 7 };
+            ans = question.MedianSlidingWindow(array, 3);
+
+            int[] array2 = { -2147483648,-2147483648,2147483647,-2147483648,1,3,-2147483648,-100,8,17,22,-2147483648,-2147483648,2147483647,2147483647,2147483647,2147483647,-2147483648,2147483647,-2147483648 };
+            ans = question.MedianSlidingWindow(array2, 6);
+
+            int[] array3 = { 1,4,2,3};
+            ans = question.MedianSlidingWindow(array3, 4);
+
+            int[] array5 = { 1, 3, -1, -3, 5, 3, 6, 7 };
+            var ans2 = question.MaxSlidingWindow_Heap(array5, 3);
+            ans2 = question.MaxSlidingWindow_DEQUEU(array5, 3);
+            
+        }
+
         static void Main(string[] args)
         {
+            //480 
+            Run_SlidingWindow();
+            // 407
+            Run_TrapRainWater();
+            //84
+            Run_LargestRectangle();
             // lint 575
             Run_ExpandExpression();
 
@@ -913,8 +976,7 @@ namespace CodeExercise
             Run_CoinseInALine();
             //367
             Run_PerfectSquare();
-            // 42
-            Run_TrapRainWater();
+            
             // lint 92 backpack
             Run_Backpack();
             //121, 151,  309
