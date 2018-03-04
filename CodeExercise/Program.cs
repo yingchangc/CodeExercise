@@ -852,10 +852,21 @@ namespace CodeExercise
             ans = question.TrapRainWater2(heightMap);
         }
 
-        //367, 279
+        //367, 279, 69
         static void Run_PerfectSquare()
         {
             DP.PerfectSquare question = new DP.PerfectSquare();
+
+            //586
+            var ans586 = question.sqrt2(0.01);
+            ans586 = question.sqrt2(0);
+            ans586 = question.sqrt2(2);
+
+            //69
+            var ans69 = question.MySqrt(10);
+            ans69 = question.MySqrt(16);
+
+            //367
             var ans = question.IsPerfectSquare(16);
             ans = question.IsPerfectSquare(14);
             ans = question.IsPerfectSquare(2147395600);
@@ -863,6 +874,21 @@ namespace CodeExercise
             //279
             var ans279 = question.NumSquares(13);
             
+        }
+
+        //643
+        static void Run_MaxAvgSubarray()
+        {
+            SweepingLine.MaximumAverageSubarray question = new SweepingLine.MaximumAverageSubarray();
+
+            int[] arr644 = { 1, 12, -5, -6, 50, 3 };
+            var ans644 =question.FindMaxAverage2(arr644 , 3);
+
+            int[] array = { 1,12,-5,-6,50,3};
+
+            var ans = question.FindMaxAverage(array, 4);
+
+
         }
 
         // Lint 394
@@ -933,7 +959,7 @@ namespace CodeExercise
 
         }
 
-        // 480
+        // 480, 239
         static void Run_SlidingWindow()
         {
             DataStructure.SlidingWindow question = new DataStructure.SlidingWindow();
@@ -955,9 +981,84 @@ namespace CodeExercise
             
         }
 
+        //346
+        static void Run_MovingAverage()
+        {
+            DataStructure.MovingAverage question = new DataStructure.MovingAverage(3);
+            var ans = question.Next(1);
+            ans = question.Next(10);
+            ans = question.Next(3);
+            ans = question.Next(5);
+        }
+
+        // 295
+        static void Run_DataStreamMedian()
+        {
+            DataStructure.DataStreamMedian question = new DataStructure.DataStreamMedian();
+
+            question.AddNum(0);
+            var ans = question.FindMedian();
+            question.AddNum(0);
+            ans = question.FindMedian();
+
+            //question.AddNum(6);
+            //var ans = question.FindMedian();
+            //question.AddNum(10);
+            //ans = question.FindMedian();
+            //question.AddNum(2);
+            //ans = question.FindMedian();
+            //question.AddNum(6);
+            //ans = question.FindMedian();
+            //question.AddNum(5);
+            //ans = question.FindMedian();
+            //question.AddNum(0);
+            //ans = question.FindMedian();
+            //question.AddNum(6);
+            //ans = question.FindMedian();
+            //question.AddNum(3);
+            //ans = question.FindMedian();
+            //question.AddNum(1);
+            //ans = question.FindMedian();
+            //question.AddNum(0);
+            //ans = question.FindMedian();
+            //question.AddNum(0);
+            //ans = question.FindMedian();
+        }
+
+        // 654
+        static void Run_MaxBinaryTree()
+        {
+            DataStructure.MaxBinaryTree question = new DataStructure.MaxBinaryTree();
+
+            int[] arr = { 3, 2, 1, 6, 0, 5 };
+            var node = question.ConstructMaximumBinaryTree(arr);
+        }
+
+        // 48 rotate image clockwise
+        static void Run_RotateImage()
+        {
+            DataStructure.RotateImage question = new DataStructure.RotateImage();
+            int[,] image = { { 1,2,3},
+                             { 4,5,6},
+                             { 7,8,9} };
+            question.Rotate(image);
+        }
+
         static void Main(string[] args)
         {
-            //480 
+            //643
+            Run_MaxAvgSubarray();
+            //367
+            Run_PerfectSquare();
+            //48
+            Run_RotateImage();
+            //654
+            Run_MaxBinaryTree();
+            //295
+            Run_DataStreamMedian();
+            //346
+            Run_MovingAverage();
+            //480 ,239
             Run_SlidingWindow();
             // 407
             Run_TrapRainWater();
@@ -974,8 +1075,7 @@ namespace CodeExercise
 
             //394
             Run_CoinseInALine();
-            //367
-            Run_PerfectSquare();
+            
             
             // lint 92 backpack
             Run_Backpack();
