@@ -25,7 +25,9 @@ namespace CodeExercise.DP
     public class LongestPalindrome
     {
         /// <summary>
-        /// First, characters are counted. Even occurring characters (v[i]%2 == 0) can always be used to build a palindrome. For every odd occurring character (v[i]%2 == 1), v[i]-1 characters can be used. Res is incremented if there is at least one character with odd occurrence number.
+        /// First, characters are counted. Even occurring characters (v[i]%2 == 0) can always be used to build a palindrome. 
+        /// For every odd occurring character (v[i]%2 == 1), v[i]-1 characters can be used. Res is incremented if there is at least one 
+        /// character with odd occurrence number.
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>

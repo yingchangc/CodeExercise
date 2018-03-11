@@ -43,12 +43,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BinarySearch\FindBadVersion.cs" />
+    <Compile Include="BinarySearch\FindPeakElement.cs" />
     <Compile Include="BinarySearch\SearchInsertPosition.cs" />
+    <Compile Include="BinarySearch\WoodCut.cs" />
+    <Compile Include="BitManipulation\DivideTwoIntegers.cs" />
+    <Compile Include="DataStructure\AirplaneInSky.cs" />
     <Compile Include="DataStructure\ConnectingGraph.cs" />
     <Compile Include="DataStructure\DataStreamMedian.cs" />
     <Compile Include="DataStructure\ExpandExpression.cs" />
+    <Compile Include="DataStructure\FindDuplicateNumber.cs" />
     <Compile Include="DataStructure\KthSmallestElementInMatrix.cs" />
     <Compile Include="DataStructure\LargestRectangleInHistogram.cs" />
+    <Compile Include="DataStructure\LinkedListCycleII.cs" />
+    <Compile Include="DataStructure\LongestPalindromicSubstring.cs" />
     <Compile Include="DataStructure\MaxBinaryTree.cs" />
     <Compile Include="DataStructure\MaxRectangle.cs" />
     <Compile Include="DataStructure\MinStack.cs" />
@@ -58,6 +66,7 @@
     <Compile Include="DataStructure\NumberOfIsland.cs" />
     <Compile Include="DataStructure\NumberOfIsland2.cs" />
     <Compile Include="DataStructure\RotateImage.cs" />
+    <Compile Include="DataStructure\Skyline.cs" />
     <Compile Include="DataStructure\SlidingWindow.cs" />
     <Compile Include="DataStructure\TrapRainWater.cs" />
     <Compile Include="DataStructure\Trie.cs" />

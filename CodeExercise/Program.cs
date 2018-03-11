@@ -318,7 +318,7 @@ namespace CodeExercise
             profit = question.MaxProfit4(2, prices188);
 
             // 309
-            int[] prices = { 2,6,8,7,8,7,9,4,1,2,4,5,8};
+            int[] prices = { 2, 6, 8, 7, 8, 7, 9, 4, 1, 2, 4, 5, 8 };
             profit = question.MaxProfitWithCooldown(prices);
             profit = question.MaxProfit5(prices);
 
@@ -353,11 +353,11 @@ namespace CodeExercise
         {
             DP.HouseRobber_DeleteAndEarn question = new DP.HouseRobber_DeleteAndEarn();
 
-            
+
 
             // 198 rob
             //int[] nums1 = { 2, 3, 7, 8, 4 };
-            int[] nums1 = { 3,8,4};
+            int[] nums1 = { 3, 8, 4 };
             int ans1 = question.Rob(nums1);   // should be rob 2 +7 +4
 
             //213 rob2
@@ -398,7 +398,7 @@ namespace CodeExercise
             int ans3 = q2.LengthOfLIS(num2);
 
             ans3 = q2.LengthOfLIS_ONlongN(num2);
-            int[] num22 = { 2,2 };
+            int[] num22 = { 2, 2 };
             ans3 = q2.LengthOfLIS_ONlongN(num22);
 
             //128
@@ -832,7 +832,7 @@ namespace CodeExercise
             ans = question.BackPackV_OptSpace(value563, 7);
 
             //564 backpack VI
-            int[] value564 = {1,2,4 };
+            int[] value564 = { 1, 2, 4 };
             ans = question.BackPackVI(value564, 4);
         }
 
@@ -873,7 +873,7 @@ namespace CodeExercise
 
             //279
             var ans279 = question.NumSquares(13);
-            
+
         }
 
         //643
@@ -882,9 +882,9 @@ namespace CodeExercise
             SweepingLine.MaximumAverageSubarray question = new SweepingLine.MaximumAverageSubarray();
 
             int[] arr644 = { 1, 12, -5, -6, 50, 3 };
-            var ans644 =question.FindMaxAverage2(arr644 , 3);
+            var ans644 = question.FindMaxAverage2(arr644, 3);
 
-            int[] array = { 1,12,-5,-6,50,3};
+            int[] array = { 1, 12, -5, -6, 50, 3 };
 
             var ans = question.FindMaxAverage(array, 4);
 
@@ -937,8 +937,8 @@ namespace CodeExercise
         static void Run_LargestRectangle()
         {
             //84
-            DataStructure.LargestRectangleInHistogram question= new DataStructure.LargestRectangleInHistogram();
-            int[] heights = {2,1,5,6,2,3 };
+            DataStructure.LargestRectangleInHistogram question = new DataStructure.LargestRectangleInHistogram();
+            int[] heights = { 2, 1, 5, 6, 2, 3 };
             var ans = question.LargestRectangleArea(heights);
 
             //85
@@ -969,16 +969,16 @@ namespace CodeExercise
             int[] array = { 1, 3, -1, -3, 5, 3, 6, 7 };
             ans = question.MedianSlidingWindow(array, 3);
 
-            int[] array2 = { -2147483648,-2147483648,2147483647,-2147483648,1,3,-2147483648,-100,8,17,22,-2147483648,-2147483648,2147483647,2147483647,2147483647,2147483647,-2147483648,2147483647,-2147483648 };
+            int[] array2 = { -2147483648, -2147483648, 2147483647, -2147483648, 1, 3, -2147483648, -100, 8, 17, 22, -2147483648, -2147483648, 2147483647, 2147483647, 2147483647, 2147483647, -2147483648, 2147483647, -2147483648 };
             ans = question.MedianSlidingWindow(array2, 6);
 
-            int[] array3 = { 1,4,2,3};
+            int[] array3 = { 1, 4, 2, 3 };
             ans = question.MedianSlidingWindow(array3, 4);
 
             int[] array5 = { 1, 3, -1, -3, 5, 3, 6, 7 };
             var ans2 = question.MaxSlidingWindow_Heap(array5, 3);
             ans2 = question.MaxSlidingWindow_DEQUEU(array5, 3);
-            
+
         }
 
         //346
@@ -1044,8 +1044,109 @@ namespace CodeExercise
             question.Rotate(image);
         }
 
+        // 391 lint
+        static void Run_NumberOfAirplanesTheSky()
+        {
+            List<DataStructure.Interval> airplanes = new List<DataStructure.Interval>
+            {
+                new DataStructure.Interval(1,10),
+                new DataStructure.Interval(2,3),
+                new DataStructure.Interval(5,8),
+                new DataStructure.Interval(4,7),
+            };
+
+            DataStructure.AirplaneInSky question = new DataStructure.AirplaneInSky();
+            var ans = question.CountOfAirplanes(airplanes);
+        }
+
+        //29
+        static void Run_Divide2Integer()
+        {
+            BitManipulation.DivideTwoIntegers question = new BitManipulation.DivideTwoIntegers();
+            var ans = question.Divide(-2147483648, 1);
+        }
+
+        //162
+        static void Run_FindPeakElemet()
+        {
+            BinarySearch.FindPeakElement question = new BinarySearch.FindPeakElement();
+            int[] arr = { 1, 2, 1 };
+            var ans = question.FindPeakElementSolver(arr);
+
+            int[,] matrix = { {1, 2, 3, 4, 5},
+                              {16,41,23,22,6},
+                              {15,24,17,21,7},
+                              {14,18,19,20,8},
+                              {13,12,11,10,9}};
+
+            int[,] matrix2 = { { 0, 0, 0, 0, 0, 0 }, { 0, 1, 12, 3, 4, 0 }, { 0, 5, 11, 7, 12, 0 }, { 0, 9, 10, 9, 13, 0 }, { 0, 13, 9, 15, 16, 0 }, { 0, 0, 0, 0, 0, 0 } };
+            var ansMatrix = question.findPeakII(matrix2);
+            ansMatrix = question.findPeakII(matrix);
+        }
+
+        //183 lint
+        static void Run_WoodCut()
+        {
+            BinarySearch.WoodCut question = new BinarySearch.WoodCut();
+
+            int[] L = { 232, 124, 456 };
+            question.WoodCutSol(L, 7);
+        }
+        
+        //142
+        static void Run_LinkedListcycle2()
+        {
+            DataStructure.LinkedListCycleII question = new DataStructure.LinkedListCycleII();
+
+            DataStructure.ListNode n = new DataStructure.ListNode(3);
+            var ans = question.DetectCycle(n);
+        }
+
+        //287
+        static void Run_FindDuplicateNumber()
+        {
+            DataStructure.FindDuplicateNumber question = new DataStructure.FindDuplicateNumber();
+            int[] arr = { 1, 4, 5, 6, 6, 2, 3 };
+            var ans = question.FindDuplicate(arr);
+        }
+
+        //218
+        static void Run_SkyLine()
+        {
+            DataStructure.Skyline question = new DataStructure.Skyline();
+            int[,] buildings = { { 2, 9, 10 }, { 3, 7, 15 }, { 5, 12, 12 }, { 15, 20, 10 }, { 19, 24, 8 } };
+
+            var ans = question.GetSkyline(buildings);
+
+        }
+
+
+        //5
+        static void Run_LongestPalindromicSubstring()
+        {
+            DataStructure.LongestPalindromicSubstring question = new DataStructure.LongestPalindromicSubstring();
+            var ans = question.LongestPalindrome("cbbd");
+        }
+
         static void Main(string[] args)
         {
+            //5
+            Run_LongestPalindromicSubstring();
+            //218
+            Run_SkyLine();
+            //287
+            Run_FindDuplicateNumber();
+            // 142
+            Run_LinkedListcycle2();
+            //162
+            Run_FindPeakElemet();
+            //183 lint
+            Run_WoodCut();
+            
+            //29
+            Run_Divide2Integer();
+            //391 lint 
+            Run_NumberOfAirplanesTheSky();
             //643
             Run_MaxAvgSubarray();
             //367
