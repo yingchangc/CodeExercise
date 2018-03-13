@@ -822,7 +822,15 @@ namespace CodeExercise
         static void Run_Backpack()
         {
             DP.Backpack question = new DP.Backpack();
+            //440
+            int[] A_440 = { 2, 3, 5, 7 };
+            int[] V_440 = { 1, 5, 2, 4 };
 
+            var ans440 = question.backPackIII(A_440, V_440, 10);
+            // 125
+            int[] A_125 = { 2, 3, 5, 7 };
+            int[] V_125 = { 1, 5, 2, 4 };
+            var ans125 = question.BackPackII(10, A_125, V_125);
             //92 backpack 
             int[] weight92 = new int[] { 2, 3, 5, 7 };
             var ans = question.BackPack1_optSpace(11, weight92);
@@ -1128,8 +1136,20 @@ namespace CodeExercise
             var ans = question.LongestPalindrome("cbbd");
         }
 
+        //516
+        static void Run_LongestPalindromeSubseq()
+        {
+            DP.LongestPalindromicSubsequence question = new DP.LongestPalindromicSubsequence();
+            var ans = question.LongestPalindromeSubseq("bbbab");
+            ans = question.LongestPalindromeSubseq("abbc");
+        }
+
         static void Main(string[] args)
         {
+            // lint 92 backpack
+            Run_Backpack();
+            //516
+            Run_LongestPalindromeSubseq();
             //5
             Run_LongestPalindromicSubstring();
             //218
@@ -1178,8 +1198,6 @@ namespace CodeExercise
             Run_CoinseInALine();
             
             
-            // lint 92 backpack
-            Run_Backpack();
             //121, 151,  309
             Run_BestTimeBuySellStock();
 

@@ -235,6 +235,126 @@ namespace CodeExercise.DP
             return F[now, target];
         }
 
+        /// <summary>
+        /// lint 125
+        /// http://www.lintcode.com/en/problem/backpack-ii/
+        /// Given n items with size Ai and value Vi, and a backpack with size m. What's the maximum value can you put into the backpack?
+        /// 
+        /// ex
+        /// Given 4 items with size [2, 3, 5, 7] and value [1, 5, 2, 4], and a backpack with size 10. The maximum value is 9.
+        /// 
+        /// F[i,W] = Max( F[i-1,w] , F[i,W-wi] + vi )
+        /// </summary>
+        /// <param name="s"> backpack size</param>
+        /// <param name="A"></param>
+        /// <param name="V"></param>
+        /// <returns></returns>
+        public int BackPackII(int s, int[] A, int[] V)
+        {
+            int N = A.Length;
+
+            int[,] F = new int[N + 1, s + 1];   // numItems, size
+
+            for (int i = 0; i <= N;i++)
+            {
+                F[i, 0] = 0;     // no size quota
+            }
+
+            for (int w = 0; w <= s; w++)
+            {
+                F[0, w] = 0;   // no item for value
+            }
+
+            for(int w = 1; w <= s; w++)
+            {
+                for (int i = 1; i <= N; i++)
+                {
+                    //F[i,W] = Max( F[i-1,w] , F[i,W-wi] + vi )
+                    F[i, w] = F[i - 1, w];
+
+                    if ((w - A[i-1]) >= 0)
+                    {
+                        F[i, w] = Math.Max(F[i-1, w], F[i-1, w - A[i - 1]] + V[i - 1]);
+                    }
+                }
+            }
+
+            return F[N, s];
+        }
+
+        /// <summary>
+        /// lint 440
+        /// http://www.lintcode.com/en/problem/backpack-iii/
+        /// 
+        /// Given n kind of items with size Ai and value Vi( each item has an infinite number available) and a backpack with size m. 
+        /// What's the maximum value can you put into the backpack?
+        /// 
+        /// Given 4 items with size [2, 3, 5, 7] and value [1, 5, 2, 4], and a backpack with size 10. The maximum value is 15.
+        /// 
+        /// Sol:
+        /// 
+        /// F[i,w] = max (F[i-1, w] ,  F[i-1, w-w_i-1], F[i-1, w-2w_i-1], F[i-1, w-k*2_i-1])
+        /// </summary>
+        /// <param name="A"></param>
+        /// <param name="V"></param>
+        /// <param name="m"> backpack size</param>
+        /// <returns></returns>
+        public int backPackIII_slow(int[] A, int[] V, int m)
+        {
+            int N = A.Length;
+            int[,] F = new int[N+1, m+1];
+
+            for (int i = 0; i <= N; i++)
+            {
+                F[i, 0] = 0;   // no size allowed
+            }
+
+            for (int w = 0; w<=m; w++)
+            {
+                F[0, w] = 0;  // no value
+            }
+
+            for (int i = 1; i <=N; i++)
+            {
+                for (int w = 1; w<=m; w++)
+                {
+                    F[i, w] = 0;
+                    for (int k = 0; k <= w/A[i-1]; k++)
+                    {
+                        F[i, w] = Math.Max(F[i, w], 
+                                           F[i - 1, w - k * A[i-1]] + k*V[i-1]);
+                    }
+
+                }
+            }
+
+            return F[N, m];
+        }
+
+        // F[i,w] = max (F[i-1,w-kWi-1] + k*Vi-1)
+        // F[i,w-wi-1] = max (F[i-1,w], F[i,w-wi-1]+vi)
+        public int backPackIII(int[] A, int[] V, int m)
+        {
+            int N = A.Length;
+            int[,] F = new int[N + 1, m + 1];
+
+            for(int i = 1; i <= N; i++)
+            {
+                for (int w= 1; w<=m; w++)
+                {
+                    F[i, w] = F[i-1, w];
+
+                    if (w-A[i-1] >=0)
+                    {
+                        F[i, w] = Math.Max(F[i-1, w],
+                                          F[i, w - A[i - 1]] + V[i - 1]);
+                    }
+                }
+            }
+
+            return F[N, m];
+        }
+
 
     }
 }

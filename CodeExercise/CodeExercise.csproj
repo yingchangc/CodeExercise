@@ -89,6 +89,7 @@
     <Compile Include="DP\JumpGame.cs" />
     <Compile Include="DP\LongestContinuousIncreasingSubsequence.cs" />
     <Compile Include="DP\LongestPalindrome.cs" />
+    <Compile Include="DP\LongestPalindromicSubsequence.cs" />
     <Compile Include="DP\LongestSubstringAtMostKDistinctChar.cs" />
     <Compile Include="DP\LongestSubstringWithoutRepeatingCharacters.cs" />
     <Compile Include="DP\MajorityElement.cs" />
