@@ -102,6 +102,7 @@
     <Compile Include="DP\PalindromePartition.cs" />
     <Compile Include="DP\PalindromePermutation.cs" />
     <Compile Include="DP\PerfectSquare.cs" />
+    <Compile Include="DP\ScrambleString.cs" />
     <Compile Include="DP\SubStringRelated.cs" />
     <Compile Include="DP\TargetSum.cs" />
     <Compile Include="DP\UniquePath.cs" />

@@ -899,11 +899,19 @@ namespace CodeExercise
 
         }
 
-        // Lint 394
+        // Lint 394, 396
         static void Run_CoinseInALine()
         {
+            //394
             DP.CoinsInALine question = new DP.CoinsInALine();
             var ans394 = question.firstWillWin(7);
+
+            int[] values = { 1, 2, 3, 4, 5, 6, 7, 8, 13, 11, 10, 9 };
+            //395
+            var ans395 = question.firstWillWin2(values);
+            //396
+            var ans396=question.firstWillWin3(values);
+
         }
 
         //lint 437
@@ -1149,39 +1157,56 @@ namespace CodeExercise
         {
             SystemDesign.Twitter twitter = new SystemDesign.Twitter();
 
+            // User 1 posts a new tweet (id = 5).
             twitter.PostTweet(1, 5);
-            twitter.Follow(1, 1);
 
+            // User 1's news feed should return a list with 1 tweet id -> [5].
             var ans = twitter.GetNewsFeed(1);
 
+            // User 1 follows user 2.
+            twitter.Follow(1, 2);
 
-            //// User 1 posts a new tweet (id = 5).
-            //twitter.PostTweet(1, 5);
+            // User 2 posts a new tweet (id = 6).
+            twitter.PostTweet(2, 6);
 
-            //// User 1's news feed should return a list with 1 tweet id -> [5].
-            //twitter.GetNewsFeed(1);
+            // User 1's news feed should return a list with 2 tweet ids -> [6, 5].
+            // Tweet id 6 should precede tweet id 5 because it is posted after tweet id 5.
+            ans = twitter.GetNewsFeed(1);
 
-            //// User 1 follows user 2.
-            //twitter.Follow(1, 2);
+            // User 1 unfollows user 2.
+            twitter.Unfollow(1, 2);
 
-            //// User 2 posts a new tweet (id = 6).
-            //twitter.PostTweet(2, 6);
-
-            //// User 1's news feed should return a list with 2 tweet ids -> [6, 5].
-            //// Tweet id 6 should precede tweet id 5 because it is posted after tweet id 5.
-            //twitter.GetNewsFeed(1);
-
-            //// User 1 unfollows user 2.
-            //twitter.Unfollow(1, 2);
-
-            //// User 1's news feed should return a list with 1 tweet id -> [5],
-            //// since user 1 is no longer following user 2.
-            //twitter.GetNewsFeed(1);
+            // User 1's news feed should return a list with 1 tweet id -> [5],
+            // since user 1 is no longer following user 2.
+            ans = twitter.GetNewsFeed(1);
         }
+
+        //312
+        static void Run_BurstBalloon()
+        {
+            DP.BurstBalloons question = new DP.BurstBalloons();
+            int[] nums = {3,1,5,8 };
+            var ans = question.MaxCoins(nums);
+        }
+
+        //87
+        static void Run_ScrambleString()
+        {
+            DP.ScrambleString question = new DP.ScrambleString();
+            var ans = question.IsScramble("eat", "tae");
+        }
+
         static void Main(string[] args)
         {
-            // big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
 
+            //396 394
+            Run_CoinseInALine();
+
+            //87
+            Run_ScrambleString();
+            //312
+            Run_BurstBalloon();
             //355
             Run_DesignTweetter();
             // lint 92 backpack
@@ -1232,8 +1257,7 @@ namespace CodeExercise
             //132
             Run_Palindrome_Partitioning_II();
 
-            //394
-            Run_CoinseInALine();
+            
             
             
             //121, 151,  309
