@@ -24,18 +24,34 @@ namespace CodeExercise.DP
         /// <returns></returns>
         public int MaxSubArraySolver(int[] nums)
         {
-            int len = nums.Length;
-            int pre = 0;
+            int N = nums.GetLength(0);
+            int[] F = new int[N + 1];
 
-            int maxV = Int32.MinValue;
-            for(int i = 0; i < len; i++)
+            F[0] = 0;
+            int ans = Int32.MinValue;
+            for (int i = 1; i <= N; i ++)
             {
-                int curr = Math.Max(pre + nums[i], nums[i]);
-                maxV = Math.Max(curr, maxV);
-                pre = curr;
+                F[i] = Math.Max(F[i - 1] + nums[i - 1], nums[i-1]);
+                ans = Math.Max(ans, F[i]);
             }
 
-            return maxV;
+            return ans;
+
+
+
+
+            //int len = nums.Length;
+            //int pre = 0;
+
+            //int maxV = Int32.MinValue;
+            //for(int i = 0; i < len; i++)
+            //{
+            //    int curr = Math.Max(pre + nums[i], nums[i]);
+            //    maxV = Math.Max(curr, maxV);
+            //    pre = curr;
+            //}
+
+            //return maxV;
         }
 
         

@@ -1141,7 +1141,7 @@ namespace CodeExercise
         static void Run_LongestPalindromicSubstring()
         {
             DataStructure.LongestPalindromicSubstring question = new DataStructure.LongestPalindromicSubstring();
-            var ans = question.LongestPalindrome("cbbd");
+            var ans = question.LongestPalindrome("abb");
         }
 
         //516
@@ -1196,10 +1196,32 @@ namespace CodeExercise
             var ans = question.IsScramble("eat", "tae");
         }
 
+        //221
+        static void Run_MaxSquare()
+        {
+            char[,] matrix =
+            {
+                { '1','0','1','0','0' },
+                { '1','0','1','1','1' },
+                { '1','1','1','1','1' }, 
+                { '1','0','0','1','0' }
+            };
+
+            DP.MaximalSquare question = new DP.MaximalSquare();
+            var ans = question.MaximalSquareSolver(matrix);
+            
+        }
+
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //674, 300
+            Run_LongestContinuousIncreasingSubsequence();
 
+            //5
+            Run_LongestPalindromicSubstring();
+            //221
+            Run_MaxSquare();
             //396 394
             Run_CoinseInALine();
 
@@ -1213,8 +1235,7 @@ namespace CodeExercise
             Run_Backpack();
             //516
             Run_LongestPalindromeSubseq();
-            //5
-            Run_LongestPalindromicSubstring();
+
             //218
             Run_SkyLine();
             //287
@@ -1263,8 +1284,7 @@ namespace CodeExercise
             //121, 151,  309
             Run_BestTimeBuySellStock();
 
-            //674, 300
-            Run_LongestContinuousIncreasingSubsequence();
+            
             //256  I  265 II
             Run_PaintHouse();
 

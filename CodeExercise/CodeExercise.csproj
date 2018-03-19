@@ -94,6 +94,7 @@
     <Compile Include="DP\LongestSubstringAtMostKDistinctChar.cs" />
     <Compile Include="DP\LongestSubstringWithoutRepeatingCharacters.cs" />
     <Compile Include="DP\MajorityElement.cs" />
+    <Compile Include="DP\MaximalSquare.cs" />
     <Compile Include="DP\MaximumSubarray.cs" />
     <Compile Include="DP\MaxProductArray.cs" />
     <Compile Include="DP\MinCostClimbingStairs.cs" />

@@ -34,18 +34,35 @@ namespace CodeExercise.DP
             int startIndex = 0;
 
             int ans = 1;
-
+            int currLen = 1;
+            int pre = nums[0];
             for (int i = 1; i < len; i++)
             {
-                if (nums[i] > nums[i - 1])
+                if (pre < nums[i])
                 {
-                    ans = Math.Max(ans, i - startIndex + 1);
+                    currLen++;
+                    ans = Math.Max(ans, currLen);
                 }
                 else
                 {
-                    startIndex = i;
+                    currLen = 1;
                 }
+
+                pre = nums[i];
             }
+
+
+            //for (int i = 1; i < len; i++)
+            //{
+            //    if (nums[i] > nums[i - 1])
+            //    {
+            //        ans = Math.Max(ans, i - startIndex + 1);
+            //    }
+            //    else
+            //    {
+            //        startIndex = i;
+            //    }
+            //}
 
             // if left and right need to be considered
             //startIndex = 0;
