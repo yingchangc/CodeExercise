@@ -56,6 +56,7 @@
     <Compile Include="DataStructure\KthSmallestElementInMatrix.cs" />
     <Compile Include="DataStructure\LargestRectangleInHistogram.cs" />
     <Compile Include="DataStructure\LinkedListCycleII.cs" />
+    <Compile Include="DataStructure\LongestCommonPrefix.cs" />
     <Compile Include="DataStructure\LongestPalindromicSubstring.cs" />
     <Compile Include="DataStructure\MaxBinaryTree.cs" />
     <Compile Include="DataStructure\MaxRectangle.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="DP\GroupAnagrams.cs" />
     <Compile Include="DP\HouseRobber.cs" />
     <Compile Include="DP\JumpGame.cs" />
+    <Compile Include="DP\LongestCommonSubsequence.cs" />
     <Compile Include="DP\LongestContinuousIncreasingSubsequence.cs" />
     <Compile Include="DP\LongestPalindrome.cs" />
     <Compile Include="DP\LongestPalindromicSubsequence.cs" />
@@ -123,7 +125,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DP\SubSets.cs" />
     <Compile Include="SweepingLine\MaximumAverageSubarray.cs" />
+    <Compile Include="SystemDesign\ConsistentHash.cs" />
     <Compile Include="SystemDesign\DesignTweeter.cs" />
+    <Compile Include="SystemDesign\MemCache.cs" />
+    <Compile Include="SystemDesign\MiniCassandra.cs" />
     <Compile Include="Tree\DiameterOfBT.cs" />
     <Compile Include="Tree\LowestCommonAncestor.cs" />
     <Compile Include="Tree\TreeNode.cs" />

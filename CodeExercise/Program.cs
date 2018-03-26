@@ -54,6 +54,11 @@ namespace CodeExercise
 
         static void Run_EditDistanceQuestion()
         {
+            bool isOneEditDistance = EditDistance.IsOneEditDistance("marts", "mart");
+            isOneEditDistance = EditDistance.IsOneEditDistance("mart", "marts");
+            isOneEditDistance = EditDistance.IsOneEditDistance("mart", "mark");
+            isOneEditDistance = EditDistance.IsOneEditDistance("cb", "ab");
+
             string s1 = "abcfg";
             string s2 = "adceg";
             int[,] resArray = EditDistance.ConstructMemorizationMatrix(s1, s2);
@@ -65,6 +70,26 @@ namespace CodeExercise
             String str1 = "azced";
             String str2 = "abcdef";
             EditDistance.FindDistanceAndPrint(str1, str2);
+        }
+
+        //14
+        static void Run_LongestCommonPrefix()
+        {
+            string[] strs = { "aa", "a"};
+
+            DataStructure.LongestCommonPrefix question = new DataStructure.LongestCommonPrefix();
+            var ans = question.LongestCommonPrefixSolver(strs);
+
+        }
+
+
+        static void Run_LongestCommonSubsequence()
+        {
+            DP.LongestCommonSubsequence question = new DP.LongestCommonSubsequence();
+
+            string A = "ABCD";
+            string B = "EACB";
+            int ans = question.longestCommonSubsequenceSolver(A, B);
         }
 
         static void Run_permuteIntArray()
@@ -383,6 +408,24 @@ namespace CodeExercise
         static void Run_LongestContinuousIncreasingSubsequence()
         {
             int[] nums = { 1, 3, 5, 4, 7 };
+
+            //398 Lint
+            int[,] matrix = {
+                              {1, 2, 3, 4, 5 },
+                              {16, 17, 24, 23, 6 },
+                              {15, 18, 25, 22, 7 },
+                              {14, 19, 20, 21, 8 },
+                              { 13, 12, 11, 10, 9 }
+                            };
+
+            int[,] matrix2 = {
+                              {1, 5,  3 },
+                              {4, 10, 9 },
+                              {2, 8,  7 }
+                            };
+
+            DP.LongestIncreasingContinuousSubsequence2 question2 = new DP.LongestIncreasingContinuousSubsequence2();
+            var ans398 = question2.LongestIncreasingContinuousSubsequenceIISolver(matrix2);
 
             //674
             DP.LongestContinuousIncreasingSubsequence question = new DP.LongestContinuousIncreasingSubsequence();
@@ -1212,9 +1255,66 @@ namespace CodeExercise
             
         }
 
+        // lint 519
+        static void Run_ConsistentHash()
+        {
+            SystemDesign.ConsistentHash question = new SystemDesign.ConsistentHash();
+            var ans = question.consistentHashing(5);
+        }
+
+        // lint 538
+        static void Run_MemCache()
+        {
+            SystemDesign.Memcache question = new SystemDesign.Memcache();
+            var ans = question.get(1, 0);  //  >> 2147483647
+            question.set(2, 1, 1, 2);  
+            ans = question.get(3, 1);  //  >> 1
+            ans = question.get(4, 1);  //  >> 2147483647
+            ans = question.incr(5, 1, 1); //  >> 2147483647
+            question.set(6, 1, 3, 0);
+            ans = question.incr(7, 1, 1);   //  >> 4
+            ans = question.decr(8, 1, 1);  //  >> 3
+            ans = question.get(9, 1);   //  >> 3
+            question.delete(10, 1);
+            ans = question.get(11, 1);  //  >> 2147483647
+            ans = question.incr(12, 1, 1);  //  >> 2147483647
+
+
+        }
+
+        //lint 502
+        static void Run_MiniCassandra()
+        {
+            SystemDesign.MiniCassandra question = new SystemDesign.MiniCassandra();
+            question.insert("gg", 2, "ggValue2");
+            question.insert("gg", 3, "ggValue3");
+            question.insert("gg", 1, "ggValue1");
+            question.insert("msft", 1, "msftValue1");
+            var ans = question.query("gg", 0, 3);
+
+            ans = question.query("msft", 0, 1);
+        }
+
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            // 14
+            Run_LongestCommonPrefix();
+
+            Run_EditDistanceQuestion();
+
+            //lint 77
+            Run_LongestCommonSubsequence();
+
+            //502
+            Run_MiniCassandra();
+
+            //538
+            Run_MemCache();
+
+            // 519
+            Run_ConsistentHash();
+
             //674, 300
             Run_LongestContinuousIncreasingSubsequence();
 
@@ -1433,7 +1533,6 @@ namespace CodeExercise
             
             Run_LowestCommonAncestorINBTree();
             Run_permuteIntArray();
-            Run_EditDistanceQuestion();
             Run_KMP_Question();
         }
     }

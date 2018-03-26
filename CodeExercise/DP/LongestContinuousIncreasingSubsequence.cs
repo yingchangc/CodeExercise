@@ -84,6 +84,87 @@ namespace CodeExercise.DP
         }
     }
 
+    class LongestIncreasingContinuousSubsequence2
+    {
+        /// <summary>
+        /// Lint 398
+        /// http://www.lintcode.com/en/problem/longest-increasing-continuous-subsequence-ii/
+        /// 
+        /// Give you an integer matrix (with row size n, column size m)，find the longest increasing continuous subsequence in this matrix. 
+        /// (The definition of the longest increasing continuous subsequence here can start at any row or column and go up/down/right/left any direction).
+        /// 
+        ///                {
+        ///                  {1, 5,  3 },
+        ///                  {4, 10, 9 },
+        ///                  {2, 8,  7 }
+        ///                };
+        /// 
+        /// sol:
+        /// 
+        /// get F[j,i] as bigger from all corner and mark as visited
+        /// </summary>
+        /// <param name="A"></param>
+        /// <returns></returns>
+        public int LongestIncreasingContinuousSubsequenceIISolver(int[,] A)
+        {
+            if (A == null)
+            {
+                return 0;
+            }
+
+            int M = A.GetLength(0);
+            int N = A.GetLength(1);
+
+            int[,] F = new int[M, N];
+            bool[,] visited = new bool[M, N];
+
+            int ans = 0;
+            for (int j = 0; j < M; j++)
+            {
+                for (int i = 0; i <N; i++)
+                {
+                    int len = LongestIncreasingContinuousSubsequenceIIHelper(A, F, visited, j, i, M, N);
+                    ans = Math.Max(ans, len);
+                }
+            }
+
+            return ans;
+        }
+
+        private int LongestIncreasingContinuousSubsequenceIIHelper(int[,] A, int[,] F, bool[,] visited, int j, int i, int M, int N)
+        {
+            if (visited[j,i] == true)
+            {
+                return F[j, i];
+            }
+
+            // will not have loop be cause recursive only happen when neighber is smaller, wont come back to curr (j,i)
+            visited[j, i] = true;
+
+            int[] deltaXs = { -1, 1, 0, 0 };
+            int[] deltaYs = {  0, 0, 1,-1 };
+
+            F[j, i] = 1;  // init len is itself
+
+
+            for (int k = 0; k <4; k++)
+            {
+                int nx = i + deltaXs[k];
+                int ny = j + deltaYs[k];
+                if (nx >= 0 && nx < N && ny >= 0 && ny < M && A[j, i] > A[ny, nx])
+                {
+                    int preLen = LongestIncreasingContinuousSubsequenceIIHelper(A, F, visited, ny, nx, M, N);
+                    F[j, i] = Math.Max(F[j, i], (preLen + 1));
+                }
+            }
+
+            
+
+            return F[j, i];
+            
+        }
+    }
+
     class LongestConsecutiveSequence
     {
         /// <summary>

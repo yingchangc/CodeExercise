@@ -62,7 +62,7 @@ namespace CodeExercise.DP
                 {
                     F[i, i + len-1] = Math.Max(F[i, i + len-1 - 1], F[i + 1, i + len-1]);  // cut last, cut front
 
-                    if (s[i] == s[i+len-1])  // frot == last char
+                    if (s[i] == s[i+len-1])  // front == last char
                     {
                         F[i, i + len - 1] = Math.Max(F[i, i + len - 1], F[i + 1, i + len - 1 - 1] + 2);    // 2+ middle
                     }

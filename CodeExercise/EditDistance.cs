@@ -9,6 +9,91 @@ namespace CodeExercise
     public class EditDistance
     {
         /// <summary>
+        /// 161. One Edit Distance
+        /// https://leetcode.com/problems/one-edit-distance/description/
+        /// Given two strings S and T, determine if they are both one edit distance apart.
+        /// 
+        /// Sol:
+        /// 
+        /// [delete]
+        ///    in    marts  
+        ///target     mart
+        /// 
+        /// [Insert]
+        ///    in   mart
+        ///  target marts
+        ///  
+        /// [Replace]
+        ///    in  mart
+        /// target mark
+
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        public static bool IsOneEditDistance(string s, string t)
+        {
+            int M = s.Length;
+            int N = t.Length;
+
+            if (Math.Abs(M-N) > 1)
+            {
+                return false;
+            }
+
+            
+            return IsOneEditDistanceHelper(s, t);
+        }
+
+
+        // helper input guarantee (s.len - t.len) <=1
+        private static bool IsOneEditDistanceHelper(string s, string t)
+        {
+            if (s == t)
+            {
+                return false;
+            }
+
+            int i = s.Length-1;   // index  off len by 1
+            int j = t.Length-1;
+
+            
+
+            while (i >=0 && j >=0)
+            {
+                if (s[i] == t[j])
+                {
+                    i--;
+                    j--;
+                }
+                else
+                {
+                    // delete case
+                    if (s.Substring(0, i) == t.Substring(0,j+1))   // yic note both s 
+                    {
+                        return true;
+                    }
+                    // insert case
+                    else if ((s.Substring(0,i+1) + t[j]) == t.Substring(0, j + 1))
+                    {
+                        return true;
+                    }
+                    // replace case
+                    else if ((s.Substring(0,i) + t[j]) == t.Substring(0, j + 1))
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+
+            // since s len is greater than t by 1, if diff, this fit 1 delete case; otherwise s==t, is not one edit 
+            return s != t;
+            
+        }
+
+
+        /// <summary>
         /// * Time complexity is O(m*n)
         /// * Space complexity is O(m* n)
         /// https://www.youtube.com/watch?v=We3YDTzNXEk
