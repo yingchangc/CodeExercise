@@ -82,6 +82,18 @@ namespace CodeExercise
 
         }
 
+        //97
+        static void Run_InterleavingString()
+        {
+            DP.InterleavingString question = new DP.InterleavingString();
+            string s1 = "aabcc";
+            string s2 = "dbbca";
+            string s3 = "aadbbcbcac"; // return true.
+            string s4 = "aadbbbaccc"; //return false.
+            var ans = question.IsInterleave(s1, s2, s3);
+            ans = question.IsInterleave(s1, s2, s4);
+            
+        }
 
         static void Run_LongestCommonSubsequence()
         {
@@ -1282,6 +1294,30 @@ namespace CodeExercise
 
         }
 
+        // 520
+        static void Run_ConsistentHashing2()
+        {
+           
+            // create(100, 3)
+            // addMachine(1)
+            // >> [3, 41, 90]  => 三个随机数
+            // getMachineIdByHashCode(4)
+            // >> 1
+            // addMachine(2)
+            // >> [11, 55, 83]
+            // getMachineIdByHashCode(61)
+            // >> 2
+            // getMachineIdByHashCode(91)
+            // >> 1
+            SystemDesign.ConsistentHashing2 question = new SystemDesign.ConsistentHashing2(1000, 3);
+            var randomlist1 = question.addMachine(1);
+            var machine = question.getMachineIdByHashCode(100);
+            var randomlist2 = question.addMachine(2);
+            machine = question.getMachineIdByHashCode(61);
+            machine = question.getMachineIdByHashCode(961);
+
+        }
+
         //lint 502
         static void Run_MiniCassandra()
         {
@@ -1295,9 +1331,81 @@ namespace CodeExercise
             ans = question.query("msft", 0, 1);
         }
 
+        //232 lint
+        static void Run_TinyUrl()
+        {
+            SystemDesign.TinyUrl question = new SystemDesign.TinyUrl();
+
+            string longUrl = "http://www.lintcode.com/en/problem/tiny-url/";
+            string tiny = question.LongToShort(longUrl);
+            string recoverLong = question.ShortToLong(tiny);
+
+
+            string ans = question.createCustom("http://www.lintcode.com/", "lccode"); // http://tiny.url/lccode
+            ans = question.createCustom("http://www.lintcode.com/", "lc"); // error
+            string newtiny = question.LongToShort("http://www.lintcode.com/problem/"); // http://tiny.url/1Ab38c   // this is just an example, you can have you own 6 characters.
+            ans = question.ShortToLong("http://tiny.url/lccode"); // http://www.lintcode.com/
+            ans = question.ShortToLong(newtiny); // http://www.lintcode.com/problem/
+            ans = question.ShortToLong("http://tiny.url/1Ab38d"); // null
+
+        }
+
+        //476
+        static void Run_StoneGame()
+        {
+            DP.StoneGame question = new DP.StoneGame();
+            int[] A = { 4, 1, 1 ,4};
+            var ans = question.StoneGameSolver(A);
+            int[] B = { 1, 1, 1, 1 };
+            int[] C = { 4, 4, 5, 9 };
+            ans = question.StoneGameSolver(B);
+            ans = question.StoneGameSolver(C);
+
+            int[] D = { 1, 1, 4, 4 };
+            ans = question.stoneGame2(D);
+        }
+
+        // 115
+        static void Run_DistinctSubsequences()
+        {
+            DP.DistinctSubsequences question = new DP.DistinctSubsequences();
+            var ans = question.NumDistinct("raab", "ra");
+
+
+            string s = "daacaedaceacabbaabdccdaaeaebacddadcaeaacadbceaecddecdeedcebcdacdaebccdeebcbdeaccabcecbeeaadbccbaeccbbdaeadecabbbedceaddcdeabbcdaeadcddedddcececbeeabcbecaeadddeddccbdbcdcbceabcacddbbcedebbcaccac";
+            string t = "ceadbaa";
+
+            ans = question.NumDistinct(s, t);
+        }
+
+        //474
+        static void Run_OneAndZero()
+        {
+            string[] Array = { "10", "0001", "111001", "1", "0" };
+            DP.OnesAndZeroes question = new DP.OnesAndZeroes();
+            var ans = question.FindMaxForm(Array, 5, 3);
+        }
+
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //474
+            Run_OneAndZero();
+
+            //520
+            Run_ConsistentHashing2();
+
+            //115
+            Run_DistinctSubsequences();
+
+            //476
+            Run_StoneGame();
+
+            //232
+            Run_TinyUrl();
+            //97
+            Run_InterleavingString();
+
             // 14
             Run_LongestCommonPrefix();
 

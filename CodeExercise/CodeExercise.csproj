@@ -85,9 +85,11 @@
     <Compile Include="DP\CopyBooks.cs" />
     <Compile Include="DP\CountingBits.cs" />
     <Compile Include="DP\DecodeWays.cs" />
+    <Compile Include="DP\DistinctSubsequences.cs" />
     <Compile Include="DP\FindMinimumInRotatedSortedArray.cs" />
     <Compile Include="DP\GroupAnagrams.cs" />
     <Compile Include="DP\HouseRobber.cs" />
+    <Compile Include="DP\InterleavingString.cs" />
     <Compile Include="DP\JumpGame.cs" />
     <Compile Include="DP\LongestCommonSubsequence.cs" />
     <Compile Include="DP\LongestContinuousIncreasingSubsequence.cs" />
@@ -101,11 +103,13 @@
     <Compile Include="DP\MaxProductArray.cs" />
     <Compile Include="DP\MinCostClimbingStairs.cs" />
     <Compile Include="DP\MinimumPathSum.cs" />
+    <Compile Include="DP\OnesAndZeroes.cs" />
     <Compile Include="DP\PaintHouse.cs" />
     <Compile Include="DP\PalindromePartition.cs" />
     <Compile Include="DP\PalindromePermutation.cs" />
     <Compile Include="DP\PerfectSquare.cs" />
     <Compile Include="DP\ScrambleString.cs" />
+    <Compile Include="DP\StoneGame.cs" />
     <Compile Include="DP\SubStringRelated.cs" />
     <Compile Include="DP\TargetSum.cs" />
     <Compile Include="DP\UniquePath.cs" />
@@ -126,9 +130,11 @@
     <Compile Include="DP\SubSets.cs" />
     <Compile Include="SweepingLine\MaximumAverageSubarray.cs" />
     <Compile Include="SystemDesign\ConsistentHash.cs" />
+    <Compile Include="SystemDesign\ConsistentHashing2.cs" />
     <Compile Include="SystemDesign\DesignTweeter.cs" />
     <Compile Include="SystemDesign\MemCache.cs" />
     <Compile Include="SystemDesign\MiniCassandra.cs" />
+    <Compile Include="SystemDesign\TinyUrl.cs" />
     <Compile Include="Tree\DiameterOfBT.cs" />
     <Compile Include="Tree\LowestCommonAncestor.cs" />
     <Compile Include="Tree\TreeNode.cs" />

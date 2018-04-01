@@ -16,7 +16,8 @@ namespace CodeExercise.DataStructure
         /// For strings "ABCD", "ABEF" and "ACEF", the LCP is "A"
         /// For strings "ABCDEFG", "ABCEFG" and "ABCEFA", the LCP is "ABC"
         /// 
-        /// use first char as test prefix, gradually trim it. 
+        /// 
+        /// use first string as  prefix (or better scan array find the smallest string as prefix candidate), gradually trim it with others in the array. Be sure preFix can be longer than toCompare during process, aware the corner case
         /// Note: This is faster than build a trie a and walk to fix each node has 1 valid child and stop when diverse or stop when isWord reached.    ex .[leet  le]
         /// </summary>
         /// <param name="strs"></param>
