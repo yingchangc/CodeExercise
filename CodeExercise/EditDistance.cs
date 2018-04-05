@@ -69,7 +69,7 @@ namespace CodeExercise
                 else
                 {
                     // delete case
-                    if (s.Substring(0, i) == t.Substring(0,j+1))   // yic note both s 
+                    if (s.Substring(0, i) == t.Substring(0,j+1))   // yic note both s   i for len  current len-1, j+1 is totla len
                     {
                         return true;
                     }

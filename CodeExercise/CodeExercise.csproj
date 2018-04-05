@@ -91,6 +91,7 @@
     <Compile Include="DP\HouseRobber.cs" />
     <Compile Include="DP\InterleavingString.cs" />
     <Compile Include="DP\JumpGame.cs" />
+    <Compile Include="DP\KEditDistance.cs" />
     <Compile Include="DP\LongestCommonSubsequence.cs" />
     <Compile Include="DP\LongestContinuousIncreasingSubsequence.cs" />
     <Compile Include="DP\LongestPalindrome.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="DP\SubStringRelated.cs" />
     <Compile Include="DP\TargetSum.cs" />
     <Compile Include="DP\UniquePath.cs" />
+    <Compile Include="DP\WildcardMatching.cs" />
     <Compile Include="DP\WordBreak.cs" />
     <Compile Include="DV\Sentence_Similarity.cs" />
     <Compile Include="EditDistance.cs" />
@@ -132,9 +134,13 @@
     <Compile Include="SystemDesign\ConsistentHash.cs" />
     <Compile Include="SystemDesign\ConsistentHashing2.cs" />
     <Compile Include="SystemDesign\DesignTweeter.cs" />
+    <Compile Include="SystemDesign\GFSClient.cs" />
+    <Compile Include="SystemDesign\HeartBeat.cs" />
+    <Compile Include="SystemDesign\InvertedIndex.cs" />
     <Compile Include="SystemDesign\MemCache.cs" />
     <Compile Include="SystemDesign\MiniCassandra.cs" />
     <Compile Include="SystemDesign\TinyUrl.cs" />
+    <Compile Include="SystemDesign\Typehead.cs" />
     <Compile Include="Tree\DiameterOfBT.cs" />
     <Compile Include="Tree\LowestCommonAncestor.cs" />
     <Compile Include="Tree\TreeNode.cs" />

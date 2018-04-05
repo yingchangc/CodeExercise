@@ -1386,9 +1386,113 @@ namespace CodeExercise
             var ans = question.FindMaxForm(Array, 5, 3);
         }
 
+        //566 lint
+        static void Run_GFSClient()
+        {
+            // client maintains chunck id   and master maintains the id to chunkserver lookup
+            SystemDesign.GFSClient client = new SystemDesign.GFSClient(5);
+
+            var ans = client.Read("a.txt");
+            //>> null
+            client.Write("a.txt", "Wor");
+            //>> You don't need to return anything, but you need to call writeChunk("a.txt", 0, "World") to write a 5 bytes chunk to GFS.
+            ans = client.Read("a.txt");
+            //>> "Wor"
+            client.Write("b.txt", "111112222233");
+            ans = client.Read("b.txt");
+            //>> You need to save "11111" at chink 0, "22222" at chunk 1, "33" at chunk 2.
+            client.Write("c.txt", "aaaaabbbbb");
+            ans = client.Read("c.txt");
+            //>> "aaaaabbbbb"
+        }
+
+        //565 lint
+        static void Run_HeartBeat()
+        {
+            SystemDesign.HeartBeat server = new SystemDesign.HeartBeat();
+            List<string> ips = new List<string>(){ "10.173.0.2", "10.173.0.3" };
+            server.initialize(ips, 10);
+            server.ping(1, "10.173.0.2");
+            var ans = server.getDiedSlaves(20);
+            //>> ["10.173.0.3"]
+            ans = server.getDiedSlaves(21);
+            //>> ["10.173.0.2", "10.173.0.3"]
+            server.ping(22, "10.173.0.2");
+            server.ping(23, "10.173.0.3");
+            ans = server.getDiedSlaves(24);
+            //>> []
+            ans = server.getDiedSlaves(42);
+            //>> ["10.173.0.2"]
+        }
+
+        //623
+        static void Run_KEditDistance()
+        {
+            DP.KEditDistance question = new DP.KEditDistance();
+            string[] wordList = { "abc", "abd", "abcd", "adc" };
+            var ans = question.kDistance(wordList, "ac", 1);
+        }
+        
+        //500 lint
+        static void Run_InvertedIndex()
+        {
+            SystemDesign.Document doc1 = new SystemDesign.Document();
+            doc1.id = 1;
+            doc1.content = "This is the content of document 1 it is very short";
+
+            SystemDesign.Document doc2 = new SystemDesign.Document();
+            doc2.id = 2;
+            doc2.content = "This is the content of document 2 it is very long bilabial bilabial heheh hahaha";
+
+            SystemDesign.InvertedIndex question = new SystemDesign.InvertedIndex();
+            SystemDesign.Document[] docs = { doc1, doc2 };
+
+            var ans = question.InvertedIndexInjection(new List<SystemDesign.Document>() { doc1, doc2 });
+         }
+
+        //231 lint
+        static void Run_Typehead()
+        {
+            var contents = new List<SystemDesign.NodeContent>() { new SystemDesign.NodeContent("Jason Zhang", 4),
+                                                                 new SystemDesign.NodeContent("Jason Cheng", 2),
+                                                                 new SystemDesign.NodeContent("Jason Lin", 3),
+                                                                 new SystemDesign.NodeContent("Jason hua", 5),
+                                                                 new SystemDesign.NodeContent("Larry Shi", 4),
+                                                                 new SystemDesign.NodeContent("James Yu", 1) };
+
+            SystemDesign.Typehead typehead = new SystemDesign.Typehead(contents);
+            var ans = typehead.search("Jason"); //{"Jason hua", "Jason Zhang", "Jason Lin"}
+            ans = typehead.search("La");  // {Larry Shi}
+            ans = typehead.search("Yu");   // empty
+        }
+
+        //44
+        static void Run_WildcardMatching()
+        {
+            DP.WildcardMatching question = new DP.WildcardMatching();
+            var ans = question.IsMatch("ABxyxzCD", "A?*CD");
+        }
+
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //44
+            Run_WildcardMatching();
+
+            //231
+            Run_Typehead();
+
+            //500 
+            Run_InvertedIndex();
+            //623
+            Run_KEditDistance();
+
+            //565
+            Run_HeartBeat();
+
+            //566
+            Run_GFSClient();
+
             //474
             Run_OneAndZero();
 

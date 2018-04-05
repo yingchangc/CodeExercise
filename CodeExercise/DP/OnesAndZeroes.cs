@@ -55,17 +55,16 @@ namespace CodeExercise.DP
 
             for (int i = 1; i <= len; i++)
             {
-                for(int j = 0; j <=m; j++)
+                string currStr = strs[i - 1];
+                int zeroCount = 0;
+                int oneCount = 0;
+                GetZeroOnesInStr(currStr, out zeroCount, out oneCount);
+
+                for (int j = 0; j <=m; j++)
                 {
                     for(int k =0; k <=n; k++)
                     {
                         F[i, j, k] = F[i - 1, j, k];  // don't take current str
-
-                        string currStr = strs[i - 1];
-
-                        int zeroCount = 0;
-                        int oneCount = 0;
-                        GetZeroOnesInStr(currStr, out zeroCount, out oneCount);
 
                         if ((j - zeroCount >=0) && (k - oneCount) >=0)
                         {
