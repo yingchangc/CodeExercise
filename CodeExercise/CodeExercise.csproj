@@ -53,6 +53,7 @@
     <Compile Include="DataStructure\DataStreamMedian.cs" />
     <Compile Include="DataStructure\ExpandExpression.cs" />
     <Compile Include="DataStructure\FindDuplicateNumber.cs" />
+    <Compile Include="DataStructure\FirstUniqueCharacterinaString.cs" />
     <Compile Include="DataStructure\KthSmallestElementInMatrix.cs" />
     <Compile Include="DataStructure\LargestRectangleInHistogram.cs" />
     <Compile Include="DataStructure\LinkedListCycleII.cs" />
@@ -66,9 +67,11 @@
     <Compile Include="DataStructure\NumberConnectedComponentsInUG.cs" />
     <Compile Include="DataStructure\NumberOfIsland.cs" />
     <Compile Include="DataStructure\NumberOfIsland2.cs" />
+    <Compile Include="DataStructure\ReverseWordsinaString2.cs" />
     <Compile Include="DataStructure\RotateImage.cs" />
     <Compile Include="DataStructure\Skyline.cs" />
     <Compile Include="DataStructure\SlidingWindow.cs" />
+    <Compile Include="DataStructure\SubarraySum.cs" />
     <Compile Include="DataStructure\TrapRainWater.cs" />
     <Compile Include="DataStructure\Trie.cs" />
     <Compile Include="DataStructure\WordDictionarySearch.cs" />
@@ -109,6 +112,7 @@
     <Compile Include="DP\PalindromePartition.cs" />
     <Compile Include="DP\PalindromePermutation.cs" />
     <Compile Include="DP\PerfectSquare.cs" />
+    <Compile Include="DP\RegularExpression.cs" />
     <Compile Include="DP\ScrambleString.cs" />
     <Compile Include="DP\StoneGame.cs" />
     <Compile Include="DP\SubStringRelated.cs" />

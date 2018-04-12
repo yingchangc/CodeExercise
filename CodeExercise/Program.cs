@@ -1470,14 +1470,67 @@ namespace CodeExercise
         static void Run_WildcardMatching()
         {
             DP.WildcardMatching question = new DP.WildcardMatching();
-            var ans = question.IsMatch("ABxyxzCD", "A?*CD");
+            var ans = question.IsMatch("ABx", "A?*");
+        }
+
+        //10
+        static void Run_RegularExpression()
+        {
+            DP.RegularExpression question = new DP.RegularExpression();
+            var ans = question.IsMatch("ac", "ac*");
+        }
+
+        // lint138,  leetcode 325
+        static void Run_SubarraySum()
+        {
+            DataStructure.SubarraySum question = new DataStructure.SubarraySum();
+            int[] arr = { -3, 1, 2, -3, 4 , -4};
+            var ans = question.SubarraySumSolver(arr);
+
+            int[] arr2 = { 1, -1, 1, 1, -1 };
+            var ans2 = question.SubarraySumK(arr2, 0);
+
+            int[] arr3 = { 1, -1, 5, -2, 3 };
+            var ans3 = question.MaxSubArrayLen(arr3, 3);
+
+            int[] arr4 = { 1, 2, 3, 4 };
+            var ans4 = question.subarraySumII(arr4, 1, 3);
+        }
+
+        //387
+        static void Run_FirstUniqueCharacterinaString()
+        {
+            DataStructure.FirstUniqueCharacterinaString question = new DataStructure.FirstUniqueCharacterinaString();
+            var ans = question.FirstUniqChar("loveleetcode");
+        }
+
+        //186
+        static void Run_ReverseWordsinaString2()
+        {
+            DataStructure.ReverseWordsinaString2 question = new DataStructure.ReverseWordsinaString2();
+            string str = "s the  sky is blue  e ";
+            question.ReverseWords(str.ToCharArray());
         }
 
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //138,325
+            Run_SubarraySum();
+
+            //186
+            Run_ReverseWordsinaString2();
+
+            //387
+            Run_FirstUniqueCharacterinaString();
+            
+
             //44
             Run_WildcardMatching();
+
+            //10
+            Run_RegularExpression();
+            
 
             //231
             Run_Typehead();
