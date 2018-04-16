@@ -1512,9 +1512,43 @@ namespace CodeExercise
             question.ReverseWords(str.ToCharArray());
         }
 
+        //529
+        static void Run_Geohash()
+        {
+            SystemDesign.Geohash question = new SystemDesign.Geohash();
+            var ans = question.Encode(39.92816697, 116.38954991, 12);
+            var ans1 = question.Decode("wx4g0s");
+        }
+
+        //453
+        static void Run_FlaternTreeNodes()
+        {
+            DataStructure.FlattenBinaryTreeToLL question = new DataStructure.FlattenBinaryTreeToLL();
+
+            TreeNode root = ConstructTeeNodeTest();
+            question.flatten(root);
+        }
+
+        static TreeNode ConstructTeeNodeTest()
+        {
+            TreeNode root = new TreeNode(1);
+            root.right = new TreeNode(5);
+            root.right.right = new TreeNode(6);
+            root.left = new TreeNode(2);
+            root.left.left = new TreeNode(3);
+            root.left.right = new TreeNode(4);
+            return root;
+        }
+
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+
+            //453
+            Run_FlaternTreeNodes();
+    
+            //529
+                Run_Geohash();
             //138,325
             Run_SubarraySum();
 

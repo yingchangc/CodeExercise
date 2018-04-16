@@ -54,6 +54,7 @@
     <Compile Include="DataStructure\ExpandExpression.cs" />
     <Compile Include="DataStructure\FindDuplicateNumber.cs" />
     <Compile Include="DataStructure\FirstUniqueCharacterinaString.cs" />
+    <Compile Include="DataStructure\FlattenBinaryTreeToLL.cs" />
     <Compile Include="DataStructure\KthSmallestElementInMatrix.cs" />
     <Compile Include="DataStructure\LargestRectangleInHistogram.cs" />
     <Compile Include="DataStructure\LinkedListCycleII.cs" />
@@ -138,6 +139,7 @@
     <Compile Include="SystemDesign\ConsistentHash.cs" />
     <Compile Include="SystemDesign\ConsistentHashing2.cs" />
     <Compile Include="SystemDesign\DesignTweeter.cs" />
+    <Compile Include="SystemDesign\Geohash.cs" />
     <Compile Include="SystemDesign\GFSClient.cs" />
     <Compile Include="SystemDesign\HeartBeat.cs" />
     <Compile Include="SystemDesign\InvertedIndex.cs" />
