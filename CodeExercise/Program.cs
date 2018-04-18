@@ -1539,11 +1539,39 @@ namespace CodeExercise
             root.left.right = new TreeNode(4);
             return root;
         }
+        
+        //525
+        static void Run_MiniUber()
+        {
+            SystemDesign.MiniUber uber = new SystemDesign.MiniUber();
+            var ans = uber.Report(1, 36.1344, 77.5672); // return null
+            ans = uber.Report(2, 45.1344, 76.5672); // return null
+            ans = uber.Request(2, 39.1344, 76.5672); // return a trip, LOG(INFO): Trip(rider_id: 2, driver_id: 1, lat: 39.1344, lng: 76.5672)
+            ans = uber.Report(1, 38.1344, 75.5672); // return a trip, LOG(INFO): Trip(rider_id: 2, driver_id: 1, lat: 39.1344, lng: 76.5672)
+            ans = uber.Report(2, 45.1344, 76.5672); // return null
+            uber.TripDone(1);
+            ans = uber.Request(2, 45, 76);
+            ans = uber.Report(2, 45, 77);
+        }
+
+        //509
+        static void Run_MiniYelp()
+        {
+            SystemDesign.MiniYelp yelp = new SystemDesign.MiniYelp();
+            var resId1 = yelp.addRestaurant("Lint Cafe", 10.4999999, 11.599999); // return 1
+            var resId2 = yelp.addRestaurant("Code Cafe", 11, 12); // return 2
+            var ans = yelp.neighbors(10.5, 11.6, 6.7); // return ["Lint Cafe"]
+            yelp.removeRestaurant(resId1);
+            ans = yelp.neighbors(10.5, 9.6, 6.7); // return []
+        }
 
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
-
+            //509
+            Run_MiniYelp();
+            //525
+            Run_MiniUber();
             //453
             Run_FlaternTreeNodes();
     

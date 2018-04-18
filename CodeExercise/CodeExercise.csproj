@@ -145,6 +145,8 @@
     <Compile Include="SystemDesign\InvertedIndex.cs" />
     <Compile Include="SystemDesign\MemCache.cs" />
     <Compile Include="SystemDesign\MiniCassandra.cs" />
+    <Compile Include="SystemDesign\MiniUber.cs" />
+    <Compile Include="SystemDesign\MiniYelp.cs" />
     <Compile Include="SystemDesign\TinyUrl.cs" />
     <Compile Include="SystemDesign\Typehead.cs" />
     <Compile Include="Tree\DiameterOfBT.cs" />
