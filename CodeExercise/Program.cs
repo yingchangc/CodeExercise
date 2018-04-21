@@ -1565,9 +1565,42 @@ namespace CodeExercise
             ans = yelp.neighbors(10.5, 9.6, 6.7); // return []
         }
 
-        static void Main(string[] args)
+        //lint 556
+        static void Run_StandardBloomFilter()
+        {
+            /// StandardBloomFilter(3)
+            /// add("lint")
+            /// add("code")
+            /// contains("lint") // return true
+            /// contains("world") // return false
+            SystemDesign.StandardBloomFilter filter = new SystemDesign.StandardBloomFilter(3);
+            filter.add("lint");
+            filter.add("code");
+            var ans = filter.contains("lint");
+            ans = filter.contains("world");
+        }
+
+        //lint 486
+        static void Run_MergeKSortedArrays()
+        {
+            List<int[]> arrays = new List<int[]>();
+            arrays.Add(new int[] { 0, 0, 5, 7 });
+            arrays.Add(new int[] { 0, 4, 6 });
+            arrays.Add(new int[] { 0, 8, 9, 10, 11 });
+            
+            SystemDesign.MergeKSortedArrays question = new SystemDesign.MergeKSortedArrays();
+            var ans = question.MergekSortedArraysSolver(arrays);
+        }
+
+    static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //486
+            Run_MergeKSortedArrays();
+
+            //556
+            Run_StandardBloomFilter();
+
             //509
             Run_MiniYelp();
             //525
