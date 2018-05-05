@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CodeExercise
@@ -1592,9 +1593,118 @@ namespace CodeExercise
             var ans = question.MergekSortedArraysSolver(arrays);
         }
 
-    static void Main(string[] args)
+        //lint 215
+        static void Run_RateLimiter()
+        {
+            SystemDesign.RateLimiter rtLimiter = new SystemDesign.RateLimiter();
+
+            var ans = rtLimiter.isRatelimited(1, "login", "3/m", true); //, return false.
+            ans = rtLimiter.isRatelimited(11, "login", "3/m", true); //, return false.
+            ans = rtLimiter.isRatelimited(21, "login", "3/m", true); //, return false.
+            ans = rtLimiter.isRatelimited(30, "login", "3/m", true); //, return true.
+            ans = rtLimiter.isRatelimited(65, "login", "3/m", true); //, return false.
+            ans = rtLimiter.isRatelimited(300, "login", "3/m", true);// , return false.
+        }
+
+        //lint 505
+        static void Run_WebLogger()
+        {
+            SystemDesign.WebLogger logger = new SystemDesign.WebLogger();
+            logger.hit(1);
+            logger.hit(2);
+            var ans = logger.get_hit_count_in_last_5_minutes(3); // >> 2
+            logger.hit(300);
+            ans = logger.get_hit_count_in_last_5_minutes(300); // >> 3
+            ans = logger.get_hit_count_in_last_5_minutes(301); // >> 2
+        }
+
+        //lint 708
+        static void Run_ElevatorSystem()
+        {
+            OOD.ElevatorSystem esystem = new OOD.ElevatorSystem();
+            var elevator1 = esystem.HandleRequest(5, OOD.Direction.Down);
+            var elevator2 = esystem.HandleRequest(4, OOD.Direction.UP);
+            var elevator3 = esystem.HandleRequest(3, OOD.Direction.UP);  // e2 == e3
+
+            // e1 reached level5 and prepare to go down
+            elevator1.OpenGate();      // e1 at level5 now
+            elevator1.HandleInternalRequest(2);   // set new direciton and to level2
+            elevator1.CloseGate();
+
+            var elevator4 = esystem.HandleRequest(6, OOD.Direction.Down);   // null, will be pick up later, because e1 curr down is at level 5 now
+
+            esystem.HandleRequest(3, OOD.Direction.Down);    // e1 at level5 down can pick up this request
+            elevator1.OpenGate();   // e1 stop at level3 first
+            elevator1.CloseGate();   // e1 set direction to down
+            elevator1.OpenGate();  // e1 stop at level2 
+            elevator1.CloseGate();  // el is idle
+
+            // make sure worker can pick up
+            Thread.Sleep(2000);
+
+            elevator1.OpenGate();   // queue worker pickup level6 down request
+
+
+            elevator2.OpenGate();  // e2 at level 3
+            elevator2.HandleInternalRequest(5);
+            elevator2.CloseGate();
+            elevator2.OpenGate();  // e2 at level 4
+            elevator2.CloseGate();
+            elevator2.OpenGate();  // e2 at level 5
+        }
+
+        //146
+        static void Run_LRUCache()
+        {
+            OOD.LRUCache cache = new OOD.LRUCache(2 /* capacity */ );
+
+            cache.Put(1, 1);
+            cache.Put(2, 2);
+            var ans = cache.Get(1);       // returns 1
+            cache.Put(3, 3);    // evicts key 2
+            ans = cache.Get(2);       // returns -1 (not found)
+            cache.Put(4, 4);    // evicts key 1
+            ans = cache.Get(1);       // returns -1 (not found)
+            ans = cache.Get(3);       // returns 3
+            ans = cache.Get(4);       // returns 4
+        }
+
+        //34
+        static void Run_SearchRange()
+        {
+        ///Input: nums = [5, 7, 7, 8, 8, 10], target = 8
+        /// Output: [3,4]
+        ///         Example 2:
+        /// 
+        /// Input: nums = [5,7,7,8,8,10], target = 6
+        /// Output: [-1,-1]
+            int[] nums = { 5, 7, 7, 8, 8, 10 };
+            BinarySearch.SearchforaRange question = new BinarySearch.SearchforaRange();
+            var ans = question.SearchRange(nums, 8);   // [3,4]
+
+            ans = question.SearchRange(nums, 5);    // [0,0]
+
+
+            ans = question.SearchRange(nums, 6);  // [-1,-1]
+
+            ans = question.SearchRange(new int[1] { 6}, 6);  // [-1,-1]
+        }
+
+        static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //34
+            Run_SearchRange();
+
+            //146
+            Run_LRUCache();
+
+            //708
+            Run_ElevatorSystem();
+            //505
+            Run_WebLogger();
+            //215
+            Run_RateLimiter();
             //486
             Run_MergeKSortedArrays();
 

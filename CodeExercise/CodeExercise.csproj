@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="BinarySearch\FindBadVersion.cs" />
     <Compile Include="BinarySearch\FindPeakElement.cs" />
+    <Compile Include="BinarySearch\SearchforaRange.cs" />
     <Compile Include="BinarySearch\SearchInsertPosition.cs" />
     <Compile Include="BinarySearch\WoodCut.cs" />
     <Compile Include="BitManipulation\DivideTwoIntegers.cs" />
@@ -132,6 +133,8 @@
     <Compile Include="Number\LargestNumberAtLeastTwiceOthers.cs" />
     <Compile Include="Number\MergeSortedArray.cs" />
     <Compile Include="Number\ReverseInteger.cs" />
+    <Compile Include="OOD\ElevatorSystem.cs" />
+    <Compile Include="OOD\LRUCache.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DP\SubSets.cs" />
@@ -148,9 +151,11 @@
     <Compile Include="SystemDesign\MiniCassandra.cs" />
     <Compile Include="SystemDesign\MiniUber.cs" />
     <Compile Include="SystemDesign\MiniYelp.cs" />
+    <Compile Include="SystemDesign\RateLimiter.cs" />
     <Compile Include="SystemDesign\StandardBloomFilter.cs" />
     <Compile Include="SystemDesign\TinyUrl.cs" />
     <Compile Include="SystemDesign\Typehead.cs" />
+    <Compile Include="SystemDesign\WebLogger.cs" />
     <Compile Include="Tree\DiameterOfBT.cs" />
     <Compile Include="Tree\LowestCommonAncestor.cs" />
     <Compile Include="Tree\TreeNode.cs" />
