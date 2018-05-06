@@ -117,6 +117,7 @@
     <Compile Include="DP\RegularExpression.cs" />
     <Compile Include="DP\ScrambleString.cs" />
     <Compile Include="DP\StoneGame.cs" />
+    <Compile Include="DP\SubmatrixSum.cs" />
     <Compile Include="DP\SubStringRelated.cs" />
     <Compile Include="DP\TargetSum.cs" />
     <Compile Include="DP\UniquePath.cs" />

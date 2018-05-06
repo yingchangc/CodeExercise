@@ -1690,9 +1690,36 @@ namespace CodeExercise
             ans = question.SearchRange(new int[1] { 6}, 6);  // [-1,-1]
         }
 
-        static void Main(string[] args)
+        // lint 405
+        static void Run_SubMatrixSum()
+        {
+            int[,] matrix1 = new int[,] {{ 1, 5, 7 },
+                                        { 3 ,7 ,-8},
+                                        { 4 ,-8 ,9}
+                                       };
+
+            DP.SubmatrixSum question = new DP.SubmatrixSum();
+            var ans1 = question.SubmatrixSumSolver(matrix1);
+
+            int[,] matrix2 = new int[,] { { 0 }
+                                       };
+
+            
+            var ans2 = question.SubmatrixSumSolver(matrix2);
+
+            //  [1 ,5 ,7],
+            //  [3 ,7 ,-8],
+            //  [4 ,-8 ,9],   ==>   {{1,1}, {2,2}}
+            // ]
+
+
+        }
+
+    static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //lint 405
+            Run_SubMatrixSum();
             //34
             Run_SearchRange();
 
