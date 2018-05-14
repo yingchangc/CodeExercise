@@ -314,5 +314,56 @@ namespace CodeExercise.DP
                 currentRes.RemoveAt(currentRes.Count-1);   // pop the current add one
             }
         }
+
+        //http://www.cnblogs.com/grandyang/p/4840713.html
+        //Given an infinite number of quarters (25 cents), dimes (10 cents), nickels (5 cents) and pennies (1 cent), 
+        //write code to calculate the number of ways of representing n cents.
+        public int NumberCoinChange(int amount, int[] denoms)
+        {
+            if (amount  == 0)
+            {
+                return 0;
+            }
+
+            Dictionary<Tuple<int,int>, int> lookup = new Dictionary<Tuple<int,int>, int>();
+            int index = 0;
+            int ans = NumCoinChange(amount, denoms, index, lookup);
+            return ans;
+        }
+
+        // use index to make sure don't revisit previous index (ie index-1), so no duplicate case  (25, 25, 5) vs (25, 5, 25)
+        private int NumCoinChange(int amount, int[] denoms, int index, Dictionary<Tuple<int,int>,int> lookup)
+        {
+            if (amount == 0)
+            {
+                return 1;
+            }
+
+            var amount_index = Tuple.Create(amount, index);
+            if (lookup.ContainsKey(amount_index))
+            {
+                return lookup[amount_index];
+            }
+
+            if (index >= denoms.Length)
+            {
+                return 0;
+            }
+
+            int ways = 0;
+            int maxChangebyCoinI = amount / denoms[index];
+
+            for (int i = 0; i <= maxChangebyCoinI; i++)
+            {
+                int newAmount = amount - i * denoms[index];
+                int leftWays = NumCoinChange(newAmount, denoms, index + 1, lookup);  // move on to next coint type, dont revisit
+                ways += leftWays;
+            }
+
+            
+            lookup[amount_index] = ways;
+            return ways;
+        }
+
     }
 }

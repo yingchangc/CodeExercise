@@ -482,6 +482,12 @@ namespace CodeExercise
             DP.CoinChange question = new DP.CoinChange();
             int ans = question.CoinChangeSolverSlow(nums, 11);
 
+
+            // 
+            int[] denoms = { 25, 10, 5, 1 };
+            int ansDenoms = question.NumberCoinChange(25, denoms);
+
+
             // #coin change 1
             ans = question.MinCoinChangeSolver(nums, 11);
             //int[] nums2 = { 3, 7, 405, 436};
@@ -499,6 +505,9 @@ namespace CodeExercise
 
             // Coin change 2
             ans = question.CoinChange2(5, nums);
+
+
+            
         }
 
         //361
@@ -1715,9 +1724,78 @@ namespace CodeExercise
 
         }
 
-    static void Main(string[] args)
+        //https://www.dotnetperls.com/fisher-yates-shuffle
+        static void Run_ShuffleCard()
+        {
+            Number.ShuffleCard question = new Number.ShuffleCard();
+            int[] array = { 1, 2, 3, 4, 5 };
+
+            int count = 10;
+
+            while (count > 0)
+            {
+                question.Shuffle(array);
+
+                for (int i = 0; i < array.Length; i++)
+                {
+                    Console.Write(array[i] + " ");
+                }
+
+                Console.WriteLine();
+                count--;
+            }    
+        }
+
+        static  void Run_ArrayAverage()
+        {
+            Number.ArrayAverage question = new Number.ArrayAverage();
+
+            long[] arr = { long.MinValue, long.MinValue+1, long.MinValue+2 };
+
+
+            var average = question.ComputeAverage(arr);
+
+            double verifyAns = 0;
+
+            foreach(var v in arr)
+            {
+                verifyAns += v;
+            }
+            verifyAns /= arr.Length;
+
+        }
+
+        // lint 402
+        static void Run_ContinuousSubarraySum()
+        {
+            DataStructure.ContinuousSubArraySum question = new DataStructure.ContinuousSubArraySum();
+            int[] arr = { -3, 1, 3, -3, 4 };
+            var ans = question.ContinuousSubarraySumSolver(arr);
+        }
+
+        //lint 502
+        static void Run_strstr()
+        {
+            DataStructure.StrStr question = new DataStructure.StrStr();
+            var ans = question.strStr2("abcdef", "bcd");
+        }
+
+        static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+
+            //502
+            Run_strstr();
+            //402
+            Run_ContinuousSubarraySum();
+
+            Run_ArrayAverage();
+
+            //322
+            Run_CointChange();
+
+
+            Run_ShuffleCard();
             //lint 405
             Run_SubMatrixSum();
             //34
@@ -1940,8 +2018,7 @@ namespace CodeExercise
 
             //152
             Run_MaxProductArray();
-            //322
-            Run_CointChange();
+            
             
             //340
             Run_LongestSubstringAtMostKDistinctChar();

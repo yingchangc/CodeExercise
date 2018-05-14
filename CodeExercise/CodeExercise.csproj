@@ -51,6 +51,7 @@
     <Compile Include="BitManipulation\DivideTwoIntegers.cs" />
     <Compile Include="DataStructure\AirplaneInSky.cs" />
     <Compile Include="DataStructure\ConnectingGraph.cs" />
+    <Compile Include="DataStructure\ContinuousSubArraySum.cs" />
     <Compile Include="DataStructure\DataStreamMedian.cs" />
     <Compile Include="DataStructure\ExpandExpression.cs" />
     <Compile Include="DataStructure\FindDuplicateNumber.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="DataStructure\RotateImage.cs" />
     <Compile Include="DataStructure\Skyline.cs" />
     <Compile Include="DataStructure\SlidingWindow.cs" />
+    <Compile Include="DataStructure\StrStr.cs" />
     <Compile Include="DataStructure\SubarraySum.cs" />
     <Compile Include="DataStructure\TrapRainWater.cs" />
     <Compile Include="DataStructure\Trie.cs" />
@@ -130,10 +132,12 @@
     <Compile Include="matrixQuestion\WordSearch.cs" />
     <Compile Include="MedianOfTwoSortedArray.cs" />
     <Compile Include="DP\PermutationIntArray.cs" />
+    <Compile Include="Number\ArrayAverage.cs" />
     <Compile Include="Number\FindPivotIndex.cs" />
     <Compile Include="Number\LargestNumberAtLeastTwiceOthers.cs" />
     <Compile Include="Number\MergeSortedArray.cs" />
     <Compile Include="Number\ReverseInteger.cs" />
+    <Compile Include="Number\ShuffleCard.cs" />
     <Compile Include="OOD\ElevatorSystem.cs" />
     <Compile Include="OOD\LRUCache.cs" />
     <Compile Include="Program.cs" />
