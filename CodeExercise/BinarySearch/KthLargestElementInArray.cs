@@ -26,6 +26,22 @@ namespace CodeExercise.BinarySearch
         /// Output: 4
         /// Note: 
         /// You may assume k is always valid, 1 ≤ k ≤ array's length.
+        /// 
+        /// sol
+        /// 
+        /// take first elemt as pivotV, left ..... right
+        /// 
+        //  [partition function]
+        // if (left < pivotV < right)
+        //   swap (arr, left++, right--)
+        // else if (left >= pivotV)
+        //     left++
+        // else 
+        //     right--;
+
+        //    swap(Array, pivotIdx, right)
+
+        //  return right   the pivot new final loc.
         /// </summary>
         /// <param name="nums"></param>
         /// <param name="k"></param>
@@ -99,6 +115,81 @@ namespace CodeExercise.BinarySearch
             nums[left] = nums[right];
             nums[right] = temp;
         }
+
+/*
+ // kth smallest
+ // Note:  the only diff is the partiton funcition
+
+
+ public int kthSmallest(int k, int[] nums) {
+        int left = 0;
+            int right = nums.length - 1;
+
+            while (left <= right)  // yic <  because   we start swap from left+1
+            {
+                int pivotIndex = partition(nums, left, right);
+                if (pivotIndex == (k-1))   // kth  means index = k-1
+                {
+                    return nums[pivotIndex];
+                }
+                else if (pivotIndex > (k-1))
+                {
+                    right = pivotIndex-1;  // yic  pivotIndex-1  since pivotIndex is not right
+                }
+                else
+                {
+                    left = pivotIndex+1; // yic  pivotIndex+1  since pivotIndex is not right
+                }
+            }
+
+            // 1 element case has been handled
+            // should not hit here
+            return nums[left];
+    }
+    
+    private int partition(int[] nums, int left, int right)
+        {
+            if (left == right)
+            {
+                return left;
+            }
+            int pivot = nums[left];
+            int pivotIndex = left;
+            left++;
+
+            while(left <= right)
+            {
+                if (nums[left] > pivot && pivot > nums[right])      // reverse the kth lartest 
+                {
+                    swap(nums, left, right);
+                    left++;
+                    right--;
+                }
+                else if (nums[left] <= pivot)
+                {
+                    left++;
+                }
+                else
+                {
+                    right--;
+                }
+            }
+
+            // eventually, right,left  cross                                   R L
+            swap(nums, pivotIndex, right);     // swap with right  pivot [3] 2 1 4 5
+
+            return right;
+        }
+
+        private void swap(int[] nums, int left, int right)
+        {
+            int temp = nums[left];
+            nums[left] = nums[right];
+            nums[right] = temp;
+        }
+    
+     
+ */
 
 
         /// <summary>
