@@ -58,6 +58,7 @@ namespace CodeExercise.DataStructure
             }
 
             return len;
+
         }
     }
 }

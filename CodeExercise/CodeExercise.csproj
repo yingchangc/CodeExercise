@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="BinarySearch\FindBadVersion.cs" />
     <Compile Include="BinarySearch\FindPeakElement.cs" />
+    <Compile Include="BinarySearch\KthLargestElementInArray.cs" />
     <Compile Include="BinarySearch\SearchforaRange.cs" />
     <Compile Include="BinarySearch\SearchInsertPosition.cs" />
     <Compile Include="BinarySearch\WoodCut.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="DataStructure\FindDuplicateNumber.cs" />
     <Compile Include="DataStructure\FirstUniqueCharacterinaString.cs" />
     <Compile Include="DataStructure\FlattenBinaryTreeToLL.cs" />
+    <Compile Include="DataStructure\HashFunction.cs" />
     <Compile Include="DataStructure\KthSmallestElementInMatrix.cs" />
     <Compile Include="DataStructure\LargestRectangleInHistogram.cs" />
     <Compile Include="DataStructure\LinkedListCycleII.cs" />
@@ -78,6 +80,7 @@
     <Compile Include="DataStructure\SubarraySum.cs" />
     <Compile Include="DataStructure\TrapRainWater.cs" />
     <Compile Include="DataStructure\Trie.cs" />
+    <Compile Include="DataStructure\ValidPalindrome.cs" />
     <Compile Include="DataStructure\WordDictionarySearch.cs" />
     <Compile Include="DP\AnagramSubstring.cs" />
     <Compile Include="DP\AssignCookies.cs" />

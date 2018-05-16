@@ -172,7 +172,7 @@ namespace CodeExercise.DataStructure
                 }
                 else
                 {
-                    rank +=( j + 1);  // i becasue consider all the to top +1 to include itself
+                    rank +=( j + 1);  // i becasue consider all the to top +1 to include itself (check vertical)
                     i++;
                 }
             }
@@ -182,7 +182,6 @@ namespace CodeExercise.DataStructure
 
         public int KthSmallestPQ(int[,] matrix, int k)
         {
-            int h = 2 + (3-2) / 2;
             SortedDictionary<int, List<Location>> pq = new SortedDictionary<int, List<Location>>();   // key num, count,  since each key has to be unique
             int m = matrix.GetLength(0);
             int n = matrix.GetLength(1);
@@ -194,7 +193,7 @@ namespace CodeExercise.DataStructure
 
             int kth = matrix[0, 0];
 
-            // dx helper
+            // dx helper. to right and down
             List<Location> deltas = new List<Location>() { new Location(1, 0), new Location(0, 1) }; 
 
             for (int i = 0; i < k; i++)

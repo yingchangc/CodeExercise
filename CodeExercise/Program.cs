@@ -1773,19 +1773,62 @@ namespace CodeExercise
             var ans = question.ContinuousSubarraySumSolver(arr);
         }
 
-        //lint 502
+        //lint 502, leetcode 28
         static void Run_strstr()
         {
             DataStructure.StrStr question = new DataStructure.StrStr();
             var ans = question.strStr2("abcdef", "bcd");
+
+            //28
+            ans = question.StrStr1("abcdef", "bcd");
+        }
+
+        //125
+        static void Run_ValidPalindrome()
+        {
+            string test1 = "A man, a plan, a canal: Panama";
+            string test2 = "race a car";
+            DataStructure.ValidPalindrome question = new DataStructure.ValidPalindrome();
+            var ans = question.IsPalindrome(test1);
+            ans = question.IsPalindrome(test2);
+
+            ans = question.ValidPalindrome2("abca");
+        }
+
+        //lint 128
+        static void Run_Hashfunction()
+        {
+            DataStructure.HashFunction question = new DataStructure.HashFunction();
+
+            var ans = question.HashCode("abcd".ToCharArray(), 100);
+        }
+
+        //215
+        static void Run_KthLargestInArray()
+        {
+            int[] arr = { 3, 2, 3, 1, 2, 4, 5, 5, 6 };
+            BinarySearch.KthLargestElementInArray question = new BinarySearch.KthLargestElementInArray();
+            var ans = question.FindKthLargest(arr, 4);
+
+            int[] arr2 = { 3, 2, 3, 1, 2, 4, 5, 5, 6 };
+            question.QuickSort(arr2);
+
         }
 
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //215
+            Run_KthLargestInArray();
+
+            //128
+            Run_Hashfunction();
 
             //502
             Run_strstr();
+            //125
+            Run_ValidPalindrome();
+            
             //402
             Run_ContinuousSubarraySum();
 

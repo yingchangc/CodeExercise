@@ -53,6 +53,11 @@ namespace CodeExercise.DataStructure
                 // (a*31*31 + b*31 + c)  % 5
                 sourceSubStrHash = (sourceSubStrHash * 31 + source[i]) % HashSlots;
 
+                // yic : don't forget the first match
+                if (i==(target.Length-1) && sourceSubStrHash == targetHash)
+                {
+                    return i - target.Length + 1;
+                }
                 // abc  + d 
                 if (i >= target.Length)
                 {
@@ -93,5 +98,59 @@ namespace CodeExercise.DataStructure
             return hash;
         }
 
+
+        /// <summary>
+        /// 28. Implement strStr()
+        /// https://leetcode.com/problems/implement-strstr/description/
+        /// </summary>
+        /// <param name="haystack"></param>
+        /// <param name="needle"></param>
+        /// <returns></returns>
+        public int StrStr1(string haystack, string needle)
+        {
+            if (string.IsNullOrEmpty(needle))
+            {
+                return 0;
+            }
+            else if (string.IsNullOrEmpty(haystack))
+            {
+                return -1;
+            }
+
+
+            int lenSource = haystack.Length;
+            int lenTarget = needle.Length;
+
+            if (lenSource < lenTarget)
+            {
+                return -1;
+            }
+
+            string source = haystack.ToLower();
+            string target = needle.ToLower();
+
+            for(int i=0; i <= (lenSource-lenTarget); i++)
+            {
+                if (containsTarget(source, target, i, lenTarget))
+                {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+
+        private bool containsTarget(string source, string target, int startIndex, int len)
+        {
+            for (int i = 0; i < len; i++)
+            {
+                if (source[startIndex + i] != target[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }
