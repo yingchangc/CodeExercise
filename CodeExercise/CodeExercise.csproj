@@ -141,6 +141,8 @@
     <Compile Include="Number\MergeSortedArray.cs" />
     <Compile Include="Number\ReverseInteger.cs" />
     <Compile Include="Number\ShuffleCard.cs" />
+    <Compile Include="Number\TriangleCount .cs" />
+    <Compile Include="Number\TwoSumLETarget.cs" />
     <Compile Include="OOD\ElevatorSystem.cs" />
     <Compile Include="OOD\LRUCache.cs" />
     <Compile Include="Program.cs" />

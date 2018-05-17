@@ -1815,9 +1815,33 @@ namespace CodeExercise
 
         }
 
+        // lint 382
+        static void Run_TriangleCount()
+        {
+            Number.TriangleCount question = new Number.TriangleCount();
+            int[] arr = { 3, 6, 4, 8 };
+            var ans = question.TriangleCountSolver(arr);
+        }
+
+        //lint 609
+        static void Run_TwoSumEqLessTarget()
+        {
+            Number.TwoSumLETarget question = new Number.TwoSumLETarget();
+            int[] arr = { 2, 7, 11, 15};
+            var ans = question.TwoSum5(arr, 24);
+        }
+
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //lint 609
+            Run_TwoSumEqLessTarget();
+            // lint 382
+            Run_TriangleCount();
+
+            // 76
+            Run_Minimum_Window_Substring();
+
             //215
             Run_KthLargestInArray();
 
@@ -2117,8 +2141,7 @@ namespace CodeExercise
 
             
 
-            // 76
-            Run_Minimum_Window_Substring();
+            
 
             //159   Not run in leetcode
             Run_lengthOfLongestSubstringTwoDistinct();

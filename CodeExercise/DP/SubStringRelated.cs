@@ -89,6 +89,72 @@ namespace CodeExercise.DP
         /// <returns></returns>
         public string MinWindow(string s, string t)
         {
+            int slen = s.Length;
+            int tlen = t.Length;
+
+            int ansLen = int.MaxValue;
+            string ans = string.Empty;
+
+            // build lookup table
+            Dictionary<char, int> lookup = new Dictionary<char, int>();
+            foreach(char c in t)
+            {
+                if (!lookup.ContainsKey(c))
+                {
+                    lookup.Add(c, 0);
+                }
+                lookup[c]++;
+            }
+
+            // two pointer pattern
+            int score = tlen;
+            int j = 0;  // j always move forward
+
+            for (int i = 0; i < slen; i++)
+            {
+                while(j < slen && score > 0)
+                {
+                    if (lookup.ContainsKey(s[j]))
+                    {
+                        if (lookup[s[j]] >0)    // yic 
+                        {
+                            score--;
+                        }
+
+                        lookup[s[j]]--; 
+                    }
+
+                    j++;
+                }
+
+                if (score == 0)
+                {
+                    int tempLen = (j-1) - i + 1;        // yic  Note:  j-1 because j++ before out of while loop
+                    if (ansLen > tempLen)
+                    {
+                        ans = s.Substring(i, tempLen);   // startidx, len
+                        ansLen = tempLen;           // yic
+                    }   
+                }
+
+                // i is about to move
+                if (lookup.ContainsKey(s[i]))
+                {
+                    lookup[s[i]]++;
+
+                    if (lookup[s[i]] > 0)    // yic 
+                    {
+                        score++;
+                    }
+                }
+            }
+
+            return ans;
+
+        }
+
+        public string MinWindowOld(string s, string t)
+        {
             int start = 0;
             int end = 0;
             int count = t.Length;
