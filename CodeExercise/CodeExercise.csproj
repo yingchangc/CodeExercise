@@ -78,10 +78,12 @@
     <Compile Include="DataStructure\SlidingWindow.cs" />
     <Compile Include="DataStructure\StrStr.cs" />
     <Compile Include="DataStructure\SubarraySum.cs" />
+    <Compile Include="DataStructure\SurroundedRegions.cs" />
     <Compile Include="DataStructure\TrapRainWater.cs" />
     <Compile Include="DataStructure\Trie.cs" />
     <Compile Include="DataStructure\ValidPalindrome.cs" />
     <Compile Include="DataStructure\WordDictionarySearch.cs" />
+    <Compile Include="DataStructure\WordSquare.cs" />
     <Compile Include="DP\AnagramSubstring.cs" />
     <Compile Include="DP\AssignCookies.cs" />
     <Compile Include="DP\Backpack.cs" />
