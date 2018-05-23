@@ -46,7 +46,10 @@
     <Compile Include="BinarySearch\FindBadVersion.cs" />
     <Compile Include="BinarySearch\FindPeakElement.cs" />
     <Compile Include="BinarySearch\KthLargestElementInArray.cs" />
+    <Compile Include="BinarySearch\LastPositionofTarget.cs" />
+    <Compile Include="BinarySearch\MaximumNumberinMountainSequence.cs" />
     <Compile Include="BinarySearch\SearchforaRange.cs" />
+    <Compile Include="BinarySearch\SearchInRotatedSortedArray.cs" />
     <Compile Include="BinarySearch\SearchInsertPosition.cs" />
     <Compile Include="BinarySearch\WoodCut.cs" />
     <Compile Include="BitManipulation\DivideTwoIntegers.cs" />
@@ -141,6 +144,7 @@
     <Compile Include="Number\FindPivotIndex.cs" />
     <Compile Include="Number\LargestNumberAtLeastTwiceOthers.cs" />
     <Compile Include="Number\MergeSortedArray.cs" />
+    <Compile Include="Number\PrimeFactorization.cs" />
     <Compile Include="Number\ReverseInteger.cs" />
     <Compile Include="Number\ShuffleCard.cs" />
     <Compile Include="Number\TriangleCount .cs" />

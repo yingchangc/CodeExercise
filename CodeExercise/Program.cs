@@ -1876,9 +1876,39 @@ namespace CodeExercise
 
             question.Solve(input2);
         }
+
+        //lint 235
+        static void Run_PrimeFactorization()
+        {
+            Number.PrimeFactorization question = new Number.PrimeFactorization();
+            var ans = question.primeFactorizationSolver(660);
+        }
+
+        //485
+        static void Run_LastPositionOfTarget()
+        {
+            int[] arr = { 1, 2, 2, 4, 5, 5 };
+            BinarySearch.LastPositionofTarget question = new BinarySearch.LastPositionofTarget();
+            var ans = question.LastPositionSolver(arr, 2);
+        }
+
+        static void Run_SearchInRotatedSortedArray()
+        {
+            int[] arr = { 4, 5, 6, 7, 0, 1, 2 };
+            BinarySearch.SearchInRotatedSortedArray question = new BinarySearch.SearchInRotatedSortedArray();
+            var ans = question.Search(arr, 0);
+        }
+
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            Run_SearchInRotatedSortedArray();
+            // 485
+            Run_LastPositionOfTarget();
+
+            //235
+            Run_PrimeFactorization();
+
             //130
             Run_SurroundingRegions();
 
