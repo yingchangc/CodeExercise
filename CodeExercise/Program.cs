@@ -1910,10 +1910,29 @@ namespace CodeExercise
             
         }
 
+        //50 
+        static void Run_Pow()
+        {
+            BinarySearch.PowXN power = new BinarySearch.PowXN();
+            var ans = power.MyPow(2.000, 10);
+            ans = power.MyPow(1.00000, -2147483648);
+        }
+
+        //140
+        static void Run_FastPower()
+        {
+            Number.FastPower question = new Number.FastPower();
+            var ans = question.fastPower(2, 3, 31);
+        }
 
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //140
+            Run_FastPower();
+            //50
+            Run_Pow();
+
             //460
             Run_FindKClosestElements();
 

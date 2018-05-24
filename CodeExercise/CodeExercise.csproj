@@ -49,6 +49,7 @@
     <Compile Include="BinarySearch\KthLargestElementInArray.cs" />
     <Compile Include="BinarySearch\LastPositionofTarget.cs" />
     <Compile Include="BinarySearch\MaximumNumberinMountainSequence.cs" />
+    <Compile Include="BinarySearch\PowXN.cs" />
     <Compile Include="BinarySearch\SearchforaRange.cs" />
     <Compile Include="BinarySearch\SearchInRotatedSortedArray.cs" />
     <Compile Include="BinarySearch\SearchInsertPosition.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="MedianOfTwoSortedArray.cs" />
     <Compile Include="DP\PermutationIntArray.cs" />
     <Compile Include="Number\ArrayAverage.cs" />
+    <Compile Include="Number\FastPower.cs" />
     <Compile Include="Number\FindPivotIndex.cs" />
     <Compile Include="Number\LargestNumberAtLeastTwiceOthers.cs" />
     <Compile Include="Number\MergeSortedArray.cs" />
