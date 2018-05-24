@@ -1899,9 +1899,25 @@ namespace CodeExercise
             var ans = question.Search(arr, 0);
         }
 
+        //lint 460
+        static  void Run_FindKClosestElements()
+        {
+            //Given A = [1, 2, 3], target = 2 and k = 3, return [2, 1, 3].
+            //Given A = [1, 4, 6, 8], target = 3 and k = 3, return [4, 1, 6].
+            int[] arr = { 1, 4, 6, 8 };
+            BinarySearch.FindKClosestElements question = new BinarySearch.FindKClosestElements();
+            question.FindClosestElements(arr, 3, 3);
+            
+        }
+
+
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //460
+            Run_FindKClosestElements();
+
+            // 33
             Run_SearchInRotatedSortedArray();
             // 485
             Run_LastPositionOfTarget();

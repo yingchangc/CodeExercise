@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinarySearch\FindBadVersion.cs" />
+    <Compile Include="BinarySearch\FindKClosestElements.cs" />
     <Compile Include="BinarySearch\FindPeakElement.cs" />
     <Compile Include="BinarySearch\KthLargestElementInArray.cs" />
     <Compile Include="BinarySearch\LastPositionofTarget.cs" />
