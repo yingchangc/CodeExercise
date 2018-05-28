@@ -19,20 +19,27 @@ namespace CodeExercise.Number
         /// <param name="n"></param>
         /// <returns></returns>
 
-        public int fastPower(int a, int b, int n)
+        public int fastPowerSolver(int a, int b, int n)
         {
             if (n == 0)
             {
                 return 1 % b;
             }
 
-            int val = a;
-            for(int i = 2; i <=n; i++)
+            if (n == 1)
             {
-                val = (val % b) * a;
+                return a % b;
             }
 
-            return val % b;
+            long product = fastPowerSolver(a, b, n / 2);
+            product = (product * product) %b;
+            if (n%2 == 0)
+            {
+                return (int)product;
+            }
+            return (int)((product * a) %b);
+
+            
         }
     }
 }

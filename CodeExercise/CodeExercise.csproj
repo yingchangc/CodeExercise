@@ -139,6 +139,7 @@
     <Compile Include="EditDistance.cs" />
     <Compile Include="DataStructure\GraphValidTree.cs" />
     <Compile Include="KMPSubstringSearch.cs" />
+    <Compile Include="ListNode.cs" />
     <Compile Include="matrixQuestion\WordSearch.cs" />
     <Compile Include="MedianOfTwoSortedArray.cs" />
     <Compile Include="DP\PermutationIntArray.cs" />
@@ -178,6 +179,7 @@
     <Compile Include="Tree\DiameterOfBT.cs" />
     <Compile Include="Tree\LowestCommonAncestor.cs" />
     <Compile Include="Tree\TreeNode.cs" />
+    <Compile Include="TwoPointers\MiddleofLinkedList.cs" />
     <Compile Include="Window\MinimumSizeSubarraySum.cs" />
   </ItemGroup>
   <ItemGroup>
