@@ -22,6 +22,17 @@ namespace CodeExercise.Number
         //  2 + 15 < 24
         //  7 + 11 < 24
         //  7 + 15 < 25
+
+        /// sol:
+        /// 
+        ///  use 2 pointers
+        /// 
+        ///      [i]    j
+        ///      
+        //   start from   i = j-1, and find the first index that (nums[j]+nums[i]) <=target
+        ///  at lease 0~i should also be able to count as valid (because is even lower after sort)
+        /// 
+        /// 
         /// </summary>
         /// <param name="nums"></param>
         /// <param name="target"></param>

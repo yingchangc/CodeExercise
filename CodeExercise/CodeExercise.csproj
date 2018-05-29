@@ -180,6 +180,8 @@
     <Compile Include="Tree\LowestCommonAncestor.cs" />
     <Compile Include="Tree\TreeNode.cs" />
     <Compile Include="TwoPointers\MiddleofLinkedList.cs" />
+    <Compile Include="TwoPointers\ThreeSum.cs" />
+    <Compile Include="TwoPointers\TwoSum.cs" />
     <Compile Include="Window\MinimumSizeSubarraySum.cs" />
   </ItemGroup>
   <ItemGroup>

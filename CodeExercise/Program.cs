@@ -1922,12 +1922,23 @@ namespace CodeExercise
         static void Run_FastPower()
         {
             Number.FastPower question = new Number.FastPower();
-            var ans = question.fastPower(2, 3, 31);
+            var ans = question.fastPowerSolver(2, 3, 31);
+        }
+
+        // 57
+        static void Run_ThreeSum()
+        {
+            TwoPointers.ThreeSum question = new TwoPointers.ThreeSum();
+            int[] numbers = { -2, -3, -4, -5, -100, 99, 1, 4, 4, 4, 5, 1, 0, -1, 2, 3, 4, 5 };
+            var ans = question.ThreeSumsolver(numbers);
         }
 
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //57
+            Run_ThreeSum();
+
             //140
             Run_FastPower();
             //50
