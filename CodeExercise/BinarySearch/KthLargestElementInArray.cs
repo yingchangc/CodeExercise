@@ -48,6 +48,53 @@ namespace CodeExercise.BinarySearch
         /// <returns></returns>
         public int FindKthLargest(int[] nums, int k)
         {
+            return SelectionSort(nums, k-1, 0, nums.Length-1);
+        }
+
+        private int SelectionSort(int[] nums, int k, int start, int end)
+        {
+            if (start >= end)
+            {
+                return nums[start];
+            }
+            int left = start;
+            int right = end;
+
+            int pivot = nums[start + (end - start) / 2];
+
+            while(left <= right)
+            {
+                while(left <= right && nums[left] > pivot)
+                {
+                    left++;
+                }
+                while (left <= right && nums[right] < pivot)
+                {
+                    right--;
+                }
+
+                if (left <= right)
+                {
+                    swap(nums, left++, right--);
+                }
+            }
+
+            if (start <= k && k <= right)
+            {
+                return SelectionSort(nums, k, start, right);
+            }
+            else if (left <= k && k<=end)
+            {
+                return SelectionSort(nums, k, left, end);
+            }
+            else
+            {
+                return nums[(left + right) / 2];
+            }
+        }
+
+        public int FindKthLargestOld(int[] nums, int k)
+        {
             int left = 0;
             int right = nums.Length - 1;
 

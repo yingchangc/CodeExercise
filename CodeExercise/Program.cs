@@ -1806,9 +1806,9 @@ namespace CodeExercise
         //215
         static void Run_KthLargestInArray()
         {
-            int[] arr = { 3, 2, 3, 1, 2, 4, 5, 5, 6 };
+            int[] arr = { 3,2,1,5,6,4 };
             BinarySearch.KthLargestElementInArray question = new BinarySearch.KthLargestElementInArray();
-            var ans = question.FindKthLargest(arr, 4);
+            var ans = question.FindKthLargest(arr, 2);
 
             int[] arr2 = { 3, 2, 3, 1, 2, 4, 5, 5, 6 };
             question.QuickSort(arr2);
@@ -1933,9 +1933,34 @@ namespace CodeExercise
             var ans = question.ThreeSumsolver(numbers);
         }
 
+        //26
+        static void Run_RemoveDuplicate()
+        {
+            TwoPointers.RemoveDuplicatesFromSortedArray question = new TwoPointers.RemoveDuplicatesFromSortedArray();
+            int[] arr = { 0, 0, 1, 1, 1, 2, 2, 3, 3, 4, 4 };
+
+            var ans = question.RemoveDuplicates(arr);
+             
+        }
+
+        //lint 464
+        static void Run_SortIntegers()
+        {
+            TwoPointers.QuickSort question = new TwoPointers.QuickSort();
+            int[] arr = { 3, 2, 1, 4, 5 };
+
+            question.sortIntegers2(arr);
+        }
+
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //215
+            Run_KthLargestInArray();
+            //464
+            Run_SortIntegers();
+            //26
+            Run_RemoveDuplicate();
             //57
             Run_ThreeSum();
 
@@ -1969,8 +1994,7 @@ namespace CodeExercise
             // 76
             Run_Minimum_Window_Substring();
 
-            //215
-            Run_KthLargestInArray();
+            
 
             //128
             Run_Hashfunction();

@@ -180,6 +180,10 @@
     <Compile Include="Tree\LowestCommonAncestor.cs" />
     <Compile Include="Tree\TreeNode.cs" />
     <Compile Include="TwoPointers\MiddleofLinkedList.cs" />
+    <Compile Include="TwoPointers\MoveZeros.cs" />
+    <Compile Include="TwoPointers\PartitionArray.cs" />
+    <Compile Include="TwoPointers\QuickSort.cs" />
+    <Compile Include="TwoPointers\RemoveDuplicatesFromSortedArray.cs" />
     <Compile Include="TwoPointers\ThreeSum.cs" />
     <Compile Include="TwoPointers\TwoSum.cs" />
     <Compile Include="Window\MinimumSizeSubarraySum.cs" />
