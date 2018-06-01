@@ -8,6 +8,61 @@ namespace CodeExercise.TwoPointers
 {
     class ThreeSum
     {
+        /// <summary>
+        /// 59. 3Sum Closest
+        /// https://www.lintcode.com/problem/3sum-closest/description
+        /// Given an array S of n integers, find three integers in S such that the sum is closest to a given number, target. 
+        /// Return the sum of the three integers.
+        /// For example, given array S = [-1 2 1 -4], and target = 1. The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
+        /// </summary>
+        /// <param name="numbers"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public int ThreeSumClosest(int[] numbers, int target)
+        {
+            if (numbers == null || numbers.Length<3)
+            {
+                return -1;
+            }
+
+            Array.Sort(numbers);
+
+            int ans = numbers[0]+ numbers[1] + numbers[2];
+
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                int left = i + 1;
+                int right = numbers.Length - 1;
+
+                while (left < right)
+                {
+                    int sum = numbers[i]+numbers[left] + numbers[right];
+
+                    // update answer
+                    if( Math.Abs(ans - target) > Math.Abs(sum - target))
+                    {
+                        ans = sum;
+                    }
+
+                    if (sum == target)
+                    {
+                        return target;
+                    }
+                    else if (sum < target)
+                    {
+                        left++;
+                    }
+                    else
+                    {
+                        right--;
+                    }
+
+                }
+            }
+
+            return ans;
+            
+        }
 
         // can be used for HashSet de duplicate
         class TrippleNode

@@ -1925,12 +1925,15 @@ namespace CodeExercise
             var ans = question.fastPowerSolver(2, 3, 31);
         }
 
-        // 57
+        // 57, 59
         static void Run_ThreeSum()
         {
             TwoPointers.ThreeSum question = new TwoPointers.ThreeSum();
             int[] numbers = { -2, -3, -4, -5, -100, 99, 1, 4, 4, 4, 5, 1, 0, -1, 2, 3, 4, 5 };
             var ans = question.ThreeSumsolver(numbers);
+
+            int[] arr = { -1, 2, 1, -4 };
+            question.ThreeSumClosest(arr, 3);
         }
 
         //26
@@ -1952,17 +1955,41 @@ namespace CodeExercise
             question.sortIntegers2(arr);
         }
 
+        //75
+        static void Run_SortColors()
+        {
+            int[] arr = { 1,2,0 };
+            TwoPointers.SortColors question = new TwoPointers.SortColors();
+            question.SortColors1(arr);
+        }
+
+        // 443
+        static void Run_TwoSum()
+        {
+            TwoPointers.TwoSum question = new TwoPointers.TwoSum();
+            int[] arr = { 1, 2, 5, 6, 7, 3, 5, 8, -33, -5, -72, 12, -34, 100, 99 };
+            var ans = question.TwoSumGreater(arr, -64);
+
+            int[] arr2 = { 2, 7, 11, 15 };
+            var ans2 = question.TwoSumLE(arr2, 24);
+        }
+
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //443
+            Run_TwoSum();
+            //59, 57
+            Run_ThreeSum();
+            //75
+            Run_SortColors();
             //215
             Run_KthLargestInArray();
             //464
             Run_SortIntegers();
             //26
             Run_RemoveDuplicate();
-            //57
-            Run_ThreeSum();
+
 
             //140
             Run_FastPower();

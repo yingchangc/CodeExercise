@@ -184,6 +184,7 @@
     <Compile Include="TwoPointers\PartitionArray.cs" />
     <Compile Include="TwoPointers\QuickSort.cs" />
     <Compile Include="TwoPointers\RemoveDuplicatesFromSortedArray.cs" />
+    <Compile Include="TwoPointers\SortColors.cs" />
     <Compile Include="TwoPointers\ThreeSum.cs" />
     <Compile Include="TwoPointers\TwoSum.cs" />
     <Compile Include="Window\MinimumSizeSubarraySum.cs" />
