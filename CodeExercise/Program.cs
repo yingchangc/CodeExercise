@@ -1974,9 +1974,127 @@ namespace CodeExercise
             var ans2 = question.TwoSumLE(arr2, 24);
         }
 
+        //102
+        static void Run_BinaryTreeLevelOrderTraversal()
+        {
+            Tree.BinaryTreeLevelTraversal question = new Tree.BinaryTreeLevelTraversal();
+            TreeNode root = new TreeNode(3);
+            root.left= new TreeNode(9);
+            root.right = new TreeNode(20);
+            root.right.left = new TreeNode(15);
+            root.right.right = new TreeNode(7);
+            question.LevelOrder(root);
+        }
+
+        // 207
+        static void Run_CourceSchedule()
+        {
+            TopologicalSort.CourseSchedule question = new TopologicalSort.CourseSchedule();
+
+            int[,] prerequsiste = { { 2, 0 }, { 1, 0 }, { 3, 2 }, { 3, 1 } };
+
+            var canfinish = question.CanFinish(4, prerequsiste);
+
+            int[,] prerequsiste2 = { { 1, 0 }, { 0, 1 }};
+            canfinish = question.CanFinish(2, prerequsiste2);
+
+            var topsort = question.FindOrder(4, prerequsiste);
+
+        }
+
+        //133 Clone Graph
+        static void Run_CloneGraph()
+        {
+            BFS.UndirectedGraphNode node0 = new BFS.UndirectedGraphNode(0);
+            BFS.UndirectedGraphNode node1 = new BFS.UndirectedGraphNode(1);
+            BFS.UndirectedGraphNode node2 = new BFS.UndirectedGraphNode(2);
+
+            node0.neighbors.Add(node1);
+            node0.neighbors.Add(node2);
+            node1.neighbors.Add(node2);
+            node2.neighbors.Add(node2);
+
+            BFS.CloneGraph question = new BFS.CloneGraph();
+            question.CloneGraphSolver(node0);
+        }
+
+        // 127 
+        static void Run_WordLadder()
+        {
+            BFS.WordLadder question = new BFS.WordLadder();
+
+            List<string> wordList = new List<string>() { "hot", "dot", "dog", "lot", "log", "cog" };
+
+            var ans = question.LadderLength("hit", "cog", wordList);
+        }
+
+        // 611
+        static void Run_KnightShortestPath()
+        {
+            BFS.KnightShortestPath question = new BFS.KnightShortestPath();
+            bool[,] grid = new bool[3, 3];
+            BFS.Point source = new BFS.Point(2, 0);
+            BFS.Point destination = new BFS.Point(2, 2);
+            var ans = question.ShortestPath(grid, source, destination);
+        }
+
+        // 444 Sequence Reconstruction
+        static void Run_SequenceReconstruction()
+        {
+            TopologicalSort.SequenceReconstruction question = new TopologicalSort.SequenceReconstruction();
+
+            int[] org = { 1, 2, 3 };
+            List<List<int>> seqs = new List<List<int>>();
+            seqs.Add(new List<int> { 1, 2 });
+            seqs.Add(new List<int> { 1, 3 });
+            seqs.Add(new List<int> { 2, 3 });
+
+            var ans = question.SequenceReconstructionSolver(org, seqs.ToArray());
+
+            int[] org2 = { 1};
+            List<List<int>> seqs2 = new List<List<int>>();
+            seqs2.Add(new List<int> { 1 });
+            seqs2.Add(new List<int> { 2, 3 });
+            seqs2.Add(new List<int> { 3, 2 });
+
+            var ans2 = question.SequenceReconstructionSolver(org2, seqs2.ToArray());
+
+        }
+
+        //297
+        static void Run_SerializeDeserializeBinaryTree()
+        {
+            TreeNode root = new TreeNode(1);
+            root.left = new TreeNode(2);
+            root.right = new TreeNode(3);
+            root.right.left = new TreeNode(4);
+            root.right.right = new TreeNode(5);
+
+            BFS.SerializeDeserializeBinaryTree question = new BFS.SerializeDeserializeBinaryTree();
+            string data = question.serialize(root);
+
+            var newBT = question.deserialize(data);
+        }
+
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //297
+            Run_SerializeDeserializeBinaryTree();
+            //444
+            Run_SequenceReconstruction();
+            //611
+            Run_KnightShortestPath();
+
+            //127
+            Run_WordLadder();
+            //133
+            Run_CloneGraph();
+            //207
+            Run_CourceSchedule();
+
+            //102
+            Run_BinaryTreeLevelOrderTraversal();
             //443
             Run_TwoSum();
             //59, 57
