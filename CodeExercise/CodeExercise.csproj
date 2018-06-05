@@ -43,8 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BFS\BinaryTreeZigzagLevelOrderTraversal.cs" />
     <Compile Include="BFS\CloneGraph.cs" />
     <Compile Include="BFS\KnightShortestPath.cs" />
+    <Compile Include="BFS\SearchGraphNode.cs" />
     <Compile Include="BFS\SerializeDeserializeBinaryTree.cs" />
     <Compile Include="BFS\UndirectedGraphNode.cs" />
     <Compile Include="BFS\WordLadder.cs" />
@@ -183,6 +185,7 @@
     <Compile Include="SystemDesign\WebLogger.cs" />
     <Compile Include="TopologicalSort\CourseSchedule.cs" />
     <Compile Include="TopologicalSort\SequenceReconstruction.cs" />
+    <Compile Include="TopologicalSort\TopologicalSorting.cs" />
     <Compile Include="Tree\BinaryTreeLevelTraversal.cs" />
     <Compile Include="Tree\DiameterOfBT.cs" />
     <Compile Include="Tree\LowestCommonAncestor.cs" />

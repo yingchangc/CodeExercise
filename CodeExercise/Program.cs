@@ -2076,9 +2076,27 @@ namespace CodeExercise
             var newBT = question.deserialize(data);
         }
 
+        //103
+        static void Run_BinaryTreeZigZag()
+        {
+            BFS.BinaryTreeZigzagLevelOrderTraversal question = new BFS.BinaryTreeZigzagLevelOrderTraversal();
+            TreeNode root = new TreeNode(1);
+            root.left = new TreeNode(2);
+            root.right = new TreeNode(3);
+
+            root.left.left = new TreeNode(4);
+            root.left.right = new TreeNode(5);
+            root.right.left = new TreeNode(6);
+            root.right.right = new TreeNode(7);
+
+            var ans = question.ZigzagLevelOrder(root);
+        }
+
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //103
+            Run_BinaryTreeZigZag();
             //297
             Run_SerializeDeserializeBinaryTree();
             //444
