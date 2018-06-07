@@ -46,6 +46,7 @@
     <Compile Include="BFS\BinaryTreeZigzagLevelOrderTraversal.cs" />
     <Compile Include="BFS\CloneGraph.cs" />
     <Compile Include="BFS\KnightShortestPath.cs" />
+    <Compile Include="BFS\RemoveSubstrings.cs" />
     <Compile Include="BFS\SearchGraphNode.cs" />
     <Compile Include="BFS\SerializeDeserializeBinaryTree.cs" />
     <Compile Include="BFS\UndirectedGraphNode.cs" />

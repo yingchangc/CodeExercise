@@ -2092,9 +2092,22 @@ namespace CodeExercise
             var ans = question.ZigzagLevelOrder(root);
         }
 
+        // lint 624
+        static void Run_RemoveSubstrings()
+        {
+            BFS.RemoveSubstrings question = new BFS.RemoveSubstrings();
+            HashSet<string> substrs = new HashSet<string>();
+            substrs.Add("ab");
+            substrs.Add("abcd");
+
+            var ans = question.MinLengthRecursive("abcabd", substrs);
+        }
+
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //624
+            Run_RemoveSubstrings();
             //103
             Run_BinaryTreeZigZag();
             //297
