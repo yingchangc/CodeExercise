@@ -49,6 +49,7 @@
     <Compile Include="BFS\RemoveSubstrings.cs" />
     <Compile Include="BFS\SearchGraphNode.cs" />
     <Compile Include="BFS\SerializeDeserializeBinaryTree.cs" />
+    <Compile Include="BFS\SixDegree.cs" />
     <Compile Include="BFS\UndirectedGraphNode.cs" />
     <Compile Include="BFS\WordLadder.cs" />
     <Compile Include="BinarySearch\FindBadVersion.cs" />
@@ -97,6 +98,8 @@
     <Compile Include="DataStructure\ValidPalindrome.cs" />
     <Compile Include="DataStructure\WordDictionarySearch.cs" />
     <Compile Include="DataStructure\WordSquare.cs" />
+    <Compile Include="DFS\ClosestBinarySearchTreeValue.cs" />
+    <Compile Include="DFS\MinimumSubtree.cs" />
     <Compile Include="DP\AnagramSubstring.cs" />
     <Compile Include="DP\AssignCookies.cs" />
     <Compile Include="DP\Backpack.cs" />

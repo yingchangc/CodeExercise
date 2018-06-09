@@ -2103,9 +2103,38 @@ namespace CodeExercise
             var ans = question.MinLengthRecursive("abcabd", substrs);
         }
 
+        // lint 596
+        static void Run_MinSubtree()
+        {
+            DFS.MinimumSubtree question = new DFS.MinimumSubtree();
+
+            ///
+            ///      1
+            ///    /   \
+            ///  -5     2
+            ///  / \   /  \
+            /// 0   2 - 4 - 5
+            ///
+            ///
+
+            TreeNode root = new TreeNode(1);
+            root.left = new TreeNode(-5);
+            root.right = new TreeNode(2);
+            root.left.left = new TreeNode(0);
+            root.left.right = new TreeNode(2);
+
+            root.right.left = new TreeNode(-4);
+            root.right.right = new TreeNode(-5);
+
+            var ans = question.FindSubtree(root);
+        }
+
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //596
+            Run_MinSubtree();
+
             //624
             Run_RemoveSubstrings();
             //103
