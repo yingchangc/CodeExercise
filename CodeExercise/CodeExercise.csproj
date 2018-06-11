@@ -98,7 +98,10 @@
     <Compile Include="DataStructure\ValidPalindrome.cs" />
     <Compile Include="DataStructure\WordDictionarySearch.cs" />
     <Compile Include="DataStructure\WordSquare.cs" />
+    <Compile Include="DFS\BalancedBinaryTree.cs" />
+    <Compile Include="DFS\BinaryTreePaths.cs" />
     <Compile Include="DFS\ClosestBinarySearchTreeValue.cs" />
+    <Compile Include="DFS\KthSmallestElementInBST.cs" />
     <Compile Include="DFS\MinimumSubtree.cs" />
     <Compile Include="DP\AnagramSubstring.cs" />
     <Compile Include="DP\AssignCookies.cs" />
