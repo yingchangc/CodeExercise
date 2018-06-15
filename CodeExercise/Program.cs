@@ -157,7 +157,7 @@ namespace CodeExercise
         static void Run_SubSets()
         {
             int[] candidates = { 1, 2, 3 };
-            SubSets.FindSubsets(candidates);
+            var ans = SubSets.FindSubsets(candidates);
         }
 
         //79. Subsets with dup element
@@ -2175,9 +2175,40 @@ namespace CodeExercise
             question.KthSmallest(root, 8);
         }
 
+        // 680
+        static void Run_SplitString()
+        {
+            DFS.SplitString question = new DFS.SplitString();
+            var ans = question.SplitStringSolver("123");
+        }
+
+        //lint 570
+        static void Run_FindMissingNumbers()
+        {
+            DFS.FindMissingNumber question = new DFS.FindMissingNumber();
+            string testStr = "111098765432";
+            var ans = question.FindMissing2(11, testStr);
+
+            
+
+            int[] num = { 3, 1, 0 };
+            var ans2 = question.MissingNumber(num);
+        }
+
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //78
+            Run_SubSets();
+
+            //79
+            Run_SubSetsWithDup();
+            
+
+            // 570
+            Run_FindMissingNumbers();
+            //680
+            Run_SplitString();
             //230
             Run_KthSmallestElementInBST();
 
@@ -2569,10 +2600,7 @@ namespace CodeExercise
             Run_PalindromePermutation();
             //47
             Run_PermuteUnique();
-            //79
-            Run_SubSetsWithDup();
-            //78
-            Run_SubSets();
+            
             //39
             Run_CombinationSumAllowDuplicate();
             //40

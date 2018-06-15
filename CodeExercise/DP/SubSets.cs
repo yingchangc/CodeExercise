@@ -30,7 +30,36 @@ namespace CodeExercise
         /// </summary>
         /// <param name="nums"></param>
         /// <returns></returns>
-        public static IList<IList<int>> FindSubsets(int[] nums)
+        public static  IList<IList<int>> FindSubsets(int[] nums)
+        {
+            List<List<int>> ans = new List<List<int>>();
+            List<int> currPath = new List<int>();
+            dfs(nums, 0, currPath, ans);
+
+            return ans.ToArray();
+        }
+
+        private static void dfs(int[] nums, int index, List<int> currPath, List<List<int>> ans)
+        {
+            if (index >= nums.Length)
+            {
+                // yic need to copy
+                List<int> copy = new List<int>(currPath);
+                ans.Add(copy);
+                return;
+            }
+
+            // not add
+            dfs(nums, index + 1, currPath, ans);
+
+            // add
+            currPath.Add(nums[index]);
+            dfs(nums, index + 1, currPath, ans);
+            currPath.RemoveAt(currPath.Count - 1);
+            
+        }
+
+        public static IList<IList<int>> FindSubsets_old(int[] nums)
         {
             List<List<int>> results = new List<List<int>>();
             List<int> path = new List<int>();
@@ -71,6 +100,40 @@ namespace CodeExercise
         /// <param name="nums"></param>
         /// <returns></returns>
         public static IList<IList<int>> SubsetsWithDup(int[] nums)
+        {
+            Array.Sort(nums);
+            List<List<int>> ans = new List<List<int>>();
+            List<int> currPath = new List<int>();
+            dfsHelper2(nums, 0, currPath, ans);
+
+            return ans.ToArray();
+        }
+
+        public static void dfsHelper2(int[] nums, int index, List<int> currPath, List<List<int>> ans)
+        {
+            if (index >= nums.Length)
+            {
+                List<int> copy = new List<int>(currPath);
+                ans.Add(copy);
+                return;
+            }
+
+            // add 
+            currPath.Add(nums[index]);
+            dfsHelper2(nums, index + 1, currPath, ans);
+            currPath.RemoveAt(currPath.Count -1);
+
+            // no add
+            int i = index + 1;
+            while (i < nums.Length && nums[i] == nums[i-1])
+            {
+                i++;
+            }
+
+            dfsHelper2(nums, i, currPath, ans);
+        }
+
+        public static IList<IList<int>> SubsetsWithDup_old(int[] nums)
         {
 
             // * YIC must sort first

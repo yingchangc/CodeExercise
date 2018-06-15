@@ -100,10 +100,13 @@
     <Compile Include="DataStructure\WordSquare.cs" />
     <Compile Include="DFS\BalancedBinaryTree.cs" />
     <Compile Include="DFS\BinaryTreePaths.cs" />
+    <Compile Include="DFS\BSTIterator.cs" />
     <Compile Include="DFS\ClosestBinarySearchTreeValue.cs" />
+    <Compile Include="DFS\FindMissingNumber.cs" />
     <Compile Include="DFS\KthSmallestElementInBST.cs" />
     <Compile Include="DFS\LCABinaryTree.cs" />
     <Compile Include="DFS\MinimumSubtree.cs" />
+    <Compile Include="DFS\SplitString.cs" />
     <Compile Include="DFS\ValidateBinarySearchTree.cs" />
     <Compile Include="DP\AnagramSubstring.cs" />
     <Compile Include="DP\AssignCookies.cs" />
