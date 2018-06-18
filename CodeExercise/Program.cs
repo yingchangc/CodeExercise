@@ -314,16 +314,17 @@ namespace CodeExercise
         // 139&140
         static void Run_WordBreak()
         {
+            //139
+            DP.WordBreak question = new DP.WordBreak();
             string test = "catsanddog";
+            string[] worddict = { "cat", "cats", "and", "sand", "dog" };
+            bool canBreak = question.CheckWordBreak(test, worddict);
+
 
             // pre test code
             string subleft = test.Substring(0, 0);
             string subRight = test.Substring(test.Length);  // Note will be empty string
 
-            string[] worddict = { "cat", "cats", "and", "sand", "dog" };
-            DP.WordBreak question = new DP.WordBreak();
-            //139
-            bool canBreak = question.CheckWordBreak(test, worddict);
 
             var ans2_1 = question.CheckWordBreakv2(test, worddict);
             string test2 = "aaaaaaa";
@@ -2195,9 +2196,39 @@ namespace CodeExercise
             var ans2 = question.MissingNumber(num);
         }
 
+        //77
+        static void Run_Combinations()
+        {
+            DFS.Combinations question = new DFS.Combinations();
+            var ans = question.Combine(4, 2);
+
+        }
+
+        //301
+        static void Run_RemoveInvalidParentheses()
+        {
+            DFS.RemoveInvalidParentheses question = new DFS.RemoveInvalidParentheses();
+            var ans = question.RemoveInvalidParenthesesHelper("(a)())())");
+        }
+
+        //93
+        static void Run_RestporeIPAddress()
+        {
+            DFS.RestoreIPAddresses question = new DFS.RestoreIPAddresses();
+            var ans = question.RestoreIpAddressesSolver("25525511135");
+
+        }
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //93
+            Run_RestporeIPAddress();
+            //139,140
+            Run_WordBreak();
+            //301
+            Run_RemoveInvalidParentheses();
+            //77
+            Run_Combinations();
             //78
             Run_SubSets();
 
@@ -2574,8 +2605,7 @@ namespace CodeExercise
             Run_MajorityElement();
             
       
-            //139,140
-            Run_WordBreak();
+           
             
 
             

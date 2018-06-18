@@ -184,6 +184,52 @@ namespace CodeExercise.DP
         /// <returns></returns>
         public static IList<IList<string>> Partition(string s)
         {
+            List<List<string>> ans = new List<List<string>>();
+            List<string> currPath = new List<string>();
+            DFSHelper1(s, ans, currPath, 0);
+            return ans.ToArray();
+        }
+
+        private static void DFSHelper1(string s, List<List<string>> ans, List<string> currPath, int index)
+        {
+            if (index >= s.Length)
+            {
+                List<string> copy = new List<string>(currPath);
+                ans.Add(copy);
+                return;
+            }
+
+            for (int i = index; i < s.Length; i++)
+            {
+                if (IsPalindrome1(s, index, i))
+                {
+                    currPath.Add(s.Substring(index, (i - index + 1)));
+                    DFSHelper1(s, ans, currPath, i + 1);
+                    currPath.RemoveAt(currPath.Count - 1);    // remove
+                }
+            }
+        }
+
+        private static bool IsPalindrome1(string s, int left, int right)
+        {
+            while(left<right)
+            {
+                if (s[left] == s[right])
+                {
+                    left++;
+                    right--;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public static IList<IList<string>> PartitionOld(string s)
+        {
             List<List<string>> results = new List<List<string>>();
             List<string> path = new List<string>();
             PalindromePartitionHelper(s, 0, results, path);

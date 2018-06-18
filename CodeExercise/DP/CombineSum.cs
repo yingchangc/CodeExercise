@@ -243,6 +243,49 @@ namespace CodeExercise
         /// <returns></returns>
         public static IList<IList<int>> CombinationSum2(int[] candidates, int target)
         {
+            Array.Sort(candidates);
+            List<List<int>> ans = new List<List<int>>();
+            List<int> currPath = new List<int>();
+            DFSHelper2(candidates, target, 0, ans, currPath);
+            return ans.ToArray();
+
+        }
+
+        private static void DFSHelper2(int[] candidates, int target, int index, List<List<int>> ans, List<int> currPath)
+        {
+            if (index > candidates.Length)
+            {
+                return;
+            }
+
+            for (int i = index; i < candidates.Length; i++)
+            {
+                if (i != index && candidates[i] == candidates[i-1])
+                {
+                    continue;
+                }
+                int temp = target - candidates[i];
+
+                if (temp == 0)
+                {
+                    currPath.Add(candidates[i]);
+                    List<int> copy = new List<int>(currPath);
+                    ans.Add(copy);
+                    currPath.RemoveAt(currPath.Count - 1);
+                    break;
+                }
+                else if (temp > 0)
+                {
+                    currPath.Add(candidates[i]);
+                    DFSHelper2(candidates, temp, i + 1, ans, currPath);
+                    currPath.RemoveAt(currPath.Count - 1);
+                }
+            }
+
+        }
+
+        public static IList<IList<int>> CombinationSum2_old(int[] candidates, int target)
+        {
             Array.Sort(candidates, new Comparison<int>(
                             (i1, i2) => i2.CompareTo(i1)
                     ));   // large to small,
@@ -315,6 +358,45 @@ namespace CodeExercise
         /// <param name="target"></param>
         /// <returns></returns>
         public static IList<IList<int>> CombinationSumAllowDuplicate(int[] candidates, int target)
+        {
+            List<List<int>> ans = new List<List<int>>();
+            List<int> currPath = new List<int>();
+
+            Array.Sort(candidates);
+            DFSHelperDupe(candidates, target, 0, ans, currPath);
+
+            return ans.ToArray();
+        }
+
+        private static void DFSHelperDupe(int[] candidates, int target, int index, List<List<int>> ans, List<int> currPath)
+        {
+            if (index >= candidates.Length)
+            {
+                return;
+            }
+
+            // candidate is sorted
+            for (int i = index; i < candidates.Length; i++)
+            {
+                int temp = target - candidates[i];
+                if (temp == 0)
+                {
+                    currPath.Add(candidates[i]);
+                    List<int> copy = new List<int>(currPath);
+                    ans.Add(copy);
+                    currPath.RemoveAt(currPath.Count - 1);  // yic need to remove 
+                    break;
+                }
+                else if (temp > 0)
+                {
+                    currPath.Add(candidates[i]);
+                    DFSHelperDupe(candidates, temp, i, ans, currPath);
+                    currPath.RemoveAt(currPath.Count-1);
+                }
+            }
+        }
+
+        public static IList<IList<int>> CombinationSumAllowDuplicate_old(int[] candidates, int target)
         {
             Array.Sort(candidates, new Comparison<int>(
                             (i1, i2) => i2.CompareTo(i1)
