@@ -105,6 +105,7 @@ namespace CodeExercise
             int ans = question.longestCommonSubsequenceSolver(A, B);
         }
 
+        //46
         static void Run_permuteIntArray()
         {
             int testlengh = 4;
@@ -171,7 +172,7 @@ namespace CodeExercise
         // 47. 
         static void Run_PermuteUnique()
         {
-            int[] nums = { 2, 2, 1, 1 };
+            int[] nums = {0,1,0};
             IList<IList<int>> results = PermutationIntArray.PermuteUnique(nums);
 
             foreach (var intList in results)
@@ -2215,12 +2216,37 @@ namespace CodeExercise
         static void Run_RestporeIPAddress()
         {
             DFS.RestoreIPAddresses question = new DFS.RestoreIPAddresses();
-            var ans = question.RestoreIpAddressesSolver("25525511135");
+            var ans = question.RestoreIpAddressesSolver("010010");
 
         }
+
+        //22
+        static void Run_GenerateParenthesis()
+        {
+            DFS.GenerateParentheses question = new DFS.GenerateParentheses();
+            var ans = question.GenerateParenthesisSolver(4);
+        }
+
+        //681
+        static void Run_NextClosestTime()
+        {
+            DFS.NextClosestTime question = new DFS.NextClosestTime();
+            var ans = question.NextClosestTimeSolver("23:59");
+        }
+
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+
+            //47
+            Run_PermuteUnique();
+            //46
+            Run_permuteIntArray();
+
+            //681
+            Run_NextClosestTime();
+            //22
+            Run_GenerateParenthesis();
             //93
             Run_RestporeIPAddress();
             //139,140
@@ -2628,8 +2654,7 @@ namespace CodeExercise
             Run_Palindrome_Partitioning();
             //267
             Run_PalindromePermutation();
-            //47
-            Run_PermuteUnique();
+            
             
             //39
             Run_CombinationSumAllowDuplicate();
@@ -2638,7 +2663,7 @@ namespace CodeExercise
             
             
             Run_LowestCommonAncestorINBTree();
-            Run_permuteIntArray();
+            
             Run_KMP_Question();
         }
     }

@@ -29,41 +29,45 @@ namespace CodeExercise.DFS
 
         private void DFSHelper(string s, int index, int section, string currPath, List<string> ans)
         {
-            if (section == 4 && index >= s.Length) 
+            if (section == 4)
             {
-                // remove the head '.'
-                string copy = currPath.Substring(1);
-                ans.Add(copy);
-
-                return;
-            }
-            else if (index >= s.Length && section != 4)
-            {
-                return;
-            }
-            else if (section > 4)
-            {
+                if (index >= s.Length)
+                {
+                    ans.Add(currPath.Substring(1)); // skip the first .
+                }
                 return;
             }
 
             for (int i = index; i < s.Length; i++)
             {
-                // only check 3 position
-                if (i > index+3)
+                string cutStr = s.Substring(index, i - index + 1);
+
+                // invalid  00, 01 >255
+                if (!isValildIP(cutStr))
                 {
                     break;
                 }
 
-                string substr = s.Substring(index, i - index + 1);
-                int val = Convert.ToInt32(substr);
-
-                if (val < 256)
-                {
-                    currPath += ("." + substr);
-                    DFSHelper(s, i + 1, section + 1, currPath, ans);
-                    currPath= currPath.Substring(0,currPath.Length - ("." + substr).Length);
-                }
+                DFSHelper(s, i + 1, section + 1, (currPath + "." + cutStr), ans);
             }
+        }
+
+        // yic  this is core of this question
+        private bool isValildIP(string cutStr)
+        {
+            if (cutStr.Length > 1 && cutStr[0] == '0')
+            {
+                return false;
+            }
+
+            int val = Convert.ToInt32(cutStr);
+            
+            if (val > 255)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

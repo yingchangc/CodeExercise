@@ -104,9 +104,11 @@
     <Compile Include="DFS\ClosestBinarySearchTreeValue.cs" />
     <Compile Include="DFS\Combinations.cs" />
     <Compile Include="DFS\FindMissingNumber.cs" />
+    <Compile Include="DFS\GenerateParentheses.cs" />
     <Compile Include="DFS\KthSmallestElementInBST.cs" />
     <Compile Include="DFS\LCABinaryTree.cs" />
     <Compile Include="DFS\MinimumSubtree.cs" />
+    <Compile Include="DFS\NextClosestTime.cs" />
     <Compile Include="DFS\RemoveInvalidParentheses.cs" />
     <Compile Include="DFS\RestoreIPAddresses.cs" />
     <Compile Include="DFS\SplitString.cs" />
