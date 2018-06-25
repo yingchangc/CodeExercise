@@ -2025,9 +2025,13 @@ namespace CodeExercise
         {
             BFS.WordLadder question = new BFS.WordLadder();
 
-            List<string> wordList = new List<string>() { "hot", "dot", "dog", "lot", "log", "cog" };
+            List<string> wordList = new List<string>() { "hot", "dot", "dog", "lot", "log" };
+
+            var ans2 = question.FindLadders2("hit", "cog", wordList);
 
             var ans = question.LadderLength("hit", "cog", wordList);
+
+            
         }
 
         // 611
@@ -2234,10 +2238,53 @@ namespace CodeExercise
             var ans = question.NextClosestTimeSolver("23:59");
         }
 
+        // lint 10
+        static void Run_StringPermutation()
+        {
+            DFS.StringPermutation question = new DFS.StringPermutation();
+            var ans = question.stringPermutation2("aabb");
+
+        }
+
+        // 51
+        static void Run_NQueen()
+        {
+            DFS.NQueens question = new DFS.NQueens();
+
+            //n queen 2
+            var ans2 = question.TotalNQueens(4);
+            // n queen 1
+            var ans1 = question.SolveNQueens(4);
+
+        }
+
+        //17
+        static void Run_LetterCombinationsPhoneNumber()
+        {
+            DFS.LetterCombinationsPhoneNumber question = new DFS.LetterCombinationsPhoneNumber();
+            var ans = question.LetterCombinations("23");
+        }
+
+        //291
+        static void Run_WordPattern()
+        {
+            DFS.WordPattern question = new DFS.WordPattern();
+            var ans = question.WordPatternMatch("ab", "ss");
+        }
+
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
-
+            //127
+            Run_WordLadder();
+            //291
+            Run_WordPattern();
+            //17
+            Run_LetterCombinationsPhoneNumber();
+            //51
+            Run_NQueen();
+            //10
+            Run_StringPermutation();
             //47
             Run_PermuteUnique();
             //46
@@ -2286,8 +2333,7 @@ namespace CodeExercise
             //611
             Run_KnightShortestPath();
 
-            //127
-            Run_WordLadder();
+            
             //133
             Run_CloneGraph();
             //207

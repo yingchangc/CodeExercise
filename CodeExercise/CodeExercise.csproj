@@ -109,10 +109,13 @@
     <Compile Include="DFS\LCABinaryTree.cs" />
     <Compile Include="DFS\MinimumSubtree.cs" />
     <Compile Include="DFS\NextClosestTime.cs" />
+    <Compile Include="DFS\NQueens.cs" />
     <Compile Include="DFS\RemoveInvalidParentheses.cs" />
     <Compile Include="DFS\RestoreIPAddresses.cs" />
     <Compile Include="DFS\SplitString.cs" />
+    <Compile Include="DFS\StringPermutation.cs" />
     <Compile Include="DFS\ValidateBinarySearchTree.cs" />
+    <Compile Include="DFS\WordPattern.cs" />
     <Compile Include="DP\AnagramSubstring.cs" />
     <Compile Include="DP\AssignCookies.cs" />
     <Compile Include="DP\Backpack.cs" />
@@ -163,6 +166,7 @@
     <Compile Include="EditDistance.cs" />
     <Compile Include="DataStructure\GraphValidTree.cs" />
     <Compile Include="KMPSubstringSearch.cs" />
+    <Compile Include="DFS\LetterCombinationsPhoneNumber.cs" />
     <Compile Include="ListNode.cs" />
     <Compile Include="matrixQuestion\WordSearch.cs" />
     <Compile Include="MedianOfTwoSortedArray.cs" />
