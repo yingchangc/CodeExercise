@@ -86,10 +86,12 @@
     <Compile Include="DataStructure\NumberConnectedComponentsInUG.cs" />
     <Compile Include="DataStructure\NumberOfIsland.cs" />
     <Compile Include="DataStructure\NumberOfIsland2.cs" />
+    <Compile Include="DataStructure\RandomizedSet.cs" />
     <Compile Include="DataStructure\ReverseWordsinaString2.cs" />
     <Compile Include="DataStructure\RotateImage.cs" />
     <Compile Include="DataStructure\Skyline.cs" />
     <Compile Include="DataStructure\SlidingWindow.cs" />
+    <Compile Include="DataStructure\StackUsingQueues.cs" />
     <Compile Include="DataStructure\StrStr.cs" />
     <Compile Include="DataStructure\SubarraySum.cs" />
     <Compile Include="DataStructure\SurroundedRegions.cs" />
@@ -109,6 +111,7 @@
     <Compile Include="DFS\LCABinaryTree.cs" />
     <Compile Include="DFS\MinimumSubtree.cs" />
     <Compile Include="DFS\NextClosestTime.cs" />
+    <Compile Include="DFS\NextPermutation.cs" />
     <Compile Include="DFS\NQueens.cs" />
     <Compile Include="DFS\RemoveInvalidParentheses.cs" />
     <Compile Include="DFS\RestoreIPAddresses.cs" />

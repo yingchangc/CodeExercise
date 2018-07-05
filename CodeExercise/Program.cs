@@ -1513,7 +1513,7 @@ namespace CodeExercise
         static void Run_FirstUniqueCharacterinaString()
         {
             DataStructure.FirstUniqueCharacterinaString question = new DataStructure.FirstUniqueCharacterinaString();
-            var ans = question.FirstUniqChar("loveleetcode");
+            var ans = question.FirstUniqChar("adaccdcda");
         }
 
         //186
@@ -2272,9 +2272,67 @@ namespace CodeExercise
             var ans = question.WordPatternMatch("ab", "ss");
         }
 
+        //31 
+        static void Run_NextPermutation()
+        {
+            DFS.NextPermutation question = new DFS.NextPermutation();
+
+            int[] nums = { 3,2,1};
+            question.NextPermutationSolver(nums);
+
+            int[] nums2 = { 1, 3, 2, 3 };
+            var ans = question.previousPermuation(nums2);
+        }
+
+
+        // 380
+        static void Run_RandomizedSet()
+        {
+            DataStructure.RandomizedSet randomSet = new DataStructure.RandomizedSet();
+
+            var boolV = randomSet.Insert(3);
+            boolV = randomSet.Insert(3);
+            var ansV = randomSet.GetRandom();
+            ansV = randomSet.GetRandom();
+            boolV = randomSet.Insert(1);
+            boolV = randomSet.Remove(3);
+            ansV = randomSet.GetRandom();
+            ansV = randomSet.GetRandom();
+            boolV = randomSet.Insert(0);
+            boolV = randomSet.Remove(0);
+   
+            
+            
+            // Inserts 1 to the set. Returns true as 1 was inserted successfully.
+            var ans = randomSet.Insert(1);
+            
+            // Returns false as 2 does not exist in the set.
+            ans = randomSet.Remove(2);
+            
+            // Inserts 2 to the set, returns true. Set now contains [1,2].
+            ans = randomSet.Insert(2);
+            
+            // getRandom should return either 1 or 2 randomly.
+            int num = randomSet.GetRandom();
+            
+            // Removes 1 from the set, returns true. Set now contains [2].
+            ans = randomSet.Remove(1);
+            
+            // 2 was already in the set, so return false.
+            ans = randomSet.Insert(2);
+
+            // Since 2 is the only number in the set, getRandom always return 2.
+            num = randomSet.GetRandom();
+        }
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //380
+            Run_RandomizedSet();
+            //387
+            Run_FirstUniqueCharacterinaString();
+            //31
+            Run_NextPermutation();
             //127
             Run_WordLadder();
             //291
@@ -2440,8 +2498,7 @@ namespace CodeExercise
             //186
             Run_ReverseWordsinaString2();
 
-            //387
-            Run_FirstUniqueCharacterinaString();
+            
             
 
             //44
