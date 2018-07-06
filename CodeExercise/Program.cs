@@ -2324,9 +2324,53 @@ namespace CodeExercise
             // Since 2 is the only number in the set, getRandom always return 2.
             num = randomSet.GetRandom();
         }
+
+        //264
+        static void Run_UglyNumber()
+        {
+            DataStructure.UglyNumber question = new DataStructure.UglyNumber();
+            var ans = question.NthUglyNumber(1407);
+        }
+
+        //612
+        static void Run_KClosestPoints()
+        {
+            //[4,6],[4,7],[4,4],[2,5],[1,1]
+            DataStructure.KClosestPoints question = new DataStructure.KClosestPoints();
+            DataStructure.Point[] arr = new DataStructure.Point[6];
+            int count = 0;
+            arr[count++] = new DataStructure.Point(1, 1);
+            arr[count++] = new DataStructure.Point(1, 1);
+            arr[count++] = new DataStructure.Point(4, 6);
+            arr[count++] = new DataStructure.Point(4, 7);
+            arr[count++] = new DataStructure.Point(4, 4);
+            arr[count++] = new DataStructure.Point(2, 5);
+
+
+
+            question.kClosest(arr, new DataStructure.Point(0,0), 3);
+        }
+
+        // lint 544
+        static void Run_TopKLargestNumbers()
+        {
+            DataStructure.TopKLargestNumbers question = new DataStructure.TopKLargestNumbers();
+
+            int[] nums = { 3, 10, 100, -99, 4, 100};
+            var ans1 = question.topKQSort(nums, 3);
+            var ans2 = question.topkPQ(nums, 3);
+        }
+
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //544
+            Run_TopKLargestNumbers();
+            //612
+            Run_KClosestPoints();
+    
+            //264
+                Run_UglyNumber();
             //380
             Run_RandomizedSet();
             //387

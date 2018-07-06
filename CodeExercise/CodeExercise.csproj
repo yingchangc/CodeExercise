@@ -73,6 +73,7 @@
     <Compile Include="DataStructure\FirstUniqueCharacterinaString.cs" />
     <Compile Include="DataStructure\FlattenBinaryTreeToLL.cs" />
     <Compile Include="DataStructure\HashFunction.cs" />
+    <Compile Include="DataStructure\KClosestPoints.cs" />
     <Compile Include="DataStructure\KthSmallestElementInMatrix.cs" />
     <Compile Include="DataStructure\LargestRectangleInHistogram.cs" />
     <Compile Include="DataStructure\LinkedListCycleII.cs" />
@@ -95,8 +96,10 @@
     <Compile Include="DataStructure\StrStr.cs" />
     <Compile Include="DataStructure\SubarraySum.cs" />
     <Compile Include="DataStructure\SurroundedRegions.cs" />
+    <Compile Include="DataStructure\TopKLargestNumbers.cs" />
     <Compile Include="DataStructure\TrapRainWater.cs" />
     <Compile Include="DataStructure\Trie.cs" />
+    <Compile Include="DataStructure\UglyNumber.cs" />
     <Compile Include="DataStructure\ValidPalindrome.cs" />
     <Compile Include="DataStructure\WordDictionarySearch.cs" />
     <Compile Include="DataStructure\WordSquare.cs" />
