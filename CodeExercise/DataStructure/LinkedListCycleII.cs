@@ -17,6 +17,17 @@ namespace CodeExercise.DataStructure
        }
    }
 
+    public class Record
+    {
+        public int id, score;
+        public Record(int id, int score)
+        {
+            this.id = id;
+            this.score = score;
+        }
+
+    }
+
     class LinkedListCycleII
     {
         /// <summary>

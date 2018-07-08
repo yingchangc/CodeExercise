@@ -2361,9 +2361,75 @@ namespace CodeExercise
             var ans2 = question.topkPQ(nums, 3);
         }
 
+        //23
+        static void Run_MergeKSortedList()
+        {
+            DataStructure.ListNode L1 = new DataStructure.ListNode(1);
+            L1.next = new DataStructure.ListNode(4);
+            L1.next.next = new DataStructure.ListNode(5);
+
+            DataStructure.ListNode L2 = new DataStructure.ListNode(1);
+            L2.next = new DataStructure.ListNode(3);
+            L2.next.next = new DataStructure.ListNode(4);
+
+            DataStructure.ListNode L3 = new DataStructure.ListNode(2);
+            L3.next = new DataStructure.ListNode(6);
+
+            DataStructure.ListNode[] arr = new DataStructure.ListNode[3];
+            arr[0] = L1;
+            arr[1] = L2;
+            arr[2] = L3;
+
+            DataStructure.MergeKSortedLists question = new DataStructure.MergeKSortedLists();
+            var ans2 = question.MergeKLists_MergeSort(arr);
+            var ans = question.MergeKLists(arr);
+
+        }
+
+        // lint 613
+        static void Run_HighFive()
+        {
+            DataStructure.HighFive question = new DataStructure.HighFive();
+            List<DataStructure.Record> records = new List<DataStructure.Record>()
+            {
+                new DataStructure.Record(1, 92),
+                new DataStructure.Record(1, 92),
+                new DataStructure.Record(1, 92),
+                new DataStructure.Record(2, 93),
+                new DataStructure.Record(2, 100),
+                new DataStructure.Record(2, 100),
+                new DataStructure.Record(2, 98),
+                new DataStructure.Record(2, 97),
+                new DataStructure.Record(1, 60),
+                new DataStructure.Record(1, 58),
+                new DataStructure.Record(2, 100),
+                new DataStructure.Record(1, 61)
+            };
+            var ans = question.HighFiveSolver(records);
+        }
+
+        // lint 104
+        static void Run_MergeKSortedArrays104()
+        {
+            DataStructure.MergeKSortedArrays question = new DataStructure.MergeKSortedArrays();
+            List<List<int>> arrays = new List<List<int>>();
+            arrays.Add(new List<int>() { 0, 0, 5, 7 });
+            arrays.Add(new List<int>() { 0, 4, 6 });
+            arrays.Add(new List<int>() { 0, 8, 9, 10, 11 });
+            var ans = question.mergekSortedArrays(arrays);
+        }
+
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //104
+            Run_MergeKSortedArrays104();
+            //23
+            Run_MergeKSortedList();
+            //613
+            Run_HighFive();
+            
+
             //544
             Run_TopKLargestNumbers();
             //612
