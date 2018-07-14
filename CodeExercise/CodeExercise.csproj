@@ -74,6 +74,7 @@
     <Compile Include="DataStructure\FlattenBinaryTreeToLL.cs" />
     <Compile Include="DataStructure\HashFunction.cs" />
     <Compile Include="DataStructure\HighFive.cs" />
+    <Compile Include="DataStructure\IntersectionofTwoArrays.cs" />
     <Compile Include="DataStructure\KClosestPoints.cs" />
     <Compile Include="DataStructure\KthSmallestElementInMatrix.cs" />
     <Compile Include="DataStructure\LargestRectangleInHistogram.cs" />
@@ -83,7 +84,11 @@
     <Compile Include="DataStructure\MaxBinaryTree.cs" />
     <Compile Include="DataStructure\MaxRectangle.cs" />
     <Compile Include="DataStructure\MergeKSortedArrays.cs" />
+    <Compile Include="DataStructure\MergeKSortedIntervalLists.cs" />
     <Compile Include="DataStructure\MergeKSortedLists.cs" />
+    <Compile Include="DataStructure\MergeSortedArray.cs" />
+    <Compile Include="DataStructure\MergeTwoSortedIntervalLists.cs" />
+    <Compile Include="DataStructure\MergeTwoSortedLists.cs" />
     <Compile Include="DataStructure\MinStack.cs" />
     <Compile Include="DataStructure\MovingAverage.cs" />
     <Compile Include="DataStructure\MyQueue.cs" />

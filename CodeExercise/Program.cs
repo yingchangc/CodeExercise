@@ -2419,10 +2419,59 @@ namespace CodeExercise
             var ans = question.mergekSortedArrays(arrays);
         }
 
+        // lint 839
+        static void Run_MergeTwoSortedIntervalLists()
+        {
+            DataStructure.MergeTwoSortedIntervalLists question = new DataStructure.MergeTwoSortedIntervalLists();
+            List<DataStructure.Interval> list1 = new List<DataStructure.Interval>() { new DataStructure.Interval(1,2), new DataStructure.Interval(3,4) };
+            List<DataStructure.Interval> list2 = new List<DataStructure.Interval>() { new DataStructure.Interval(2,3), new DataStructure.Interval(5,6) };
+
+            var ans = question.MergeTwoInterval(list1, list2);
+        }
+
+        // 577
+        static void Run_MergeKSortedIntervalLists()
+        {
+            DataStructure.MergeKSortedIntervalLists question = new DataStructure.MergeKSortedIntervalLists();
+            List<DataStructure.Interval> list1 = new List<DataStructure.Interval>() { new DataStructure.Interval(1, 3), new DataStructure.Interval(4, 7), new DataStructure.Interval(6, 8) };
+            List<DataStructure.Interval> list2 = new List<DataStructure.Interval>() { new DataStructure.Interval(1,2), new DataStructure.Interval(9,10) };
+            List<List<DataStructure.Interval>> lists = new List<List<DataStructure.Interval>>() { list1, list2 };
+
+            var ans = question.MergeKSortedIntervalListsSolver(lists);
+
+        }
+
+        // 88
+        static void Run_MergeSortedArray()
+        {
+            DataStructure.MergeSortedArray question = new DataStructure.MergeSortedArray();
+            int[] num1 = new int[5];
+            num1[0] = 1;
+            num1[1] = 3;
+            num1[2] = 5;
+
+            int[] num2 = new int[2];
+            num2[0] = 2;
+            num2[1] = 4;
+
+            question.Merge(num1,3, num2,2);
+        }
+
+        
+
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //577
+            Run_MergeKSortedIntervalLists();
+
+            //88
+            Run_MergeSortedArray();
             //https://blog.csdn.net/u012289441/article/details/45192775   十道海量数据处理面试题与十个方法大总结
+
+            // 839
+            Run_MergeTwoSortedIntervalLists();
+
             //104
             Run_MergeKSortedArrays104();
             //23
