@@ -82,6 +82,7 @@
     <Compile Include="DataStructure\LongestCommonPrefix.cs" />
     <Compile Include="DataStructure\LongestPalindromicSubstring.cs" />
     <Compile Include="DataStructure\MaxBinaryTree.cs" />
+    <Compile Include="DataStructure\MaximumSubmatrix.cs" />
     <Compile Include="DataStructure\MaxRectangle.cs" />
     <Compile Include="DataStructure\MergeKSortedArrays.cs" />
     <Compile Include="DataStructure\MergeKSortedIntervalLists.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="DataStructure\RotateImage.cs" />
     <Compile Include="DataStructure\Skyline.cs" />
     <Compile Include="DataStructure\SlidingWindow.cs" />
+    <Compile Include="DataStructure\SparseMatrixMultiplication.cs" />
     <Compile Include="DataStructure\StackUsingQueues.cs" />
     <Compile Include="DataStructure\StrStr.cs" />
     <Compile Include="DataStructure\SubarraySum.cs" />

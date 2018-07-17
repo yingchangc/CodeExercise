@@ -2457,11 +2457,50 @@ namespace CodeExercise
             question.Merge(num1,3, num2,2);
         }
 
-        
+
+        // 4
+        static void Run_Merge2SortedArrays()
+        {
+            int[] nums1 = { 2 };
+            int[] nums2 = { 1,3,4 };
+            var ans = MedianOfTwoSortedArray.FindMedianSortedArrays(nums1, nums2);
+        }
+
+        // 944
+        static void Run_MaximumSubmatrix()
+        {
+            DataStructure.MaximumSubmatrix question = new DataStructure.MaximumSubmatrix();
+
+            int[,] matrix =
+            {
+                {1, 3, -1 },
+                { 2,3,-2},
+                { -1,-2,-3}
+            };
+           
+
+            var ans = question.MaxSubmatrixSolver(matrix);
+        }
+
+        // 311
+        static void Run_SparseMatrixMult()
+        {
+            DataStructure.SparseMatrixMultiplication question = new DataStructure.SparseMatrixMultiplication();
+            int[,] A = { { 1, 0, 0 }, { -1, 0, 3 } };
+            int[,] B = { { 7, 0, 0 }, { 0, 0, 0 }, { 0, 0, 1 } };
+            var ans = question.Multiply(A, B);
+        }
 
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //311
+            Run_SparseMatrixMult();
+            //944
+            Run_MaximumSubmatrix();
+
+            //4
+            Run_Merge2SortedArrays();
             //577
             Run_MergeKSortedIntervalLists();
 
