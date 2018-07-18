@@ -84,6 +84,7 @@
     <Compile Include="DataStructure\MaxBinaryTree.cs" />
     <Compile Include="DataStructure\MaximumSubmatrix.cs" />
     <Compile Include="DataStructure\MaxRectangle.cs" />
+    <Compile Include="DataStructure\MedianKSortedArrays.cs" />
     <Compile Include="DataStructure\MergeKSortedArrays.cs" />
     <Compile Include="DataStructure\MergeKSortedIntervalLists.cs" />
     <Compile Include="DataStructure\MergeKSortedLists.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="DataStructure\NumberOfIsland.cs" />
     <Compile Include="DataStructure\NumberOfIsland2.cs" />
     <Compile Include="DataStructure\RandomizedSet.cs" />
+    <Compile Include="DataStructure\RangeSumQuery.cs" />
     <Compile Include="DataStructure\ReverseWordsinaString2.cs" />
     <Compile Include="DataStructure\RotateImage.cs" />
     <Compile Include="DataStructure\Skyline.cs" />

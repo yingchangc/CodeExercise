@@ -2491,9 +2491,39 @@ namespace CodeExercise
             var ans = question.Multiply(A, B);
         }
 
+        // 931
+        static void Run_MedianKSortedArrays()
+        {
+            DataStructure.MedianKSortedArrays question = new DataStructure.MedianKSortedArrays();
+            List<List<int>> nums = new List<List<int>>();
+            nums.Add(new List<int>() { 15, 41, 43, 52, 53, 56, 73, 87, 93 });
+            nums.Add(new List<int>() { 27} );
+            nums.Add(new List<int>() { 2, 46, 92 });
+            nums.Add(new List<int>() { 9, 12, 25, 58, 63, 72, 84, 92 });
+            nums.Add(new List<int>());
+            nums.Add(new List<int>());
+            nums.Add(new List<int>() { 1 });
+            nums.Add(new List<int>() { 3, 29, 31, 55 });
+            nums.Add(new List<int>() { 17, 33, 45, 60, 74, 76, 80, 90, 92 });
+            nums.Add(new List<int>() { 4, 8, 20, 25, 25, 27, 45, 90, 100 });
+
+            int[] expected = { 15, 41, 43, 52, 53, 56, 73, 87, 93,27, 2, 46, 92, 9, 12, 25, 58, 63, 72, 84, 92,1, 3, 29, 31, 55, 17, 33, 45, 60, 74, 76, 80, 90, 92, 4, 8, 20, 25, 25, 27, 45, 90, 100 };
+            Array.Sort(expected);
+
+            foreach(var i in expected)
+            {
+                Console.Write(i + " " );
+            }
+            
+
+            var ans = question.FindMedian(nums);
+        }
+
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //931
+            Run_MedianKSortedArrays();
             //311
             Run_SparseMatrixMult();
             //944
