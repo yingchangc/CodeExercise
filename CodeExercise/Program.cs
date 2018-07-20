@@ -2519,9 +2519,49 @@ namespace CodeExercise
             var ans = question.FindMedian(nums);
         }
 
+        //307
+        static void Run_RangeSumQueryMutable()
+        {
+            int[] nums = { 1, 3, 5 };
+            DataStructure.NumArrayMutable question = new DataStructure.NumArrayMutable(nums);
+            var ans = question.SumRange(0, 2);  // 9
+            question.Update(1, 2);
+            ans = question.SumRange(0, 2);   // 8
+        }
+
+
+        //304
+        static void Run_RangeSumQuery2()
+        {
+            int[,] matrix =
+            {
+                {3, 0, 1, 4, 2},
+                {5, 6, 3, 2, 1},
+                {1, 2, 0, 1, 5},
+                {4, 1, 0, 1, 7},
+                {1, 0, 3, 0, 5 }
+            };
+
+            DataStructure.RangeSumQuery2D question = new DataStructure.RangeSumQuery2D(matrix);
+            var ans = question.SumRegion(2, 1, 4, 3);  // 8
+            ans = question.SumRegion(1, 1, 2, 2); //11
+            ans = question.SumRegion(1, 2, 2, 4); //12 
+
+
+            DataStructure.RangeSumQuery2DMutable question2 = new DataStructure.RangeSumQuery2DMutable(matrix);
+            var ans2 = question2.SumRegion(2, 1, 4, 3);  // 8
+            question2.Update(3, 2, 2);
+            ans2 = question2.SumRegion(2, 1, 4, 3);  // 10
+
+        }
+
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //304
+            Run_RangeSumQuery2();
+            //307
+            Run_RangeSumQueryMutable();
             //931
             Run_MedianKSortedArrays();
             //311

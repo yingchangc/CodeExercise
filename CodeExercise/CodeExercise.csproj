@@ -89,6 +89,7 @@
     <Compile Include="DataStructure\MergeKSortedIntervalLists.cs" />
     <Compile Include="DataStructure\MergeKSortedLists.cs" />
     <Compile Include="DataStructure\MergeSortedArray.cs" />
+    <Compile Include="DataStructure\MergeTwoSortedArrays.cs" />
     <Compile Include="DataStructure\MergeTwoSortedIntervalLists.cs" />
     <Compile Include="DataStructure\MergeTwoSortedLists.cs" />
     <Compile Include="DataStructure\MinStack.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="DataStructure\NumberOfIsland2.cs" />
     <Compile Include="DataStructure\RandomizedSet.cs" />
     <Compile Include="DataStructure\RangeSumQuery.cs" />
+    <Compile Include="DataStructure\RangeSumQuery2D.cs" />
     <Compile Include="DataStructure\ReverseWordsinaString2.cs" />
     <Compile Include="DataStructure\RotateImage.cs" />
     <Compile Include="DataStructure\Skyline.cs" />
