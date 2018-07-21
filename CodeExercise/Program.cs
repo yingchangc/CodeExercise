@@ -2565,9 +2565,39 @@ namespace CodeExercise
 
         }
 
-        static void Main(string[] args)
+        // lint 139
+        static void Run_SubarraySumClosest()
+        {
+            DataStructure.SubarraySumClosest question = new DataStructure.SubarraySumClosest();
+            int[] nums = { -3, 1, 1, -3, 5 };
+
+            var ans = question.SubarraySumClosestSol(nums);
+
+        }
+
+        // lint 793
+        static void Run_IntersectionArrays()
+        {
+            DataStructure.IntersectionOfArrays question = new DataStructure.IntersectionOfArrays();
+            List<List<int>> arrs = new List<List<int>>();
+            arrs.Add(new List<int> { 1, 2, 3, 4 });
+            arrs.Add(new List<int> { 1, 2, 5, 6, 7 });
+            arrs.Add(new List<int> { 9, 10, 1, 5, 2, 3 });
+
+            var ans = question.IntersectionOfArraysSolver(arrs);
+
+            
+    }
+
+    static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //793
+            Run_IntersectionArrays();
+
+            //139
+            Run_SubarraySumClosest();
+
             //548
             Run_InterSectionTwoArrays();
             //304
