@@ -2555,9 +2555,21 @@ namespace CodeExercise
 
         }
 
+        // 548
+        static void Run_InterSectionTwoArrays()
+        {
+            DataStructure.IntersectionofTwoArrays question = new DataStructure.IntersectionofTwoArrays();
+            int[] nums1 = { 1, 2, 2, 1 };
+            int[] nums2 = { 2, 2 };
+            var ans = question.IntersectionGetAll(nums1, nums2);
+
+        }
+
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //548
+            Run_InterSectionTwoArrays();
             //304
             Run_RangeSumQuery2();
             //307

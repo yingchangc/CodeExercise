@@ -9,6 +9,48 @@ namespace CodeExercise.DataStructure
     class IntersectionofTwoArrays
     {
         /// <summary>
+        /// 548. Intersection of Two Arrays II
+        /// Given two arrays, write a function to compute their intersection.
+        /// 
+        /// Example
+        /// Given nums1 = [1, 2, 2, 1], nums2 = [2, 2], return [2, 2].
+        /// 
+        /// Challenge
+        /// What if the given array is already sorted? How would you optimize your algorithm?
+        /// What if nums1's size is small compared to num2's size? Which algorithm is better?
+        /// What if elements of nums2 are stored on disk, and the memory is limited such that you cannot load all elements into the memory at once?
+        /// </summary>
+        /// <param name="nums1"></param>
+        /// <param name="nums2"></param>
+        /// <returns></returns>
+        public int[] IntersectionGetAll(int[] nums1, int[] nums2)
+        {
+            Dictionary<int, int> lookup = new Dictionary<int, int>();
+
+            foreach(var num1 in nums1)
+            {
+                if (!lookup.ContainsKey(num1))
+                {
+                    lookup.Add(num1, 0);
+                }
+                lookup[num1]++;
+            }
+
+            List<int> ans = new List<int>();
+
+            foreach(var num2 in nums2)
+            {
+                if (lookup.ContainsKey(num2) && lookup[num2] >0)
+                {
+                    ans.Add(num2);
+                    lookup[num2]--;
+                }
+            }
+
+            return ans.ToArray();
+        }
+
+        /// <summary>
         /// 349. Intersection of Two Arrays
         /// https://leetcode.com/problems/intersection-of-two-arrays/description/
         /// iven two arrays, write a function to compute their intersection.
