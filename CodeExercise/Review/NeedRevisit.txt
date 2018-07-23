@@ -1,0 +1,37 @@
+﻿
+// <summary>
+/// 186. Reverse Words in a String II
+/// https://leetcode.com/problems/reverse-words-in-a-string-ii/description/
+///  Given an input string, reverse the string word by word.A word is defined as a sequence of non-space characters.
+/// 
+/// The input string does not contain leading or trailing spaces and the words are always separated by a single space.
+/// 
+/// For example,
+/// Given s = "the sky is blue",
+/// return "blue is sky the".
+/// 
+/// sol:
+/// 
+/// step1 mirror all "eulb si yks eht"
+/// step2 mirror each word    note: can mirror space
+// step 2 rotate each word
+
+[code]
+int len = str.Length;
+int left = 0;
+int right = 0;
+while (left < len)
+{
+    if (right == len || str[right] == ' ')
+    {
+        Rotate(str, left, right - 1);
+
+        // reset left and right
+        right = right + 1;   // skip curr space
+        left = right;
+    }
+    else
+    {
+        right++;
+    }
+}

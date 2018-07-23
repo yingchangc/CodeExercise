@@ -104,6 +104,7 @@
     <Compile Include="DataStructure\RangeSumQuery2D.cs" />
     <Compile Include="DataStructure\ReverseWordsinaString2.cs" />
     <Compile Include="DataStructure\RotateImage.cs" />
+    <Compile Include="DataStructure\ShortestRangeInKSortedArrays.cs" />
     <Compile Include="DataStructure\Skyline.cs" />
     <Compile Include="DataStructure\SlidingWindow.cs" />
     <Compile Include="DataStructure\SparseMatrixMultiplication.cs" />
@@ -245,6 +246,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Review\NeedCheckAnswer.txt" />
+    <Content Include="Review\NeedRevisit.txt" />
+    <Content Include="Review\Pattern.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

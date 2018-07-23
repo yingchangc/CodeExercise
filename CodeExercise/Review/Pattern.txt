@@ -1,0 +1,47 @@
+﻿
+/// <summary>
+/// 143. Sort Colors II
+/// https://www.lintcode.com/problem/sort-colors-ii/description
+/// Description
+/// Given an array of n objects with k different colors(numbered from 1 to k), sort them so that objects of the same 
+/// color are adjacent, with the colors in the order 1, 2, ... k.
+/// 
+/// Example
+/// Given colors =[3, 2, 2, 1, 4], k = 4, your code should sort colors in-place to[1, 2, 2, 3, 4].
+/// 
+/// Sol.
+/// 
+/// QSort
+
+private void qkSort(int[] colors, int k, int start, int end)
+{
+    if (colors == null || start >=end)
+    {
+        return;
+    }
+
+    int left = start;
+    int right = end;
+
+    int pivot = colors[(start + (end - start) / 2)];
+
+    while(left <= right)
+    {
+        while(left <= right && colors[left] < pivot)
+        {
+            left++;
+        }
+        while(left <= right && colors[right] > pivot)
+        {
+            right--;
+        }
+
+        if (left <= right)
+        {
+            swap(colors, left++, right--);
+        }
+    }
+
+    qkSort(colors, k, start, right);
+    qkSort(colors, k, left, end);
+}

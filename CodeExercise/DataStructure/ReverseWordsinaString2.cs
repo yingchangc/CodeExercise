@@ -35,19 +35,22 @@ namespace CodeExercise.DataStructure
             Console.WriteLine(str);
             // step 2 rotate each word
             int len = str.Length;
-            int start = 0;
-            for (int i = 0; i < len; i++)
+            int left = 0;
+            int right = 0;
+            while (left < len)
             {
-                if (str[i] == ' ')
+                if (right == len || str[right] == ' ')
                 {
-                    Rotate(str, start, i - 1);
-                    start = i + 1;  // yic : assume next is not space, if is, it will just rotate itself
-                }
-            }
+                    Rotate(str, left, right - 1);
 
-            if (start < len)
-            {
-                Rotate(str, start, len - 1);
+                    // reset left and right
+                    right = right + 1;   // skip curr space
+                    left = right;
+                }
+                else
+                {
+                    right++;
+                }
             }
 
             Console.WriteLine(str);

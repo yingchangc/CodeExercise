@@ -2587,11 +2587,28 @@ namespace CodeExercise
             var ans = question.IntersectionOfArraysSolver(arrs);
 
             
-    }
+        }
 
-    static void Main(string[] args)
+        static void Run_ShortestRangeInKSortedArrays()
+        {
+            DataStructure.ShortestRangeInKSortedArrays question = new DataStructure.ShortestRangeInKSortedArrays();
+
+            List<List<int>> arrs = new List<List<int>>();
+            arrs.Add(new List<int>() { 4, 10, 15, 24 });
+            arrs.Add(new List<int>() { 0, 9, 12, 20 });
+            arrs.Add(new List<int>() { 5, 18, 22, 30 });
+
+            var ans = question.ShortestRange(arrs);
+        }
+
+        static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            Run_ShortestRangeInKSortedArrays();
+
+            //186
+            Run_ReverseWordsinaString2();
+
             //793
             Run_IntersectionArrays();
 
@@ -2806,8 +2823,7 @@ namespace CodeExercise
             //138,325
             Run_SubarraySum();
 
-            //186
-            Run_ReverseWordsinaString2();
+            
 
             
             

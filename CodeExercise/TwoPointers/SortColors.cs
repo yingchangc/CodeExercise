@@ -23,7 +23,10 @@ namespace CodeExercise.TwoPointers
         /// sol:
         /// (1)A rather straight forward solution is a two-pass algorithm using counting sort.
         /// First, iterate the array counting number of 0's, 1's, and 2's, then overwrite array with total number of 0's, then 1's and followed by 2's.
-        /// (2)zero ptr in front, swap happen when [1] 1 [0]   and two ptr in the back
+        /// (2)use "zeroIdx"  and "twoIdx", 
+        ///    hit 1, i++,  
+        ///    hit 0  swap(i++, zeroIdx++),
+        ///    hit 2, swap(i, twoIdx--)  only, keep i for next check, in front, swap happen when [1] 1 [0]   and two ptr in the back
         public void SortColors1(int[] colors)
         {
             int len = colors.Length;
@@ -59,6 +62,10 @@ namespace CodeExercise.TwoPointers
         /// 
         /// Example
         /// Given colors =[3, 2, 2, 1, 4], k = 4, your code should sort colors in-place to[1, 2, 2, 3, 4].
+        /// 
+        /// Sol.
+        /// 
+        /// QSort
         /// </summary>
         /// <param name="colors"></param>
         /// <param name="k"></param>
