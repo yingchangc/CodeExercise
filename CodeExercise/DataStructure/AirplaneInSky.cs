@@ -39,6 +39,10 @@ namespace CodeExercise.DataStructure
         /// ]
         /// Return 3
         /// 
+        /// sol:
+        /// 
+        /// break  fly and landing into  2 item (+1  -1) and put into PQ
+        /// 
         /// </summary>
         /// <param name="airplanes"></param>
         /// <returns></returns>

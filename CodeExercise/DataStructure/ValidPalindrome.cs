@@ -85,6 +85,12 @@ namespace CodeExercise.DataStructure
         ///Explanation: You could delete the character 'c'.
         ///Note:
         ///The string will only contain lowercase characters a-z.The maximum length of the string is 50000.
+        ///
+        /// Sol:
+        /// 
+        /// check if curr string can be palindrome.
+        /// if not, remove left char || remove right char and see
+        /// 
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>

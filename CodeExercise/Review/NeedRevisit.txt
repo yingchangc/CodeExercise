@@ -35,3 +35,96 @@ while (left < len)
         right++;
     }
 }
+
+
+
+
+/// <summary>
+/// 680
+/// https://leetcode.com/problems/valid-palindrome-ii/description/
+/// Given a non-empty string s, you may delete at most one character. Judge whether you can make it a palindrome.
+///Example 1:
+///Input: "aba"
+///Output: True
+///Example 2:
+///Input: "abca"
+///Output: True
+///Explanation: You could delete the character 'c'.
+///Note:
+///The string will only contain lowercase characters a-z.The maximum length of the string is 50000.
+///
+/// Sol:
+/// 
+/// check if curr string can be palindrome.
+/// if not, remove left char || remove right char and see
+
+[code]
+if (!hasMismatch)
+{
+    return true;
+}
+else
+{
+    return simpleValidPalindrome(s.Substring(left, (right - left)))
+        || simpleValidPalindrome(s.Substring(left + 1, (right - left)));
+
+
+
+/// <summary>
+/// https://www.lintcode.com/problem/implement-strstr/description
+/// 13. Implement strStr()
+/// For a given source string and a target string, you should output the first index(from 0) of target string in source string.
+/// 
+/// If target does not exist in source, just return -1.
+/// 
+/// Example
+/// If source = "source" and target = "target", return -1.
+/// 
+/// If source = "abcdabcdefg" and target = "bcd", return 1.
+///  
+     Sol: corner condition like source or target is null
+
+O(n^2)
+
+for(int i=0; i <= (lenSource-lenTarget); i++)
+{
+    if (containsTarget(source, target, i, lenTarget))
+    {
+        return i;
+    }
+}
+
+(O(M+N))
+
+Sol: use hash  and walk through source until find the same len of the target and compare with target hash
+(1)first to find target (smaller string) hash
+foreach (char c in target)
+{
+    targetHash = (targetHash * 31 + c) % HashSlots;
+}
+
+(2) 
+if i > target.length, we need to substract (-) the highest bit by follow hash and prepare to new lower bit to add to hash
+get higest bit
+for(int i = 1; i <=targetLen; i++)
+{
+    hash = (hash * 31) % HashSlots;
+}
+
+
+// curr len is > target, need to remove high bit
+sourceSubStrHash -= ((source[i-target.Length] * highestpower)%HashSlots);
+if (sourceSubStrHash < 0)
+{
+    sourceSubStrHash += HashSlots;
+}
+
+if (sourceSubStrHash == targetHash)
+{
+    // need to double confirm with reach char compare, to prevent hash collision
+    if (source.Substring(i-target.Length+1, target.Length).Equals(target) )
+    {
+        return i - target.Length + 1;
+    }                
+}
+

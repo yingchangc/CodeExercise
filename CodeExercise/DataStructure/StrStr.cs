@@ -10,6 +10,20 @@ namespace CodeExercise.DataStructure
     {
         private static readonly int HashSlots = 1000;
         /// <summary>
+        /// https://www.lintcode.com/problem/implement-strstr/description
+        /// 13. Implement strStr()
+        /// For a given source string and a target string, you should output the first index(from 0) of target string in source string.
+        /// 
+        /// If target does not exist in source, just return -1.
+        /// 
+        /// Example
+        /// If source = "source" and target = "target", return -1.
+        /// 
+        /// If source = "abcdabcdefg" and target = "bcd", return 1.
+        /// 
+        /// Challenge
+        /// O(n^2) is acceptable.Can you implement an O(n) algorithm? (hint: KMP)
+        /// 
         /// Implement strStr function in O(n + m) time.
         /// strStr return the first index of the target string in a source string. 
         /// The length of the target string is m and the length of the source string is n.
@@ -53,12 +67,12 @@ namespace CodeExercise.DataStructure
                 // (a*31*31 + b*31 + c)  % 5
                 sourceSubStrHash = (sourceSubStrHash * 31 + source[i]) % HashSlots;
 
-                // yic : don't forget the first match
+                // now we have full length of target, check if first match. 
                 if (i==(target.Length-1) && sourceSubStrHash == targetHash)
                 {
                     return i - target.Length + 1;
                 }
-                // abc  + d 
+                // abc  + d,  remove the highest hash so we can add a newer low bit to hash (keep the same lenght as target) 
                 if (i >= target.Length)
                 {
 
@@ -74,6 +88,7 @@ namespace CodeExercise.DataStructure
 
                     if (sourceSubStrHash == targetHash)
                     {
+                        // need to double confirm with reach char compare, to prevent hash collision
                         if (source.Substring(i-target.Length+1, target.Length).Equals(target) )
                         {
                             return i - target.Length + 1;
