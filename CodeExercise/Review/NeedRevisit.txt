@@ -113,18 +113,95 @@ for(int i = 1; i <=targetLen; i++)
 
 
 // curr len is > target, need to remove high bit
-sourceSubStrHash -= ((source[i-target.Length] * highestpower)%HashSlots);
-if (sourceSubStrHash < 0)
+for (int i = 0; i < slen; i++)
 {
-    sourceSubStrHash += HashSlots;
-}
+    // (a*31*31 + b*31 + c)  % 5
+    sourceSubStrHash = (sourceSubStrHash * 31 + source[i]) % HashSlots;
 
-if (sourceSubStrHash == targetHash)
-{
-    // need to double confirm with reach char compare, to prevent hash collision
-    if (source.Substring(i-target.Length+1, target.Length).Equals(target) )
+    // now we have full length of target, check if first match. 
+    if (i==(target.Length-1) && sourceSubStrHash == targetHash)
     {
         return i - target.Length + 1;
-    }                
+    }
+    // abc  + d,  remove the highest hash so we can add a newer low bit to hash (keep the same lenght as target) 
+    if (i >= target.Length)
+    {
+
+        // substract the highest bit number
+        //sourceSubStrHash -= ((source[i-targetlen] * 31 ^ (target.Length))%HashSlots);    // might overflow
+
+        sourceSubStrHash -= ((source[i-target.Length] * highestpower)%HashSlots);
+
+        if (sourceSubStrHash < 0)
+        {
+            sourceSubStrHash += HashSlots;
+        }
+
+        if (sourceSubStrHash == targetHash)
+        {
+            // need to double confirm with reach char compare, to prevent hash collision
+            if (source.Substring(i-target.Length+1, target.Length).Equals(target) )
+            {
+                return i - target.Length + 1;
+            }                
+        }
+
+    }
 }
 
+
+
+//235
+//https://www.lintcode.com/problem/prime-factorization/description
+// Given 10, return [2, 5].
+//Given 660, return [2, 2, 3, 5, 11].
+// O(sqrt(N))
+[CODE]
+// 34,   sqrt = 5   i = 2~5 check, any thing > 5 must be prime, otherwise, a smaller one should make it small
+for (int i = 2; i*i <= num; i++)    // yic sqrt   34  after sqrt, if != 1, the rest must be a prime
+{
+    while (num%i ==0)
+    {
+        ans.Add(i);
+        num /= i;
+    }
+}
+
+if (num > 1)
+{
+    ans.Add(num);
+}
+
+
+
+/// 50. Pow(x, n)
+/// https://leetcode.com/problems/powx-n/description/
+/// Implement pow(x, n), which calculates x raised to the power n (xn).
+else if (n < 0)
+{
+    // yic
+    //max 2147483647
+    //min -2147483648
+    if (n == Int32.MinValue)     
+    {
+        return MyPow(Math.Abs(1 / x), Int32.MaxValue);  // -2147483648  -> 2147483647   if - value, the final is positive
+    }
+    return MyPow(1 / x, -n);
+}  
+
+private double powerHelper(double x, int n)
+{
+    if (n == 1)
+    {
+        return x;
+    }
+    double half = powerHelper(x, n / 2);
+
+    if (n%2 == 0)
+    {
+        return half * half;
+    }
+
+    return half * half * x;
+
+}        
