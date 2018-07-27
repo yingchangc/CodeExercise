@@ -204,4 +204,155 @@ private double powerHelper(double x, int n)
 
     return half * half * x;
 
-}        
+}       
+
+
+/// lint 140 fast power
+///  https://www.lintcode.com/problem/fast-power/description
+///  Calculate the a^n % b where a, b and n are all 32bit integers.
+///  For 2^31 % 3 = 2
+[code]
+hanle a=0  n = 0 case.
+Then
+
+long product = fastPowerSolver(a, b, n / 2);
+product = (product * product) %b;
+if (n%2 == 0)
+{
+    return (int)product;
+}
+return (int)((product * a) %b);
+
+
+/// 585. Maximum Number in Mountain Sequence
+/// https://www.lintcode.com/en/old/problem/maximum-number-in-mountain-sequence/
+/// 
+/// Given a mountain sequence of n integers which increase firstly and then decrease, find the mountain top.
+/// Example
+/// Given nums = [1, 2, 4, 8, 6, 3] return 8
+/// Given nums = [10, 9, 8, 7], return 10 
+[code]
+while((left + 1) < right)
+{
+    // must be at least 3 elem to check
+    int mid = left + (right - left) / 2;
+
+    if (nums[mid-1] < nums[mid] && nums[mid] > nums[mid+1])     // yic  check mid-1  mid mid+1   not left, right
+    {
+        return nums[mid];
+    }
+    else if (nums[mid-1] <= nums[mid])
+    {
+        left = mid;
+    }
+    else
+    {
+        right = mid;
+    }
+}
+// when out, it must be on the left/right edge
+return Math.Max(nums[left], nums[right]);
+
+
+
+/// 153
+/// https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/
+/// Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.
+/// (i.e.,  [0,1,2,4,5,6,7]
+///         might become[4, 5, 6, 7, 0, 1, 2]).
+/// 
+case     4 5 6 [0] "1" 2 3
+case     4 5 6 [7] 8 9 "2"
+
+/// Find the minimum element.
+/// use binary search, and use "midV vs arr[right]""
+///   smaller => go left to  get smallest,  bigger => go right
+[code]
+while((left +1) < right)
+{
+    int mid = left + (right - left) / 2;
+
+    // yic  find smallest, check  mid and right
+    // mid < right  (ascending),  go left to fiind min
+    if (nums[mid] <= nums[right])
+    {
+        right = mid;
+    }
+    else
+    {
+        // 3 [4] 5 2
+        left = mid;
+    }
+}
+
+return nums[left] < nums[right] ? nums[left] : nums[right];
+
+
+
+/// <summary>
+/// 33. Search in Rotated Sorted Array
+/// https://leetcode.com/problems/search-in-rotated-sorted-array/description/
+/// Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.
+/// (i.e., [0,1,2,4,5,6,7]
+///         might become[4, 5, 6, 7, 0, 1, 2]).
+/// 
+/// You are given a target value to search.If found in the array return its index, otherwise return -1.
+/// 
+/// You may assume no duplicate exists in the array.
+case     4 5 6 [0] 1 2 3
+case     4 5 6 [7] 8 9 2
+[code]
+while(left +1 < right)
+{
+    int mid = left + (right - left)/2;
+    if (nums[mid] == target)
+    {
+        return mid;
+    }
+    // ascendint region
+    if (nums[mid] < nums[right])
+    {
+        if (nums[mid] <= target && target <= nums[right])
+        {
+            left = mid;
+        }
+        else
+        {
+            right = mid;
+        }
+    }
+    else
+    {
+        //3 4 [5] 6 1
+        if (nums[left] <= target && target <= nums[mid])
+        {
+            right = mid;
+        }
+            else
+        {
+            left = mid;
+        }
+    }
+
+}
+
+if (nums[left] == target)
+{
+    return left;
+}
+else if (nums[right] == target)
+{
+    return right;
+}
+return -1;
+
+
+
+//235
+//Prime Factorization
+//https://www.lintcode.com/problem/prime-factorization/description
+// Given 10, return [2, 5].
+//Given 660, return [2, 2, 3, 5, 11].
+[code]
+// 34,   sqrt = 5   i = 2~5 check, any thing > 5 must be prime, otherwise, a smaller one should make it small
+for (int i = 2; i*i <= num; i++)    // yic sqrt   34  after sqrt, if != 1, the rest must be a prime

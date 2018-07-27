@@ -10,6 +10,7 @@ namespace CodeExercise.BinarySearch
     {
         // lint 485
         /// <summary>
+        /// 458. Last Position of Target
         /// https://www.lintcode.com/en/old/problem/last-position-of-target/
         /// 
         /// Find the last position of a target number in a sorted array. Return -1 if target does not exist.

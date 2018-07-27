@@ -10,6 +10,7 @@ namespace CodeExercise.BinarySearch
     {
         /// <summary>
         /// 162
+        /// Find Peak Element
         /// https://leetcode.com/problems/find-peak-element/description/
         /// A peak element is an element that is greater than its neighbors.
         /// Given an input array where num[i] ≠ num[i + 1], find a peak element and return its index.
@@ -31,6 +32,7 @@ namespace CodeExercise.BinarySearch
 
             while(left+1 < right)
             {
+                //at least 3 elemt
                 int mid = (left + right) / 2;
                 if (nums[mid] <= nums[mid + 1])
                 {

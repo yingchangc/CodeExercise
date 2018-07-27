@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace CodeExercise.Number
 {
     //235
+    //Prime Factorization
     //https://www.lintcode.com/problem/prime-factorization/description
     // Given 10, return [2, 5].
     //Given 660, return [2, 2, 3, 5, 11].
