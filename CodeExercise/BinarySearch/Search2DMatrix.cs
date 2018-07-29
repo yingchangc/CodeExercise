@@ -36,11 +36,66 @@ namespace CodeExercise.BinarySearch
         /// <param name="matrix"></param>
         /// <param name="target"></param>
         /// <returns></returns>
-        public bool SearchMatrix2(int[,] matrix, int target)
+        public int SearchMatrix2(int[,] matrix, int target)
         {
+            int rows = matrix.GetLength(0);
+            int cols = matrix.GetLength(1);
 
+            int count = 0;
+            // start from left bottom
+            int r = rows - 1;
+            int c = 0;
+            
+            while (r >=0 && c< cols)
+            {
+                if (matrix[r, c] == target)
+                {
+                    count++;
+                    r--;  // can only go up for smaller
+                }
+                else if (matrix[r, c] > target)
+                {
+                    r--;
+                }
+                else
+                {
+                    //matrix[r, c] < target
+                    c++;
+                }
+            }
+
+            return count;
         }
 
+
+        public bool SearchMatrixLeet2(int[,] matrix, int target)
+        {
+            int rows = matrix.GetLength(0);
+            int cols = matrix.GetLength(1);
+
+            // start from left bottom
+            int r = rows - 1;
+            int c = 0;
+
+            while (r >= 0 && c < cols)
+            {
+                if (matrix[r, c] == target)
+                {
+                    return true;
+                }
+                else if (matrix[r, c] > target)
+                {
+                    r--;
+                }
+                else
+                {
+                    //matrix[r, c] < target
+                    c++;
+                }
+            }
+
+            return false;
+        }
 
         /// <summary>
         /// 28. Search a 2D Matrix

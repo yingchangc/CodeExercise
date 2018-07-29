@@ -2604,6 +2604,9 @@ namespace CodeExercise
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //464
+            Run_SortIntegers();
+
             Run_ShortestRangeInKSortedArrays();
 
             //186
@@ -2735,8 +2738,7 @@ namespace CodeExercise
             Run_SortColors();
             //215
             Run_KthLargestInArray();
-            //464
-            Run_SortIntegers();
+            
             //26
             Run_RemoveDuplicate();
 

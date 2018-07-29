@@ -18,7 +18,62 @@ namespace CodeExercise.TwoPointers
         /// <param name="A"></param>
         public void sortIntegers2(int[] A)
         {
-            qSort(A, 0, A.Length - 1);
+            if (A == null || A.Length == 0)
+            {
+                return;
+            }
+            int[] temp = new int[A.Length];
+            MergeSort(A, 0, A.Length - 1, temp);
+            //qSort(A, 0, A.Length - 1);
+        }
+
+
+        private void MergeSort(int[] A, int start, int end, int[] temp)
+        {
+            if (start >=end)
+            {
+                return;
+            }
+
+            MergeSort(A, start, (start + end) / 2, temp);
+            MergeSort(A, (start + end) / 2 + 1, end, temp);
+            Merge(A, start, end, temp);
+        }
+
+        private void Merge(int[] A, int start, int end, int[] temp)
+        {
+            int left1 = start;
+            int right1 = (start + end) / 2;
+            int left2 = (start + end) / 2 +1;
+            int right2 = end;
+
+            int tempIdx = start;
+
+            while(left1 <= right1 && left2 <=right2)
+            {
+                if (A[left1] <= A[left2])
+                {
+                    temp[tempIdx++] = A[left1++];
+                }
+                else
+                {
+                    temp[tempIdx++] = A[left2++];
+                }
+            }
+
+            while(left1 <= right1)
+            {
+                temp[tempIdx++] = A[left1++];
+            }
+            while (left2 <= right2)
+            {
+                temp[tempIdx++] = A[left2++];
+            }
+
+            for (int i = start; i <=end; i++)
+            {
+                A[i] = temp[i];
+            }
         }
 
         private void qSort(int[] nums, int start, int end)

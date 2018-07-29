@@ -59,6 +59,7 @@
     <Compile Include="BinarySearch\LastPositionofTarget.cs" />
     <Compile Include="BinarySearch\MaximumNumberinMountainSequence.cs" />
     <Compile Include="BinarySearch\PowXN.cs" />
+    <Compile Include="BinarySearch\Search2DMatrix.cs" />
     <Compile Include="BinarySearch\SearchforaRange.cs" />
     <Compile Include="BinarySearch\SearchInRotatedSortedArray.cs" />
     <Compile Include="BinarySearch\SearchInsertPosition.cs" />
