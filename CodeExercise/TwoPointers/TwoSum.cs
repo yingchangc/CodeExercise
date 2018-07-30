@@ -213,7 +213,7 @@ namespace CodeExercise.TwoPointers
                 if (nums[left] + nums[right] > target)
                 {
                     ans += (right - left);    // yic means [left  .... + (right will be also greater   ex.  3  4 5  6 [7]   target  3+[7] =10  
-                                              //means 4+[7]  5+[7] will be greater as well,  next step we move right [7], so won't have duplicate  
+                                              //means 4+[7]  5+[7] will be greater as well,  next step we move left [7], so won't have duplicate  
                     right--;
                 }
                 else
@@ -258,6 +258,70 @@ namespace CodeExercise.TwoPointers
         }
 
 
+        /// <summary>
+        /// 610. Two Sum - Difference equals to target
+        /// https://www.lintcode.com/problem/two-sum-difference-equals-to-target/description
+        /// Given an array of integers, find two numbers that their difference equals to a target value.
+        /// where index1 must be less than index2.Please note that your returned answers(both index1 and index2) are NOT zero-based.
+        /// 
+        ///   Example
+        ///   Given nums = [2, 7, 15, 24], target = 5
+        /// return [1, 2] (7 - 2 = 5)
+        /// 
+        /// sol  
+        /// if use the origin sum   left     .... right
+        /// 
+        /// if a[right] -a[left] > target.   should move left or right? is confusing
+        /// 
+        /// so   use the 
+        /// 
+        /// 我们可以先尝试一下两数之和的方法，发现并不奏效，因为即便在数组已经排好序的前提下，nums[i] - nums[j] 与 target 之间的关系并不能决定我们淘汰掉 nums[i] 或者 nums[j]。
 
+        /// 那么我们尝试一下将两根指针同向前进而不是相向而行，在 i 指针指向 nums[i] 的时候，j 指针指向第一个使得 nums[j] - nums[i] >= |target| 的下标 j：
+        /// 
+        /// 如果 nums[j] - nums[i] == |target|，那么就找到答案
+        /// 否则的话，我们就尝试挪动 i，让 i 向右挪动一位 => i++
+        /// 此时我们也同时将 j 向右挪动，直到 nums[j] - nums[i] >= |target|
+        /// 可以知道，由于 j 的挪动不会从头开始，而是一直递增的往下挪动，那么这个时候，i 和 j 之间的两个循环的就不是累乘关系而是叠加关系。
+        /// 
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public int[] twoSum7_diffHashmap(int[] nums, int target)
+        {
+            int len = nums.Length;
+
+            Dictionary<int, int> lookup = new Dictionary<int, int>();
+
+            for (int i = 0; i < len; i++)
+            {
+                // x - arr[i] == target
+
+                if (lookup.ContainsKey(nums[i] + target))
+                {
+                    int[] ans = new int[2];
+                    ans[0] = lookup[nums[i] + target];
+                    ans[1] = i;
+                    return ans;
+                }
+
+                // arr[i] -x == target
+                if (lookup.ContainsKey(nums[i] - target))
+                {
+                    int[] ans = new int[2];
+                    ans[0] = lookup[nums[i] - target];
+                    ans[1] = i;
+                    return ans;
+                }
+
+                lookup.Add(nums[i], i);
+
+            }
+
+            return null;
+        }
     }
+
+    
 }

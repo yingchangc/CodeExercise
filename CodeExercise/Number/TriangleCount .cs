@@ -29,7 +29,9 @@ namespace CodeExercise.Number
         ///[4(2),4(3),4(4)]
         ///
         /// 
-        /// Sol  use 2 ptr
+        /// Sol
+        /// The sum of the lengths of any two sides of a triangle is greater than the length of the third side.
+        /// use 2 ptr
         /// 
         /// left, right   i
         /// 
@@ -45,8 +47,9 @@ namespace CodeExercise.Number
             int ans = 0;
             int len = arr.Length;
 
-            for (int i = 0; i <len; i++)
+            for (int i = len-1; i >=2; i--)
             {
+                // two sum greater
                 int left = 0;
                 int right = i - 1;
 

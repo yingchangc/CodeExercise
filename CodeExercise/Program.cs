@@ -1821,17 +1821,11 @@ namespace CodeExercise
         static void Run_TriangleCount()
         {
             Number.TriangleCount question = new Number.TriangleCount();
-            int[] arr = { 3, 6, 4, 8 };
+            int[] arr = { 3, 6, 4, 7 };
             var ans = question.TriangleCountSolver(arr);
         }
 
-        //lint 609
-        static void Run_TwoSumEqLessTarget()
-        {
-            Number.TwoSumLETarget question = new Number.TwoSumLETarget();
-            int[] arr = { 2, 7, 11, 15};
-            var ans = question.TwoSum5(arr, 24);
-        }
+       
 
         //425
         static void Run_WordSquares()
@@ -2601,9 +2595,22 @@ namespace CodeExercise
             var ans = question.ShortestRange(arrs);
         }
 
+        //lint 604
+        static void Run_WindowSum()
+        {
+            TwoPointers.WindowSum question = new TwoPointers.WindowSum();
+            int[] nums = { 1, 2, 7, 8, 5 };
+            var ans = question.WinSum(nums, 3);
+        }
+
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            // lint 382
+            Run_TriangleCount();
+
+            //604
+            Run_WindowSum();
             //464
             Run_SortIntegers();
 
@@ -2765,10 +2772,7 @@ namespace CodeExercise
             //425
             Run_WordSquares();
 
-            //lint 609
-            Run_TwoSumEqLessTarget();
-            // lint 382
-            Run_TriangleCount();
+            
 
             // 76
             Run_Minimum_Window_Substring();

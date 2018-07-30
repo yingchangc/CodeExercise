@@ -204,7 +204,6 @@
     <Compile Include="Number\ReverseInteger.cs" />
     <Compile Include="Number\ShuffleCard.cs" />
     <Compile Include="Number\TriangleCount .cs" />
-    <Compile Include="Number\TwoSumLETarget.cs" />
     <Compile Include="OOD\ElevatorSystem.cs" />
     <Compile Include="OOD\LRUCache.cs" />
     <Compile Include="Program.cs" />
@@ -243,6 +242,7 @@
     <Compile Include="TwoPointers\SortColors.cs" />
     <Compile Include="TwoPointers\ThreeSum.cs" />
     <Compile Include="TwoPointers\TwoSum.cs" />
+    <Compile Include="TwoPointers\WindowSum.cs" />
     <Compile Include="Window\MinimumSizeSubarraySum.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -252,6 +252,7 @@
     <Content Include="Review\NeedCheckAnswer.txt" />
     <Content Include="Review\NeedRevisit.txt" />
     <Content Include="Review\Pattern.txt" />
+    <Content Include="Review\Similiar.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

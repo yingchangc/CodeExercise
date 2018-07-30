@@ -64,19 +64,25 @@ namespace CodeExercise.DataStructure
             ListNode fast = head;
 
             //phase 1 find meet point
-            do
+            while (fast != null && fast.next != null && fast.next.next != null)
             {
-                if (fast.next == null || fast.next.next == null)
-                {
-                    return null;
-                }
-                fast = fast.next.next;
                 slow = slow.next;
-            } while (slow != fast);
+                fast = fast.next.next;
+
+                if (slow == fast)
+                {
+                    break;
+                }
+            }
+
+            if (fast == null || fast.next == null || fast.next.next == null)
+            {
+                return null;
+            }
 
             // phase 2
             ListNode start = head;
-            while(start != slow)
+            while (start != slow)
             {
                 start = start.next;
                 slow = slow.next;

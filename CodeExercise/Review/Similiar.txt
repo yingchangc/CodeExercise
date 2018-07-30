@@ -1,0 +1,37 @@
+﻿/// 443. Two Sum - Greater than target
+/// https://www.lintcode.com/problem/two-sum-greater-than-target/description
+/// Given an array of integers, find how many pairs in the array such that their sum is bigger than a specific target number. 
+/// Please return the number of pairs.
+///Example
+///Given numbers = [2, 7, 11, 15], target = 24. Return 1. (11 + 15 is the only pair)
+ [code]
+ Array.Sort(nums);
+int right = nums.Length-1;
+int left = 0;
+
+while(left < right)
+{
+    if (nums[left] + nums[right] > target)
+    {
+        ans += (right - left);    // yic means [left  .... + (right will be also greater   ex.  3  4 5  6 [7]   target  3+[7] =10  
+                                    //means 4+[7]  5+[7] will be greater as well,  next step we move left [7], so won't have duplicate  
+        right--;
+    }
+    else
+    {
+        left++;
+    }              
+}
+
+/// <summary>
+/// Lint 382. Triangle Count 
+/// https://www.lintcode.com/en/old/problem/triangle-count/
+/// Given an array of integers, how many three numbers can be found in the array, 
+/// so that we can build an triangle whose three edges length is the three numbers that we find?
+
+/// Given array S = [3,4,6,7], return 3. They are:
+///
+///[3,4,6]
+///[3,6,7]
+///[4,6,7]
+///Given array S = [4,4,4,4], return 4. They are:
