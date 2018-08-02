@@ -560,3 +560,204 @@ while(left < right)
     }              
 }
 
+
+/// 200. Number of Islands
+/// Given a 2d grid map of '1's (land) and '0's (water), count the number of islands. An island is surrounded by water and is formed 
+/// by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.
+[code]
+
+ for (int j = 0; j < m; j++)
+{
+    for (int i = 0; i < n; i++)
+    {
+        if (grid[j, i] == '1' && visited[j, i] == false)
+        {
+            // go to BFS and mark visited
+            BFSHelper(grid, visited, m, n, i, j);
+            numOFIsland++;
+        }
+    }
+}
+
+ private void BFSHelper(char[,] grid, bool[,] visited, int m, int n, int i, int j)
+{
+    Queue<Location> stk = new Queue<Location>();
+    stk.Enqueue(new Location(i, j));
+
+    visited[j, i] = true;
+    // need to look for 4 dirs, because we rely on all must be visited in a BFS helper,  each push can be from all dirs
+    List<Location> deltas = new List<Location>() { new Location(1, 0), new Location(-1, 0), new Location(0, 1), new Location(0, -1) };
+
+    while (stk.Count > 0)
+    {
+        var loc = stk.Dequeue();
+
+        foreach (var delta in deltas)
+        {
+            int nx = loc.x + delta.x;
+            int ny = loc.y + delta.y;
+            if ((nx >= 0 && nx < n) && (ny >= 0 && ny < m) && grid[ny, nx] == '1' && visited[ny, nx] == false)  // not yet visited land
+            {
+                visited[ny, nx] = true;
+                stk.Enqueue(new Location(nx, ny));
+            }
+        }
+    }
+}
+
+
+/// 207. Course Schedule
+/// https://leetcode.com/problems/course-schedule/description/
+/// There are a total of n courses you have to take, labeled from 0 to n-1.
+
+/// Some courses may have prerequisites, for example to take course 0 you have to first take course 1, which is expressed as a pair: [0,1]
+/// 
+/// Given the total number of courses and a list of prerequisite pairs, is it possible for you to finish all courses?
+/// Example:
+/// 
+/// Input: 2, [[1,0],[0,1]]
+/// Output: false
+sol:
+// (1) compute the inbound count and build child graph (so that we can traverse to next child)
+Dictionary<int, int> inLookup = new Dictionary<int, int>();   // node , inbound count
+Dictionary<int, List<int>> childLookup = new Dictionary<int, List<int>>();   // parent-> children
+// (2) put no inbound to queue
+ for (int i = 0; i < numCourses; i++)
+{
+    if (!inbound.ContainsKey(i))
+    {
+        ans.Add(i);
+        queue.Enqueue(i);
+    }
+}
+
+// (3) traverse to next course, --child inbound, 0 then put to queue, finish when queue empty
+    int finishCount = 0;
+    while (queue.Count > 0)
+    {
+        int curr = queue.Dequeue();  // 0  root
+        finishCount++;
+        if (childLookup.ContainsKey(curr))   // yic  prevent the last node  no child exception
+        {
+            var ListNextCourses = childLookup[curr];
+            foreach (int nxt in ListNextCourses)
+            {
+                inLookup[nxt]--;
+
+                // new root node found
+                if (inLookup[nxt] == 0)
+                {
+                    queue.Enqueue(nxt);  // only no pre can insert to queue
+                }
+            }
+        }
+    }
+
+    return finishCount == numCourses;
+
+
+
+/// lint 611 Knight Shortest Path
+/// https://www.lintcode.com/problem/knight-shortest-path/description
+/// Given a knight in a chessboard (a binary matrix with 0 as empty and 1 as barrier) with a source position, find the shortest path to a destination position, return the length of the route.
+/// Return -1 if knight can not reached.
+/// 
+/// If the knight is at (x, y), he can get to the following positions in one step:
+/// (x + 1, y + 2)
+/// (x + 1, y - 2)
+/// (x - 1, y + 2)
+/// (x - 1, y - 2)
+/// (x + 2, y + 1)
+/// (x + 2, y - 1)
+/// (x - 2, y + 1)
+/// (x - 2, y - 1)
+//Sol :use BFS level order to get min steps count
+[code]
+step = 0;
+while(queue.Count > 0)
+{
+    int levelSize = queue.Count;
+
+    for (int i = 0; i <levelSize; i++)
+    {
+        var curr = queue.Dequeue();
+
+        if (curr.x == destination.x && curr.y == destination.y)
+        {
+            return steps;    // yic check  source == destination
+        }
+
+        // look for 8 surrandings 
+        foreach (var deltaP in deltas)
+        {
+            var newPoint = new Point(curr.x + deltaP.x, curr.y + deltaP.y);
+
+            if (newPoint.x >= 0 && newPoint.x < xLen && newPoint.y >= 0 && newPoint.y < yLen
+                && grid[newPoint.x, newPoint.y] == false   // no block
+                && visited[newPoint.x, newPoint.y] == false)
+            {
+                visited[newPoint.x, newPoint.y] = true;   //yic  true first
+                queue.Enqueue(newPoint);
+            }
+        }
+
+    }
+
+    steps++;  // yic, step ++ here   ex, source==dest
+}
+
+
+/// 444. Sequence Reconstruction
+/// https://leetcode.com/problems/sequence-reconstruction/description/
+/// Check whether the original sequence org can be uniquely reconstructed from the sequences in seqs. The org sequence is a 
+/// permutation of the integers from 1 to n, with 1 ≤ n ≤ 10^4. Reconstruction means building a shortest common supersequence 
+/// of the sequences in seqs (i.e., a shortest sequence so that all sequences in seqs are subsequences of it). 
+/// Determine whether there is only one sequence that can be reconstructed from seqs and it is the org sequence.
+/// Example 1:
+/// 
+/// Input:
+/// org: [1,2,3], seqs: [[1,2,3],[1,3]]
+sol:
+ use topological sort. None anyone seq can bigger than count 2.
+ if unique. 
+ // early terminate when more than 1 choices
+ while(queue.Count == 1)
+
+ if (org.Length == tSortArr.Count && inbound.Keys.Count == org.Length)   //yic make sure inbound all node are calculated
+
+
+/// 133 Clone Graph
+/// https://leetcode.com/problems/clone-graph/description/
+/// 
+/// Clone an undirected graph. Each node in the graph contains a label and a list of its neighbors.
+/// 
+/// Nodes are labeled uniquely.
+/// 
+/// We use # as a separator for each node, and , as a separator for node label and each neighbor of the node.
+/// As an example, consider the serialized graph {
+///             0,1,2#1,2#2,2}.
+/// 
+/// The graph has a total of three nodes, and therefore contains three parts as separated by #.
+/// 
+/// First node is labeled as 0.Connect node 0 to both nodes 1 and 2.
+/// Second node is labeled as 1.Connect node 1 to node 2.
+/// Third node is labeled as 2.Connect node 2 to node 2(itself), thus forming a self-cycle.
+/// Sol:
+///  first copy node by bfs to dictionary<orig, new>
+/// for each dic keys, find orig neighbors and assign coped neighbor to new node 
+[code]
+Queue<UndirectedGraphNode> queue = new Queue<UndirectedGraphNode>();
+Dictionary<UndirectedGraphNode, UndirectedGraphNode> lookup = new Dictionary<UndirectedGraphNode, UndirectedGraphNode>();  // old, new
+queue.Enqueue(node);
+lookup.Add(node, new UndirectedGraphNode(node.label));
+
+
+ // link new neighbors by old neighbors
+foreach(UndirectedGraphNode n in lookup.Keys)
+{
+    var copiedNode = lookup[n];
+    foreach(var neighbor in n.neighbors)
+    {
+        copiedNode.neighbors.Add(lookup[neighbor]);
+    }
+}

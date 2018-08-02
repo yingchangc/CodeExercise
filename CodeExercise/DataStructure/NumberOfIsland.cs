@@ -73,16 +73,16 @@ namespace CodeExercise.DataStructure
 
         private void BFSHelper(char[,] grid, bool[,] visited, int m, int n, int i, int j)
         {
-            Stack<Location> stk = new Stack<Location>();
-            stk.Push(new Location(i, j));
+            Queue<Location> stk = new Queue<Location>();
+            stk.Enqueue(new Location(i, j));
 
+            visited[j, i] = true;
             // need to look for 4 dirs, because we rely on all must be visited in a BFS helper,  each push can be from all dirs
             List<Location> deltas = new List<Location>() { new Location(1, 0), new Location(-1, 0), new Location(0, 1), new Location(0, -1) };
 
             while (stk.Count > 0)
             {
-                var loc = stk.Pop();
-                visited[loc.y, loc.x] = true;
+                var loc = stk.Dequeue();
 
                 foreach (var delta in deltas)
                 {
@@ -90,7 +90,8 @@ namespace CodeExercise.DataStructure
                     int ny = loc.y + delta.y;
                     if ((nx >= 0 && nx < n) && (ny >= 0 && ny < m) && grid[ny, nx] == '1' && visited[ny, nx] == false)  // not yet visited land
                     {
-                        stk.Push(new Location(nx, ny));
+                        visited[ny, nx] = true;
+                        stk.Enqueue(new Location(nx, ny));
                     }
                 }
             }

@@ -43,6 +43,11 @@ namespace CodeExercise.BFS
         /// <param name="grid"></param>
         /// <param name="source"></param>
         /// <param name="destination"></param>
+        /// 
+        /// 
+        /// sol:
+        /// 
+        /// use BFS level order to get min steps count
         /// <returns></returns>
         public int ShortestPath(bool[,] grid, Point source, Point destination)
         {

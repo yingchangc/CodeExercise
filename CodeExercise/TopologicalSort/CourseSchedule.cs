@@ -139,8 +139,8 @@ namespace CodeExercise.TopologicalSort
         public bool CanFinish(int numCourses, int[,] prerequisites)
         {
             // (1) compute the inbound count and build child graph
-            Dictionary<int, int> inLookup = new Dictionary<int, int>();
-            Dictionary<int, List<int>> childLookup = new Dictionary<int, List<int>>();
+            Dictionary<int, int> inLookup = new Dictionary<int, int>();   // node , inbound count
+            Dictionary<int, List<int>> childLookup = new Dictionary<int, List<int>>();   // parent-> children
             int edges = prerequisites.GetLength(0);
             
             for (int i =0; i < edges; i++)

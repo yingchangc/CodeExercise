@@ -146,3 +146,133 @@ while (start != slow)
 }
 
 return start;
+
+
+
+/// 102. Binary Tree Level Order Traversal
+/// https://leetcode.com/problems/binary-tree-level-order-traversal/description/
+/// Given a binary tree, return the level order traversal of its nodes' values. (ie, from left to right, level by level).
+[code]
+public IList<IList<int>> LevelOrder(TreeNode root)
+{
+    List<List<int>> ans = new List<List<int>>();
+    Queue<TreeNode> queue = new Queue<TreeNode>();
+
+    if (root == null)
+    {
+        return ans.ToArray();
+    }
+
+    queue.Enqueue(root);
+
+    while(queue.Count >0)
+    {
+        // each time current queue contains all node of this level
+        int size = queue.Count;
+
+        List<int> levelAns = new List<int>();
+
+        for(int i = 0; i <size; i++)
+        {
+            var top = queue.Dequeue();
+
+            levelAns.Add(top.val);
+
+            if (top.left != null)
+            {
+                queue.Enqueue(top.left);
+            }
+
+            if (top.right != null)
+            {
+                queue.Enqueue(top.right);
+            }
+        }
+
+        ans.Add(levelAns); 
+    }
+
+    return ans.ToArray();
+}
+
+
+//615. Course Schedule
+//There are a total of n courses you have to take, labeled from 0 to n - 1.
+//Some courses may have prerequisites, for example to take course 0 you have to first take course 1, which is expressed as a pair: [0,1]
+// (1) compute the inbound count and build child graph (so that we can traverse to next child)
+Dictionary<int, int> inLookup = new Dictionary<int, int>();   // node , inbound count
+Dictionary<int, List<int>> childLookup = new Dictionary<int, List<int>>();   // parent-> children
+// (2) put no inbound to queue
+// (3) traverse to next course, --child inbound, 0 then put to queue, finish when queue empty
+
+
+//BFS
+// T 指代任何你希望存储的类型
+Queue<T> queue = new LinkedList<>();
+Set<T> set = new HashSet<>();
+
+set.add(start);
+queue.offer(start);
+while (!queue.isEmpty()) {
+    int size = queue.size();
+    for (int i = 0; i < size; i++) {
+        T head = queue.poll();
+        for (T neighbor : head.neighbors) {
+            if (!set.contains(neighbor)) {
+                set.add(neighbor);
+                queue.offer(neighbor);
+            }
+        }
+    }
+}
+
+
+/// lint 611 Knight Shortest Path
+/// https://www.lintcode.com/problem/knight-shortest-path/description
+/// Given a knight in a chessboard (a binary matrix with 0 as empty and 1 as barrier) with a source position, find the shortest path to a destination position, return the length of the route.
+/// Return -1 if knight can not reached.
+/// 
+/// If the knight is at (x, y), he can get to the following positions in one step:
+/// (x + 1, y + 2)
+/// (x + 1, y - 2)
+/// (x - 1, y + 2)
+/// (x - 1, y - 2)
+/// (x + 2, y + 1)
+/// (x + 2, y - 1)
+/// (x - 2, y + 1)
+/// (x - 2, y - 1)
+//Sol :use BFS level order to get min steps count
+[code]
+step = 0;
+ visited[source.x, source.y] = true;
+
+while(queue.Count > 0)
+{
+    int levelSize = queue.Count;
+
+    for (int i = 0; i <levelSize; i++)
+    {
+        var curr = queue.Dequeue();
+
+        if (curr.x == destination.x && curr.y == destination.y)
+        {
+            return steps;    // yic check  source == destination
+        }
+
+        // look for 8 surrandings 
+        foreach (var deltaP in deltas)
+        {
+            var newPoint = new Point(curr.x + deltaP.x, curr.y + deltaP.y);
+
+            if (newPoint.x >= 0 && newPoint.x < xLen && newPoint.y >= 0 && newPoint.y < yLen
+                && grid[newPoint.x, newPoint.y] == false   // no block
+                && visited[newPoint.x, newPoint.y] == false)
+            {
+                visited[newPoint.x, newPoint.y] = true;   //yic  true first
+                queue.Enqueue(newPoint);
+            }
+        }
+    }
+
+    steps++;  // yic, step ++ here   ex, source==dest
+}

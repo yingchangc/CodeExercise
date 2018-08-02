@@ -42,8 +42,7 @@ namespace CodeExercise.BFS
             }
 
             Queue<UndirectedGraphNode> queue = new Queue<UndirectedGraphNode>();
-            Dictionary<UndirectedGraphNode, UndirectedGraphNode> lookup = new Dictionary<UndirectedGraphNode, UndirectedGraphNode>();
-
+            Dictionary<UndirectedGraphNode, UndirectedGraphNode> lookup = new Dictionary<UndirectedGraphNode, UndirectedGraphNode>();  // old, new
             queue.Enqueue(node);
             lookup.Add(node, new UndirectedGraphNode(node.label));
 
