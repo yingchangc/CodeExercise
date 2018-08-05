@@ -2606,6 +2606,9 @@ namespace CodeExercise
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //133
+            Run_CloneGraph();
+
             // lint 382
             Run_TriangleCount();
 
@@ -2730,8 +2733,7 @@ namespace CodeExercise
             Run_KnightShortestPath();
 
             
-            //133
-            Run_CloneGraph();
+            
             //207
             Run_CourceSchedule();
 

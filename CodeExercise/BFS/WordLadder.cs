@@ -209,6 +209,59 @@ namespace CodeExercise.BFS
             while (queue.Count > 0)
             {
                 int levelSize = queue.Count;
+
+                for (int i = 0; i < levelSize; i++)
+                {
+                    string curr = queue.Dequeue();
+
+                    if (string.Compare(curr, endWord) == 0)
+                    {
+                        return len + 1;  // base 1
+                    }
+
+                    // get all possitble combinations
+                    // if already exists in pre level, don't count, since we care about the shortest path
+                    HashSet<string> candidates = getNextWords(curr, visited, dictionary);
+
+                    foreach (string candidate in candidates)
+                    {
+                        queue.Enqueue(candidate);
+                        visited.Add(candidate);
+                    }
+                }
+                len++;
+
+            }
+
+            return 0;
+
+        }
+
+        public int LadderLength_old(string beginWord, string endWord, IList<string> wordList)
+        {
+            if (wordList == null)
+            {
+                return 0;
+            }
+
+            if (string.Compare(beginWord, endWord) == 0)
+            {
+                return 1;
+            }
+
+            HashSet<string> dictionary = new HashSet<string>(wordList);
+
+            HashSet<string> visited = new HashSet<string>();
+            Queue<string> queue = new Queue<string>();
+            queue.Enqueue(beginWord);
+            visited.Add(beginWord);
+
+            int len = 0;
+
+            // bfs level
+            while (queue.Count > 0)
+            {
+                int levelSize = queue.Count;
                 len++;
 
                 for (int i = 0; i < levelSize; i++)

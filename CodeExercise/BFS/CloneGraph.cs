@@ -42,6 +42,44 @@ namespace CodeExercise.BFS
             }
 
             Queue<UndirectedGraphNode> queue = new Queue<UndirectedGraphNode>();
+            Dictionary<UndirectedGraphNode, UndirectedGraphNode> lookup = new Dictionary<UndirectedGraphNode, UndirectedGraphNode>();  // orig, copy
+            lookup.Add(node, new UndirectedGraphNode(node.label));
+
+            queue.Enqueue(node);
+
+            while(queue.Count > 0)
+            {
+                var top = queue.Dequeue();
+                var topClone = lookup[top];
+                foreach (var neighbor in top.neighbors)
+                {
+                    if (!lookup.ContainsKey(neighbor))
+                    {
+                        var neighbClone = new UndirectedGraphNode(neighbor.label);
+                        topClone.neighbors.Add(neighbClone);
+                        lookup.Add(neighbor, neighbClone); // orig, copy
+                        queue.Enqueue(neighbor);
+                    }
+                    else
+                    {
+                        // Note: yic  the neighbor has been visited (checked) first by other nodes, but we still need to make connection for curr top (not the pre top)
+                        var neighbClone = lookup[neighbor];
+                        topClone.neighbors.Add(neighbClone);
+                    }
+                }
+            }
+
+            return lookup[node];
+        }
+
+        public UndirectedGraphNode CloneGraphSolver_old(UndirectedGraphNode node)
+        {
+            if (node == null)
+            {
+                return null;
+            }
+
+            Queue<UndirectedGraphNode> queue = new Queue<UndirectedGraphNode>();
             Dictionary<UndirectedGraphNode, UndirectedGraphNode> lookup = new Dictionary<UndirectedGraphNode, UndirectedGraphNode>();  // old, new
             queue.Enqueue(node);
             lookup.Add(node, new UndirectedGraphNode(node.label));
