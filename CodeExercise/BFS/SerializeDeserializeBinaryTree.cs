@@ -26,6 +26,10 @@ namespace CodeExercise.BFS
     ///    4   5
     ///
     ///as "[1,2,3,null,null,4,5]"
+    ///
+    /// sol:
+    /// 
+    ///  serialize level order, always add node, dequeue append # or num
     /// </summary>
     class SerializeDeserializeBinaryTree
     {
@@ -43,24 +47,14 @@ namespace CodeExercise.BFS
             Queue<TreeNode> queue = new Queue<TreeNode>();
             queue.Enqueue(root);
 
-            while(queue.Count >0)
+            while (queue.Count >0)
             {
                 var node = queue.Dequeue();
-
-                if (node != null)
-                {
-                    sb.Append(node.val);
-                }
-                else
-                {
-                    sb.Append("#");
-                }
-
-                sb.Append(",");
+                EncodeNode(node, sb);   // add (num|#)  + ","
 
                 if (node != null)   // yic: easy to get wrong here
                 {
-                    queue.Enqueue(node.left);
+                    queue.Enqueue(node.left);    // add node or null
                     queue.Enqueue(node.right);
                 }
             }
@@ -70,10 +64,30 @@ namespace CodeExercise.BFS
             return sb.ToString();
         }
 
+        private void EncodeNode(TreeNode node, StringBuilder sb)
+        {
+            if (node == null)
+            {
+                sb.Append("#");
+            }
+            else
+            {
+                sb.Append(node.val);
+            }
+            sb.Append(",");
+        }
+
         // Decodes your encoded data to tree.
         // 1,2,3,#,#,4,5,#,#,#,#
         // use array to maintain the nodes
         // use isLeft to link from parent (currIdx)
+
+        /// <summary>
+        /// sol:
+        /// use BFS queue to memorize node created, needed when curr left and right has filled
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public TreeNode deserialize(string data)
         {
             if (string.IsNullOrEmpty(data))
@@ -81,40 +95,38 @@ namespace CodeExercise.BFS
                 return null;
             }
 
-            // yic trick:  Use list to collect node
-            List<TreeNode> arr = new List<TreeNode>();
+            // yic use queue to memo the next node to add child
+            Queue<TreeNode> queue = new Queue<TreeNode>();
             var tokens = data.Split(',');
 
             // handle root node (since no pre)
             TreeNode root = new TreeNode(Convert.ToInt32(tokens[0]));
-            arr.Add(root);
+
+            TreeNode parent = root;
 
             int len = tokens.Length;
-            int currIdx = 0;        // trick
             bool isLeft = true;      // trick
             for(int i = 1; i <len; i++)
             {
+                TreeNode child = null;
                 if (tokens[i] != "#")
                 {
-                    TreeNode node = new TreeNode(Convert.ToInt32(tokens[i]));
-                    arr.Add(node);
-
-                    // assign curr node to parent
-                    var parent = arr[currIdx];
-
-                    if (isLeft)
-                    {
-                        parent.left = node;
-                    }
-                    else
-                    {
-                        parent.right = node;
-                    }
+                    child = new TreeNode(Convert.ToInt32(tokens[i]));
+                    queue.Enqueue(child);
                 }
 
+                if (isLeft)
+                {
+                    parent.left = child;
+                }
                 if (!isLeft)
                 {
-                    currIdx++;
+                    parent.right = child; 
+                }
+
+                if (!isLeft && queue.Count > 0)    // yic: prevent last node          1                  case
+                {                                  //                           null    null    
+                    parent = queue.Dequeue();
                 }
 
                 isLeft = !isLeft;   // swap   

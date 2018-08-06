@@ -2606,6 +2606,8 @@ namespace CodeExercise
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //297
+            Run_SerializeDeserializeBinaryTree();
             //133
             Run_CloneGraph();
 
@@ -2725,8 +2727,7 @@ namespace CodeExercise
             Run_RemoveSubstrings();
             //103
             Run_BinaryTreeZigZag();
-            //297
-            Run_SerializeDeserializeBinaryTree();
+            
             //444
             Run_SequenceReconstruction();
             //611
