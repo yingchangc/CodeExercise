@@ -20,6 +20,20 @@ namespace CodeExercise.DFS
             }
         }
 
+        public class ResultType2
+        {
+            public int minV;
+            public TreeNode node;
+            public int currSum;
+
+            public ResultType2(int minV, TreeNode node, int sum)
+            {
+                this.minV = minV;
+                this.node = node;
+                this.currSum = sum;
+            }
+        }
+
         /// <summary>
         /// lint 596. Minimum Subtree
         /// https://www.lintcode.com/problem/minimum-subtree/description
@@ -38,6 +52,44 @@ namespace CodeExercise.DFS
         /// <param name="root"></param>
         /// <returns></returns>
         public TreeNode FindSubtree(TreeNode root)
+        {
+            
+            var result = FindSubtreeHelper2(root);
+
+            return result == null ? null : result.node;
+        }
+
+        public ResultType2 FindSubtreeHelper2(TreeNode node)
+        {
+            if (node == null)
+            {                             // min   node, sum
+                var test =  new ResultType2(int.MaxValue, null, 0);  // yic  so that we don't need to check resultType null case
+                return test;
+            }
+
+            var left = FindSubtreeHelper2(node.left);
+            var right = FindSubtreeHelper2(node.right);
+
+            int currSum = node.val + left.currSum + right.currSum;
+                        
+            if(currSum < left.minV && currSum < right.minV)
+            {
+                return new ResultType2(currSum, node, currSum);
+            }
+            else if (left.minV <= right.minV)
+            {
+                left.currSum = currSum;
+                return left;
+            }
+            else
+            {
+                right.currSum = currSum;
+                return right;
+            }
+
+        }
+
+        public TreeNode FindSubtree_old(TreeNode root)
         {
             ResultType result = new ResultType();
             FindSubtreeHelper(root, result);

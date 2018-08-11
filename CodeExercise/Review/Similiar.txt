@@ -35,3 +35,165 @@ while(left < right)
 ///[3,6,7]
 ///[4,6,7]
 ///Given array S = [4,4,4,4], return 4. They are:
+
+
+
+// 230. Kth Smallest Element in a BST
+/// https://leetcode.com/problems/kth-smallest-element-in-a-bst/description/
+/// Given a binary search tree, write a function kthSmallest to find the kth smallest element in it.
+/// Note: 
+/// You may assume k is always valid, 1 ≤ k ≤ BST's total elements.
+/// sol
+/// 使用 Binary Search Tree Iterator 的方式（可以参考 binary search tree iterator 那个题）
+///用 stack，从第一个点开始，走 k-1 步，就是第 k 个点了。
+/// 时间复杂度是 O(h + k)O(h+k) h 是树的高度。
+[code]
+Stack<TreeNode> stk = new Stack<TreeNode>();
+
+InsertAllLeft(root, stk);
+
+int count = 0;
+int ans = -1;
+while (stk.Count > 0)
+{
+    TreeNode node = stk.Pop();
+    count++;
+    Console.WriteLine(node.val);
+
+    if (count ==k)
+    {
+        ans = node.val;
+        break;
+    }
+
+    if (node.right !=null)
+    {
+        InsertAllLeft(node.right, stk);
+    }
+}
+
+
+/// 98. Validate Binary Search Tree
+/// https://leetcode.com/problems/validate-binary-search-tree/description/
+/// Given a binary tree, determine if it is a valid binary search tree (BST).
+/// Assume a BST is defined as follows:
+/// 
+/// The left subtree of a node contains only nodes with keys less than the node's key.
+/// The right subtree of a node contains only nodes with keys greater than the node's key.
+/// Both the left and right subtrees must also be binary search trees.
+/// sol:
+/// 
+/// think use stack
+ Stack<TreeNode> stk = new Stack<TreeNode>();
+InsertAllLeft(root, stk);
+
+int pre = Int32.MinValue;
+
+// yic: to prevent first node is MinValue
+bool isFirst = true;
+
+while (stk.Count > 0)
+{
+    TreeNode curr = stk.Pop();
+    if (!isFirst && pre >= curr.val)
+    {
+        return false;
+    }
+    isFirst = false;
+
+    pre = curr.val;
+
+    if (curr.right != null)
+    {
+        InsertAllLeft(curr.right, stk);
+    }
+}
+
+return true;
+
+
+
+//
+先序遍历 iteration
+思路
+遍历顺序为根、左、右
+
+如果根节点非空，将根节点加入到栈中。
+如果栈不空，弹出出栈顶节点，将其值加加入到数组中。
+如果该节点的右子树不为空，将右子节点加入栈中。
+如果左子节点不为空，将左子节点加入栈中。
+重复第二步，直到栈空。
+代码实现
+public class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        List<Integer> preorder = new ArrayList<Integer>();
+        
+        if (root == null) {
+            return preorder;
+        }
+        
+        stack.push(root);
+        while (!stack.empty()) {
+            TreeNode node = stack.pop();
+            preorder.add(node.val);      // record on pop
+            if (node.right != null) {   // push right first.
+                stack.push(node.right);
+            }
+            if (node.left != null) {    
+                stack.push(node.left);   // then push left 
+            }
+        }
+        
+        return preorder;
+    }
+}
+
+
+// http://blog.sina.com.cn/s/blog_eb52001d0102v1si.html
+http://blog.csdn.net/fightforyourdream/article/details/16843303         面试大总结之二：Java搞定面试中的二叉树题目
+以及：
+http://blog.csdn.net/luckyxiaoqiang/article/details/7518888                 轻松搞定面试中的二叉树题目
+http://www.cnblogs.com/Jax/archive/2009/12/28/1633691.html           算法大全（3） 二叉树
+
+二叉树是面试中的常考题目。而且许多别的题是基于二叉树的，所以我们必须对二叉树无比熟悉。
+经过多日的努力，以下所有的题目主页君全部实现了一次，并且加上自己的理解，所有的算法都基本最优化过。敬请大家指正：
+
+以下是目录，以及主页君的代码
+
+GitHub代码链接-Tree大总结
+https://github.com/yuzhangcmu/LeetCode_algorithm/blob/master/tree/TreeDemo.java
+ 
+1. 求二叉树中的节点个数:
+        getNodeNumRec（递归），getNodeNum（迭代）
+2. 求二叉树的深度:
+        getDepthRec（递归），getDepth 
+3. 前序遍历，中序遍历，后序遍历:
+        preorderTraversalRec, preorderTraversal, inorderTraversalRec, postorderTraversalRec
+4. 分层遍历二叉树（按层次从上往下，从左往右）:
+        levelTraversal, levelTraversalRec（递归解法）
+5. 将二叉查找树变为有序的双向链表:
+        convertBST2DLLRec, convertBST2DLL
+6. 求二叉树第K层的节点个数：
+        getNodeNumKthLevelRec, getNodeNumKthLevel
+7. 求二叉树中叶子节点的个数：
+        getNodeNumLeafRec, getNodeNumLeaf
+8. 判断两棵二叉树是否相同的树：
+        isSameRec, isSame
+9. 判断二叉树是不是平衡二叉树：isAVLRec
+10. 求二叉树的镜像（破坏和不破坏原来的树两种情况）：
+     mirrorRec, mirrorCopyRec
+     mirror, mirrorCopy
+10.1 判断两个树是否互相镜像：isMirrorRec isMirror
+11. 求二叉树中两个节点的最低公共祖先节点：
+         LAC        求解最小公共祖先, 使用list来存储path.
+         LCABstRec  递归求解BST树.
+         LCARec     递归算法 .
+12. 求二叉树中节点的最大距离：
+         getMaxDistanceRec
+13. 由前序遍历序列和中序遍历序列重建二叉树：
+         rebuildBinaryTreeRec
+14. 判断二叉树是不是完全二叉树：
+         isCompleteBinaryTree, isCompleteBinaryTreeRec
+15. 找出二叉树中最长连续子串(即全部往左的连续节点，或是全部往右的连续节点）
+         findLongest

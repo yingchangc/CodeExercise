@@ -182,3 +182,136 @@ for(int i = 1; i <len; i++)
 
     isLeft = !isLeft;   // swap   
 }
+
+
+
+/// 98. Validate Binary Search Tree
+/// https://leetcode.com/problems/validate-binary-search-tree/description/
+/// Given a binary tree, determine if it is a valid binary search tree (BST).
+/// Assume a BST is defined as follows:
+/// 
+/// The left subtree of a node contains only nodes with keys less than the node's key.
+/// The right subtree of a node contains only nodes with keys greater than the node's key.
+/// Both the left and right subtrees must also be binary search trees.
+/// sol:
+/// 
+/// think use stack
+/// 
+///                5
+///              4    9
+///            3     8
+///          2      7                   to store   2 3 4 5           than 7 8 9
+
+[code]
+(option 1)
+
+ Stack<TreeNode> stk = new Stack<TreeNode>();
+InsertAllLeft(root, stk);
+
+int pre = Int32.MinValue;
+
+// yic: to prevent first node is MinValue
+bool isFirst = true;
+
+while (stk.Count > 0)
+{
+    TreeNode curr = stk.Pop();
+    if (!isFirst && pre >= curr.val)
+    {
+        return false;
+    }
+    isFirst = false;
+
+    pre = curr.val;
+
+    if (curr.right != null)
+    {
+        InsertAllLeft(curr.right, stk);
+    }
+}
+
+return true;
+
+
+(option 2) use inorder traversal
+
+// to left 
+if (node.left != null)
+{
+    InorderTraversal(node.left);
+}
+            
+// compare & update
+if (lastNode != null && lastNode.val >= node.val)
+{
+    isValid = false;
+}
+
+lastNode = node;
+
+// to right
+if (node.right!=null)
+{
+    InorderTraversal(node.right);
+}
+
+
+/// 270. Closest Binary Search Tree Value
+/// https://leetcode.com/problems/closest-binary-search-tree-value/description/
+/// Given a non-empty binary search tree and a target value, find the value in the BST that is closest to the target.
+/// Note:
+/// 
+/// Given target value is a floating point.
+/// You are guaranteed to have only one unique value in the BST that is closest to the target.
+/// Example:
+/// 
+/// Input: root = [4, 2, 5, 1, 3], target = 3.714286
+
+[code]
+TreeNode smaller = CloseLower(root, target);
+TreeNode larger = CloseLarger(root, target);
+
+(1)closer  Lower 
+if (root.val == target)
+{
+    return root;
+}
+
+if (root.val < target)
+{
+    // to right
+    TreeNode right = CloseLower(root.right, target);
+    if (right == null)
+    {                  // no find child, since target is bigger
+        return root;   // so this is closest smaller than target
+    }
+    return right;
+}
+// else
+
+// curr > target
+// go to left ,  smaller is not yet find
+return CloseLower(root.left, target);   // can be null becasue we cannot find any lower than target
+
+
+
+
+/// lint 453
+/// http://www.lintcode.com/en/problem/flatten-binary-tree-to-linked-list/
+/// Flatten a binary tree to a fake "linked list" in pre-order traversal.
+/// Here we use the right pointer in TreeNode as the next pointer in ListNode.
+/// 
+/// Example
+///                  1
+///                   \
+///         1          2
+///        / \          \
+///       2   5    =>    3
+///      / \   \          \
+///     3   4   6          4
+///                         \
+///                          5
+///                           \
+///                            6
+/// sol  find the last node in left branch of node(1) -> 4 .  connect 4 right = 1 riight,  root.right = root.left. and root.left = null (move to right)  
+ return the last node in right branch if there is, otherwise, return left most ; otherwise return root.

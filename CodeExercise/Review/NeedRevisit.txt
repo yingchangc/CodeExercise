@@ -726,6 +726,9 @@ sol:
  if (org.Length == tSortArr.Count && inbound.Keys.Count == org.Length)   //yic make sure inbound all node are calculated
 
 
+
+
+
 /// 133 Clone Graph
 /// https://leetcode.com/problems/clone-graph/description/
 /// 
@@ -761,3 +764,213 @@ foreach(UndirectedGraphNode n in lookup.Keys)
         copiedNode.neighbors.Add(lookup[neighbor]);
     }
 }
+
+
+ /// 624. Remove Substrings
+/// https://www.lintcode.com/problem/remove-substrings/description
+/// Given a string s and a set of n substrings.You are supposed to remove every instance of those n substrings 
+/// from s so that s is of the minimum length and output this minimum length.
+/// 
+/// Example
+/// Given s = ccdaabcdbb, substrs = ["ab", "cd"]
+/// Return 2
+
+[code]
+if (visited.Contains(s))
+{
+    return;
+}
+
+minLen = Math.Min(s.Length, minLen);
+
+foreach(string word in dict)
+{
+    if (s.Contains(word))
+    {
+        HashSet<string> shorterStrs = RemoveSubstr(s, word);
+        foreach(string shorterStr in shorterStrs)
+        {
+            MinLengthHelper(shorterStr, dict);
+        }
+                                      
+    }
+}
+
+visited.Add(s);
+
+
+
+
+ /// 261 Graph Valid Tree
+/// https://leetcode.com/problems/graph-valid-tree/description/
+/// Given n nodes labeled from 0 to n - 1 and a list of undirected edges (each edge is a pair of nodes), write a function to check whether these edges make up a valid tree.
+/// 
+///         For example:
+/// 
+/// Given n = 5 and edges = [[0, 1], [0, 2], [0, 3], [1, 4]], return true.
+/// 
+/// Given n = 5 and edges = [[0, 1], [1, 2], [2, 3], [1, 3], [1, 4]], return false.
+/// 
+/// Note: you can assume that no duplicate edges will appear in edges.Since all edges are undirected, [0, 1] is the same as [1, 0]
+///         and thus will not appear together in edges.
+///         
+/// Wikipedia: “a tree is an undirected graph in which any two vertices are connected by exactly one path.”
+/// 
+/// 
+/// Sol:
+///  UnionFind when add a node their parent should not be the same initially,          
+/// in case 2 , when [1,3] is added, found that 1  and 3 point to the same parent, which should not be the case for real tree
+[code]
+UnionFindGraphValidTree uf = new UnionFindGraphValidTree(n); // n nodes
+
+for (int i = 0; i< numEdges; i++)
+{
+    int n1 = edges[i, 0];
+    int n2 = edges[i, 1];
+
+    int rootA = uf.Find(n1);
+    int rootB = uf.Find(n2);
+
+    if (rootA == rootB)
+    {
+        return false;
+    }
+
+    uf.Union(n1, n2);
+}
+
+return (uf.Count==1);   // yic for disjoin graph
+
+
+ public int Find(int a)
+{
+    if (a != ufArray[a])
+    {
+        int topAncestor = Find(ufArray[a]);
+        ufArray[a] = topAncestor;
+    }
+    return ufArray[a];
+}
+
+
+
+/// 431. Connected Component in Undirected Graph
+/// https://www.lintcode.com/problem/connected-component-in-undirected-graph/description
+/// Find the number connected component in the undirected graph. Each node in the graph contains a label and a list of its neighbors. (a connected component (or just component) of an undirected graph is a subgraph in which any two vertices are connected to each other by paths, and which is connected to no additional vertices in the supergraph.)
+/// 
+/// Example
+/// Given graph:
+/// 
+/// A------B  C
+///  \     |  | 
+///   \    |  |
+///    \   |  |
+///     \  |  |
+///       D   E
+/// Return {A,B,D}, {C,E}. Since there are two connected component which is {A,B,D}, {C,E}
+
+sol:  use HashSet<int> to find how many distinct nodes, then use UnionFind, since nodes are A, B, C  not 0 1 2 ..
+need to use HashMap<char, char>  for node, parent in union
+
+
+
+/// 110. Balanced Binary Tree
+/// https://leetcode.com/problems/balanced-binary-tree/description/
+/// Given a binary tree, determine if it is height-balanced.
+[code]
+if (root == null)
+{
+    return 0;
+}
+
+int leftPath = longestPath(root.left);
+int rightPath = longestPath(root.right);
+
+if (Math.Abs(leftPath - rightPath) > 1)
+{
+    isBalanceFalg = false;
+}
+
+return Math.Max(1+leftPath, 1+rightPath);
+
+
+
+573. Build Post Office II
+/// https://www.lintcode.com/problem/build-post-office-ii/description
+/// Given a 2D grid, each cell is either a wall 2, an house 1 or empty 0 (the number zero, one, two), find a place to build a post office so that the 
+/// sum of the distance from the post office to all the houses is smallest.
+/// 
+/// Return the smallest sum of distance.Return -1 if it is not possible.
+Sol:
+ /// BFS in each 0 location and compute the sum, find the min sum, Note: look for 4 directions
+[code]
+while(queue.Count > 0)
+{
+    int levelSize = queue.Count();
+
+    for (int k = 0; k < levelSize; k++)
+    {
+        Location curr = queue.Dequeue();  // should be 0   empty
+        foreach (var delta in deltas)
+        {
+            int nI = curr.i + delta.i;
+            int nJ = curr.j + delta.j;
+
+            if (nI < totalI && nI >= 0 && nJ < totalJ && nJ >= 0 && !visited[nI, nJ])  // yic  visited  is needed
+            {
+                if (grid[nI, nJ] == 0)    // empty, can walk to next position
+                {
+                    queue.Enqueue(new Location(nI, nJ));
+                }
+                else if (grid[nI, nJ] == 1)  // house
+                {
+                    sum += (step + 1);
+                    numHouse--;
+                }
+                visited[nI, nJ] = true;
+            }  
+        }
+    }
+    step++;
+}
+
+
+
+// Binary Search Tree Removal
+http://www.algolist.net/Data_structures/Binary_search_tree/Removal
+
+
+
+/// <summary>
+/// 79 
+/// Given a collection of integers that might contain duplicates, nums, return all possible subsets (the power set). 
+/// If nums = [1,2,2], a solution is: 
+///           [
+///             [2],
+///             [1],
+///             [1,2,2],
+///             [2,2],
+///             [1,2],
+///             []
+///           ]
+[code]
+    if (index >= nums.Length)
+    {
+        List<int> copy = new List<int>(currPath);
+        ans.Add(copy);
+        return;
+    }
+
+    // add 
+    currPath.Add(nums[index]);
+    dfsHelper2(nums, index + 1, currPath, ans);
+    currPath.RemoveAt(currPath.Count -1);
+
+    // no add
+    int i = index + 1;
+    while (i < nums.Length && nums[i] == nums[i-1])
+    {
+        i++;
+    }
+
+    dfsHelper2(nums, i, currPath, ans);

@@ -27,6 +27,10 @@ namespace CodeExercise.DFS
         ///     /  \                / \
         ///    15   7              15  7
         /// The binary tree A is a height-balanced binary tree, but B is not.
+        /// 
+        /// Sol:
+        /// 
+        /// note: the depth of 2 subtree diff more than 1, cannot use longest - shortest 
         /// </summary>
         /// <param name="root"></param>
         /// <returns></returns>

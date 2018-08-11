@@ -49,7 +49,7 @@ namespace CodeExercise
         }
 
         /// <summary>
-        /// 261
+        /// 261 Graph Valid Tree
         /// https://leetcode.com/problems/graph-valid-tree/description/
         /// Given n nodes labeled from 0 to n - 1 and a list of undirected edges (each edge is a pair of nodes), write a function to check whether these edges make up a valid tree.
         /// 
@@ -66,7 +66,7 @@ namespace CodeExercise
         /// 
         /// 
         /// Sol:
-        ///  UnionFind when add a node from the parent should not be the same initially,          
+        ///  UnionFind when add a node their parent should not be the same initially,          
         /// in case 2 , when [1,3] is added, found that 1  and 3 point to the same parent, which should not be the case for real tree
         /// </summary>
         /// <param name="n"></param>
@@ -93,7 +93,7 @@ namespace CodeExercise
                 uf.Union(n1, n2);
             }
 
-            return (uf.Count==1);
+            return (uf.Count==1);  // yic for disjoin graph
 
         }
     }

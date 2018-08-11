@@ -34,10 +34,57 @@ namespace CodeExercise.DFS
         /// Output: false
         /// Explanation: The input is: [5,1,4,null,null,3,6]. The root node's value
         ///              is 5 but its right child's value is 4.
+        ///              
+        /// sol:
+        /// 
+        /// think use stack
+        /// 
+        ///                5
+        ///              4    9
+        ///            3     8
+        ///          2      7                   to store   2 3 4 5           than 7 8 9
+        /// 
         /// </summary>
         /// <param name="root"></param>
         /// <returns></returns>
         public bool IsValidBST(TreeNode root)
+        {
+            if (root == null)
+            {
+                return true;
+            }
+            InorderTraversal(root);
+            return isValid;
+        }
+
+        // global answer
+        private bool isValid = true;
+        private TreeNode lastNode = null;
+
+        private void InorderTraversal(TreeNode node)
+        {
+            // to left
+            if (node.left != null)
+            {
+                InorderTraversal(node.left);
+            }
+            
+            // compare & update
+            if (lastNode != null && lastNode.val >= node.val)
+            {
+                isValid = false;
+            }
+
+            lastNode = node;
+
+            // to right
+            if (node.right!=null)
+            {
+                InorderTraversal(node.right);
+            }
+        }
+
+        public bool IsValidBST_better(TreeNode root)
         {
             Stack<TreeNode> stk = new Stack<TreeNode>();
             InsertAllLeft(root, stk);

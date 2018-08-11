@@ -24,6 +24,9 @@ namespace CodeExercise.BFS
         /// 
         /// Explanation:
         /// ccdaabcdbb -> ccdacdbb -> cabb -> cb (length = 2)
+        /// 
+        /// sol:
+        /// remove substrs from orig string with diff index  stat locs
         /// </summary>
         /// <param name="s"></param>
         /// <param name="dict"></param>

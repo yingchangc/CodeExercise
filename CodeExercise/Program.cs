@@ -2172,7 +2172,7 @@ namespace CodeExercise
             root.right.left = new TreeNode(6);
             root.right.right = new TreeNode(8);
 
-            question.KthSmallest(root, 8);
+            question.KthSmallest(root, 7);
         }
 
         // 680
@@ -2603,9 +2603,60 @@ namespace CodeExercise
             var ans = question.WinSum(nums, 3);
         }
 
+        // lint 573
+        static void Run_BuildPostOffice()
+        {
+            BFS.BuildPostOffice question = new BFS.BuildPostOffice();
+            int[,] grid = { { 0, 1, 0, 0, 0 },
+                            { 1, 0, 0, 2, 1 },
+                            { 0, 1, 0, 0, 0}};
+
+            var ans = question.ShortestDistance(grid);
+        }
+
+        //597
+        static void Run_SubtreewithMaximumAverage()
+        {
+            TreeNode root = new TreeNode(-1);
+            root.left = new TreeNode(-2);
+            root.right = new TreeNode(-3);
+
+            root.left.left = new TreeNode(-4);
+            root.left.right = new TreeNode(-5);
+            root.right.left = new TreeNode(-6);
+            root.right.right = new TreeNode(-7);
+
+            root.left.left.left = new TreeNode(-8);
+            root.left.left.right = new TreeNode(-9);
+            root.left.right.left = new TreeNode(-10);
+            root.left.right.right = new TreeNode(-11);
+
+            root.right.left.left = new TreeNode(-12);
+            root.right.left.right = new TreeNode(-13);
+            root.right.right.left = new TreeNode(-14);
+            root.right.right.right = new TreeNode(-15);
+
+
+            root.left.left.left.left = new TreeNode(-16);
+
+
+            DFS.SubtreewithMaximumAverage question = new DFS.SubtreewithMaximumAverage();
+            var ans = question.FindSubtree2(root);
+        }
+
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //lint 597
+            Run_SubtreewithMaximumAverage();
+
+            //230
+            Run_KthSmallestElementInBST();
+
+            //596
+            Run_MinSubtree();
+            // 573
+            Run_BuildPostOffice();
             //297
             Run_SerializeDeserializeBinaryTree();
             //133
@@ -2714,14 +2765,12 @@ namespace CodeExercise
             Run_FindMissingNumbers();
             //680
             Run_SplitString();
-            //230
-            Run_KthSmallestElementInBST();
+            
 
             // 110
             Run_BalancedBinaryTree();
             
-            //596
-            Run_MinSubtree();
+            
 
             //624
             Run_RemoveSubstrings();

@@ -71,108 +71,67 @@ namespace CodeExercise.DFS
             return right;
         }
 
-        public class ResultType
-        {
-            public bool pExist;
-
-            public bool qExist;
-
-            public TreeNode node;
-
-            public ResultType()
-            {
-                pExist = false;
-                qExist = false;
-                node = null;
-            }
-
-            public ResultType(bool pexist, bool qexist, TreeNode n)
-            {
-                pExist = pexist;
-                qExist = qexist;
-                node = n;
-            }
-        }
+        private bool findAncestor3 = false;
 
         public TreeNode LowestCommonAncestor3(TreeNode root, TreeNode p, TreeNode q)
         {
-            ResultType res = LowestCommonAncestor3Helper(root, p, q);
-
-            if (res.pExist && res.qExist)
+            var candidate = Traversal(root, p, q);
+            if (findAncestor3)
             {
-                return res.node;
+                return candidate;
             }
             return null;
         }
 
-        // Question qhere p  or q can be not in the tree
-        public ResultType LowestCommonAncestor3Helper(TreeNode root, TreeNode p, TreeNode q)
+        private TreeNode Traversal(TreeNode node, TreeNode p, TreeNode q)
         {
-            if (root == null)
+            if (node == null)
             {
-                return new ResultType();
+                return null;
             }
 
-            ResultType left = LowestCommonAncestor3Helper(root.left, p, q);
-            ResultType right = LowestCommonAncestor3Helper(root.right, p, q);
 
-            bool pexist = root.val == p.val || left.pExist || right.pExist;
-            bool qexist = root.val == q.val || left.qExist || right.qExist;
+            // yic:  must go left and right first  for case find ancestor 1 and 3
+            //  1
+            //      3
 
-            if (!pexist && !qexist)
-            {
-                return new ResultType();
-            }
-            else if (pexist && qexist)
-            {
-                // mid and one side
-                if (root.val == p.val || root.val == q.val)
-                {
-                    return new ResultType(true, true, root);
-                }
+            var left = Traversal(node.left, p, q);
+            var right = Traversal(node.right, p, q);
 
-                // both side
-                if (left.node != null && right.node !=null)
-                {
-                    return new ResultType(true, true, root);
-                }
+            //    2
+            // [1]    [3]
+            if (left != null && right != null)
+            {
+                findAncestor3 = true;
+                return node;
+            }
 
-                // from only one child and is descend
-                if (left.node != null)
-                {
-                    return new ResultType(true, true, left.node);
-                }
-                
-                return new ResultType(true, true, right.node);
-            }
-            else if (pexist)
+            // [1]   yic  don't forget the same node case.
+            if (node.val == p.val && node.val == q.val)
             {
-                // root
-                if (p.val == root.val)
-                {
-                    return new ResultType(true, false, root);
-                }
-                // child
-                if (left.node != null)
-                {
-                    return new ResultType(true, false, left.node);
-                }
-                return new ResultType(true, false, right.node);
+                findAncestor3 = true;
+                return node;
             }
-            else
+
+            //   [2]
+            //         [3]  
+            if (node.val == p.val || node.val == q.val)
             {
-                // root
-                if (q.val == root.val)
+                if (left != null || right != null)
                 {
-                    return new ResultType(false, true, root);
+                    findAncestor3 = true;  
                 }
-                // child
-                if (left.node != null)
-                {
-                    return new ResultType(false, true, left.node);
-                }
-                return new ResultType(false, true, right.node);
+                return node;
             }
+
+            if (left != null)
+            {
+                return left;
+            }
+            return right;   // can be null as well
         }
+
+
+        
     }
 }

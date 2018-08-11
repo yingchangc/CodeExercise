@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BFS\BinaryTreeZigzagLevelOrderTraversal.cs" />
+    <Compile Include="BFS\BuildPostOffice.cs" />
     <Compile Include="BFS\CloneGraph.cs" />
     <Compile Include="BFS\KnightShortestPath.cs" />
     <Compile Include="BFS\RemoveSubstrings.cs" />
@@ -138,6 +139,7 @@
     <Compile Include="DFS\RestoreIPAddresses.cs" />
     <Compile Include="DFS\SplitString.cs" />
     <Compile Include="DFS\StringPermutation.cs" />
+    <Compile Include="DFS\SubtreewithMaximumAverage.cs" />
     <Compile Include="DFS\ValidateBinarySearchTree.cs" />
     <Compile Include="DFS\WordPattern.cs" />
     <Compile Include="DP\AnagramSubstring.cs" />
