@@ -197,3 +197,149 @@ https://github.com/yuzhangcmu/LeetCode_algorithm/blob/master/tree/TreeDemo.java
          isCompleteBinaryTree, isCompleteBinaryTreeRec
 15. 找出二叉树中最长连续子串(即全部往左的连续节点，或是全部往右的连续节点）
          findLongest
+
+
+/// 131
+/// Given a string s, partition s such that every substring of the partition is a palindrome. 
+///        Return all possible palindrome partitioning of s.
+///        For example, given s = "aab",
+/// Return
+/// [
+///  ["aa","b"],
+///  ["a","a","b"]
+/// sol   need to visit all, so need to check each position
+[code]
+List<List<string>> results = new List<List<string>>();
+List<string> path = new List<string>();
+PalindromePartitionHelper(s, 0, results, path);
+
+...
+if (index == s.Length)
+{
+    List<string> clone = new List<string>(path);
+    results.Add(clone);
+    return;
+}
+
+for(int i = index; i < s.Length; i++)
+{
+    int subLen = (i - index) + 1;
+    string sub = s.Substring(index, subLen);
+                
+    if (isPalindrome(sub))
+    {
+        path.Add(sub);
+        PalindromePartitionHelper(s, i + 1, results, path);
+        path.RemoveAt(path.Count - 1);         //* YIC remove the last one from List<string>  can't path.Remove(sub) it will remove the first match from front.
+    }
+}
+
+
+/// 132
+/// Given a string s, partition s such that every substring of the partition is a palindrome. 
+///        Return the minimum cuts needed for a palindrome partitioning of s.
+///        For example, given s = "aab",
+///Return 1 since the palindrome partitioning["aa", "b"] could be produced using 1 cut.
+///
+/// Sol  F[j] = min (F[i] where i: 0~j-1 and i to j is palindrome ) +1
+/// 
+/// O(n^2)
+(1)precompute
+private static bool[,] computePalindrome(string s)
+{
+    int len = s.Length;
+    bool[,] memo = new bool[len, len];   // init to all false
+    for (int i = 0; i <len; i++)
+    {
+        // odd
+        int mid = i;
+        int left = mid;
+        int right = mid;
+        while(left >= 0 && right <len && s[left] == s[right])
+        {
+            memo[left, right] |= true;
+            left--;
+            right++;
+        }
+
+        // even
+        left = mid;
+        right = mid+1;
+        while (left >= 0 && right < len && s[left] == s[right])
+        {
+            memo[left, right] |= true;
+            left--;
+            right++;
+        }
+    }
+
+    return memo;   
+}
+
+(core)
+public static int MinCut(string s)
+{
+    int len = s.Length;
+
+    bool[,] calPalindrome = computePalindrome(s);
+
+    int[] F = new int[len+1];    // pre j how many segments, add padding for no char
+
+    F[0] = 0;   
+
+    for (int j = 1; j <= len; j++)
+    {
+        F[j] = Int32.MaxValue;
+        for (int i=0; i <= j-1; i++)
+        {
+            if (calPalindrome[i,j-1])      // yic the range after F[i]
+            {
+                F[j] = Math.Min(F[i] + 1, F[j]);   // F[i] can never be int32.max  because it has been update to at mose number of chars
+            }  
+        }
+    }
+
+    return F[len] - 1;  
+}
+
+
+
+
+/// <summary>
+/// https://www.youtube.com/watch?v=jaNZ83Q3QGc
+/// </summary>
+/// You are given coins of different denominations and a total amount of money.
+/// Write a function to compute the number of combinations that make up that amount. 
+/// 
+/// (1,2,3)  target 4
+/// 
+/// ans = 4
+/// ->
+/// [1 1 1 1]
+/// [1 1 2]
+/// [1 3]
+/// [2 2]
+/// 
+/// 
+/// sol:                                                                       amount
+/// 
+///       0 1 2 3 4             for each new coin seleciton     orig + (how many combine before current coin)
+///init   1 0 0 0 0
+///give 1   1 a b 1              a = arr[2]_orig_b4_coin1 + arr[2-1] = 1    b =arr[3]+arr[3-1]= 1    
+///give 2     c d e              c=  arr[2] + arr[2-1] = 1+1  d =arr[3]+arr[3-2]=1+1=2   e= arr[4]+arr[4-2]=1+2=3
+
+[code]
+
+int[] ansArr = new int[target + 1];   // put 0 as 1 for padding purpose and a[0] = 1 
+ansArr[0] = 1;
+
+foreach(int coin in coins)
+{
+    for(int currentTarget = 0; currentTarget <= target; currentTarget++)
+    {
+        if (currentTarget >= coin)
+        {
+            ansArr[currentTarget] += ansArr[currentTarget - coin];    //inital currAns before having the coin + ways if having the current coin
+        }
+    }
+}

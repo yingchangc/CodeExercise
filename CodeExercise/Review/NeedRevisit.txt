@@ -954,23 +954,102 @@ http://www.algolist.net/Data_structures/Binary_search_tree/Removal
 ///             []
 ///           ]
 [code]
-    if (index >= nums.Length)
+if (index >= nums.Length)
+{
+    List<int> copy = new List<int>(currPath);
+    ans.Add(copy);
+    return;
+}
+
+// add 
+currPath.Add(nums[index]);
+dfsHelper2(nums, index + 1, currPath, ans);
+currPath.RemoveAt(currPath.Count -1);
+
+// no add
+int i = index + 1;
+while (i < nums.Length && nums[i] == nums[i-1])
+{
+    i++;
+}
+
+dfsHelper2(nums, i, currPath, ans);
+
+
+
+//235
+//Prime Factorization
+//https://www.lintcode.com/problem/prime-factorization/description
+// Given 10, return [2, 5].
+//Given 660, return [2, 2, 3, 5, 11].
+// O(sqrt(N))
+// sol  for from 2 to sqrt(N)  + the leftover num   ( sqrt 34 is 5.   34/2 = 17)
+[code]
+for (int i = 2; i*i <= num; i++)    // yic sqrt   34  after sqrt, if != 1, the rest must be a prime
+{
+    while (num%i ==0)
     {
-        List<int> copy = new List<int>(currPath);
-        ans.Add(copy);
-        return;
+        ans.Add(i);
+        num /= i;
+    }
+}
+
+if (num > 1)
+{
+    ans.Add(num);
+}
+
+
+
+/// 140
+/// Given a non-empty string s and a dictionary wordDict containing a list of non-empty words, add spaces in s to construct a sentence where each word is a valid dictionary word. You may assume the dictionary does not contain duplicate words. 
+///         Return all such possible sentences.
+///         For example, given
+/// s = "catsanddog",
+/// dict = ["cat", "cats", "and", "sand", "dog"]. 
+/// A solution is ["cats and dog", "cat sand dog"].
+/// Sol:  don't forget memoizaiton
+
+// think each return I want List<subString>,  be carefore for the whole word match case
+[code]
+
+private List<string> DFSHelper2(string s, int index, IList<string> wordDict, Dictionary<int, List<string>> visited)
+{
+    if (visited.ContainsKey(index))
+    {
+        return visited[index];
     }
 
-    // add 
-    currPath.Add(nums[index]);
-    dfsHelper2(nums, index + 1, currPath, ans);
-    currPath.RemoveAt(currPath.Count -1);
+    List<string> currAns = new List<string>();
 
-    // no add
-    int i = index + 1;
-    while (i < nums.Length && nums[i] == nums[i-1])
+    for (int i = index; i <s.Length; i++)
     {
-        i++;
+        string substr = s.Substring(index, i - index + 1);
+        if (wordDict.Contains(substr))
+        {
+            // reached last word
+            if (i+1 >= s.Length)
+            {
+                currAns.Add(substr);
+            }
+            else
+            {
+                // not last word
+                List<string> suffixStrs = DFSHelper2(s, i + 1, wordDict, visited);
+
+                foreach (var suffix in suffixStrs)
+                {
+                    // only add to ans if suffix has something
+                    currAns.Add(substr + " " + suffix);
+                }
+            }
+                    
+        }
     }
 
-    dfsHelper2(nums, i, currPath, ans);
+    visited.Add(index, currAns);
+
+    return currAns;
+
+}
+

@@ -11,7 +11,7 @@ namespace CodeExercise.DFS
         private int max = 0;
         private int setSize = 0;
         /// <summary>
-        /// 77. Combinations
+        /// 77. Combinations  lint 152
         /// https://leetcode.com/problems/combinations/description/
         /// Given two integers n and k, return all possible combinations of k numbers out of 1 ... n.
         ///Example:
@@ -45,24 +45,24 @@ namespace CodeExercise.DFS
 
         private void DFSHelper(List<List<int>> ans, List<int> currPath, int idx)
         {
-            if (idx > max)
+            if (currPath.Count  == setSize)
+            {
+                List<int> copy = new List<int>(currPath);
+                ans.Add(copy);
+                return;
+            }
+
+            if (idx > max)  // 1 based   1~n
             {
                 return;
             }
+
 
             for (int i = idx; i <= max; i++)
             {
                 currPath.Add(i);   // add
 
-                if (currPath.Count == setSize)
-                {
-                    List<int> copy = new List<int>(currPath);
-                    ans.Add(copy);
-                }
-                else
-                {
-                    DFSHelper(ans, currPath, i + 1);
-                }
+                DFSHelper(ans, currPath, i + 1);
 
                 currPath.RemoveAt(currPath.Count - 1);   //remove
             }

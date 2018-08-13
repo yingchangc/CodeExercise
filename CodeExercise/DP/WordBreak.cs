@@ -64,7 +64,7 @@ namespace CodeExercise.DP
         {
             // stop condition
 
-            // no need ,since empty string will not contain in worddict and no lenght
+            // no need ,since empty string will not contain in worddict and no length
             //if (string.IsNullOrEmpty(s))
             //{
             //    return false;
