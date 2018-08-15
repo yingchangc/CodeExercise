@@ -315,3 +315,72 @@ return CloseLower(root.left, target);   // can be null becasue we cannot find an
 ///                            6
 /// sol  find the last node in left branch of node(1) -> 4 .  connect 4 right = 1 riight,  root.right = root.left. and root.left = null (move to right)  
  return the last node in right branch if there is, otherwise, return left most ; otherwise return root.
+
+
+
+/// 301. Remove Invalid Parentheses
+/// https://leetcode.com/problems/remove-invalid-parentheses/description/
+/// Remove the minimum number of invalid parentheses in order to make the input string valid. Return all possible results.
+/// Example
+/// "()())()" -> ["()()()", "(())()"]
+/// "(a)())()" -> ["(a)()()", "(a())()"]
+/// ")(" -> [""]
+/// 
+/// sol:
+/// 
+/// 1. get left and right extra parentheses count need to be removed. be aware of ")("  case
+/// 2. use leftextra and rightextra  and open as stop condition.
+/// 
+/// foreach s
+/// 
+/// if '('    use  then open++
+///          no use   then  leftExtra--.
+///          
+/// if ')'   use  then open--
+///          no use  rightExtra--
+///          
+/// 
+/// stop when   index >=len  , or leftExtra|rightExtra|oepn smaller than 0 (memans over substract)
+[code]
+ private void DFSHelper(string s, int idx, HashSet<string> ans, int leftCount, int rightCount, StringBuilder sb, int openCount)
+{
+    if (leftCount < 0 || rightCount < 0 || openCount < 0)   // yic use open to make sure curr loc is okay before move on
+    {
+        return;
+    }
+    if (idx >= s.Length)
+    {
+        if (leftCount == rightCount && rightCount ==0 && openCount==0)
+        {
+            ans.Add(sb.ToString());
+        }
+        return;
+    }
+            
+    if (s[idx] == '(')
+    {
+        // use it
+        sb.Append('(');            // left keep as is
+        DFSHelper(s, idx + 1, ans, leftCount, rightCount, sb, openCount + 1);
+        sb.Remove(sb.Length-1, 1);
+                
+        // don't use it
+        DFSHelper(s, idx + 1, ans, leftCount-1, rightCount, sb, openCount);
+    }
+    else if (s[idx] == ')')
+    {
+        // use it
+        sb.Append(')');
+        DFSHelper(s, idx + 1, ans, leftCount, rightCount, sb, openCount - 1);
+        sb.Remove(sb.Length-1, 1);
+
+        // don't use it
+        DFSHelper(s, idx + 1, ans, leftCount, rightCount-1, sb, openCount);
+    }
+    else
+    {
+        sb.Append(s[idx]);
+        DFSHelper(s, idx + 1, ans, leftCount, rightCount, sb, openCount);
+        sb.Remove(sb.Length - 1, 1);
+    }
+}

@@ -1482,7 +1482,8 @@ namespace CodeExercise
         static void Run_WildcardMatching()
         {
             DP.WildcardMatching question = new DP.WildcardMatching();
-            var ans = question.IsMatch("ABx", "A?*");
+            var ans1 = question.IsMatch_recursive2("aa", "*");
+            var ans2 = question.IsMatch("ABx", "A?*");
         }
 
         //10
@@ -1877,7 +1878,9 @@ namespace CodeExercise
         static void Run_PrimeFactorization()
         {
             Number.PrimeFactorization question = new Number.PrimeFactorization();
+            var ans1 = question.GetFactors(12);
             var ans = question.primeFactorizationSolver(660);
+
         }
 
         //485
@@ -2647,6 +2650,11 @@ namespace CodeExercise
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //235
+            Run_PrimeFactorization();
+            //44
+            Run_WildcardMatching();
+
             //lint 597
             Run_SubtreewithMaximumAverage();
 
@@ -2815,8 +2823,7 @@ namespace CodeExercise
             // 485
             Run_LastPositionOfTarget();
 
-            //235
-            Run_PrimeFactorization();
+            
 
             //130
             Run_SurroundingRegions();
@@ -2886,8 +2893,7 @@ namespace CodeExercise
             
             
 
-            //44
-            Run_WildcardMatching();
+            
 
             //10
             Run_RegularExpression();

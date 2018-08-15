@@ -98,6 +98,73 @@ namespace CodeExercise.DP
             return F[M, N];
         }
 
+        public bool IsMatch_recursive2(string s, string p)
+        {
+            int M = s.Length;
+            int N = p.Length;
+            bool[,] visited = new bool[M, N];
+
+            bool[,] F = new bool[M, N];
+
+            var ans = IsMatchHelper2(s, p, visited, F, 0, 0);
+
+            return ans;
+        }
+
+        private bool IsMatchHelper2(string s, string p, bool[,] visited,  bool[,] memo, int i, int j)
+        {
+            int sLen = s.Length;
+            int pLen = p.Length;
+            if (i == sLen && j == pLen)  // both ran out
+            {
+                return true;
+            }
+
+            if (j == p.Length)   // yic: only pattern ran out
+            {
+                return false;
+            }
+            if (i == s.Length)  // yic s ran out
+            {
+                if (p[j] == '*')
+                {
+                    return IsMatchHelper2(s, p, visited, memo, i, j + 1);  // match 0 case
+                }
+                return false;
+            }
+
+            if (visited[i,j])
+            {
+                return memo[i, j];
+            }
+
+            bool canMatch = false;
+
+            if (s[i] == p[j])
+            {
+                canMatch = IsMatchHelper2(s, p, visited, memo, i + 1, j + 1);
+            }
+            else if (p[j] == '?')
+            {
+                canMatch = IsMatchHelper2(s, p, visited, memo, i + 1, j + 1);
+            }
+            else if (p[j] == '*')
+            {
+                canMatch = IsMatchHelper2(s, p, visited, memo, i, j + 1)   // match 0
+                        || IsMatchHelper2(s, p, visited, memo, i+1, j + 1)   // match 1
+                        || IsMatchHelper2(s, p, visited, memo, i+1, j);  // match many
+            }
+            else
+            {
+                //s[i]!=p[j]
+                canMatch = false;
+            }
+            visited[i, j] = true;
+            memo[i, j] = canMatch;
+
+            return canMatch;
+        }
+
 
         public bool IsMatch_recursive(string s, string p)
         {

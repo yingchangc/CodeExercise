@@ -92,6 +92,22 @@ namespace CodeExercise.DFS
         /// "()())()" -> ["()()()", "(())()"]
         /// "(a)())()" -> ["(a)()()", "(a())()"]
         /// ")(" -> [""]
+        /// 
+        /// sol:
+        /// 
+        /// 1. get left and right extra parentheses count need to be removed. be aware of ")("  case
+        /// 2. use leftextra and rightextra  and open as stop condition.
+        /// 
+        /// foreach s
+        /// 
+        /// if '('    use  then open++
+        ///          no use   then  leftExtra--.
+        ///          
+        /// if ')'   use  then open--
+        ///          no use  rightExtra--
+        ///          
+        /// 
+        /// stop when   index >=len  , or leftExtra|rightExtra smaller than 0 (memans over substract)
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
