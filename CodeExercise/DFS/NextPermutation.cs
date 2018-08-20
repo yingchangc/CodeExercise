@@ -28,6 +28,16 @@ namespace CodeExercise.DFS
         ///  --> 1 3 2 3 1       search for ascending from righ to left, stop  (2),   and swap with value just greater (3)
         ///  --> 1 3 3 [2 1]     it will be ascending , but we want smaller so, revese the after swap
         ///  --> 1 3 3 [1 2]
+        ///  
+        ///  (1)  find anchor index start to descend,  right part is ascending
+        ///  (2)  swap achor index with the position value just greater than anchor V,  so that we can make min high bit change
+        ///
+        ///          1 [2] 8 7 6 0
+        ///
+        ///		  swap with 6
+        ///	=>    1 [6] 8 7 2 0
+        ///	            reverse right part so that this become the next 
+        ///	==>   1 [6] 0 2 7 8
         /// </summary>
         /// <param name="nums"></param>
         public void NextPermutationSolver(int[] nums)
@@ -53,9 +63,9 @@ namespace CodeExercise.DFS
             {
                 int anchor = i;
 
-                for (int j = len-1; j >=0; j--)
+                for (int j = len-1; j >anchor; j--)
                 {
-                    // find num that is just greater than nums[anchor]
+                    // find num that is just greater than nums[anchor] so that the high bit change is smallest
                     if (nums[j] > nums[anchor])
                     {
                         swap(nums, j, anchor);
@@ -63,7 +73,7 @@ namespace CodeExercise.DFS
                     }
                 }
 
-                // reverse anchor+1 ~len-1
+                // then, reverse anchor+1 ~len-1
                 int left = anchor + 1;
                 int right = len - 1;
                 while(left <right)

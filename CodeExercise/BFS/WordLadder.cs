@@ -64,7 +64,7 @@ namespace CodeExercise.BFS
 
             foreach(string parent in parents)
             {
-                if (visited[beginWord] == (visited[parent] +1))  // yic must have to make sure alsways go down rather tahn go up to diff level.
+                if (visited[beginWord] == (visited[parent] +1))  // yic must have to make sure alsways go down rather tahn go up to diff level. cannot use visited[parent] because it may select detour string
                 {
                     currPath.Add(parent);
                     DFSHelper(parent, endWord, visited, parentsLookup, currPath, ans);

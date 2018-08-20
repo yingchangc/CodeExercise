@@ -384,3 +384,100 @@ return CloseLower(root.left, target);   // can be null becasue we cannot find an
         sb.Remove(sb.Length - 1, 1);
     }
 }
+
+
+/// 31. Next Permutation
+/// https://leetcode.com/problems/next-permutation/description/
+/// Implement next permutation, which rearranges numbers into the lexicographically next greater permutation of numbers.
+/// 
+/// If such arrangement is not possible, it must rearrange it as the lowest possible order(ie, sorted in ascending order).
+/// 
+/// The replacement must be in-place and use only constant extra memory.
+/// 
+/// Here are some examples.Inputs are in the left-hand column and its corresponding outputs are in the right-hand column.
+/// 
+/// 1,2,3 → 1,3,2
+/// 3,2,1 → 1,2,3
+/// 1,1,5 → 1,5,1
+/// 
+/// sol
+/// 
+///  --> 1 3 2 3 1       search for ascending from righ to left, stop  (2),   and swap with value just greater (3)
+///  --> 1 3 3 [2 1]     it will be ascending , but we want smaller so, revese the after swap
+///  --> 1 3 3 [1 2]
+
+///  (1)  find anchor index start to descend,  right part is ascending
+///  (2)  swap achor index with the position value just greater than anchor V,  so that we can make min high bit change
+///
+///          1 [2] 8 7 6 0
+///
+///		  swap with 6
+///	=>    1 [6] 8 7 2 0
+///	            reverse right part so that this become the next 
+///	==>   1 [6] 0 2 7 8
+[code]
+for (int j = len-1; j >anchor; j--)
+{
+    // find num that is just greater than nums[anchor] so that the high bit change is smallest
+    if (nums[j] > nums[anchor])
+    {
+        swap(nums, j, anchor);
+        break;
+    }
+}
+
+// then reverse anchor+1 ~len-1
+
+/// 425. Word Squares
+/// https://leetcode.com/problems/word-squares/description/
+/// Given a set of words (without duplicates), find all word squares you can build from them.
+///
+///A sequence of words forms a valid word square if the kth row and column read the exact same string, where 0 ≤ k<max(numRows, numColumns).
+///
+//  For example, the word sequence["ball", "area", "lead", "lady"] forms a word square because each word reads the same both horizontally and vertically.
+///
+ b a  l  l
+ a r  e  a
+ l e  a  d  
+ l a  d  y
+ 
+ sol
+(1) use trie to construct words so that we can lookup  prefix to get candidates
+
+(2) DFS 
+ /// step 1
+///   b  [a]   l  l          -> currently  we have 1 word,  so Indx = 1
+/// 
+/// find next word with prefix of word   ball[1]   ie "a"    so choose  "a"rea
+/// 
+/// step 2  
+///   
+///   b  a     l   l
+///   a  r     e   a              -> currently, we have 2 words   so index =2
+///   
+/// find next word with prefix  char    ball[2]  +  area[2]      ie  "le"    so choose  "le"ad 
+
+private void WordSquaresHelper(int finalLen, WQTrie trie, List<string> oneAns, List<List<string>> allAns)
+{
+    if (oneAns.Count == finalLen)
+    {
+        CopyOneAns(oneAns, allAns);
+        return;
+    }
+
+    int index = oneAns.Count;
+    string prefix = "";
+    foreach (string str in oneAns)
+    {
+        prefix += str[index];      // take a char from index of each ans word      b [a]  xxx
+                                    //                                              a [r]  yyy
+    }
+
+    List<string> startWithPrefixStrs = trie.startWithPrefix(prefix);
+    foreach(string str in startWithPrefixStrs)
+    {
+        oneAns.Add(str);
+        WordSquaresHelper(finalLen, trie, oneAns, allAns);
+        oneAns.RemoveAt(oneAns.Count - 1);   // remove str just added.  can be we have store in AllAns or not fix. Now, we try next word for OneAns
+    }
+}

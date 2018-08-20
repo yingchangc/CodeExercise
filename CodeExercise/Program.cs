@@ -2232,7 +2232,7 @@ namespace CodeExercise
         static void Run_NextClosestTime()
         {
             DFS.NextClosestTime question = new DFS.NextClosestTime();
-            var ans = question.NextClosestTimeSolver("23:59");
+            var ans = question.NextClosestTimeSolver2("19:34");
         }
 
         // lint 10
@@ -2647,9 +2647,30 @@ namespace CodeExercise
             var ans = question.FindSubtree2(root);
         }
 
+        static void BitOperation()
+        {
+            List<char> candidates = new List<char>() { 'a', 'b', 'c', 'a', 'c' };
+
+            int len = candidates.Count;
+            char c = candidates[0];
+
+            for(int i = 1; i <len; i++)
+            {
+                c = (char)(c ^ candidates[i]);
+            }
+
+            Console.Write("unique char is :" + c);
+        }
+
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+
+            BitOperation();
+
+
+            //681
+            Run_NextClosestTime();
             //235
             Run_PrimeFactorization();
             //44
@@ -2750,8 +2771,7 @@ namespace CodeExercise
             //46
             Run_permuteIntArray();
 
-            //681
-            Run_NextClosestTime();
+            
             //22
             Run_GenerateParenthesis();
             //93

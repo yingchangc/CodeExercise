@@ -1182,3 +1182,279 @@ private bool IsMatchHelper(string s, string p, bool [,] F, bool[,] visited, int 
 
     return F[i, j];
 }
+
+
+
+/// 46
+///https://leetcode.com/problems/permutations/description/
+///Given a collection of distinct integers, return all possible permutations.
+///
+/// sol: DFS  can easily handle duplicate number
+[code]
+// visited  is for each unique location, don't insert again to currPath
+private static void DFSHelper(int[] nums, List<int> currPath, List<List<int>> ans, bool[] visited)
+{
+    if (currPath.Count == nums.Length)
+    {
+        List<int> copy = new List<int>(currPath);
+        ans.Add(copy);
+        return;
+    }
+    HashSet<int> currLevelHasVisitedValue = new HashSet<int>();
+
+    for (int i = 0; i < nums.Length; i++)
+    {
+        if (visited[i])
+        {
+            continue;
+        }
+
+        if (currLevelHasVisitedValue.Contains(nums[i]))
+        {
+            continue;
+        }
+
+        currLevelHasVisitedValue.Add(nums[i]);
+
+        visited[i] = true;
+        currPath.Add(nums[i]);
+
+        DFSHelper(nums, currPath, ans, visited);
+
+        currPath.RemoveAt(currPath.Count - 1);
+        visited[i] = false;
+    }
+}
+
+
+/// 10. String Permutation II
+/// https://www.lintcode.com/problem/string-permutation-ii/description
+/// Given a string, find all permutations of it without duplicates.
+/// 
+/// Example
+/// Given "abb", return ["abb", "bab", "bba"].
+/// 
+/// Given "aabb", return ["aabb", "abab", "baba", "bbaa", "abba", "baab"].
+/// sol:   use dfs to handle duplicate 
+if (sb.Length == str.Length)
+{
+    ans.Add(sb.ToString());
+    return;
+}
+
+// to prevent duplicate
+HashSet<char> currVisited = new HashSet<char>();
+
+for (int i = 0; i < str.Length; i++)
+{
+    if (visited[i] || currVisited.Contains(str[i]))
+    {
+        continue;
+    }
+
+    currVisited.Add(str[i]);
+
+    visited[i]= true;
+    sb.Append(str[i]);
+
+    DFSHelper(str, sb, ans, visited);
+
+    sb.Remove(sb.Length - 1, 1);
+    visited[i] = false;
+}
+
+/// 51. N-Queens
+/// https://leetcode.com/problems/n-queens/description/
+/// The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that no two queens attack each other.
+/// Given an integer n, return all distinct solutions to the n-queens puzzle.
+/// Each solution contains a distinct board configuration of the n-queens' placement, where 'Q' and '.' both indicate a queen and an empty space respectively.
+/// Input: 4
+/// Output: [
+///          [".Q..",  // Solution 1
+///           "...Q",
+///           "Q...",
+///           "..Q."],
+/// 
+///  ["..Q.",  // Solution 2
+///   "Q...",
+///   "...Q",
+///   ".Q.."]
+///  ]
+
+// sol  canot be in the same col, and diag
+/// [diagnal case 1]
+/// (1,2)
+///     (x,y)
+///         (3,4)
+/// 
+/// column - row == const
+/// 
+/// [diagnal case 2]
+///                (1,4)
+///           (x, y)
+///      (3,2)
+///      
+/// column + row = const
+private void DFSHelper(int n, List<int> queenLocs, int currRow, List<List<string>> ans)
+
+
+
+//681. Next Closest Time
+//https://leetcode.com/problems/next-closest-time/description/
+/// <summary>
+/// Given a time represented in the format "HH:MM", form the next closest time by reusing the current digits. There is no limit on how many times a digit can be reused.
+
+///You may assume the given input string is always valid.For example, "01:34", "12:09" are all valid. "1:34", "12:9" are all invalid.
+///
+///Example 1:
+///
+///
+///Input: "19:34"
+///Output: "19:39"
+///Explanation: The next closest time choosing from digits 1, 9, 3, 4, is 19:39
+///
+/// sol: DFS and use orign time char as candidate,  convert all to min and compare if new number diff is smaller
+/// for negative  (23:59   -> 22:22) need to  +24*60 as diff
+private void dfsHelper(HashSet<char> candidate, int index, string currpath)
+{
+    if (index == 4)
+    {
+        int candidateTimeMin = ConvertPureTimeStrToMinute(currpath);
+        int currDiff = (candidateTimeMin - baseTimeMin) >= 0 ? 
+            (candidateTimeMin - baseTimeMin) :
+            (candidateTimeMin - baseTimeMin) + 24*60;   // next day
+
+        // find a smaller candidate but not the same
+        if (currDiff != 0 && mindiff > currDiff)
+        {
+            ans = currpath.Substring(0, 2) + ":" + currpath.Substring(2, 2);
+            mindiff = currDiff;  // yic don't forget
+        }
+        return;
+    }
+
+    foreach (char c in candidate)
+    {
+        if (index == 0 && c > '2')
+        {
+            continue;
+        }
+        else if (index == 1 && (currpath[0]-'0')*10+c-'0' >23 )   // yic 0~23: has limit 
+        {
+            continue;
+        }
+        else if (index == 2 && c > '5') // 23:59
+        {
+            continue;
+        }
+        else if (index ==3 && (currpath[2]-'0')*10 + (c-'0') > 59)  // 0~59
+        {
+            continue;
+        }
+
+        dfsHelper(candidate, index + 1, currpath + c);
+    }
+
+}
+
+
+// 291. Word Pattern II
+/// https://leetcode.com/problems/word-pattern-ii/description/
+/// 
+/// Given a pattern and a string str, find if str follows the same pattern.
+/// Here follow means a full match, such that there is a bijection between a letter in pattern and a non-empty substring in str.
+/// 
+/// Example 1:
+/// 
+/// Input: pattern = "abab", str = "redblueredblue"
+/// Output: true
+/// Example 2:
+/// 
+/// Input: pattern = pattern = "aaaa", str = "asdasdasdasd"
+/// Output: true
+/// Example 3:
+/// 
+/// Input: pattern = "aabb", str = "xyzabcxzyabc"
+/// Output: false
+/// Notes:
+/// You may assume both pattern and str contains only lowercase letters.
+/// 这里遵循的意思是一个完整的匹配，在一个字母的模式和一个非空的单词str之间有一个双向连接的模式对应。
+/// (如果a对应s，then b cannot match s。例如，给定的模式= "ab"， str = "ss"，返回false）。
+[code]
+ lookup = new Dictionary<char, string>();   // a -> "red"   b-> "blue"
+used = new HashSet<string>();    // "red"   "blue"
+var ans = DFSHelper(pattern, 0, str, 0);
+
+
+
+/// wordsearch 2
+ /// Given a 2D board and a list of words from the dictionary, find all words in the board.
+///        Each word must be constructed from letters of sequentially adjacent cell, where "adjacent" cells are those horizontally or vertically neighboring.The same letter cell may not be used more than once in a word.
+///
+///       For example,
+///       Given words = ["oath", "pea", "eat", "rain"] and board =
+///
+///       [   
+///         ['o','a','a','n'],
+///         ['e','t','a','e'],
+///         ['i','h','k','r'],
+///         ['i','f','l','v']
+///       ]
+///Return["eat", "oath"].
+//sol: build trie from words,  and at each DFS use Node to help determine if need to go to next level
+[code]
+if (visited[i,j])
+{
+    return;
+}
+
+visited[i, j] = true;
+
+if (curr.hasWord)
+{
+    ans.Add(curr.word);
+}
+
+var deltasI = new int[] { 1, 0, -1, 0 };
+var deltasJ = new int[] { 0, 1, 0, -1 };
+
+for(int k = 0; k < 4; k++)
+{
+    int nI = i + deltasI[k];
+    int nJ = j + deltasJ[k];
+    if (!(nI < 0 || nI >= M || nJ < 0 || nJ >= N))
+    {
+        char nextC = board[nI, nJ];
+        if (curr.children[nextC-'a'] != null)
+        {
+            FindWordsHelper(board, nI, nJ, M, N, curr.children[nextC - 'a'], visited, ans);
+        }
+    }          
+}
+
+visited[i, j] = false;
+
+
+
+
+/// 387. First Unique Character in a String
+/// https://leetcode.com/problems/first-unique-character-in-a-string/description/
+/// Given a string, find the first non-repeating character in it and return it's index. If it doesn't exist, return -1.
+/// 
+/// Examples:
+/// 
+/// s = "leetcode"
+/// return 0.
+/// 
+/// s = "loveleetcode",
+/// return 2.
+/// 
+/// 
+/// Sol:
+/// 
+/// for long data stream, use LRU cache
+DummyHead(-1)   ---  DummyTail(-1)
+
+HashMap[char, node]    if repeat  remove the node only.
+
+The answer will be DummyHead.next.val    

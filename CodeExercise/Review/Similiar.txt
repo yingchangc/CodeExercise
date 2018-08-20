@@ -343,3 +343,131 @@ foreach(int coin in coins)
         }
     }
 }
+
+
+
+/// 127 Word Ladder
+/// https://leetcode.com/problems/word-ladder/description/
+/// Given two words (beginWord and endWord), and a dictionary's word list, find the length of shortest transformation sequence from beginWord to endWord, such that:
+/// Only one letter can be changed at a time.
+/// Each transformed word must exist in the word list.Note that beginWord is not a transformed word.
+/// Note:
+/// 
+/// Return 0 if there is no such transformation sequence.
+/// All words have the same length.
+/// All words contain only lowercase alphabetic characters.
+///        You may assume no duplicates in the word list.
+///        You may assume beginWord and endWord are non-empty and are not the same.
+/// Example 1:
+/// 
+/// 
+///        Input:
+///        beginWord = "hit",
+///        endWord = "cog",
+///        wordList = ["hot", "dot", "dog", "lot", "log", "cog"]
+/// 
+/// 
+///        Output: 5
+/// 
+/// 
+///        Explanation: As one shortest transformation is "hit" -> "hot" -> "dot" -> "dog" -> "cog",
+///        return its length 5.
+
+[code] 
+HashSet<string> visited = new HashSet<string>();
+Queue<string> queue = new Queue<string>();
+queue.Enqueue(beginWord);
+visited.Add(beginWord);
+
+int len = 0;
+
+// bfs level
+while (queue.Count > 0)
+{
+    int levelSize = queue.Count;
+
+    for (int i = 0; i < levelSize; i++)
+    {
+        string curr = queue.Dequeue();
+
+        if (string.Compare(curr, endWord) == 0)
+        {
+            return len + 1;  // base 1
+        }
+
+        // get all possitble combinations
+        // if already exists in pre level, don't count, since we care about the shortest path
+        HashSet<string> candidates = getNextWords(curr, visited, dictionary);
+
+        foreach (string candidate in candidates)
+        {
+            queue.Enqueue(candidate);
+            visited.Add(candidate);
+        }
+    }
+    len++;
+
+}
+
+
+/// 126. Word Ladder I II
+/// https://leetcode.com/problems/word-ladder-ii/description/
+/// Given two words (start and end), and a dictionary, find all shortest transformation sequence(s) from start to end, such that:
+///Only one letter can be changed at a time
+///Each intermediate word must exist in the dictionary
+///Example
+///Given:
+///start = "hit"
+///end = "cog"
+///dict = ["hot","dot","dog","lot","log"]
+///        Return
+///  [
+///    ["hit", "hot", "dot", "dog", "cog"],
+///    ["hit","hot","lot","log","cog"]
+///  ]
+sol  :  same as ladder I using bfs, but use Dicitonary<stirng, List<string>> parentlookup and a visited[string, depth], parentlookup will be use it for later dfs backtrack.
+visited will be used in dfs for determine if we need to go down with min length
+
+[parentLookup]
+{log,dog} <- cog
+{lot} <- log
+
+---BFS----
+parentsLookup[nxt].Add(curr); // set parent
+
+if (!visited.ContainsKey(nxt))
+{
+    if (string.Compare(nxt, endWord) == 0)
+    {
+        found = true;
+    }
+
+    visited.Add(nxt, distance);  // update distance
+    queue.Enqueue(nxt);
+}
+
+---DFS---
+if (string.Compare(beginWord, endWord) == 0)
+            {
+                List<string> copy = new List<string>(currPath);
+                copy.Reverse();
+                ans.Add(copy);
+                return;
+            }
+
+            if (!parentsLookup.ContainsKey(beginWord))
+            {
+                return;
+            }
+            List<string> parents = parentsLookup[beginWord];
+
+            foreach(string parent in parents)
+            {
+                if (visited[beginWord] == (visited[parent] +1))  // yic must have to make sure alsways go down rather tahn go up to diff level. cannot use visited[parent] because it may select detour string
+                {
+                    currPath.Add(parent);
+                    DFSHelper(parent, endWord, visited, parentsLookup, currPath, ans);
+                    currPath.RemoveAt(currPath.Count - 1);
+                }
+                
+            }

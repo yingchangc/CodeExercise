@@ -13,6 +13,10 @@ namespace CodeExercise
         /// <summary>
         /// 46
         ///https://leetcode.com/problems/permutations/description/
+        ///Given a collection of distinct integers, return all possible permutations.
+        ///
+        /// sol: DFS  can easily handle duplicate number
+        /// 
         /// </summary>
         /// <param name="nums"></param>
         /// <returns></returns>
@@ -31,6 +35,8 @@ namespace CodeExercise
             return resArray.ToArray();
         }
 
+
+        // visited  is for each unique location, don't insert again to currPath
         private static void DFSHelper(int[] nums, List<int> currPath, List<List<int>> ans, bool[] visited)
         {
             if (currPath.Count == nums.Length)
@@ -78,12 +84,7 @@ namespace CodeExercise
             int len = nums.Length;
             if (index == (len -1))
             {
-                List<int> res = new List<int>();
-
-                for (int i = 0; i< len; i++)
-                {
-                    res.Add(nums[i]);
-                }
+                List<int> res = new List<int>(nums);
 
                 resArray.Add(res);
                 return;

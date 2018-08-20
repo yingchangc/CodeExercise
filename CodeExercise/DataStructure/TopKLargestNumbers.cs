@@ -31,7 +31,7 @@ namespace CodeExercise.DataStructure
         /// Sol
         /// (1) sort all array  nlogn
         /// (2) use minheap and pop min if size > k so that in the end, we can get the largest k   nlogk
-        /// (3) selection sort  n+klogk
+        /// (3) selection sort  n+(klogk)   selection + sort answer
         /// </summary>
         /// <param name="nums"></param>
         /// <param name="k"></param>
