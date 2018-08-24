@@ -10,6 +10,7 @@ namespace CodeExercise.DP
     {
         /// <summary>
         /// 53. Maximum Subarray
+        /// https://leetcode.com/problems/maximum-subarray/description/
         /// Find the contiguous subarray within an array (containing at least one number) which has the largest sum. 
         ///        For example, given the array[-2, 1, -3, 4, -1, 2, 1, -5, 4],
         ///        the contiguous subarray[4, -1, 2, 1] has the largest sum = 6.
@@ -22,6 +23,30 @@ namespace CodeExercise.DP
         /// </summary>
         /// <param name="nums"></param>
         /// <returns></returns>
+        public int MaxSubArrayPractice(int[] nums)
+        {
+            int currSum = 0;
+
+            int ans = Int32.MinValue;
+            int preAccuMin = 0;
+
+            foreach(var num in nums)
+            {
+                currSum += num;
+
+                int localMax =  Math.Max(currSum, currSum - preAccuMin);
+
+                // yic don't forget
+                ans = Math.Max(localMax, ans);
+
+
+                preAccuMin = Math.Min(currSum, preAccuMin);
+
+            }
+            return ans;
+        }
+
+
         public int MaxSubArraySolver(int[] nums)
         {
             int N = nums.GetLength(0);

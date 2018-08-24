@@ -220,29 +220,22 @@ namespace CodeExercise.DataStructure
         /// <returns></returns>
         public int SubarraySumK(int[] nums, int k)
         {
-            int N = nums.Length;
-            int sum = 0;
-            Dictionary<int, int> lookup = new Dictionary<int, int>();   // {sum, count}
-
-            int ans = 0;
-
+            Dictionary<int, int> lookup = new Dictionary<int, int>();  // {val, count}
             lookup.Add(0, 1);
 
-            for (int i = 0; i <N; i++)
+            int sum = 0;
+            int ans = 0;
+            for (int i = 0; i < nums.Length; i++)
             {
                 sum += nums[i];
 
-                // yic must compute ans first
-                // ex   sum    0    1  0  -1  0
-                //      count  [1]  1   -------------->   match 0,  ans += 1  and then ++0's count
-                //             1    1  [2] 1   ------->   match 0,   ans += 2  because we can have 2 choice for the 3rd 0 
-                //                             
-                if (lookup.ContainsKey(sum - k))
+                // count curr sum-k number,   2  2  [4]    k = 2,    ans  = 2      becasue can be 4-2'    4-2''
+                if (lookup.ContainsKey(sum-k))
                 {
                     ans += lookup[sum - k];
                 }
 
-                // add sum count
+                // put sum into lookup
                 if (!lookup.ContainsKey(sum))
                 {
                     lookup.Add(sum, 1);
@@ -250,10 +243,11 @@ namespace CodeExercise.DataStructure
                 else
                 {
                     lookup[sum]++;
-                } 
+                }                
             }
 
             return ans;
+
         }
     }
 }

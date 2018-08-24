@@ -1458,3 +1458,269 @@ DummyHead(-1)   ---  DummyTail(-1)
 HashMap[char, node]    if repeat  remove the node only.
 
 The answer will be DummyHead.next.val    
+
+
+
+/// https://www.lintcode.com/problem/insert-delete-getrandom-o1/description
+/// 380. Insert Delete GetRandom O(1)
+/// Design a data structure that supports all following operations in average O(1) time.
+///insert(val): Inserts an item val to the set if not already present.
+///remove(val): Removes an item val from the set if present.
+///getRandom: Returns a random element from current set of elements.Each element must have the same probability of being returned.
+
+Sol : use List<int>  for insert, 
+use Dictionary<int,int>  as (val, index)  to quick lookup. For delete, swap value_index with the lasst item, then delete the last one.
+
+Dictionary<int, int> lookup; // (val, index)
+List<int> arr;
+Random rd; 
+
+ // (2-2) swap last item with removed one
+int last = arr[arr.Count - 1];
+arr.RemoveAt(arr.Count - 1);
+arr[index] = last;
+lookup[last] = index;  // update last new index loc
+
+
+/// https://www.lintcode.com/problem/k-closest-points/description
+/// lint 612. K Closest Points
+/// Given some points and a point origin in two dimensional space, find k points out of the some points which are nearest to origin.
+/// Return these points sorted by distance, if they are same with distance, sorted by x-axis, otherwise sorted by y-axis.
+/// 
+/// Example
+/// Given points = [[4,6],[4,7],[4,4],[2,5],[1,1]], origin = [0, 0], k = 3
+/// return [[1,1],[2,5],[4,4]]
+Sol:
+
+use Priority Queue ("max" heap) and pop when size > k,  in the end, only "smallest" k will be keep in the pq.
+
+private Point global_origin = null;
+    public Point[] kClosest(Point[] points, Point origin, int k) {
+        // Write your code here
+        global_origin = origin;
+        PriorityQueue<Point> pq = new PriorityQueue<Point> (k, new Comparator<Point> () {
+            @Override
+            public int compare(Point a, Point b) {
+                int diff = getDistance(b, global_origin) - getDistance(a, global_origin);
+                if (diff == 0)
+                    diff = b.x - a.x;
+                if (diff == 0)
+                    diff = b.y - a.y;
+                return diff;
+            }
+        });
+
+        for (int i = 0; i < points.length; i++) {
+            pq.offer(points[i]);
+            if (pq.size() > k)
+                pq.poll();
+        }
+        
+        k = pq.size();
+        Point[] ret = new Point[k];  
+        while (!pq.isEmpty())
+            ret[--k] = pq.poll();
+        return ret;
+    }
+    
+    private int getDistance(Point a, Point b) {
+        return (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
+    }
+
+
+/// Lint 398
+/// http://www.lintcode.com/en/problem/longest-increasing-continuous-subsequence-ii/
+/// 
+/// Give you an integer matrix (with row size n, column size m)，find the longest increasing continuous subsequence in this matrix. 
+/// (The definition of the longest increasing continuous subsequence here can start at any row or column and go up/down/right/left any direction).
+/// 
+///                {
+///                  {1, 5,  3 },
+///                  {4, 10, 9 },
+///                  {2, 8,  7 }
+///                };
+/// 
+
+Sol: DFS would timeout, use DP
+if (visited[j,i] == true)
+{
+    return F[j, i];
+}
+
+// will not have loop be cause recursive only happen when neighber is smaller, wont come back to curr (j,i)
+visited[j, i] = true;
+
+int[] deltaXs = { -1, 1, 0, 0 };
+int[] deltaYs = {  0, 0, 1,-1 };
+
+F[j, i] = 1;  // init len is itself
+
+
+for (int k = 0; k <4; k++)
+{
+    int nx = i + deltaXs[k];
+    int ny = j + deltaYs[k];
+    if (nx >= 0 && nx < N && ny >= 0 && ny < M && A[j, i] > A[ny, nx])
+    {
+        int preLen = LongestIncreasingContinuousSubsequenceIIHelper(A, F, visited, ny, nx, M, N);
+        F[j, i] = Math.Max(F[j, i], (preLen + 1));
+    }
+}
+
+            
+
+return F[j, i];
+
+
+/// 300
+/// 
+/// O(n^2 ) https://www.youtube.com/watch?v=CE2b_-XfVDk
+/// O(nlongn)https://www.youtube.com/watch?v=S9oUiVYEq7E
+/// 
+/// Given an unsorted array of integers, find the length of longest increasing subsequence. 
+///        For example,
+///        Given[10, 9, 2, 5, 3, 7, 101, 18],
+///        The longest increasing subsequence is [2, 3, 7, 101], therefore the length is 4. Note that there may be more than one LIS combination, it is only necessary for you to return the length.
+///Your algorithm should run in O(n2) complexity.
+///
+/// Sol
+/// F[j] = max (1 self,    f[i]+1 if a[j] > a[i] 
+public int LengthOfLIS(int[] nums)
+{
+    if (nums ==null || nums.Length ==0)
+    {
+        return 0;
+    }
+
+    int[] F = new int[nums.Length];
+    for (int i = 0; i <nums.Length; i++)
+    {
+        F[i] = 1;
+    }
+
+    int ans = 1;
+
+    for (int i =0; i < nums.Length; i++)
+    {
+        for (int j = 0; j < i; j++)
+        {
+            if (nums[j] < nums[i])
+            {
+                F[i] = Math.Max(F[i], F[j] + 1);
+                ans = Math.Max(F[i], ans);
+            }
+                    
+        }
+    }
+    return ans;
+}
+
+
+/// 53. Maximum Subarray
+/// https://leetcode.com/problems/maximum-subarray/description/
+/// Find the contiguous subarray within an array (containing at least one number) which has the largest sum. 
+///        For example, given the array[-2, 1, -3, 4, -1, 2, 1, -5, 4],
+///        the contiguous subarray[4, -1, 2, 1] has the largest sum = 6.
+///          click to show more practice.
+///          More practice: 
+/// If you have figured out the O(n) solution, try coding another solution using the divide and conquer approach, which is more subtle.
+///
+/// sol:
+/// 
+currAccuSum - preAccuMin (<-  default to 0, and hope to get minus)
+
+public int MaxSubArrayPractice(int[] nums)
+{
+    int currSum = 0;
+
+    int ans = Int32.MinValue;
+    int preAccuMin = 0;
+
+    foreach(var num in nums)
+    {
+        currSum += num;
+
+        int localMax =  Math.Max(currSum, currSum - preAccuMin);
+
+        // yic don't forget
+        ans = Math.Max(localMax, ans);
+
+
+        preAccuMin = Math.Min(currSum, preAccuMin);
+
+    }
+    return ans;
+}
+
+
+/// 139. Subarray Sum Closest
+/// https://www.jiuzhang.com/solution/subarray-sum-closest/
+/// Given an integer array, find a subarray with sum closest to zero. Return the indexes of the first number and last number.
+/// 
+/// Example
+/// Given[-3, 1, 1, -3, 5], return [0, 2], [1, 3], [1, 1], [2, 2] or[0, 4].
+
+// sol:  sort sum  and flid neighbor items closet,  use 
+Class Item
+{
+    public int sum;
+    public int loc;
+
+    public Item(int sum, int loc)
+    {
+        this.sum = sum;
+        this.loc = loc;
+    }
+}
+
+class ItemComparer : IComparer<Item>
+{
+    public int Compare(Item x, Item y)
+    {
+        return x.sum.CompareTo(y.sum);
+    }
+}
+
+to help sort  but keep track of item location.
+
+
+
+
+/// 57. Insert Interval
+/// https://leetcode.com/problems/insert-interval/description/
+/// Given a set of non-overlapping intervals, insert a new interval into the intervals (merge if necessary).
+/// 
+/// You may assume that the intervals were initially sorted according to their start times.
+/// 
+/// Example 1:
+/// 
+/// Input: intervals = [[1, 3], [6,9]], newInterval = [2,5]
+/// Output: [[1,5],[6,9]]
+sol:
+
+add newInterval to intervals and sort by start.
+
+then add item to Ans with the logic
+[code]
+Interval pre = intervals[0];
+for (int i = 0; i < copy.Length; i++)
+{
+    if (i ==0)
+    {
+        ans.Add(copy[0]);
+    }
+    else
+    {
+        Interval curr = copy[i];
+        if (pre.end < curr.start)   // okay to seperate
+        {
+            ans.Add(curr);
+            pre = curr;
+        }
+        else  if (pre.end < curr.end)
+        {
+            pre.end = curr.end;   // override to longer interval end
+        }
+    }
+
+}

@@ -73,15 +73,18 @@
     <Compile Include="DataStructure\ExpandExpression.cs" />
     <Compile Include="DataStructure\FindDuplicateNumber.cs" />
     <Compile Include="DataStructure\FirstUniqueCharacterinaString.cs" />
+    <Compile Include="DataStructure\Flatten2D Vector.cs" />
     <Compile Include="DataStructure\FlattenBinaryTreeToLL.cs" />
     <Compile Include="DataStructure\HashFunction.cs" />
     <Compile Include="DataStructure\HighFive.cs" />
+    <Compile Include="DataStructure\InsertInterval.cs" />
     <Compile Include="DataStructure\IntersectionOfArrays.cs" />
     <Compile Include="DataStructure\IntersectionofTwoArrays.cs" />
     <Compile Include="DataStructure\KClosestPoints.cs" />
     <Compile Include="DataStructure\KthSmallestElementInMatrix.cs" />
     <Compile Include="DataStructure\LargestRectangleInHistogram.cs" />
     <Compile Include="DataStructure\LinkedListCycleII.cs" />
+    <Compile Include="DataStructure\LoadBalancer.cs" />
     <Compile Include="DataStructure\LongestCommonPrefix.cs" />
     <Compile Include="DataStructure\LongestPalindromicSubstring.cs" />
     <Compile Include="DataStructure\MaxBinaryTree.cs" />
@@ -104,6 +107,7 @@
     <Compile Include="DataStructure\RandomizedSet.cs" />
     <Compile Include="DataStructure\RangeSumQuery.cs" />
     <Compile Include="DataStructure\RangeSumQuery2D.cs" />
+    <Compile Include="DataStructure\Rehashing.cs" />
     <Compile Include="DataStructure\ReverseWordsinaString2.cs" />
     <Compile Include="DataStructure\RotateImage.cs" />
     <Compile Include="DataStructure\ShortestRangeInKSortedArrays.cs" />

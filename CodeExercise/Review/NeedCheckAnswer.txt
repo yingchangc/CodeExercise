@@ -272,6 +272,10 @@ TreeNode smaller = CloseLower(root, target);
 TreeNode larger = CloseLarger(root, target);
 
 (1)closer  Lower 
+if (root == null)
+{
+    return null;
+}
 if (root.val == target)
 {
     return root;

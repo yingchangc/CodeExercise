@@ -442,6 +442,8 @@ namespace CodeExercise
             DP.LongestIncreasingContinuousSubsequence2 question2 = new DP.LongestIncreasingContinuousSubsequence2();
             var ans398 = question2.LongestIncreasingContinuousSubsequenceIISolver(matrix2);
 
+            var ans398_2 = question2.LongestIncreasingContinuousSubsequenceIIPractice_slow(matrix2);
+
             //674
             DP.LongestContinuousIncreasingSubsequence question = new DP.LongestContinuousIncreasingSubsequence();
             int ans = question.FindLengthOfLCIS(nums);
@@ -630,6 +632,7 @@ namespace CodeExercise
         {
             int[] nums = { -2, 1, -3, 4, -1, 2, 1, -5, 4 };
             DP.MaximumSubarray question = new DP.MaximumSubarray();
+            int ans2 = question.MaxSubArrayPractice(nums);
             int ans = question.MaxSubArraySolver(nums);
         }
 
@@ -1497,6 +1500,10 @@ namespace CodeExercise
         static void Run_SubarraySum()
         {
             DataStructure.SubarraySum question = new DataStructure.SubarraySum();
+            int[] arr4 = { 1, 2, 3, 4 };
+            var ans4 = question.subarraySumII(arr4, 1, 3);
+
+
             int[] arr = { -3, 1, 2, -3, 4 , -4};
             var ans = question.SubarraySumSolver(arr);
 
@@ -1506,8 +1513,7 @@ namespace CodeExercise
             int[] arr3 = { 1, -1, 5, -2, 3 };
             var ans3 = question.MaxSubArrayLen(arr3, 3);
 
-            int[] arr4 = { 1, 2, 3, 4 };
-            var ans4 = question.subarraySumII(arr4, 1, 3);
+            
         }
 
         //387
@@ -2662,9 +2668,42 @@ namespace CodeExercise
             Console.Write("unique char is :" + c);
         }
 
+        //251
+        static void Run_Flattern2DVector()
+        {
+            List<List<int>> matrix = new List<List<int>>();
+            matrix.Add(new List<int>() { 1, 2, 3 });
+            matrix.Add(new List<int>() { 4 });
+            matrix.Add(new List<int>() { 5,6 });
+            DataStructure.Flatten2D_Vector question = new DataStructure.Flatten2D_Vector(matrix.ToArray());
+        }
+
+        //57
+        static void Run_InsertIntervals()
+        {
+            DataStructure.InsertInterval question = new DataStructure.InsertInterval();
+            DataStructure.Interval i1 = new DataStructure.Interval(1, 3);
+            DataStructure.Interval i2 = new DataStructure.Interval(6, 9);
+            DataStructure.Interval i3 = new DataStructure.Interval(2, 5);
+            List<DataStructure.Interval> intervals = new List<DataStructure.Interval>() { i1, i2 };
+            var ans =  question.Insert(intervals, i3);
+
+        }
+
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //57
+            Run_InsertIntervals();
+            //53
+            Run_MaxSumSubarray();
+            //138,325
+            Run_SubarraySum();
+
+            //674, 300
+            Run_LongestContinuousIncreasingSubsequence();
+            //251
+            Run_Flattern2DVector();
 
             BitOperation();
 
@@ -2905,8 +2944,7 @@ namespace CodeExercise
     
             //529
                 Run_Geohash();
-            //138,325
-            Run_SubarraySum();
+           
 
             
 
@@ -2967,8 +3005,7 @@ namespace CodeExercise
             // 519
             Run_ConsistentHash();
 
-            //674, 300
-            Run_LongestContinuousIncreasingSubsequence();
+            
 
             //5
             Run_LongestPalindromicSubstring();
@@ -3108,8 +3145,7 @@ namespace CodeExercise
             
     
             
-            //53
-            Run_MaxSumSubarray();
+            
             
             //// 746, 70
             Run_MinCostClimbingStairs();

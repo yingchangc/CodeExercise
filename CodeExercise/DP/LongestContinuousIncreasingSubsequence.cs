@@ -8,6 +8,7 @@ namespace CodeExercise.DP
 {
     /// <summary>
     /// 674
+    /// https://leetcode.com/problems/longest-continuous-increasing-subsequence/description/
     /// Given an unsorted array of integers, find the length of longest continuous increasing subsequence (subarray). 
     /// Example 1:
     /// Input: [1,3,5,4,7]
@@ -24,64 +25,34 @@ namespace CodeExercise.DP
     {
         public int FindLengthOfLCIS(int[] nums)
         {
-            int len = nums.Length;
-
-            if (len == 0)
+            if (nums ==null || nums.Length == 0)
             {
                 return 0;
             }
 
-            int startIndex = 0;
+            int[] lenCount = new int[nums.Length];
 
-            int ans = 1;
-            int currLen = 1;
+            lenCount[0] = 1;
             int pre = nums[0];
-            for (int i = 1; i < len; i++)
+            int maxLen = 1;
+
+            for(int i = 1; i <nums.Length; i++)
             {
-                if (pre < nums[i])
+                if (nums[i] > pre)
                 {
-                    currLen++;
-                    ans = Math.Max(ans, currLen);
+                    lenCount[i] = lenCount[i - 1] + 1;
+                    maxLen = Math.Max(lenCount[i], maxLen);
                 }
                 else
                 {
-                    currLen = 1;
+                    lenCount[i] = 1;
                 }
 
                 pre = nums[i];
             }
 
-
-            //for (int i = 1; i < len; i++)
-            //{
-            //    if (nums[i] > nums[i - 1])
-            //    {
-            //        ans = Math.Max(ans, i - startIndex + 1);
-            //    }
-            //    else
-            //    {
-            //        startIndex = i;
-            //    }
-            //}
-
-            // if left and right need to be considered
-            //startIndex = 0;
-            //for (int i = 1; i < len; i++)
-            //{
-            //    if (nums[i] < nums[i - 1])
-            //    {
-            //        ans = Math.Max(ans, i - startIndex + 1);
-            //    }
-            //    else
-            //    {
-            //        startIndex = i;
-            //    }
-            //}
-
-            return ans;
-
-
-        }
+            return maxLen;
+        } 
     }
 
     class LongestIncreasingContinuousSubsequence2
@@ -105,6 +76,63 @@ namespace CodeExercise.DP
         /// </summary>
         /// <param name="A"></param>
         /// <returns></returns>
+        public int LongestIncreasingContinuousSubsequenceIIPractice_slow(int[,] A)
+        {
+            if (A == null)
+            {
+                return 0;
+            }
+
+            int height = A.GetLength(0);
+            int width = A.GetLength(1);
+            bool[,] visited = new bool[height, width];
+
+            int ans = 0;
+
+            for (int j = 0; j < height; j++)
+            {
+                for (int i = 0; i<width; i++)
+                {
+                    visited[j, i] = true;
+                    int temp = DFS(A, j, i, visited, width, height);
+                    ans = Math.Max(ans, temp);
+                    visited[j, i] = false;
+                }
+            }
+
+            return ans;
+        }
+
+        private int DFS(int[,] A, int j, int i, bool[,] visited, int width, int height)
+        {
+            
+            int[] deltaX = { -1, 0, 1, 0 };
+            int[] deltaY = { 0, -1, 0, 1 };
+
+            int childDepth = 0;
+
+            for (int k = 0; k <4; k++)
+            {
+                int newY = j + deltaY[k];
+                int newX = i + deltaX[k];
+
+                if (newY>=0 && newY <height && newX>=0 && newX < width && visited[newY, newX] ==false && A[j,i] <A[newY, newX])
+                {
+
+                    visited[newY, newX] = true;
+
+                    int temp = DFS(A, newY, newX, visited, width, height);
+                    childDepth = Math.Max(childDepth, temp);
+
+                    visited[newY, newX] = false;
+                }
+            }
+
+            return 1 + childDepth;
+
+        }
+
+
         public int LongestIncreasingContinuousSubsequenceIISolver(int[,] A)
         {
             if (A == null)
@@ -169,6 +197,7 @@ namespace CodeExercise.DP
     {
         /// <summary>
         /// 128
+        /// https://leetcode.com/problems/longest-consecutive-sequence/description/
         /// Given an unsorted array of integers, find the length of the longest consecutive elements sequence. 
         ///        For example,
         ///        Given[100, 4, 200, 1, 3, 2],
@@ -179,36 +208,47 @@ namespace CodeExercise.DP
         /// find a random location to start and choose any other location to find consecutuve
         /// 
         /// Use hashSet to memo nums, find a number that has no pre consecutive num to check
+        /// 
+        /// Time complexity : O(n)
+        ///
+        ///Although the time complexity appears to be quadratic due to the while loop nested within the for loop, closer inspection reveals it to be linear.Because the while loop is reached only when currentNum marks the beginning of a sequence(i.e.currentNum-1 is not present in nums), the while loop can only run for nn iterations throughout the entire runtime of the algorithm.This means that despite looking like O(n \cdot n)O(n⋅n) complexity, the nested loops actually run in O(n + n) = O(n)O(n+n)=O(n) time.All other computations occur in constant time, so the overall runtime is linear.
+        ///
+        ///Space complexity : O(n)
+        ///
+        ///In order to set up O(1)containment lookups, we allocate linear space for a hash table to store the O(n)O(n) numbers in nums.Other than that, the space complexity is identical to that of the brute force solution.
+        ///
+
         /// </summary>
         /// <param name="nums"></param>
         /// <returns></returns>
         public int LongestConsecutiveSolver(int[] nums)
         {
-            if (nums == null || nums.Length == 0)
+            if (nums==null || nums.Length == 0)
             {
                 return 0;
             }
-            HashSet<int> memo = new HashSet<int>();
-            foreach(int num in nums)
+
+            HashSet<int> lookup = new HashSet<int>();
+            foreach(int n in nums)
             {
-                memo.Add(num);
+                lookup.Add(n);
             }
 
+            int maxLen = 1;
 
-            int maxLen = 0;
-
-            foreach(int num in nums)
+            foreach(int n in nums)
             {
-                // find start number;  ex 100, 200, 1 in the example
-                if (!memo.Contains(num - 1))
+                int currCount = 1;
+                int temp = n;
+                // lookfor Smallest in consecutive
+                // only move on when smallest,   so only iterate once O(n)  in the end,
+                if (!lookup.Contains(n-1))
                 {
-                    int currLen = 0;
-                    int temp = num;
-                    while(memo.Contains(temp))
+                    while(lookup.Contains(temp+1))
                     {
-                        currLen++;
-                        maxLen = Math.Max(currLen, maxLen);
+                        currCount++;
                         temp++;
+                        maxLen = Math.Max(maxLen, currCount);
                     }
                 }
             }
@@ -241,32 +281,34 @@ namespace CodeExercise.DP
         /// <returns></returns>
         public int LengthOfLIS(int[] nums)
         {
-            int N = nums.Length;
-            if (N==0)
+            if (nums ==null || nums.Length ==0)
             {
                 return 0;
             }
 
-            int[] F = new int[N];     // this question use 0~N-1 
-            int ans = 1;              // at least one length
-
-            for (int j = 0; j < N; j++)
+            int[] F = new int[nums.Length];
+            for (int i = 0; i <nums.Length; i++)
             {
-                F[j] = 1;   // init
-
-                for (int i = 0; i < j; i++)
-                {
-                    if (nums[j] > nums[i])
-                    {
-                        F[j] = Math.Max(F[j], F[i] + 1);
-
-                        ans = Math.Max(F[j], ans);
-                    }
-                }  
+                F[i] = 1;
             }
 
+            int ans = 1;
+
+            for (int i =0; i < nums.Length; i++)
+            {
+                for (int j = 0; j < i; j++)
+                {
+                    if (nums[j] < nums[i])
+                    {
+                        F[i] = Math.Max(F[i], F[j] + 1);
+                        ans = Math.Max(F[i], ans);
+                    }
+                    
+                }
+            }
             return ans;
         }
+
 
         //Sol
         /// 
