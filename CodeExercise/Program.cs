@@ -630,10 +630,19 @@ namespace CodeExercise
         // 53
         static void Run_MaxSumSubarray()
         {
+            int[] nums2 = { -2, 2, -3, 4, -1, 2, 1, -5, 3 };
+            DP.MaximumSubarray question3 = new DP.MaximumSubarray();
+            var ans4=question3.MinSubarray(nums2);
+
+            DP.MaximumSubarray question2 = new DP.MaximumSubarray();
+            var ans3 = question2.MaxSubarray4(nums2, 2);
+
+
             int[] nums = { -2, 1, -3, 4, -1, 2, 1, -5, 4 };
             DP.MaximumSubarray question = new DP.MaximumSubarray();
             int ans2 = question.MaxSubArrayPractice(nums);
             int ans = question.MaxSubArraySolver(nums);
+  
         }
 
         //152
@@ -2693,10 +2702,13 @@ namespace CodeExercise
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
-            //57
-            Run_InsertIntervals();
+
             //53
             Run_MaxSumSubarray();
+
+            //57
+            Run_InsertIntervals();
+            
             //138,325
             Run_SubarraySum();
 

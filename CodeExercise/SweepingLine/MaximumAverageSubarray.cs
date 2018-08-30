@@ -141,6 +141,33 @@ namespace CodeExercise.SweepingLine
         /// <param name="nums"></param>
         /// <param name="k"></param>
         /// <returns></returns>
+        public double FindMaxAveragePractice(int[] nums, int k)
+        {
+            if (nums == null || nums.Length == 0)
+            {
+                return 0;
+            }
+
+            double ans = Int32.MinValue;    // yic
+            double sum = 0;
+            double preKMin = 0;
+            Queue<double> que = new Queue<double>();
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                sum += nums[i];
+                que.Enqueue(sum);
+
+                if(que.Count == k)
+                {
+                    ans = Math.Max((sum - preKMin)/ k, ans);
+                    preKMin = que.Dequeue();
+                }
+            }
+            
+
+            return ans;
+        }
         public double FindMaxAverage(int[] nums, int k)
         {
             double sum = 0;

@@ -10,6 +10,7 @@ namespace CodeExercise.DataStructure
     {
         /// <summary>
         /// 6. Merge Two Sorted Arrays
+        /// https://www.lintcode.com/problem/merge-two-sorted-arrays/description
         /// Merge two given sorted integer array A and B into a new sorted integer array.
         /// 
         /// Example

@@ -30,6 +30,10 @@ namespace CodeExercise.DataStructure
         /// 
         /// Sol:
         /// 枚举子矩阵的上下边界 up & down, 然后将这之间的数压缩为一个一维数组（降维攻击），剩下的任务就是一维数组如何求 Maximum Subarray 了。
+        /// 
+        /// set (up - down) range,  make it from 2d to 1d sum
+        /// then find max subarry sum
+        /// 
         /// </summary>
         /// <param name="matrix"></param>
         /// <returns></returns>

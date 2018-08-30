@@ -76,7 +76,7 @@ namespace CodeExercise.BinarySearch
         /// There is an integer matrix which has the following features:
         /// The numbers in adjacent positions are different.
         /// The matrix has n rows and m columns.
-        // For all i<m, A[0][i] < A[1][i] && A[n - 2][i]> A[n - 1][i].
+        // For all i<m, A[0][i] < A[1][i] && A[n - 2][i]> A[n - 1][i].       ie middle somewhere is big
         // For all j<n, A[j][0] < A[j][1] && A[j][m - 2]> A[j][m - 1].
         /// We define a position P is a peek if:
         /// 

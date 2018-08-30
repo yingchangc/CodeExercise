@@ -711,3 +711,51 @@ foreach(int n in nums)
         }
     }
 }
+
+
+
+/// lint 405 
+/// https://www.lintcode.com/en/old/problem/submatrix-sum/
+/// Given an integer matrix, find a submatrix where the sum of numbers is zero. Your code should return the coordinate of the left-up and right-down number.
+/// Given matrix
+/// 
+///ex,
+// [
+//  [1 ,5 ,7],
+//  [3 ,7 ,-8],
+//  [4 ,-8 ,9],
+// ]
+/// return [(1, 1), (2, 2)]
+
+[code]
+for (int j1 = 0; j1 <=M; j1++)    // 0~M
+{
+    for (int j2 = j1+1; j2 <= M; j2++)  //j1+1 ~M   because down right corner
+    {
+        for (int i = 0; i <= N; i++)      // 0~N    0  because we need dummy padding for compute "incude start idx"
+
+private void preComputeSum(int[,] matrix, int[,] sumMatrix)
+{
+    int M = matrix.GetLength(0);
+    int N = matrix.GetLength(1);
+
+    // place padding
+    for (int j = 0; j <=M; j++)
+    {
+        sumMatrix[j, 0] = 0;
+    }
+
+    for (int i = 0; i <= N; i++)
+    {
+        sumMatrix[0, i] = 0;
+    }
+
+    // compute sum from (left + top - top_left) + currLocValue
+    for (int j = 1; j <=M; j++)
+    {
+        for (int i = 1; i <=N; i++)
+        {
+            sumMatrix[j, i] = sumMatrix[j - 1, i] + sumMatrix[j, i - 1] - sumMatrix[j - 1, i - 1] + matrix[j - 1, i - 1];
+        }
+    }
+}

@@ -49,7 +49,7 @@ namespace CodeExercise
             //
             // 2 3
             // 4 5 6 7 8 9
-            // can remove the longer one half since longer one must contain waste
+            // can remove the longer one half since longer one must contrain waste
             if (start1 >= nums1.Length)
             {
                 return nums2[start2+kth-1];     // yic "start"+kth -1
@@ -59,6 +59,7 @@ namespace CodeExercise
                 return nums1[start1+kth-1];
             }
 
+            // yic Important
             // 2 3
             // 1
             if (kth ==1)
@@ -106,7 +107,7 @@ namespace CodeExercise
 
             if (len1 > len2)
             {
-                return FindMedianSortedArrays_old(nums2, nums1);
+                return FindMedianSortedArrays(nums2, nums1);
             }
 
 
