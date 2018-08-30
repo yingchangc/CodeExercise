@@ -1885,3 +1885,193 @@ for (int i = 0; i < colA; i++)
 
     }
 }
+
+
+
+/// leetcode 340
+/// https://www.lintcode.com/problem/longest-substring-with-at-most-k-distinct-characters/description
+/// Given a string s, find the length of the longest substring T that contains at most k distinct characters.
+/// 
+/// Example
+///        For example, Given s = "eceba", k = 3,
+/// 
+///        T is "eceb" which its length is 4. 
+
+[code]
+
+public int LengthOfLongestSubstringKDistinct(String s, int k)
+{
+    Dictionary<char, int> memo = new Dictionary<char, int>();
+
+    int j = 0;
+    int currLen = 0;
+    int maxLen = 0;
+
+    for (int i = 0; i < s.Length; i++)
+    {
+        while (j < s.Length && (memo.Keys.Count < k || (memo.Keys.Count==k && memo.ContainsKey(s[j]))))    // < count < k or count ==k  but old key
+        {
+            currLen++;
+
+            if (!memo.ContainsKey(s[j]))
+            {
+                memo.Add(s[j], 0);
+            }
+            memo[s[j++]]++;
+        }
+
+        maxLen = Math.Max(maxLen, currLen);
+
+        // now ready to move i
+        memo[s[i]]--;
+        if (memo[s[i]] == 0)
+        {
+            memo.Remove(s[i]);
+        }
+        currLen--;
+    }
+
+    return maxLen;
+}
+
+
+/// 465. Kth Smallest Sum In Two Sorted Arrays
+/// http://www.lintcode.com/en/problem/kth-smallest-sum-in-two-sorted-arrays/
+/// Given two integer arrays sorted in ascending order and an integer k. Define sum = a + b, 
+/// where a is an element from the first array and b is an element from the second one. Find the kth smallest sum out of all possible sums.
+/// 
+/// 
+/// Example
+///  Given[1, 7, 11] and[2, 4, 6].
+/// 
+/// For k = 3, return 7.
+/// 
+/// For k = 4, return 9.
+/// 
+/// For k = 8, return 15
+[sol]  use pq  and start with index (0,0)
+
+
+
+SortedDictionary<int, List<Location>> pq = new SortedDictionary<int, List<Location>>(); // (sum, LocaitonS)
+
+List<Location> initLocaitons = new List<Location>() { new Location(0, 0) }; //use List because: [1 3 5]   [2,4,6]   sum == 5 has (1,4), (2,5)
+bool[,] visited = new bool[arrA.Length, arrB.Length];     
+pq.Add(arrA[0] + arrB[0], initLocaitons);
+visited[0, 0] = true;
+
+List<Location> deltas = new List<Location>() { new Location(0, 1), new Location(1, 0) };    
+            
+int ans = 0;
+
+for (int i = 0; i < k; i++)
+{
+    ans = pq.Keys.First();
+
+    var locations = pq.Values.First();
+    var location = locations[0];
+
+    foreach(var delta in deltas)
+    {
+        int newLocX = location.x + delta.x;   // A index
+        int newLocY = location.y + delta.y;   // B index
+
+        if (newLocX < arrA.Length && newLocY < arrB.Length && visited[newLocX, newLocY] == false)     // YIC  boundary condition
+        {
+            visited[newLocX, newLocY] = true;
+            var newSum = arrA[newLocX] + arrB[newLocY];
+                        
+            if (pq.ContainsKey(newSum))
+            {
+                pq[newSum].Add(new Location(newLocX, newLocY));
+            }
+            else
+            {
+                pq.Add(newSum, new List<Location>() { new Location(newLocX, newLocY) });
+            }
+        }
+    }
+
+    if (locations.Count == 1)
+    {
+        pq.Remove(ans);
+    }
+    else
+    {
+        locations.RemoveAt(0);  // remove first locaiton wth the same key
+    }     
+}
+
+
+/// 609. Two Sum - Less than or equal to target
+/// https://www.lintcode.com/en/old/problem/two-sum-less-than-or-equal-to-target/
+/// Given an array of integers, find how many pairs in the array such that their sum is less than or equal to a specific target number.
+/// Please return the number of pairs.
+/// Have you met this question in a real interview?
+/// Example
+/// Given nums = [2, 7, 11, 15], target = 24.
+/// Return 5. 
+//  2 + 7 < 24
+//  2 + 11 < 24
+//  2 + 15 < 24
+//  7 + 11 < 24
+//  7 + 15 < 25
+
+/// sol:
+/// 
+///  use 2 pointers
+Array.Sort(nums);
+
+int right = nums.Length - 1;
+int left = 0;
+
+while (left < right)
+{
+    if (nums[left] + nums[right] <= target)
+    {
+        ans += (right - left);   // yic  means, [left ...-> (right    will be smaller as well   ex.  [3]  4 5  6 [7]   target 3+7=  10,  means [3]+6  [3]+5 will be smaller, and 
+                                    //  next step we move left [3], so won't have duplicate  
+        left++;
+    }
+    else
+    {
+        right--;
+    }
+
+}
+
+return ans;
+
+/// 610. Two Sum - Difference equals to target
+/// https://www.lintcode.com/problem/two-sum-difference-equals-to-target/description
+/// Given an array of integers, find two numbers that their difference equals to a target value.
+/// where index1 must be less than index2.Please note that your returned answers(both index1 and index2) are NOT zero-based.
+
+Dictionary<int, int> lookup = new Dictionary<int, int>();
+
+for (int i = 0; i < len; i++)
+{
+    // x - arr[i] == target
+
+    if (lookup.ContainsKey(nums[i] + target))
+    {
+        int[] ans = new int[2];
+        ans[0] = lookup[nums[i] + target];
+        ans[1] = i;
+        return ans;
+    }
+
+    // arr[i] -x == target
+    if (lookup.ContainsKey(nums[i] - target))
+    {
+        int[] ans = new int[2];
+        ans[0] = lookup[nums[i] - target];
+        ans[1] = i;
+        return ans;
+    }
+
+    lookup.Add(nums[i], i);
+
+}
+
+return null;

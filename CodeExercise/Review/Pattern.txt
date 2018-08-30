@@ -759,3 +759,152 @@ private void preComputeSum(int[,] matrix, int[,] sumMatrix)
         }
     }
 }
+
+
+
+/// 38. Search a 2D Matrix II
+/// https://leetcode.com/problems/search-a-2d-matrix-ii/description/
+/// Write an efficient algorithm that searches for a value in an m x n matrix, return the occurrence of it.
+/// 
+/// This matrix has the following properties:
+/// 
+/// 
+/// Integers in each row are sorted from left to right.
+/// Integers in each column are sorted from up to bottom.
+/// No duplicate integers in each row or column.
+/// Example
+///         Consider the following matrix:
+/// 
+/// 
+///         [
+///           [1, 3, 5, 7],
+///           [2, 4, 7, 8],
+///           [3, 5, 9, 10]
+/// ]
+/// Given target = 3, return 2.
+
+[code]
+int count = 0;
+// start from left bottom
+int r = rows - 1;
+int c = 0;
+            
+while (r >=0 && c< cols)
+{
+    if (matrix[r, c] == target)
+    {
+        count++;
+        r--;  // can only go up for smaller
+    }
+    else if (matrix[r, c] > target)
+    {
+        r--;
+    }
+    else
+    {
+        //matrix[r, c] < target
+        c++;
+    }
+}
+
+
+
+
+/// 378. Kth Smallest Element in a Sorted Matrix
+/// Given a n x n matrix where each of the rows and columns are sorted in ascending order, find the kth smallest element in the matrix.
+/// 
+///         Note that it is the kth smallest element in the sorted order, not the kth distinct element.
+/// 
+///         Example:
+/// 
+/// matrix = [
+///    [ 1,  5,  9],
+///    [10, 11, 13],
+///    [12, 13, 15]
+/// ],
+/// k = 8,
+/// 
+/// return 13.
+
+
+//[sol]
+pick two corners, (start and end) and choose midV and compute rank
+int left = matrix[0, 0];
+int right = matrix[M - 1, N - 1];  //(j,i)      
+
+while (left < right)
+{
+    int mid = (left + right) / 2;
+    int rank = countRank(matrix, mid);
+
+    if (rank >= k)                 // note >=  use mid
+    {
+        right = mid;
+    }
+    else
+    {
+        left = mid + 1;    // note mid +1
+    }
+}
+
+return left;
+
+
+// count where mid rank, start from botton-left as moving point
+private int countRank(int[,] matrix, int mid)
+{
+    int M = matrix.GetLength(0);   // for j
+    int N = matrix.GetLength(1);   // for i
+    int i = 0;
+    int j = N - 1;
+
+    int rank = 0;
+    // move i, j
+    while(i < N && j >= 0)
+    {
+        int debug = matrix[j, i];
+        if (matrix[j,i] > mid)  // note  yic   [j,i]
+        {
+            j--;
+        }
+        else
+        {
+            rank +=( j + 1);  // i becasue consider all the to top +1 to include itself (check vertical)
+            i++;
+        }
+    }
+
+    return rank;
+}
+
+
+
+/// 209. Minimum Size Subarray Sum
+/// https://www.lintcode.com/problem/minimum-size-subarray-sum/description
+/// Given an array of n positive integers and a positive integer s, find the minimal length of a contiguous subarray of which the sum ≥ s. 
+/// If there isn't one, return 0 instead. 
+/// For example, given the array[2, 3, 1, 2, 4, 3] and s = 7,
+///  the subarray[4, 3] has the minimal length under the problem constraint.
+[code]
+int currlen = 0;
+int currSum = 0;
+bool foundAns = false;       // yic  for no ans case
+
+for (int i = 0; i <nums.Length; i++)
+{
+    while (j < nums.Length && currSum < s)
+    {
+        currSum += nums[j++];
+        currlen++;
+    }
+
+    if (currSum >= s)
+    {
+        foundAns = true;
+        minLen = Math.Min(minLen, currlen);
+
+        // now i can move forward
+        currlen--;
+        currSum -= nums[i];
+    }
+}

@@ -9,7 +9,8 @@ namespace CodeExercise.DP
     class LongestSubstringAtMostKDistinctChar
     {
         /// <summary>
-        /// leetcode 340 
+        /// leetcode 340
+        /// https://www.lintcode.com/problem/longest-substring-with-at-most-k-distinct-characters/description
         /// Given a string s, find the length of the longest substring T that contains at most k distinct characters.
         /// 
         /// Example
