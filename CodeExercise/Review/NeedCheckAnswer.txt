@@ -485,3 +485,47 @@ private void WordSquaresHelper(int finalLen, WQTrie trie, List<string> oneAns, L
         oneAns.RemoveAt(oneAns.Count - 1);   // remove str just added.  can be we have store in AllAns or not fix. Now, we try next word for OneAns
     }
 }
+
+public class WQTrie
+{
+    WQNode root;
+
+    public WQTrie()
+    {
+        root = new WQNode();
+    }
+
+    public void AddWord(string str)
+    {
+        WQNode curr = root;
+
+        foreach(char c in str)
+        {
+            if (curr.children[c] == null)
+            {
+                curr.children[c] = new WQNode();
+            }
+
+            curr = curr.children[c];
+            curr.startWith.Add(str);   // yic  record   "ap"    contains apple
+        }
+
+        curr.hasWord = true;
+    }
+	...
+}
+
+class WQNode
+{
+    public bool hasWord;
+    public WQNode[] children;
+
+    public List<string> startWith;
+
+    public WQNode()
+    {
+        hasWord = false;
+        children = new WQNode[256];
+        startWith = new List<string>();
+    }
+}

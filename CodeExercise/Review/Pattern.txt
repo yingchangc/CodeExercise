@@ -889,6 +889,7 @@ private int countRank(int[,] matrix, int mid)
 int currlen = 0;
 int currSum = 0;
 bool foundAns = false;       // yic  for no ans case
+int j = 0;
 
 for (int i = 0; i <nums.Length; i++)
 {
@@ -906,5 +907,65 @@ for (int i = 0; i <nums.Length; i++)
         // now i can move forward
         currlen--;
         currSum -= nums[i];
+    }
+}
+
+/// 590
+/// http://www.lintcode.com/en/problem/connecting-graph-ii/
+/// Given n nodes in a graph labeled from 1 to n. There is no edges in the graph at beginning.
+///
+///    You need to support the following method:
+///1. connect(a, b), an edge to connect node a and node b
+///2. query(a), Returns the number of connected component nodes which include node a.
+/// </summary>
+public class ConnectingGraph2
+{
+    int[] ufArray;
+    int[] countArray;
+	int componentsCount;
+
+    public ConnectingGraph2(int n)
+    {
+        ufArray = new int[n];    // store parent and count
+        countArray = new int[n];
+        for (int i = 0; i<n; i++)
+        {
+            ufArray[i] = i;     // parent loc to itself
+            countArray[i] = 1;    // count
+        }
+		this.componentsCount = n;
+    }
+
+    private int Find(int x)
+    {
+        if (x != ufArray[x])
+        {
+            int topAncestor = Find(ufArray[x]);
+            ufArray[x] = topAncestor;
+        }
+
+        return ufArray[x];
+    }
+
+    public void connect(int a, int b)
+    {
+        int rootA = Find(a);
+        int rootB = Find(b);
+
+        if (rootA != rootB)
+        {
+            ufArray[rootB] = rootA;
+            countArray[rootA] += countArray[rootB];  // dump the rootB count to RootA
+
+			componentsCount--;
+        }
+    }
+
+    public int query(int a)
+    {
+        int rootA = Find(a);
+        return countArray[rootA];
+
+		//return  componentsCount;
     }
 }

@@ -71,16 +71,21 @@ namespace CodeExercise.DP
         }
 
         //TODO
-        //https://leetcode.com/problems/substring-with-concatenation-of-all-words/discuss/
+        //30
+        //https://leetcode.com/problems/substring-with-concatenation-of-all-words/description/
+
+
+
 
         /// <summary>
+        /// 76
         /// Given a string S and a string T, find the minimum window in S which will contain all the characters in T in complexity O(n). 
         /// For example,
         /// S = "ADOBECODEBANC"
         /// T = "ABC"
         /// Minimum window is "BANC". 
         /// 
-        /// https://leetcode.com/problems/minimum-window-substring/discuss/
+        /// https://leetcode.com/problems/minimum-window-substring/description/
         /// 
         /// /// // sliding window
         /// </summary>
