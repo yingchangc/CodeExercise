@@ -2091,7 +2091,7 @@ namespace CodeExercise
             BFS.SerializeDeserializeBinaryTree question = new BFS.SerializeDeserializeBinaryTree();
             string data = question.serialize(root);
 
-            var newBT = question.deserialize(data);
+            var newBT = question.deserializePractice(data);
         }
 
         //103
@@ -2699,10 +2699,58 @@ namespace CodeExercise
 
         }
 
+        // 721
+        static void Run_AccountMerge()
+        {
+            List<List<string>> accounts = new List<List<string>>()
+            {
+                new List<string>() { "John", "johnsmith@mail.com", "john00@mail.com" },
+                new List<string>() { "John", "johnnybravo@mail.com" },
+                new List<string>() { "John", "johnsmith@mail.com", "john_newyork@mail.com" },
+                new List<string>() { "Mary", "mary@mail.com" }
+            };
+
+            //List<List<string>> accounts = new List<List<string>>()
+            //{
+            //    new List<string>() { "David","David0@m.co","David4@m.co","David3@m.co" },
+            //    new List<string>() { "David","David5@m.co","David5@m.co","David0@m.co" },
+            //    new List<string>() { "David","David1@m.co","David4@m.co","David0@m.co" },
+            //    new List<string>() { "David","David0@m.co","David1@m.co","David3@m.co" },
+            //    new List<string>() { "David","David4@m.co","David1@m.co","David3@m.co" }
+            //};
+
+
+            DataStructure.AccountsMerge question = new DataStructure.AccountsMerge();
+            var ans = question.AccountsMergeSolver(accounts.ToArray());
+        }
+
+        // lint 692
+        static void Run_MinimumSpanningTree()
+        {
+            List<Connection> connections = new List<Connection>()
+            {
+                new Connection("B_City", "C_City", 3),
+                new Connection("A_City", "B_City", 1),
+                new Connection("A_City", "C_City", 2)
+            };
+
+            DataStructure.MinimumSpanningTree question = new DataStructure.MinimumSpanningTree();
+            var ans = question.LowestCost(connections);
+        }
+
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            // lint 575
+            Run_ExpandExpression();
+            // 692
+            Run_MinimumSpanningTree();
 
+            //721
+            Run_AccountMerge();
+
+            //297
+            Run_SerializeDeserializeBinaryTree();
             //53
             Run_MaxSumSubarray();
 
@@ -2737,8 +2785,7 @@ namespace CodeExercise
             Run_MinSubtree();
             // 573
             Run_BuildPostOffice();
-            //297
-            Run_SerializeDeserializeBinaryTree();
+            
             //133
             Run_CloneGraph();
 
@@ -3070,8 +3117,7 @@ namespace CodeExercise
             Run_TrapRainWater();
             //84
             Run_LargestRectangle();
-            // lint 575
-            Run_ExpandExpression();
+            
 
             Run_MyQueue();
             //437

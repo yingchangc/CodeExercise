@@ -79,6 +79,7 @@ namespace CodeExercise.DataStructure
         /// <param name="nums"></param>
         /// <param name="k"></param>
         /// <returns></returns>
+        /// 
         public int[] MaxSlidingWindow_DEQUEU(int[] nums, int k)
         {
             int N = nums.GetLength(0);
@@ -92,7 +93,7 @@ namespace CodeExercise.DataStructure
             List<int> ans = new List<int>();
 
             //[1,3,-1,-3,5,3,6,7]
-            for (int i = 0; i <k; i++)
+            for (int i = 0; i < k; i++)
             {
                 insertToDequeue(dequeue, nums[i]);
             }
@@ -100,7 +101,7 @@ namespace CodeExercise.DataStructure
 
             for (int i = k; i < N; i++)
             {
-                removeFromDequeue(dequeue, nums[i - k]);
+                removeFromDequeue(dequeue);
                 insertToDequeue(dequeue, nums[i]);
                 ans.Add(dequeue.Last());
             }
@@ -108,21 +109,30 @@ namespace CodeExercise.DataStructure
             return ans.ToArray();
         }
 
+
         private void insertToDequeue(LinkedList<int> dequeue, int num)
         {
+            int replaceCount = 0;
             while(dequeue.Count > 0 && dequeue.First() < num)   // keep the same number in the list, only discard smaller
             {
                 dequeue.RemoveFirst();
+                replaceCount++;
             }
+
+            // replace bigger from old
+            while(replaceCount > 0)
+            {
+                dequeue.AddFirst(num);
+                replaceCount--;
+            }
+
+            // add
             dequeue.AddFirst(num);
         }
 
-        private void removeFromDequeue(LinkedList<int> dequeue, int num)
+        private void removeFromDequeue(LinkedList<int> dequeue)
         {
-            if (dequeue.Last() == num)
-            {
-                dequeue.RemoveLast();
-            }
+            dequeue.RemoveLast();
         }
 
         /// <summary>
@@ -191,6 +201,7 @@ namespace CodeExercise.DataStructure
             heap[num]++;
         }
 
+        // remove old key and  and add new key
         private void insert(SortedDictionary<int, int> maxHeap, SortedDictionary<int, int> minHeap, int k, int newNum, int oldNum)
         {
             // delete old num
@@ -244,6 +255,7 @@ namespace CodeExercise.DataStructure
             return ((double)(maxHeap.Keys.First()) + (double)(minHeap.Keys.First())) /2.0;
         }
 
+        // dump k to maxheap, remove the top k/2 to minheap
         private void InitHeap(SortedDictionary<int, int> maxHeap, SortedDictionary<int, int> minHeap, int[] nums, int k)
         {
             for (int i = 0; i < k; i++)

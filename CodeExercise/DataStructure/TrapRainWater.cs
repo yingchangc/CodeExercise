@@ -9,15 +9,65 @@ namespace CodeExercise.DataStructure
     class TrapRainWater
     {
         /// <summary>
-        /// 42
+        /// 42. Trapping Rain Water
         /// https://leetcode.com/problems/trapping-rain-water/description/
         /// Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water 
         /// it is able to trap after raining.
         /// 
         /// Given [0,1,0,2,1,0,1,3,2,1,2,1], return 6.
+        /// 
+        /// sol:
+        /// 
+        /// use left and right,
+        /// 
+        // pick smaller height and got one direction to get area (since the otherside is higher, won't go over)  (stop when leftH <= arr[i])
+        // then reconsider choose left or right
         /// </summary>
         /// <param name="height"></param>
         /// <returns></returns>
+        public int TrapRainWaterPractice(int[] height)
+        {
+            int N = height.GetLength(0);
+
+            if (N == 0)
+            {
+                return 0;
+            }
+
+            int left = 0;
+            int right = N - 1;
+
+            int area = 0;
+
+            while (left < right)
+            {
+                int leftH = height[left];
+                int rightH = height[right];
+
+                if (leftH <= rightH)
+                {
+                    int i = left + 1;
+                    while (leftH > height[i])
+                    {
+                        area += (leftH - height[i]);
+                        i++;
+                    }
+                    left = i;
+                }
+                else
+                {
+                    int i = right - 1;
+                    while (height[i] < rightH)
+                    {
+                        area += (rightH - height[i]);
+                        i--;
+                    }
+                    right = i;
+                }
+            }
+
+            return area;
+        }
         public int TrapRainWaterSolution(int[] height)
         {
             int N = height.GetLength(0);

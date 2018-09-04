@@ -2180,3 +2180,109 @@ for (int i = 0; i < slen; i++)
 }
 
 return ans;
+
+
+
+/// 721. Accounts Merge
+/// https://leetcode.com/problems/accounts-merge/description/
+/// Given a list accounts, each element accounts[i] is a list of strings, where the first element accounts[i][0] is a name, and the rest of the elements are emails representing emails of the account.
+/// 
+/// Now, we would like to merge these accounts.Two accounts definitely belong to the same person if there is some email that is common to both accounts.Note that even if two accounts have the same name, they may belong to different people as people could have the same name. A person can have any number of accounts initially, but all of their accounts definitely have the same name.
+/// 
+/// 
+/// After merging the accounts, return the accounts in the following format: the first element of each account is the name, and the rest of the elements are emails in sorted order. The accounts themselves can be returned in any order.
+/// 
+/// 
+/// Example 1:
+/// Input: 
+/// accounts = [["John", "johnsmith@mail.com", "john00@mail.com"], ["John", "johnnybravo@mail.com"], ["John", "johnsmith@mail.com", "john_newyork@mail.com"], ["Mary", "mary@mail.com"]]
+/// Output: [["John", 'john00@mail.com', 'john_newyork@mail.com', 'johnsmith@mail.com'],  ["John", "johnnybravo@mail.com"], ["Mary", "mary@mail.com"]]
+/// Explanation: 
+/// The first and third John's are the same person as they have the common email "johnsmith@mail.com".
+/// The second John and Mary are different people as none of their email addresses are used by other accounts.
+/// We could return these lists in any order, for example the answer[['Mary', 'mary@mail.com'], ['John', 'johnnybravo@mail.com'],
+/// ['John', 'john00@mail.com', 'john_newyork@mail.com', 'johnsmith@mail.com']] would still be accepted.
+
+/// sol:
+/// 
+/// (1) use UnionFind to get all emails connected components.
+/// (2) also use Hashset to store emails, walk through each key and if they have the same parent, put into the same List, so each List will belong to the same person   Dicitonary(ParentMail, List(mails))
+/// (3) for each person, get the first email and find its parent, and then find the corresponding list, note  need use hashset to cache visited ancestor mail since we want to skip the same user
+public class UnionFindAccont
+{
+    Dictionary<string, string> unionLookup;
+
+    public UnionFindAccont(HashSet<string> emails)
+    {
+        unionLookup = new Dictionary<string, string>();
+        foreach (var email in emails)
+        {
+            unionLookup.Add(email, email);
+        }
+    }
+
+    public string Find(string email)
+    {
+        if (email != unionLookup[email])
+        {
+            var ancestor = Find(unionLookup[email]);
+            unionLookup[email] = ancestor;
+        }
+        return unionLookup[email];
+    }
+
+    public void Union(string email1, string email2)
+    {
+        // yic use find  
+        string p1 = Find(email1);
+        string p2 = Find(email2);
+
+        if (p1 != p2)
+        {
+            //  yic use p2, not email
+            unionLookup[p2] = p1;
+        }
+    }
+
+}   
+
+
+/// 42. Trapping Rain Water
+/// https://leetcode.com/problems/trapping-rain-water/description/
+/// Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water 
+/// it is able to trap after raining.
+/// 
+/// Given [0,1,0,2,1,0,1,3,2,1,2,1], return 6.
+/// 
+/// sol:
+/// 
+/// use left and right,
+/// 
+// pick smaller height and got one direction to get area (since the otherside is higher, won't go over)  (stop when leftH <= arr[i])
+// then reconsider choose left or right
+while (left < right)
+{
+    int leftH = height[left];
+    int rightH = height[right];
+
+    if (leftH <= rightH)
+    {
+        int i = left + 1;
+        while (leftH > height[i])
+        {
+            area += (leftH - height[i]);
+            i++;
+        }
+        left = i;
+    }
+    else
+    {
+        int i = right - 1;
+        while (height[i] < rightH)
+        {
+            area += (rightH - height[i]);
+            i--;
+        }
+        right = i;
+    }
+}     

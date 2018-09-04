@@ -88,6 +88,55 @@ namespace CodeExercise.BFS
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
+        public TreeNode deserializePractice(string data)
+        {
+            if (string.IsNullOrEmpty(data) || string.Compare(data, "#") == 0)
+            {
+                return null;
+            }
+
+            // yic use queue to memo the next node to add child
+           
+            var tokens = new Queue<string>(data.Split(','));
+
+            // handle root node (since no pre)
+            TreeNode root = new TreeNode(Convert.ToInt32(tokens.Dequeue()));
+
+            Queue<TreeNode> queue = new Queue<TreeNode>();
+            queue.Enqueue(root);
+
+            bool isleft = true;
+            while(queue.Count > 0)
+            {
+                var curr = queue.Dequeue();
+
+                // hanlde left , right child
+                for (int i = 0; i < 2; i++)
+                {
+                    string childV = tokens.Dequeue();
+                    TreeNode child = null;
+                    if (string.Compare(childV, "#") != 0)
+                    {
+                        child = new TreeNode(Convert.ToInt32(childV));
+                        queue.Enqueue(child);
+                    }
+
+                    if (isleft)
+                    {
+                        curr.left = child;
+                    }
+                    else
+                    {
+                        curr.right = child;
+                    }
+                    isleft = !isleft;
+                }
+                
+            }
+            return root;  
+        }
+
+
         public TreeNode deserialize(string data)
         {
             if (string.IsNullOrEmpty(data))

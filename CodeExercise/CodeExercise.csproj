@@ -66,6 +66,8 @@
     <Compile Include="BinarySearch\SearchInsertPosition.cs" />
     <Compile Include="BinarySearch\WoodCut.cs" />
     <Compile Include="BitManipulation\DivideTwoIntegers.cs" />
+    <Compile Include="Connection.cs" />
+    <Compile Include="DataStructure\AccountsMerge.cs" />
     <Compile Include="DataStructure\AirplaneInSky.cs" />
     <Compile Include="DataStructure\ConnectingGraph.cs" />
     <Compile Include="DataStructure\ContinuousSubArraySum.cs" />
@@ -98,6 +100,7 @@
     <Compile Include="DataStructure\MergeTwoSortedArrays.cs" />
     <Compile Include="DataStructure\MergeTwoSortedIntervalLists.cs" />
     <Compile Include="DataStructure\MergeTwoSortedLists.cs" />
+    <Compile Include="DataStructure\MinimumSpanningTree.cs" />
     <Compile Include="DataStructure\MinStack.cs" />
     <Compile Include="DataStructure\MovingAverage.cs" />
     <Compile Include="DataStructure\MyQueue.cs" />
@@ -258,6 +261,7 @@
     <Content Include="Review\NeedCheckAnswer.txt" />
     <Content Include="Review\NeedRevisit.txt" />
     <Content Include="Review\Pattern.txt" />
+    <Content Include="Review\PriorityQueueInJava.txt" />
     <Content Include="Review\Similiar.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

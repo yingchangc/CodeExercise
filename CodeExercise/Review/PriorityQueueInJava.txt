@@ -1,0 +1,90 @@
+﻿
+//https://www.compilejava.net/
+In Java programming, Java Priority Queue is implemented using Heap Data Structures and Heap has O(log(n)) time complexity to insert and delete element.
+Element retrieval methods i.e. peek() and element(), that are used to retrieve elements from the head of the queue is constant time i.e. O(1).
+contains(Object)method that is used to check if a particular element is present in the queue, have leaner time complexity i.e. O(n).
+
+
+import java.lang.Math; // headers MUST be above the first class
+import java.util.*;
+
+// one class needs to have a main() method
+public class HelloWorld
+{
+  // arguments are passed using the text field below this editor
+  public static void main(String[] args)
+  {
+
+        PriorityQueue<Integer> numbers = new PriorityQueue<>(new Comparator<Integer> () {
+                public int compare(Integer x, Integer y) {
+                    return x - y;
+                }
+            });
+        // Add items to a Priority Queue (ENQUEUE)
+        numbers.add(100);   
+        numbers.add(750);
+        numbers.add(500);
+        numbers.add(900);
+        numbers.add(100);
+    
+        // list pq value in non order
+    	for (Integer var : numbers) 
+		{ 
+    		System.out.println(var);
+		}	
+    
+        // remove a duplicate
+        numbers.remove(100); 
+        System.out.println("pop from prioirty queue");
+    
+        // Remove items from the Priority Queue (DEQUEUE)
+        while (!numbers.isEmpty()) {
+            System.out.println(numbers.remove());
+        }
+  }
+}
+
+
+
+
+// arguments are passed using the text field below this editor
+public static void main(String[] args)
+{
+
+    PriorityQueue<String> numbers = new PriorityQueue<>(new Comparator<String> () {
+            public int compare(String x, String y) {
+                return x.compareTo(y);
+            }
+        });
+    // Add items to a Priority Queue (ENQUEUE)
+    numbers.add("Apple");   
+    numbers.add("Zillo");
+    numbers.add("MSFT");
+    numbers.add("Goog");
+    numbers.add("MSFT");
+    
+    // list pq value in non order
+    for (String var : numbers) 
+	{ 
+    	System.out.println(var);
+	}	
+    		
+        
+    // contains
+    if (numbers.contains("Goog"))
+    {
+        System.out.println("numbers contains Goog");
+    }
+    
+    // size
+    System.out.println("size = " + numbers.size());
+    
+    // remove a duplicate
+    numbers.remove("MSFT"); 
+    System.out.println("pop from prioirty queue");
+    
+    // Remove items from the Priority Queue (DEQUEUE)
+    while (!numbers.isEmpty()) {
+        System.out.println(numbers.remove());
+    }
+}
