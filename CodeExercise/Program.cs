@@ -1033,7 +1033,7 @@ namespace CodeExercise
         {
             //84
             DataStructure.LargestRectangleInHistogram question = new DataStructure.LargestRectangleInHistogram();
-            int[] heights = { 2, 1, 5, 6, 2, 3 };
+            int[] heights = { 1,1 };
             var ans = question.LargestRectangleArea(heights);
 
             //85
@@ -2741,6 +2741,9 @@ namespace CodeExercise
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+           //84
+            Run_LargestRectangle();
+            
             // lint 575
             Run_ExpandExpression();
             // 692
@@ -3115,8 +3118,7 @@ namespace CodeExercise
             Run_SlidingWindow();
             // 407
             Run_TrapRainWater();
-            //84
-            Run_LargestRectangle();
+            
             
 
             Run_MyQueue();

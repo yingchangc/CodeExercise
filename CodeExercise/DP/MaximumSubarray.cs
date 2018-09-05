@@ -54,7 +54,8 @@ namespace CodeExercise.DP
         /// <summary>
         /// 620. Maximum Subarray IV
         /// https://www.lintcode.com/problem/maximum-subarray-iv/description
-        /// Given an integer arrays, find a contiguous subarray which has the largest sum, note length should be greater or equal to given length k.
+        /// Given an integer arrays, find a contiguous subarray which has the largest sum, 
+        /// note length should be greater or equal to given length k.
         /// Return the largest sum, return 0 if there are fewer than k elements in the array.
         /// 
         /// Example

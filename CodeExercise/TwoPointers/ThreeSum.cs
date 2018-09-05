@@ -93,9 +93,56 @@ namespace CodeExercise.TwoPointers
             }
         }
 
+        // worng for case [0,0',0'']     0 already in the set, falsely skip
+        public IList<IList<int>> ThreeSum_WrongWithHahset(int[] nums)
+        {
+            Array.Sort(nums, (x, y) =>
+            {
+                return x.CompareTo(y);
+            });
+
+            
+            List<List<int>> ans = new List<List<int>>();
+            int len = nums.Length;
+            int pre = 0;
+            for (int i = 0; i <= len - 3; i++)
+            {
+                // skip duplicate
+                if (i != 0 && pre == nums[i])
+                {
+                    continue;
+                }
+                int left = i + 1;
+                int target = 0 - nums[i];
+                int v1 = nums[i];
+                TwoSumHelper(nums, left, ans, target, v1);
+                pre = nums[i];
+            }
+
+            return ans.ToArray();
+        }
+
+        private void TwoSumHelper(int[] nums, int left, List<List<int>> ans, int target, int v1)
+        {
+            HashSet<int> lookup = new HashSet<int>();
+
+            for (int i = left; i < nums.Length; i++)
+            {
+                int curr = nums[i];
+
+                // already sorted, if contains, skip to avoid duplicate
+                if (!lookup.Contains(curr) && lookup.Contains(target-curr))
+                {
+                    ans.Add(new List<int>() { v1, curr, target - curr });
+                    
+                }
+                lookup.Add(curr);
+            }
+        }
 
         /// <summary>
         /// lint 57. 3Sum
+        /// https://leetcode.com/problems/3sum/description/
         ///https://www.lintcode.com/problem/3sum/description
         ///Given an array S of n integers, are there elements a, b, c in S such that a + b + c = 0? Find all unique triplets in 
         ///the array which gives the sum of zero.
@@ -114,63 +161,59 @@ namespace CodeExercise.TwoPointers
         /// </summary>
         /// <param name="numbers"></param>
         /// <returns></returns>
-        public List<List<int>> ThreeSumsolver(int[] numbers)
+        public IList<IList<int>> ThreeSumsolver(int[] nums)
         {
-            if (numbers == null || numbers.Length <3)
+            Array.Sort(nums, (x, y) =>
             {
-                return null;
-            }
+                return x.CompareTo(y);
+            });
 
-            // sort for the ans requirement (list to be ascending)
-            Array.Sort(numbers);
-            int len = numbers.Length;
+            int pre = 0;
 
             List<List<int>> ans = new List<List<int>>();
+            int len = nums.Length;
 
-            for (int i =0; i <len-2; i++)
+            for (int i = 0; i <= len - 3; i++)
             {
-                if (i > 0 && numbers[i]==numbers[i-1])
+                // skip duplicate
+                if (i != 0 && pre == nums[i])
                 {
                     continue;
-
-                    // YIC (numbers[i-1], numbers[i]), numbers[i+1]     if num i-1  == num i, i-1 has done all the possible combination
                 }
 
-                // apply two sum
-                int target = 0 - numbers[i];
-
+                int target = -1 * nums[i];
                 int left = i + 1;
-                int right = len-1;
+                int right = len - 1;
 
                 while (left < right)
                 {
-                    if ((numbers[left] + numbers[right]) == target)
+                    if (nums[left] + nums[right] == target)
                     {
-                        ans.Add(new List<int>() { numbers[i], numbers[left], numbers[right] });
+                        ans.Add(new List<int>() { nums[i], nums[left], nums[right] });
 
+                        int origLeftV = nums[left];
                         left++;
-                        
-                        // yic Note: after add to ans, need to keep go right to de-duplicate   [1,1,1],1  target =3
-                        while (left < len && numbers[left] == numbers[left-1])
+
+                        while (left < right && nums[left] == origLeftV)
                         {
-                            //just need to move left, because dup right cannot fullfil after
                             left++;
                         }
                     }
-                    else if ((numbers[left] + numbers[right]) < target)
-                    {
-                        //yic just need to move left
-                        left++;
-                    }
-                    else
+                    else if ((nums[left] + nums[right]) > target)
                     {
                         right--;
                     }
-
+                    else
+                    {
+                        left++;
+                    }
                 }
+
+                pre = nums[i];
             }
 
-            return ans;
+
+            return ans.ToArray();
         }
     }
 }
