@@ -86,18 +86,22 @@ public int gcd(int big, int small) {
 /// Divide two integers without using multiplication, division and mod operator.
 /// If it is overflow, return MAX_INT.
 [code]
-long a = Math.abs((long)dividend);
-long b = Math.abs((long)divisor);
-int result = 0;
-while(a >= b){
-    int shift = 0;
-    while(a >= (b << shift)){      // 3*3*3*...
-        shift++;
+long noSign_dividend = ABS_num((long)dividend);
+long noSign_divisor = ABS_num((long)divisor);
+
+while (noSign_dividend >= noSign_divisor)
+{
+    long currDivisor = noSign_divisor;
+    int temp = 1;
+
+    while (noSign_dividend >= currDivisor)
+    {
+        noSign_dividend -= currDivisor;
+        ans += temp;
+        currDivisor <<= 1;
+        temp <<= 1;
     }
-    a -= b << (shift - 1);
-    result += 1 << (shift - 1);
 }
-return isNegative? -result: result;
 
 
 /// 297. Serialize and Deserialize Binary Tree

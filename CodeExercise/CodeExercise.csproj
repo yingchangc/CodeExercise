@@ -198,6 +198,7 @@
     <Compile Include="DV\Sentence_Similarity.cs" />
     <Compile Include="EditDistance.cs" />
     <Compile Include="DataStructure\GraphValidTree.cs" />
+    <Compile Include="Interval.cs" />
     <Compile Include="KMPSubstringSearch.cs" />
     <Compile Include="DFS\LetterCombinationsPhoneNumber.cs" />
     <Compile Include="ListNode.cs" />
@@ -219,6 +220,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DP\SubSets.cs" />
     <Compile Include="SweepingLine\MaximumAverageSubarray.cs" />
+    <Compile Include="SweepingLine\MeetingRooms.cs" />
     <Compile Include="SystemDesign\ConsistentHash.cs" />
     <Compile Include="SystemDesign\ConsistentHashing2.cs" />
     <Compile Include="SystemDesign\DesignTweeter.cs" />

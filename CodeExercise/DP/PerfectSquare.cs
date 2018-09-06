@@ -20,26 +20,31 @@ namespace CodeExercise.DP
         /// <returns></returns>
         public int MySqrt(int x)
         {
-            int start = 0;
-            int last = x;
-            while (start <= last)
+            int left = 0;
+            int right = x;
+            while (left+1 < right)
             {
-                int mid = start + (last - start) / 2;
+                int mid = left + (right - left) / 2;
                 if ((long)mid * (long)mid == (long)x)
                 {
                     return mid;
                 }
                 else if ((long)mid * (long)mid > (long)x)
                 {
-                    last = mid - 1;
+                    right = mid;
                 }
                 else
                 {
-                    start = mid + 1;
+                    left = mid;
                 }
             }
 
-            return last;
+            if ((long)right * (long)right <= (long)x)
+            {
+                return right;
+            }
+            
+            return left;
         }
 
         /// <summary>

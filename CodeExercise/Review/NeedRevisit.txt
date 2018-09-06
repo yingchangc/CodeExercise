@@ -2300,3 +2300,170 @@ while (left < right)
 /// 
 /// Return 6.     
 [sol]  use find LargestRectangleInHistogram case,  keep accumulate to 1D array, (get 0 reset to 0)
+
+
+
+/// 620. Maximum Subarray IV
+/// https://www.lintcode.com/problem/maximum-subarray-iv/description
+/// Given an integer arrays, find a contiguous subarray which has the largest sum, 
+/// note length should be greater or equal to given length k.
+/// Return the largest sum, return 0 if there are fewer than k elements in the array.
+sol:  preMin = 0, aggregate num[i] tp sum, and queue sum, until queue.size ==k  than update preMin and comute ans
+
+
+/// 523. Continuous Subarray Sum
+/// https://leetcode.com/problems/continuous-subarray-sum/description/
+/// iven a list of non-negative numbers and a target integer k, write a function to check if the array has a continuous subarray of size at least 2 that sums up to the multiple of k, that is, sums up to n*k where n is also an integer.
+/// 
+/// Example 1:
+/// Input: [23, 2, 4, 6, 7],  k=6
+/// Output: True
+/// Explanation: Because[2, 4] is a continuous subarray of size 2 and sums up to 6.
+
+can do in O(n^2)   traditional 
+for (int i = 0; i <len; i++)
+{
+    int sum = nums[i];
+    for (int j = i+1; j <len; j++)
+    {
+        sum += nums[j];
+
+        if (sum ==0 && k == 0)
+        {
+            return true;
+        }
+        else if (sum != 0 && k ==0)
+        {
+            continue;  // otherwise, will throw exception
+        }
+        else if (sum % k == 0)
+        {
+            return true;
+        }
+    }
+}
+
+
+or O(n)
+sol:
+/// 
+///  use hashmap store % result, if repeat, means we find it
+lookupResdule.Add(0, -1);
+
+int sum = 0;
+
+for (int i = 0; i < nums.Length; i++)
+{
+    sum += nums[i];
+
+    if (k != 0)
+    {
+        sum = sum % k;
+    }
+
+    if (lookupResdule.ContainsKey(sum) && (i - lookupResdule[sum]) >= 2)
+    {
+        return true;
+    }
+
+    if (!lookupResdule.ContainsKey(sum))
+    {
+        lookupResdule.Add(sum, i);
+    }
+}
+
+
+/// 162
+/// Find Peak Element
+/// https://leetcode.com/problems/find-peak-element/description/
+/// A peak element is an element that is greater than its neighbors.
+/// Given an input array where num[i] ≠ num[i + 1], find a peak element and return its index.
+/// 
+/// The array may contain multiple peaks, in that case return the index to any one of the peaks is fine.
+/// 
+/// You may imagine that num[-1] = num[n] = -∞.
+
+[code]
+int left = 0;
+int right = N - 1;
+
+while(left+1 < right)
+{
+    //at least 3 elemt
+    int mid = (left + right) / 2;
+    if (nums[mid] <= nums[mid + 1])
+    {
+        left = mid;
+    }
+    else
+    {
+        right = mid;
+    }
+}
+
+if (nums[left] <= nums[right])
+{
+    return right;
+}
+return left;
+
+
+
+/// 218
+/// https://leetcode.com/problems/the-skyline-problem/description/
+/// Given N buildings in a x-axis，each building is a rectangle and can be represented by a triple (start, end, height)，where start is the 
+/// start position on x-axis, end is the end position on x-axis and height is the height of the building. Buildings may overlap if you see 
+/// them from far away，find the outline of them。An outline can be represented by a triple, (start, end, height), where start is the start 
+/// position on x - axis of the outline, end is the end position on x - axis and height is the height of the outline.
+/// 
+/// For instance, the dimensions of all buildings in Figure A are recorded as: [ [2 9 10], [3 7 15], [5 12 12], [15 20 10], [19 24 8] ] .
+///The output is a list of "key points" (red dots in Figure B) in the format of[[x1, y1], [x2, y2], [x3, y3], ... ] that uniquely defines a skyline.
+///A key point is the left endpoint of a horizontal line segment.Note that the last key point, where the rightmost building ends, 
+///is merely used to mark the termination of the skyline, and always has zero height.Also, the ground in between any two adjacent 
+///buildings should be considered part of the skyline contour.
+
+sweep line => (loc +H)  (loc -H) to maxheap  (loc, List<Height>)  
+
+init ansHeap (Loc:0,H:0)
+use  if (preHeight != currMaxHeight)  to prevent add loc with the smae height
+
+
+// 182 Wood Cut
+/// http://www.lintcode.com/en/problem/wood-cut/
+/// Given n pieces of wood with length L[i] (integer array). Cut them into small pieces to guarantee you could 
+/// have equal or more than k pieces with the same length. What is the longest length you can get from the n pieces of wood? 
+/// Given L & k, return the maximum length of the small pieces.
+
+sol  use the larget segment as right, 1 as left
+
+[code]
+int maxWoodLen = FindMaxWoodLengthFromArray(L);
+
+int left = 1;
+int right = maxWoodLen;
+
+while((left+1) < right)
+{
+    int mid = left + (right - left) / 2;
+    int cuts = GetNumberOfCut(L, mid);
+
+    if (cuts >= k)
+    {
+        left = mid;
+    }
+    else
+    {
+        right = mid;
+    }
+}
+
+if (GetNumberOfCut(L, right)>=k)
+{
+    return right;
+}
+else if (GetNumberOfCut(L, left) >= k)
+{
+    return left;
+}
+
+return 0;

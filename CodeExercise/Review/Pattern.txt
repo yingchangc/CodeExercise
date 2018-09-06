@@ -1100,3 +1100,38 @@ public bool startsWith(String prefix)
 
     return true;
 }
+
+
+/// 162
+/// Find Peak Element
+/// https://leetcode.com/problems/find-peak-element/description/
+/// A peak element is an element that is greater than its neighbors.
+/// Given an input array where num[i] ≠ num[i + 1], find a peak element and return its index.
+/// 
+/// The array may contain multiple peaks, in that case return the index to any one of the peaks is fine.
+/// 
+/// You may imagine that num[-1] = num[n] = -∞.
+
+[code]
+int left = 0;
+int right = N - 1;
+
+while(left+1 < right)
+{
+    //at least 3 elemt
+    int mid = (left + right) / 2;
+    if (nums[mid] <= nums[mid + 1])
+    {
+        left = mid;
+    }
+    else
+    {
+        right = mid;
+    }
+}
+
+if (nums[left] <= nums[right])
+{
+    return right;
+}
+return left;
