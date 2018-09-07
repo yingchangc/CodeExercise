@@ -2738,10 +2738,55 @@ namespace CodeExercise
             var ans = question.LowestCost(connections);
         }
 
+        // lint 821
+        static void Run_TimeIntersection()
+        {
+            SweepingLine.TimeIntersection question = new SweepingLine.TimeIntersection();
+            List<Interval> seqA = new List<Interval>();
+            Interval tempA1 = new Interval();
+            tempA1.start = 1;
+            tempA1.end = 2;
+
+            Interval tempA2 = new Interval();
+            tempA2.start = 10;
+            tempA2.end = 15;
+            seqA.Add(tempA1);
+            seqA.Add(tempA2);
+
+            List<Interval> seqB = new List<Interval>();
+            Interval tempB1 = new Interval();
+            tempB1.start = 3;
+            tempB1.end = 5;
+            Interval tempB2 = new Interval();
+            tempB2.start = 7;
+            tempB2.end = 9;
+            seqB.Add(tempB2);
+
+            var ans = question.TimeIntersectionSolver(seqA, seqB);
+        }
+
+        //302
+        static void Run_SmallestRectangleEnclosingBlackPixels()
+        {
+            char[,] image = new char[3, 4];
+            image[0, 2] = '1';
+            image[1, 1] = '1';
+            image[1, 2] = '1';
+            image[2, 1] = '1';
+            DFS.SmallestRectangleEnclosingBlackPixels question = new DFS.SmallestRectangleEnclosingBlackPixels();
+            var ans = question.MinArea(image, 0,2);
+        }
+
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
-           //84
+            //302
+            Run_SmallestRectangleEnclosingBlackPixels();
+
+            //821
+            Run_TimeIntersection();
+
+            //84
             Run_LargestRectangle();
             
             // lint 575

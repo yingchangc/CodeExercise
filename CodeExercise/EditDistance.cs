@@ -87,7 +87,7 @@ namespace CodeExercise
                 }
             }
 
-            // since s len is greater than t by 1, if diff, this fit 1 delete case; otherwise s==t, is not one edit 
+            // YIC:  for case like "a" vs ""  => true    "a" vs "a"   return false
             return s != t;
             
         }

@@ -20,6 +20,9 @@ namespace CodeExercise.BinarySearch
         /// 
         /// ex
         /// For L=[232, 124, 456], k=7, return 114.
+        /// 
+        /// sol.
+        /// use the larget segment as right, 1 as left
         /// </summary>
         /// <param name="L"></param>
         /// <param name="k"></param>

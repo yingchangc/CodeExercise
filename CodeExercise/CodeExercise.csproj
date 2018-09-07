@@ -144,6 +144,7 @@
     <Compile Include="DFS\NQueens.cs" />
     <Compile Include="DFS\RemoveInvalidParentheses.cs" />
     <Compile Include="DFS\RestoreIPAddresses.cs" />
+    <Compile Include="DFS\SmallestRectangleEnclosingBlackPixels.cs" />
     <Compile Include="DFS\SplitString.cs" />
     <Compile Include="DFS\StringPermutation.cs" />
     <Compile Include="DFS\SubtreewithMaximumAverage.cs" />
@@ -221,6 +222,7 @@
     <Compile Include="DP\SubSets.cs" />
     <Compile Include="SweepingLine\MaximumAverageSubarray.cs" />
     <Compile Include="SweepingLine\MeetingRooms.cs" />
+    <Compile Include="SweepingLine\TimeIntersection.cs" />
     <Compile Include="SystemDesign\ConsistentHash.cs" />
     <Compile Include="SystemDesign\ConsistentHashing2.cs" />
     <Compile Include="SystemDesign\DesignTweeter.cs" />
