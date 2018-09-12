@@ -2777,9 +2777,24 @@ namespace CodeExercise
             var ans = question.MinArea(image, 0,2);
         }
 
+        //843
+        static void Run_DigitalFlip()
+        {
+            int[] arr = {1,0,0,1,1,1};
+            DP.DigitalFlip question = new DP.DigitalFlip();
+            var ans = question.FlipDigit(arr);
+        }
+
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //843
+            Run_DigitalFlip();
+            //322
+            Run_CointChange();
+            //674, 300
+            Run_LongestContinuousIncreasingSubsequence();
+
             //302
             Run_SmallestRectangleEnclosingBlackPixels();
 
@@ -2808,8 +2823,7 @@ namespace CodeExercise
             //138,325
             Run_SubarraySum();
 
-            //674, 300
-            Run_LongestContinuousIncreasingSubsequence();
+            
             //251
             Run_Flattern2DVector();
 
@@ -3017,8 +3031,7 @@ namespace CodeExercise
 
             Run_ArrayAverage();
 
-            //322
-            Run_CointChange();
+            
 
 
             Run_ShuffleCard();

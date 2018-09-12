@@ -26,6 +26,10 @@ namespace CodeExercise.DP
         /// return 3. (Placing a bomb at (1,1) kills 3 enemies)
         /// 
         /// Note that you can only put the bomb at an empty cell.
+        /// 
+        /// sol: 
+        /// 
+        /// use 4 memo matrix to accum 4 directions   so , at(i,j)  just lookup the 4 matrix as O(1) time
         /// </summary>
         /// <param name="grid"></param>
         /// <returns></returns>

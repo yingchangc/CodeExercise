@@ -104,13 +104,11 @@ namespace CodeExercise.DP
         }
 
         private int DFS(int[,] A, int j, int i, bool[,] visited, int width, int height)
-        {
-            
+        {       
             int[] deltaX = { -1, 0, 1, 0 };
             int[] deltaY = { 0, -1, 0, 1 };
 
             int childDepth = 0;
-
             for (int k = 0; k <4; k++)
             {
                 int newY = j + deltaY[k];
@@ -118,18 +116,13 @@ namespace CodeExercise.DP
 
                 if (newY>=0 && newY <height && newX>=0 && newX < width && visited[newY, newX] ==false && A[j,i] <A[newY, newX])
                 {
-
                     visited[newY, newX] = true;
-
                     int temp = DFS(A, newY, newX, visited, width, height);
                     childDepth = Math.Max(childDepth, temp);
-
                     visited[newY, newX] = false;
                 }
             }
-
             return 1 + childDepth;
-
         }
 
 
@@ -167,7 +160,7 @@ namespace CodeExercise.DP
             }
 
             // will not have loop be cause recursive only happen when neighber is smaller, wont come back to curr (j,i)
-            visited[j, i] = true;
+            // 
 
             int[] deltaXs = { -1, 1, 0, 0 };
             int[] deltaYs = {  0, 0, 1,-1 };
@@ -186,7 +179,7 @@ namespace CodeExercise.DP
                 }
             }
 
-            
+            visited[j, i] = true;   // mark when done
 
             return F[j, i];
             
@@ -269,7 +262,7 @@ namespace CodeExercise.DP
         ///        For example,
         ///        Given[10, 9, 2, 5, 3, 7, 101, 18],
         ///        The longest increasing subsequence is [2, 3, 7, 101], therefore the length is 4. Note that there may be more than one LIS combination, it is only necessary for you to return the length.
-        ///Your algorithm should run in O(n2) complexity.
+        ///Your algorithm should run in O(n^2) complexity.
         ///
         /// Sol
         /// F[j] = max (1 self,    f[i]+1 if a[j] > a[i] 
@@ -379,8 +372,8 @@ namespace CodeExercise.DP
         /// 
         /// Note: LIS [ 1 2 4 3 5 4 7 2]
         /// 
-        /// len   [ 1 2 3 3 4 4 5 2]
-        /// count [ 1 1 1 1 2 1 3 1]   //  note  max len = 5, count = 2+1 =3
+        ///     len   [ 1 2 3 3 4 4 5 2]
+        ///     count [ 1 1 1 1 2 1 3 1]   //  note  max len = 5, count = 2+1 =3
         /// 
         /// 
         /// time O(n^2)
@@ -418,7 +411,8 @@ namespace CodeExercise.DP
                             numMaxCount[j] = numMaxCount[i];
                         }
                         else if (lenghts[j] == (lenghts[i] + 1))
-                        {
+                        {   // 1 2 5     [6]
+                            // 1 2 4     [6]   both 4 and 5 contrubute to maxLen for 6. need to combine
                             // some other pre position can also add up to the same count
                             numMaxCount[j] += numMaxCount[i];   // yic  check  [1 2 3 4 5 4 7] case  the max count = 3
                         }
@@ -429,7 +423,7 @@ namespace CodeExercise.DP
             }
 
             int ans = 0;
-
+            // compute the final maxlen combine  6 5 3    => 1+1+1
             for (int k = 0; k < len; k++)
             {
                 if (lenghts[k] == longest)

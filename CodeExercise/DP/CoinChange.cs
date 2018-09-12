@@ -79,6 +79,8 @@ namespace CodeExercise.DP
 
         /// <summary>
         /// 518
+        /// https://leetcode.com/problems/coin-change-2/discuss/
+        /// coin exchange 2
         /// u are given coins of different denominations and a total amount of money. Write a function to compute the number of combinations that make up that amount. You may assume that you have infinite number of each kind of coin. 
         /// Note: You can assume that 
         /// 0 ge amount le 5000
@@ -119,6 +121,20 @@ namespace CodeExercise.DP
         /// Example 3: 
         /// Input: amount = 10, coins = [10]
         ///         Output: 1
+        ///         
+        /// sol:
+        /// 
+        /// for "coins"
+        ///    for "amounts"      can prevent target = 5   [1 2 5]    2 2 1    and  2 1 2 recompute  
+        ///    
+        /// amount  0  1 2     3 4    5
+        /// init    1
+        /// coin[1] 1  1  1    1 1    1 
+        /// coin[2] 1  1 +1=2  2 +2=3                      4:  2 2  or 2 1   or 1 1 1     (avoid 1  2)
+        /// 
+        /// if using     for "amounts"
+        ///                  for "coins"
+        ///                      1 2  and 2 1 can be double count
         /// </summary>
         /// <param name="amount"></param>
         /// <param name="coins"></param>
@@ -145,35 +161,42 @@ namespace CodeExercise.DP
 
         /// <summary>
         /// http://www.lintcode.com/en/problem/coin-change/
-        /// 
+        /// You are given coins of different denominations and a total amount of money amount. Write a function to compute the fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return -1.
         /// the same as leetcode 322
+        /// Given coins = [1, 2, 5], amount = 11
+        /// return 3 (11 = 5 + 5 + 1)
+        /// 
+        /// Given coins = [2], amount = 3
+        /// return -1.
+        ///  
+        ///                                                             
         /// </summary>
         /// <param name="coins"></param>
         /// <param name="amount"></param>
         /// <returns></returns>
         public int coinChange(int[] coins, int amount)
         {
-
-            int[] memo = new int[amount + 1];
-            memo[0] = 0;
-            for(int i = 1; i <= amount; i++)
+            int[] F = new int[amount + 1];
+            F[0] = 0;
+            for (int i = 1; i <= amount; i++)
             {
-                memo[i] = Int32.MaxValue;
+                F[i] = Int32.MaxValue;
             }
 
-            for (int i = 0; i <= amount; i++)
+            foreach (int coin in coins)
             {
-                foreach(var coin in coins)
+                for (int i = 1; i <= amount; i++)
                 {
-                    if ( i >= coin)
+                    if (i >= coin)
                     {
-                        memo[i] = Math.Min(memo[i], 
-                                           (memo[i - coin] == Int32.MaxValue) ? Int32.MaxValue : memo[i - coin] + 1);
+                        F[i] = Math.Min(F[i],
+                                    F[i - coin] == Int32.MaxValue ? Int32.MaxValue : F[i - coin] + 1);
                     }
+
                 }
             }
 
-            return (memo[amount] == Int32.MaxValue) ? -1 : memo[amount];
+            return F[amount] == Int32.MaxValue ? -1 : F[amount];
 
         }
 

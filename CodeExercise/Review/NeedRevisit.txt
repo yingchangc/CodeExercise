@@ -2576,3 +2576,69 @@ while(que.Count > 0)
         }
     }
 }
+
+
+/// 91
+/// https://leetcode.com/problems/decode-ways/description/
+/// http://zxi.mytechroad.com/blog/dynamic-programming/leetcode-91-decode-ways/
+/// A message containing letters from A-Z is being encoded to numbers using the following mapping: 
+///'A' -> 1
+///'B' -> 2
+///...
+///'Z' -> 26
+///Given an encoded message containing digits, determine the total number of ways to decode it.
+///For example,
+///Given encoded message "12", it could be decoded as "AB" (1 2) or "L" (12). 
+///The number of ways decoding "12" is 2.  
+public int NumDecodings(string s)
+{
+    if (string.IsNullOrEmpty(s))
+    {
+        return 1;
+    }
+
+    int[] F = new int[(s.Length + 1)];    // yic  n+1  to handle pre case
+    F[0] = 1;     // empty string as 1 decode ways
+
+    for (int i = 1; i <= s.Length; i++)
+    {
+
+        F[i] = 0;
+
+        if ((i-2) >=0 && isValid2Char(s, i-2))
+        {
+            F[i] += F[i - 2];
+        }
+
+        if (isValid1Char(s, i-1))
+        {
+            F[i] += F[i - 1];
+        }
+    }
+
+    return F[s.Length];
+
+}
+
+
+/// 361
+/// https://leetcode.com/problems/bomb-enemy/description/
+/// 
+/// iven a 2D grid, each cell is either a wall 'W', an enemy 'E' or empty '0' (the number zero), return the maximum enemies you can kill using one bomb.
+/// The bomb kills all the enemies in the same row and column from the planted point until it hits the wall since the wall is too strong to be destroyed.
+/// Note that you can only put the bomb at an empty cell.
+/// 
+/// Example:
+/// For the given grid
+/// 
+/// 0 E 0 0
+/// E 0 W E
+/// 0 E 0 0
+/// 
+/// return 3. (Placing a bomb at (1,1) kills 3 enemies)
+/// 
+/// Note that you can only put the bomb at an empty cell.
+/// 
+/// sol: 
+/// 
+/// use 4 memo matrix to accum 4 directions   so , at(i,j)  just lookup the 4 matrix as O(1) time

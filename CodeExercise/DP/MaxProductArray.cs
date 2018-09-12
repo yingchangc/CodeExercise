@@ -41,6 +41,7 @@ namespace CodeExercise.DP
         }
 
         //For example, given the array [2,3,-2,4], the contiguous subarray [2,3] has the largest product = 6.
+        // note: note like maxSubarrySum, the num[i] * preMin/preMax  the pre# is at i-1 loc, is either i-1 or continue till i-1
         // space O(1)  time O(n)
         //http://www.lintcode.com/en/problem/maximum-product-subarray/
         public int maxProductNoMemo(int[] nums)

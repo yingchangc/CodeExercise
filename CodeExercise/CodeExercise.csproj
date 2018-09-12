@@ -163,6 +163,7 @@
     <Compile Include="DP\CopyBooks.cs" />
     <Compile Include="DP\CountingBits.cs" />
     <Compile Include="DP\DecodeWays.cs" />
+    <Compile Include="DP\DigitalFlip.cs" />
     <Compile Include="DP\DistinctSubsequences.cs" />
     <Compile Include="DP\FindMinimumInRotatedSortedArray.cs" />
     <Compile Include="DP\GroupAnagrams.cs" />
