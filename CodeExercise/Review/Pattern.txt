@@ -1369,7 +1369,8 @@ public int CoinChange2(int amount, int[] coins)
 }
 
 /// http://www.lintcode.com/en/problem/coin-change/
-/// You are given coins of different denominations and a total amount of money amount. Write a function to compute the fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return -1.
+/// You are given coins of different denominations and a total amount of money amount. Write a function to compute the fewest number of coins 
+/// that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return -1.
 /// the same as leetcode 322
 /// Given coins = [1, 2, 5], amount = 11
 /// return 3 (11 = 5 + 5 + 1)
@@ -1608,4 +1609,66 @@ for (int i =0; i<colors; i++)
 {
     ans = Math.Min(F[N, i], ans);
 }
-       
+
+
+/// 40
+/// https://leetcode.com/problems/combination-sum-ii/description/
+/// Given a collection of candidate numbers (C) and a target number (T), find all unique combinations in C where the candidate numbers sums to T. 
+///         Each number in C may only be used once in the combination.
+///         Note:
+/// All numbers (including target) will be positive integers.
+/// The solution set must not contain duplicate combinations.
+/// No duplicate 
+/// For example, given candidate set [10, 1, 2, 7, 6, 1, 5] and target 8, 
+///    A solution set is: 
+///    [
+///      [1, 7],
+///      [1, 2, 5],
+///      [2, 6],
+///      [1, 1, 6]
+///    ]
+///    
+/// sort [10 7 6 5 2 1 1]        
+Array.Sort(candidates, new Comparison<int>(
+                (i1, i2) => i2.CompareTo(i1)
+        ));   // large to small,
+
+List<List<int>> results = new List<List<int>>();
+List<int> path = new List<int>();
+if (target > 0)
+{
+    CombinationSum2Helper(candidates, target, 0, results, path);
+}
+
+private static void CombinationSum2Helper(int[] candidates, int target, int index, List<List<int>> results, List<int> path)
+{
+    if (target == 0)
+    {
+        List<int> result = new List<int>(path);
+        results.Add(result);
+        return;
+    }
+
+
+    for (int i = index; i < candidates.Length; i++)
+    {
+        // * YIC Note:  i != index, don't check previously because for case 
+        // find 8, [6 , 1, [1]]   the last iteration [1] should not check i-1     
+        //to find 2    [2,2,2], if 2 has reached previously, move on
+        //  find 8, [7 , 1, 1]
+        if (i != index && candidates[i] == candidates[i-1])
+        {
+            continue;
+        } 
+
+        path.Add(candidates[i]);
+        int newTarget = target - candidates[i];
+
+        if (newTarget >= 0)
+        {
+            CombinationSum2Helper(candidates, newTarget, i + 1, results, path);
+        }
+        path.RemoveAt(path.Count-1);
+        
+    }
+}

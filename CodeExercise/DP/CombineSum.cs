@@ -328,7 +328,7 @@ namespace CodeExercise
                 {
                     CombinationSum2Helper(candidates, newTarget, i + 1, results, path);
                 }
-                path.Remove(candidates[i]);
+                path.RemoveAt(path.Count-1);
         
             }
         }

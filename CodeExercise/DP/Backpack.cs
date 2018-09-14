@@ -78,6 +78,34 @@ namespace CodeExercise.DP
         /// 
         /// F[i,W] = F[i-1,W]  || F[i-1, W - P[i-1]]    maxWeight is when F[N, maxWeight] == true;
         /// 
+        /// can use F[w][i] += F[w - A[i - 1]][i - 1];  and check
+        /// 
+        /// [JavaCode] 
+        /// int N = A.length;
+        // boolean[][] F = new boolean[m+1][N + 1];
+        // F[0][0] = true;
+        //
+        // int ans = 0;
+        // for (int i = 1; i <= A.length; i++)
+        // {
+        //     for (int w = 0; w <= m; w++)
+        //     {
+        //         F[w][i] = F[w][i-1];
+        //         if (w - A[i - 1] >= 0)
+        //         {
+        //             F[w][i] |= F[w - A[i - 1]][i - 1];
+        //         }
+        //         
+        //         if (F[w][i] == true)
+        //         {
+        //             ans = w;
+        //         }
+        //     }
+        // }
+        //
+        // return ans;
+        /// 
+        /// 
         /// </summary>
         /// <param name="m"> weight constraint</param>
         /// <param name="A"> list of weights</param>

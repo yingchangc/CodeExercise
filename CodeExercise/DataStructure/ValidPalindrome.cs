@@ -23,8 +23,10 @@ namespace CodeExercise.DataStructure
         /// 
         /// Input: "race a car"
         /// Output: false
+        /// 
+        /// sol: ref to qick selection
         /// </summary>
-        public bool IsPalindrome(string s)
+        public bool IsPalindromePractice(string s)
         {
             if (string.IsNullOrEmpty(s))
             {
@@ -33,15 +35,14 @@ namespace CodeExercise.DataStructure
             string lower = s.ToLower();   //yic
             int left = 0;
             int right = lower.Length - 1;
-            //bool hasValidChar = false;     // yic "  "  is valid by the definition from the question
- 
-            while (left < right)
+
+            while (left <= right)
             {
-                while (left < lower.Length && !isAlphaNumeric(lower[left]))
+                while (left <= right && !isAlphaNumeric(lower[left]))
                 {
                     left++;
                 }
-                while (right >= 0 && !isAlphaNumeric(lower[right]))
+                while (left <= right && !isAlphaNumeric(lower[right]))
                 {
                     right--;
                 }
@@ -53,7 +54,6 @@ namespace CodeExercise.DataStructure
                     {
                         left++;
                         right--;
-                        //hasValidChar = true;
                     }
                     else
                     {
@@ -62,10 +62,9 @@ namespace CodeExercise.DataStructure
                 }
 
             }
-
-            //return hasValidChar;
             return true;
         }
+       
 
         private bool isAlphaNumeric(char c)
         {

@@ -23,6 +23,95 @@ namespace CodeExercise.DP
         /// <param name="s"></param>
         /// <returns></returns>
         /// 
+        public static int MinCutPractice(string s)
+        {
+            int len = s.Length;
+            int[] F = new int[len+1];
+            bool[,] calPalindrome = computePalindromeOutward(s);
+
+            for (int i = 0; i <= len; i++)
+            {
+                F[i] = i;   // pre cut for all places
+            }
+
+            for(int i = 1; i <= s.Length; i++)
+            {
+                for(int j = i; j <=s.Length; j++)
+                {
+                    if (calPalindrome[i-1,j-1])
+                    {
+                        F[j] = Math.Min(F[j], F[i-1] + 1);
+                    }
+                }
+            }
+
+            return F[len]-1;
+
+        }
+
+        private static bool[,] computePalindromeOutward(string s)
+        {
+            int len = s.Length;
+            bool[,] memo = new bool[len, len];
+
+            for (int i = 0; i< len; i++)
+            {
+                //odd 
+                int left = i;
+                int right = i;
+
+                while(left>=0 && right <len)
+                {
+                    if(s[left] == s[right])
+                    {
+                        if (left == right)
+                        {
+                            memo[left, right] = true;
+                        }
+                        else
+                        {
+                            memo[left, right] = memo[left + 1, right - 1]; // check inner
+                        }
+                        
+                        left--;
+                        right++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                //even
+                left = i;
+                right = i+1;
+
+                while (left >= 0 && right < len)
+                {
+                    if (s[left] == s[right])
+                    {
+                        if (left+1 == right)
+                        {
+                            memo[left, right] = true;
+                        }
+                        else
+                        {
+                            memo[left, right] = memo[left + 1, right - 1];
+                        }
+                        left--;
+                        right++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+
+            return memo;
+             
+        }
+
         public static int MinCut(string s)
         {
             int len = s.Length;

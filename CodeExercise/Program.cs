@@ -211,9 +211,9 @@ namespace CodeExercise
         // 132. PalindromePartitioning min cut
         static void Run_Palindrome_Partitioning_II()
         {
-            string test = "bbcxcbm";
+            string test = "aab";
 
-            int res = DP.PalindromePartition.MinCut(test);
+            int res = DP.PalindromePartition.MinCutPractice(test);
         }
 
         // 55. Jump Game
@@ -2788,6 +2788,9 @@ namespace CodeExercise
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //132
+            Run_Palindrome_Partitioning_II();
+
             //843
             Run_DigitalFlip();
             //322
@@ -3182,8 +3185,7 @@ namespace CodeExercise
             Run_MyQueue();
             //437
             Run_CopyBooks();
-            //132
-            Run_Palindrome_Partitioning_II();
+            
 
             
             
