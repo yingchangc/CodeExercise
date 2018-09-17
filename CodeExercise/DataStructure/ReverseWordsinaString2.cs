@@ -25,6 +25,55 @@ namespace CodeExercise.DataStructure
         /// step2 mirror each word    note: can mirror space
         /// </summary>
         /// <param name="str"></param>
+        public void ReverseWordsPractice(char[] str)
+        {
+            // this can hanlde empty arr case
+            // step 1 mirror all
+            Console.WriteLine(str);
+
+            Rotate(str, 0, str.Length - 1);
+            Console.WriteLine(str);
+            // step 2 rotate each word
+            int len = str.Length;
+            int i = 0;
+
+            while(i <len)
+            {
+                while(i < len && str[i] == ' ')
+                {
+                    i++;
+                }
+
+                if (i < len)
+                {
+                    int nextSpaceIdx = findSpaceIdx(str, i);
+                    Rotate(str, i, nextSpaceIdx - 1);
+
+                    i = nextSpaceIdx;
+                }
+                
+            }
+
+            Console.WriteLine(str);
+        }
+
+        private int findSpaceIdx(char[] str, int startIdx)
+        {
+            int idx = startIdx;
+            while(idx < str.Length)
+            {
+                if (str[idx] == ' ')
+                {
+                    break;
+                }
+                idx++;
+            }
+
+            // idx can be space idx or len+1
+            return idx;
+        }
+
+
         public void ReverseWords(char[] str)
         {
             // this can hanlde empty arr case

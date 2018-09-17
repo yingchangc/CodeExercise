@@ -852,3 +852,180 @@ private int firstWillWin3Helper(int[] values, int[,] F, int i, int j, bool[,] me
 
     return F[i, j]; 
 }
+
+
+
+---------------Palindrom
+/// https://leetcode.com/problems/longest-palindromic-substring/description/
+/// Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.
+/// 
+/// Input: "babad"
+/// Output: "bab"
+for (int i = 0; i<N; i++)
+{
+    // odd
+    int oddLen = longestPalindromeInSubString(s, i, i);
+                
+    if (maxLen <= oddLen)
+    {
+        maxLen = oddLen;
+        ans = s.Substring(i-maxLen/2, maxLen);   
+    }
+    // even
+    int evenLen = longestPalindromeInSubString(s, i, i+1);
+    if (maxLen <= evenLen)
+    {
+        maxLen = evenLen;
+        ans = s.Substring(i - evenLen / 2 + 1, evenLen);
+                    
+    }
+}
+/// 409. Longest Palindrome 
+/// Given a string which consists of lowercase or uppercase letters, find the length of the longest palindromes that can be built with those letters.
+/// This is case sensitive, for example "Aa" is not considered a palindrome here.
+/// Note:
+/// Assume the length of given string will not exceed 1,010. 
+/// Example: 
+/// Input:
+/// "abccccdd"
+/// 
+/// Output:
+/// 7
+/// 
+/// Note: order not matter~ can rearrange order.
+[sol]  ans+= even_num    + odd_num-1  (get even part)      + extra odd
+
+
+/// 516
+/// https://leetcode.com/problems/longest-palindromic-subsequence/description/
+/// Given a string s, find the longest palindromic subsequence's length in s. You may assume that the maximum length of s is 1000.
+///Example 1:
+///Input:
+///
+///"bbbab"
+///Output:
+///4
+/// for len = 3 ~ len
+///    for i = 0~ N-len
+///       f[i,i+len-1] = max (f[i, i+len-2], f[i+1, i+len-1])   and max with (f[i+1, i+len-2] + 2)
+
+// 125
+/// https://leetcode.com/problems/valid-palindrome/description/
+/// Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
+/// Note: For the purpose of this problem, we define empty string as valid palindrome.
+/// 
+/// Example 1:
+/// 
+/// Input: "A man, a plan, a canal: Panama"
+/// Output: true
+while (left <= right)
+{
+    while (left <= right && !isAlphaNumeric(lower[left]))
+    {
+        left++;
+    }
+    while (left <= right && !isAlphaNumeric(lower[right]))
+    {
+        right--;
+    }
+
+    // yic  the trick
+    if (left <= right)
+    {
+        if (lower[left] == lower[right])
+        {
+            left++;
+            right--;
+        }
+        else
+        {
+            return false;
+        }
+    }
+}
+
+//PalindromePartition
+for (int i = 0; i <= len; i++)
+{
+    F[i] = i;   // pre cut for all places
+}
+
+for(int i = 1; i <= s.Length; i++)
+{
+    for(int j = i; j <=s.Length; j++)
+    {
+        if (calPalindrome[i-1,j-1])
+        {
+            F[j] = Math.Min(F[j], F[i-1] + 1);
+        }
+    }
+}
+
+return F[len]-1;
+
+/// 131
+/// Given a string s, partition s such that every substring of the partition is a palindrome. 
+///        Return all possible palindrome partitioning of s.
+///        For example, given s = "aab",
+/// Return
+/// [
+///  ["aa","b"],
+///  ["a","a","b"]
+///]
+/// DFS
+private static void DFSHelper1(string s, List<List<string>> ans, List<string> currPath, int index)
+{
+    if (index >= s.Length)
+    {
+        List<string> copy = new List<string>(currPath);
+        ans.Add(copy);
+        return;
+    }
+
+    for (int i = index; i < s.Length; i++)
+    {
+        if (IsPalindrome1(s, index, i))
+        {
+            currPath.Add(s.Substring(index, (i - index + 1)));
+            DFSHelper1(s, ans, currPath, i + 1);
+            currPath.RemoveAt(currPath.Count - 1);    // remove
+        }
+    }
+}
+
+/// 77. Longest Common Subsequence 
+/// http://www.lintcode.com/en/problem/longest-common-subsequence/
+/// 
+/// Given two strings, find the longest common subsequence (LCS).
+/// Your code should return the length of LCS.
+/// 
+///  
+///     nu A B C D
+///  nu 0  0 0 0 0
+///   E 0  0 0 0 0 
+///   A 0  1 1 1 1
+///   C 0  1 1 2 2
+///   B 0  1 2 2 2
+///    
+/// sol: eql, take diagnal +1
+///     Not eql, take left or top
+
+
+
+/// Edit distance
+for (int i = 1; i <= len1; i++)
+{
+    for (int j = 1; j <= len2; j++)
+    {
+                    
+        if (s1[i-1] == s2[j-1])
+        {
+            res[i, j] = res[i - 1, j - 1];  //* must use diag to take previous [i-1,j-1] best conclude steps
+        }
+        else
+        {
+            int minOfTopToLeftCorner = Math.Min(res[i - 1, j - 1], Math.Min(res[i - 1, j], res[i, j - 1]));
+            res[i, j] = minOfTopToLeftCorner + 1;
+        }
+    }
+}

@@ -1407,6 +1407,7 @@ namespace CodeExercise
         {
             string[] Array = { "10", "0001", "111001", "1", "0" };
             DP.OnesAndZeroes question = new DP.OnesAndZeroes();
+            var ans1 = question.FindMaxFormDFS(Array, 5, 3);
             var ans = question.FindMaxForm(Array, 5, 3);
         }
 
@@ -2788,6 +2789,11 @@ namespace CodeExercise
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            //624
+            Run_RemoveSubstrings();
+
+            //474
+            Run_OneAndZero();
             //132
             Run_Palindrome_Partitioning_II();
 
@@ -2963,8 +2969,7 @@ namespace CodeExercise
             
             
 
-            //624
-            Run_RemoveSubstrings();
+            
             //103
             Run_BinaryTreeZigZag();
             
@@ -3094,8 +3099,7 @@ namespace CodeExercise
             //566
             Run_GFSClient();
 
-            //474
-            Run_OneAndZero();
+            
 
             //520
             Run_ConsistentHashing2();

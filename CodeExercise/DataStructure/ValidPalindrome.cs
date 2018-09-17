@@ -26,7 +26,7 @@ namespace CodeExercise.DataStructure
         /// 
         /// sol: ref to qick selection
         /// </summary>
-        public bool IsPalindromePractice(string s)
+        public bool IsPalindrome(string s)
         {
             if (string.IsNullOrEmpty(s))
             {

@@ -29,6 +29,41 @@ namespace CodeExercise.DP
         /// <param name="s2"></param>
         /// <param name="s3"></param>
         /// <returns></returns>
+        public bool IsInterleavePractice(string s1, string s2, string s3)
+        {
+            int M = s1.Length;
+            int N = s2.Length;
+            int Z = s3.Length;
+            if ((M + N) != Z)
+            {
+                return false;
+            }
+
+            bool[,] F = new bool[M + 1, N + 1];
+            F[0, 0] = true;
+
+            for (int i = 0; i <= M; i++)
+            {
+                for (int j = 0; j <= N; j++)
+                {
+                    if (i >= 1 && s1[i - 1] == s3[i + j - 1])  // s1 pickup char started s1:a   s2:b   s3:ab
+                    {
+                        F[i, j] |= F[i - 1, j];
+                    }
+
+                    // yic cannot be else if,  both s1 and s2 char case need to be considered
+                    if (j >= 1 && s2[j - 1] == s3[i + j - 1])
+                    {
+                        F[i, j] |= F[i, j - 1];
+                    }
+
+                }
+            }
+
+            return F[M, N];
+
+        }
+
         public bool IsInterleave(string s1, string s2, string s3)
         {
             int M = s1.Length;

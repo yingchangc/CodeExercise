@@ -66,14 +66,15 @@ namespace CodeExercise.BFS
         // yic  need to get all substrings combination    abcdabd "ab" -> "cdabd"  and "abcdd" because order matters  
         private HashSet<string> RemoveSubstr(string s, string word)
         {
-            int firstOccurrent = s.IndexOf(word);
+            int startIdx = 0;
             HashSet<string> collection = new HashSet<string>();
-            while(firstOccurrent != -1)
+            while(s.IndexOf(word, startIdx)!= -1)
             {
+                int firstOccurrent = s.IndexOf(word, startIdx);
                 string shorterStr = s.Substring(0, firstOccurrent) + s.Substring(firstOccurrent + word.Length);
                 collection.Add(shorterStr);
 
-                firstOccurrent = s.IndexOf(word, firstOccurrent + 1);
+                startIdx = firstOccurrent + 1;
             }
 
            

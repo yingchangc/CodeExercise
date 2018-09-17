@@ -49,35 +49,40 @@ namespace CodeExercise.DP
                 return 0;
             }
 
-            int[,,] F = new int[len + 1, m+1, n+1];
+            int[,,] F = new int[len + 1, m + 1, n + 1];
 
             int ans = 0;
 
-            for (int i = 1; i <= len; i++)
+            for (int j = 0; j <= m; j++)
             {
-                string currStr = strs[i - 1];
-                int zeroCount = 0;
-                int oneCount = 0;
-                GetZeroOnesInStr(currStr, out zeroCount, out oneCount);
-
-                for (int j = 0; j <=m; j++)
+                for (int k = 0; k <= n; k++)
                 {
-                    for(int k =0; k <=n; k++)
+                    for (int i = 1; i <= len; i++)
                     {
+
+                        string currStr = strs[i - 1];
+                        int zeroCount = 0;
+                        int oneCount = 0;
+                        GetZeroOnesInStr(currStr, out zeroCount, out oneCount);
+
                         F[i, j, k] = F[i - 1, j, k];  // don't take current str
 
-                        if ((j - zeroCount >=0) && (k - oneCount) >=0)
+                        if ((j - zeroCount >= 0) && (k - oneCount) >= 0)
                         {
                             F[i, j, k] = Math.Max(F[i, j, k], (F[i - 1, j - zeroCount, k - oneCount] + 1));   // yic +1 if consider current valid string
                         }
 
                         ans = Math.Max(ans, F[i, j, k]);
                     }
+                        
                 }
             }
+ 
 
             return ans;
         }
+
+        
 
         private void GetZeroOnesInStr(string str, out int zeroCount, out int oneCount)
         {
@@ -96,6 +101,48 @@ namespace CodeExercise.DP
                 {
                     oneCount += 1;
                 }
+            }
+        }
+
+        /// <summary>
+        /// DFS  can timeout
+        /// </summary>
+
+        private int maxLen = 0;
+
+        // time exceeded
+        public int FindMaxFormDFS(string[] strs, int m, int n)
+        {
+            List<string> curr = new List<string>();
+            DFSHelper(strs, 0, m, n, curr);
+
+            return maxLen;
+
+        }
+
+        private void DFSHelper(string[] strs, int idx, int m, int n, List<string> currPath)
+        {
+            if (idx == strs.Length)
+            {
+                maxLen = Math.Max(maxLen, currPath.Count);
+                return;
+            }
+
+            for (int i = idx; i < strs.Length; i++)
+            {
+                int strM = 0;
+                int strN = 0;
+                GetZeroOnesInStr(strs[i], out strM, out strN);
+
+                if (m - strM >= 0 && n - strN >= 0)
+                {
+                    currPath.Add(strs[i]);
+
+                    DFSHelper(strs, i + 1, m - strM, n - strN, currPath);
+
+                    currPath.RemoveAt(currPath.Count - 1);
+                }
+
             }
         }
     }

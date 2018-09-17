@@ -18,7 +18,7 @@ namespace CodeExercise.DP
         /// Return 3.
         /// 
         /// Sol:
-        /// 
+        /// DFS + memo  visit[i,j]   when if S[i] = T[j] move i, j, otherwise move i at curr level
         /// F[i,j]   start from A[i] and B[j] number of choices
         /// 
         /// </summary>

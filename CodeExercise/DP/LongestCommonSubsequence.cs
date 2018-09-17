@@ -23,6 +23,8 @@ namespace CodeExercise.DP
         ///   C 0  1 1 2 2
         ///   B 0  1 2 2 2
         ///    
+        /// sol: eql, take diagnal +1
+        ///     Not eql, take left or top
         /// 
         /// </summary>
         /// <param name="A"></param>

@@ -32,7 +32,7 @@ namespace CodeExercise.DP
         /// f[i,i+1] = 1 or 2
         /// 
         /// for len = 3 ~ len
-        ///    for i = 3
+        ///    for i = 0~ N-len
         ///       f[i,i+len-1] = max (f[i, i+len-2], f[i+1, i+len-1])   and max with (f[i+1, i+len-2] + 2)
         ///
         /// 

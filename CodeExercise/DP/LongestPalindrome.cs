@@ -21,6 +21,9 @@ namespace CodeExercise.DP
     /// 
     /// Explanation:
     /// One longest palindrome that can be built is "dccaccd", whose length is 7.
+    /// 
+    /// 
+    /// Note: order not matter~ can rearrange order.
     /// </summary>
     public class LongestPalindrome
     {
