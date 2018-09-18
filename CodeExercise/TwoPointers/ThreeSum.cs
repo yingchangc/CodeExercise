@@ -173,7 +173,7 @@ namespace CodeExercise.TwoPointers
             List<List<int>> ans = new List<List<int>>();
             int len = nums.Length;
 
-            for (int i = 0; i <= len - 3; i++)
+            for (int i = 0; i < len; i++)
             {
                 // skip duplicate
                 if (i != 0 && pre == nums[i])
@@ -182,22 +182,23 @@ namespace CodeExercise.TwoPointers
                 }
 
                 int target = -1 * nums[i];
-                int left = i + 1;
-                int right = len - 1;
+                int start = i + 1;
+                int last = len - 1;
 
+                int left = start;
+                int right = last;
                 while (left < right)
                 {
+                    if (left != start && nums[left] == nums[left-1])
+                    {
+                        left++;
+                        continue;
+                    }
+
                     if (nums[left] + nums[right] == target)
                     {
                         ans.Add(new List<int>() { nums[i], nums[left], nums[right] });
-
-                        int origLeftV = nums[left];
                         left++;
-
-                        while (left < right && nums[left] == origLeftV)
-                        {
-                            left++;
-                        }
                     }
                     else if ((nums[left] + nums[right]) > target)
                     {

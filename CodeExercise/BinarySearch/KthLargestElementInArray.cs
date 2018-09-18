@@ -53,10 +53,11 @@ namespace CodeExercise.BinarySearch
 
         private int SelectionSort(int[] nums, int k, int start, int end)
         {
-            if (start >= end)
-            {
-                return nums[start];
-            }
+            // no need
+            //if (start >= end)
+            //{
+            //    return nums[start];
+            //}
             int left = start;
             int right = end;
 

@@ -17,26 +17,43 @@
 // step 2 rotate each word
 
 [code]
+Rotate(str, 0, str.Length - 1);
+Console.WriteLine(str);
+// step 2 rotate each word
 int len = str.Length;
-int left = 0;
-int right = 0;
-while (left < len)
-{
-    if (right == len || str[right] == ' ')
-    {
-        Rotate(str, left, right - 1);
+int i = 0;
 
-        // reset left and right
-        right = right + 1;   // skip curr space
-        left = right;
-    }
-    else
+while(i <len)
+{
+    while(i < len && str[i] == ' ')
     {
-        right++;
+        i++;
     }
+
+    if (i < len)
+    {
+        int nextSpaceIdx = findSpaceIdx(str, i);
+        Rotate(str, i, nextSpaceIdx - 1);
+
+        i = nextSpaceIdx;
+    }               
 }
 
+private int findSpaceIdx(char[] str, int startIdx)
+{
+    int idx = startIdx;
+    while(idx < str.Length)
+    {
+        if (str[idx] == ' ')
+        {
+            break;
+        }
+        idx++;
+    }
 
+    // idx can be space idx or len+1
+    return idx;
+}
 
 
 /// <summary>
@@ -347,18 +364,6 @@ else if (nums[right] == target)
 return -1;
 
 
-
-//235
-//Prime Factorization
-//https://www.lintcode.com/problem/prime-factorization/description
-// Given 10, return [2, 5].
-//Given 660, return [2, 2, 3, 5, 11].
-[code]
-// 34,   sqrt = 5   i = 2~5 check, any thing > 5 must be prime, otherwise, a smaller one should make it small
-for (int i = 2; i*i <= num; i++)    // yic sqrt   34  after sqrt, if != 1, the rest must be a prime
-
-
-
 /// 215. Kth Largest Element in an Array
 /// https://leetcode.com/problems/kth-largest-element-in-an-array/description/
 /// Find the kth largest element in an unsorted array. Note that it is the 
@@ -373,11 +378,6 @@ for (int i = 2; i*i <= num; i++)    // yic sqrt   34  after sqrt, if != 1, the r
 
 [code]   k is the kIndex (0 based) not kth
 
-
-if (start >= end)
-{
-    return nums[start];
-}
 int left = start;
 int right = end;
 
@@ -449,53 +449,46 @@ while (fast!=null && fast.next !=null && fast.next.next!=null)
 
 [code]
  // sort for the ans requirement (list to be ascending)
-Array.Sort(numbers);
-int len = numbers.Length;
-
-List<List<int>> ans = new List<List<int>>();
-
-for (int i =0; i <len-2; i++)
+for (int i = 0; i < len; i++)
 {
-    if (i > 0 && numbers[i]==numbers[i-1])
+    // skip duplicate
+    if (i != 0 && pre == nums[i])
     {
         continue;
-
-        // YIC (numbers[i-1], numbers[i]), numbers[i+1]     if num i-1  == num i, i-1 has done all the possible combination
     }
 
-    // apply two sum
-    int target = 0 - numbers[i];
+    int target = -1 * nums[i];
+    int start = i + 1;
+    int last = len - 1;
 
-    int left = i + 1;
-    int right = len-1;
-
+    int left = start;
+    int right = last;
     while (left < right)
     {
-        if ((numbers[left] + numbers[right]) == target)
+        if (left != start && nums[left] == nums[left-1])
         {
-            ans.Add(new List<int>() { numbers[i], numbers[left], numbers[right] });
+            left++;
+            continue;
+        }
 
-            left++;
-                        
-            // yic Note: after add to ans, need to keep go right to de-duplicate   [1,1,1],1  target =3
-            while (left < len && numbers[left] == numbers[left-1])
-            {
-                //just need to move left, because dup right cannot fullfil after
-                left++;
-            }
-        }
-        else if ((numbers[left] + numbers[right]) < target)
+        if (nums[left] + nums[right] == target)
         {
-            //yic just need to move left
+            ans.Add(new List<int>() { nums[i], nums[left], nums[right] });
             left++;
         }
-        else
+        else if ((nums[left] + nums[right]) > target)
         {
             right--;
         }
-
+        else
+        {
+            left++;
+        }
     }
+
+    pre = nums[i];
 }
+
 
 
 
