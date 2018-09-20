@@ -1035,8 +1035,7 @@ private List<string> DFSHelper2(string s, int index, IList<string> wordDict, Dic
                     // only add to ans if suffix has something
                     currAns.Add(substr + " " + suffix);
                 }
-            }
-                    
+            }                 
         }
     }
 
@@ -1045,6 +1044,61 @@ private List<string> DFSHelper2(string s, int index, IList<string> wordDict, Dic
     return currAns;
 
 }
+
+/// 438. Find All Anagrams in a String 
+/// Input:
+/// s: "cbaebabacd" p: "abc"
+/// 
+/// Output:
+/// [0, 6]
+/// 
+///         Explanation:
+/// The substring with start index = 0 is "cba", which is an anagram of "abc".
+/// The substring with start index = 6 is "bac", which is an anagram of "abc".
+[sol]
+ sliding window    rely on end to --, and start to ++
+
+ [1]perform substract part  
+ if (lookupCounts.ContainsKey(s[end]))
+{
+    lookupCounts[s[end]]--;
+
+    // make sure no over substract
+    if (lookupCounts[s[end]] >= 0)
+    {
+        count--;
+    }
+
+    // find a result (compare p.length)?  no need to check length
+    if (count == 0)
+    {
+        results.Add(start);
+    }
+}
+
+// [2]perform move.
+// should we also move start or just end only?
+if ((end - start + 1) == p.Length)
+{
+    // ready to move "start" forward, but let's take start count back if necessary
+    if (lookupCounts.ContainsKey(s[start]))
+    {
+        lookupCounts[s[start]]++;
+
+        // not over substract  aaaabc    p:abc     a(0)
+        if (lookupCounts[s[start]] > 0)  /// > 0 becasue it means we have take the value back
+        {
+            count++;
+        }  
+    }
+    start++;
+}
+
+// always move end
+end++;
+
+
+
 
 
 /// https://leetcode.com/problems/wildcard-matching/description/
@@ -1184,41 +1238,33 @@ private bool IsMatchHelper(string s, string p, bool [,] F, bool[,] visited, int 
 ///
 /// sol: DFS  can easily handle duplicate number
 [code]
-// visited  is for each unique location, don't insert again to currPath
-private static void DFSHelper(int[] nums, List<int> currPath, List<List<int>> ans, bool[] visited)
+private static void PermuteUniqueHelper(int[] nums, int index, List<List<int>> results)
 {
-    if (currPath.Count == nums.Length)
+    if (index == nums.Length)
     {
-        List<int> copy = new List<int>(currPath);
-        ans.Add(copy);
+        List<int> result = new List<int>(nums);
+        results.Add(result);
         return;
     }
-    HashSet<int> currLevelHasVisitedValue = new HashSet<int>();
 
-    for (int i = 0; i < nums.Length; i++)
+    HashSet<int> appeared = new HashSet<int>();
+
+    for (int i = index; i<nums.Length; i++)
     {
-        if (visited[i])
+
+        //* YIC skip the same 
+        if (appeared.Contains(nums[i]))
         {
             continue;
         }
 
-        if (currLevelHasVisitedValue.Contains(nums[i]))
-        {
-            continue;
-        }
+        appeared.Add(nums[i]);
 
-        currLevelHasVisitedValue.Add(nums[i]);
-
-        visited[i] = true;
-        currPath.Add(nums[i]);
-
-        DFSHelper(nums, currPath, ans, visited);
-
-        currPath.RemoveAt(currPath.Count - 1);
-        visited[i] = false;
+        swapArray(nums, index, i);
+        PermuteUniqueHelper(nums, index + 1, results);
+        swapArray(nums, i, index);
     }
 }
-
 
 /// 10. String Permutation II
 /// https://www.lintcode.com/problem/string-permutation-ii/description

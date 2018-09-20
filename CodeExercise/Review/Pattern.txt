@@ -1672,3 +1672,64 @@ private static void CombinationSum2Helper(int[] candidates, int target, int inde
         
     }
 }
+
+// 140
+/// Given a non-empty string s and a dictionary wordDict containing a list of non-empty words, add spaces in s to construct a sentence where each word is a valid dictionary word. You may assume the dictionary does not contain duplicate words. 
+///         Return all such possible sentences.
+///         For example, given
+/// s = "catsanddog",
+/// dict = ["cat", "cats", "and", "sand", "dog"]. 
+/// A solution is ["cats and dog", "cat sand dog"].
+/// 
+/// 
+/// http://zxi.mytechroad.com/blog/leetcode/leetcode-140-word-break-ii/
+/// </summary>
+/// <param name="s"></param>
+/// <param name="wordDict"></param>
+/// <returns></returns>
+public IList<string> CheckWordBreakv2(string s, IList<string> wordDict)
+{
+    Dictionary<int, List<string>> visited = new Dictionary<int, List<string>>();
+    var res = DFSHelper2(s, 0, wordDict, visited);  
+    return res.ToArray();
+}
+
+private List<string> DFSHelper2(string s, int index, IList<string> wordDict, Dictionary<int, List<string>> visited)
+{
+    if (visited.ContainsKey(index))
+    {
+        return visited[index];
+    }
+
+    List<string> currAns = new List<string>();
+
+    for (int i = index; i <s.Length; i++)
+    {
+        string substr = s.Substring(index, i - index + 1);
+        if (wordDict.Contains(substr))
+        {
+            // reached last word
+            if (i+1 >= s.Length)
+            {
+                currAns.Add(substr);
+            }
+            else
+            {
+                // not last word
+                List<string> suffixStrs = DFSHelper2(s, i + 1, wordDict, visited);
+
+                foreach (var suffix in suffixStrs)
+                {
+                    // only add to ans if suffix has something
+                    currAns.Add(substr + " " + suffix);
+                }
+            }
+                    
+        }
+    }
+
+    visited.Add(index, currAns);
+
+    return currAns;
+
+}

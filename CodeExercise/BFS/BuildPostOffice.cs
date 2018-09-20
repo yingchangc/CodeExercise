@@ -97,7 +97,7 @@ namespace CodeExercise.BFS
 
             Queue<Location> queue = new Queue<Location>();
             queue.Enqueue(new Location(i, j));
-
+            visited[i, j] = true;
             int step = 0;
 
             while(queue.Count > 0)
