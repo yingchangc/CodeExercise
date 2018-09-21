@@ -1679,12 +1679,10 @@ public int MaxSubArrayPractice(int[] nums)
     {
         currSum += num;
 
-        int localMax =  Math.Max(currSum, currSum - preAccuMin);
+        int localMax =  currSum - preAccuMin;
 
         // yic don't forget
         ans = Math.Max(localMax, ans);
-
-
         preAccuMin = Math.Min(currSum, preAccuMin);
 
     }

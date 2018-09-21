@@ -39,27 +39,78 @@ namespace CodeExercise.DFS
         /// <param name="pattern"></param>
         /// <param name="str"></param>
         /// <returns></returns>
-        public bool WordPatternMatch(string pattern, string str)
+        public bool WordPatternMatchPractice(string pattern, string str)
         {
-            lookup = new Dictionary<char, string>();   // a -> "red"   b-> "blue"
-            used = new HashSet<string>();    // "red"   "blue"
-            var ans = DFSHelper(pattern, 0, str, 0);
-
-            return ans;
+            return DFSHelperPractice(pattern, 0, str, new Dictionary<char, string>(), new HashSet<string>());
         }
 
-        private bool isPrefix(string str, string prefix, int start)
+        private bool DFSHelperPractice(string pattern, int pidx, string str, Dictionary<char, string> lookup, HashSet<string> uniqueSet)
         {
-            int prefixLen = prefix.Length;
-
-            if (start + prefixLen -1 >= str.Length)
+            if (string.IsNullOrEmpty(str) && pidx >= pattern.Length)
+            {
+                return true;
+            }
+            else if (string.IsNullOrEmpty(str) && pidx < pattern.Length)
+            {
+                return false;
+            }
+            else if (pidx >= pattern.Length)
             {
                 return false;
             }
 
-            for (int i = 0; i < prefixLen; i++)
+            char c = pattern[pidx];
+
+            if (!lookup.ContainsKey(c))
             {
-                if (prefix[i] != str[start+i])
+                for (int i = 0; i < str.Length; i++)
+                {
+                    string curr = str.Substring(0, i - 0 + 1);
+
+                    if (uniqueSet.Contains(curr))
+                    {
+                        continue;
+                    }
+
+                    lookup.Add(c, curr);
+                    uniqueSet.Add(curr);
+
+                    string nxt = str.Substring(i + 1);
+                    if (DFSHelperPractice(pattern, pidx+1, nxt, lookup, uniqueSet))
+                    {
+                        return true;
+                    }
+
+                    uniqueSet.Remove(curr);
+                    lookup.Remove(c);
+                }
+            }
+            else
+            {
+                string matchStr = lookup[c];
+                if (CanMatchPrefix(str, matchStr))
+                {
+                    string nxt = str.Substring(matchStr.Length);
+                    return DFSHelperPractice(pattern, pidx + 1, nxt, lookup, uniqueSet);
+                }
+                return false;
+
+            }
+
+            return false;
+
+        }
+
+        private bool CanMatchPrefix(string str, string prefix)
+        {
+            if (prefix.Length > str.Length)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < prefix.Length; i++)
+            {
+                if (str[i] != prefix[i])
                 {
                     return false;
                 }
@@ -68,56 +119,6 @@ namespace CodeExercise.DFS
             return true;
         }
 
-        private bool DFSHelper(string pattern, int pidx, string str, int stridx)
-        {
-            if (pidx == pattern.Length && stridx ==str.Length)
-            {
-                return true;
-            }
-            else if (pidx == pattern.Length || stridx == str.Length)
-            {
-                // either pattern used up or origin string used up
-                return false;
-            }
-
-            char c = pattern[pidx];
-
-            if(lookup.ContainsKey(c))
-            {
-                string substr = lookup[c];
-
-                if (isPrefix(str, substr, stridx))
-                {
-                    int nextStrIdx = stridx + substr.Length;
-                    return DFSHelper(pattern, pidx + 1, str, nextStrIdx);
-                }
-                return false;
-            }
-            else
-            {
-                for (int i = stridx; i < str.Length; i++)
-                {
-                    string substr = str.Substring(stridx, i - stridx + 1);
-                    if (!used.Contains(substr) && isPrefix(str, substr, stridx) )
-                    {   // yic before add b->"red"   need to check if the other pattern has use "red" 
-
-                        lookup.Add(c, substr);
-                        used.Add(substr);
-
-                        int nextStrIdx = stridx + substr.Length;
-                        if (DFSHelper(pattern, pidx + 1, str, nextStrIdx))
-                        {
-                            return true;
-                        }
-
-                        lookup.Remove(c);
-                        used.Remove(substr);
-                    }
-                }
-            }
-
-            return false;
-            
-        }
+        
     }
 }

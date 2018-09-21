@@ -25,6 +25,42 @@ namespace CodeExercise.DataStructure
     /// </summary>
     class InsertInterval
     {
+        public IList<Interval> InsertPractice(IList<Interval> intervals, Interval newInterval)
+        {
+            List<Interval> ans = new List<Interval>();
+            intervals.Add(newInterval);
+
+            var copy = intervals.ToArray();
+
+            Array.Sort(copy, (i1, i2) => i1.start.CompareTo(i2.start));
+
+            Interval pre = copy[0];
+            for(int i = 1; i< copy.Length; i++)
+            {
+                Interval curr = copy[i];
+
+                if (pre.end < curr.start)
+                {
+                    ans.Add(pre);
+                    pre = curr;
+                }
+                else
+                {
+                    // overlap
+                    // update pre end if needed
+                    if (pre.end < curr.end)
+                    {
+                        pre.end = curr.end;
+                    }
+                }
+            }
+
+            ans.Add(pre);
+
+            return ans;
+
+        }
+
         public IList<Interval> Insert(IList<Interval> intervals, Interval newInterval)
         {
             List<Interval> ans = new List<Interval>();

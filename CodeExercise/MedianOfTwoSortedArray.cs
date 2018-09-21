@@ -48,7 +48,7 @@ namespace CodeExercise
         {
             //
             // 2 3
-            // 4 5 6 7 8 9
+            // 4 5 6 7 8 9   shorter one used out.
             // can remove the longer one half since longer one must contrain waste
             if (start1 >= nums1.Length)
             {

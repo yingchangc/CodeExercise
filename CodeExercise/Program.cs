@@ -2198,7 +2198,8 @@ namespace CodeExercise
         static void Run_SplitString()
         {
             DFS.SplitString question = new DFS.SplitString();
-            var ans = question.SplitStringSolver("123");
+            //var ans = question.SplitStringSolver("123");
+            var ans = question.SplitStringSolverPractice("123");
         }
 
         //lint 570
@@ -2282,7 +2283,7 @@ namespace CodeExercise
         static void Run_WordPattern()
         {
             DFS.WordPattern question = new DFS.WordPattern();
-            var ans = question.WordPatternMatch("ab", "ss");
+            var ans = question.WordPatternMatchPractice("ab", "ss");
         }
 
         //31 
@@ -2474,8 +2475,8 @@ namespace CodeExercise
         // 4
         static void Run_Merge2SortedArrays()
         {
-            int[] nums1 = { 2 };
-            int[] nums2 = { 1,3,4 };
+            int[] nums1 = { 1, 2 };
+            int[] nums2 = { 3,4 };
             var ans = MedianOfTwoSortedArray.FindMedianSortedArrays(nums1, nums2);
         }
 
@@ -2696,7 +2697,8 @@ namespace CodeExercise
             DataStructure.Interval i2 = new DataStructure.Interval(6, 9);
             DataStructure.Interval i3 = new DataStructure.Interval(2, 5);
             List<DataStructure.Interval> intervals = new List<DataStructure.Interval>() { i1, i2 };
-            var ans =  question.Insert(intervals, i3);
+            //var ans =  question.Insert(intervals, i3);
+            var ans = question.InsertPractice(intervals, i3);
 
         }
 
@@ -2788,7 +2790,18 @@ namespace CodeExercise
 
         static void Main(string[] args)
         {
-            // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html
+            // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html           
+            //4
+            Run_Merge2SortedArrays();
+
+            //57
+            Run_InsertIntervals();
+
+            //680
+            Run_SplitString();
+            //291
+            Run_WordPattern();
+
             //624
             Run_RemoveSubstrings();
 
@@ -2826,8 +2839,7 @@ namespace CodeExercise
             //53
             Run_MaxSumSubarray();
 
-            //57
-            Run_InsertIntervals();
+            
             
             //138,325
             Run_SubarraySum();
@@ -2892,8 +2904,7 @@ namespace CodeExercise
             //944
             Run_MaximumSubmatrix();
 
-            //4
-            Run_Merge2SortedArrays();
+            
             //577
             Run_MergeKSortedIntervalLists();
 
@@ -2927,8 +2938,7 @@ namespace CodeExercise
             Run_NextPermutation();
             //127
             Run_WordLadder();
-            //291
-            Run_WordPattern();
+            
             //17
             Run_LetterCombinationsPhoneNumber();
             //51
@@ -2960,8 +2970,7 @@ namespace CodeExercise
 
             // 570
             Run_FindMissingNumbers();
-            //680
-            Run_SplitString();
+            
             
 
             // 110
