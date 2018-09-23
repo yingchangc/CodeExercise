@@ -27,23 +27,21 @@ namespace CodeExercise.DP
             Dictionary<char, int> memo = new Dictionary<char, int>();
 
             int j = 0;
-            int currLen = 0;
             int maxLen = 0;
 
             for (int i = 0; i < s.Length; i++)
             {
-                while (j < s.Length && (memo.Keys.Count < k || (memo.Keys.Count==k && memo.ContainsKey(s[j]))))    // < count < k or count ==k  but old key
+                while (j < s.Length && (memo.Keys.Count < k || (memo.Keys.Count == k && memo.ContainsKey(s[j]))))    // < count < k or count ==k  but old key
                 {
-                    currLen++;
-
                     if (!memo.ContainsKey(s[j]))
                     {
                         memo.Add(s[j], 0);
                     }
-                    memo[s[j++]]++;
-                }
+                    memo[s[j]]++;
 
-                maxLen = Math.Max(maxLen, currLen);
+                    maxLen = Math.Max(maxLen, j-i+1);
+                    j++;
+                }
 
                 // now ready to move i
                 memo[s[i]]--;
@@ -51,7 +49,6 @@ namespace CodeExercise.DP
                 {
                     memo.Remove(s[i]);
                 }
-                currLen--;
             }
 
             return maxLen;

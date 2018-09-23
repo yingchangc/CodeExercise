@@ -2791,6 +2791,8 @@ namespace CodeExercise
         static void Main(string[] args)
         {
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html           
+            //340
+            Run_LongestSubstringAtMostKDistinctChar();
             //4
             Run_Merge2SortedArrays();
 
@@ -3267,8 +3269,7 @@ namespace CodeExercise
             Run_MaxProductArray();
             
             
-            //340
-            Run_LongestSubstringAtMostKDistinctChar();
+            
             //3
             Run_LongestSubstringWithoutRepeatingCharacters();
             //209

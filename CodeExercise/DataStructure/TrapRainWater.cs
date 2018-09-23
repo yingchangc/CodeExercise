@@ -41,28 +41,37 @@ namespace CodeExercise.DataStructure
 
             while (left < right)
             {
-                int leftH = height[left];
-                int rightH = height[right];
-
-                if (leftH <= rightH)
+                if (height[left] <= height[right])
                 {
-                    int i = left + 1;
-                    while (leftH > height[i])
+                    int start = height[left];
+                    while(left < right)
                     {
-                        area += (leftH - height[i]);
-                        i++;
+                        if (start >= height[left])
+                        {
+                            area += (start - height[left]);
+                            left++;
+                        }
+                        else
+                        {
+                            break;  // curr left is bigger 
+                        }
                     }
-                    left = i;
                 }
                 else
                 {
-                    int i = right - 1;
-                    while (height[i] < rightH)
+                    int start = height[right];
+                    while(left < right)
                     {
-                        area += (rightH - height[i]);
-                        i--;
+                        if (start >= height[right])
+                        {
+                            area += (start - height[right]);
+                            right--;
+                        }
+                        else
+                        {
+                            break;
+                        }
                     }
-                    right = i;
                 }
             }
 

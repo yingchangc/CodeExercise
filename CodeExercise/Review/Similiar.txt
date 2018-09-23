@@ -1119,3 +1119,39 @@ private static void PermuteUniqueHelper(int[] nums, int index, List<List<int>> r
 }
 
 
+/// 76
+/// Given a string S and a string T, find the minimum window in S which will contain all the characters in T in complexity O(n). 
+/// For example,
+/// S = "ADOBECODEBANC"
+/// T = "ABC"
+/// Minimum window is "BANC". 
+sol:
+
+   lookup dictionary for T, because T can be "BBB"\
+   use score (ie tLen) to control innder while loop out condition
+   for (i:0~len)
+      while(j ~ len  && score > 0)
+
+/// leetcode 340
+/// https://www.lintcode.com/problem/longest-substring-with-at-most-k-distinct-characters/description
+/// Given a string s, find the length of the longest substring T that contains at most k distinct characters.
+/// 
+/// Example
+///        For example, Given s = "eceba", k = 3,
+/// 
+///        T is "eceb" which its length is 4. 
+Note:
+ while (j < s.Length && (memo.Keys.Count < k || (memo.Keys.Count==k && memo.ContainsKey(s[j]))))    // < count < k or count ==k  but old key
+
+ 
+/// Given a string S and a string T, count the number of distinct subsequences of S which equals T.
+        /// A subsequence of a string is a new string which is formed from the original string by deleting some(can be none) of the characters without disturbing the relative positions of the remaining characters. (ie, "ACE" is a subsequence of "ABCDE" while "AEC" is not).
+        /// 
+        /// Here is an example:
+        /// S = "rabbbit", T = "rabbit"
+        /// 
+        /// Return 3.
+        /// 
+        /// Sol:
+        /// DFS + memo  visit[i,j]   when if S[i] = T[j] move i, j, otherwise move i at curr level
+        /// F[i,j]   start from A[i] and B[j] number of choices
