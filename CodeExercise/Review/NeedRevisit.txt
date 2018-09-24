@@ -2749,36 +2749,7 @@ return ans;
 //                     F[i-1][m-"a0_i-1"][n-"a1_i-1"]    <-- take current ) 
 
 
-/// 161. One Edit Distance
-/// https://leetcode.com/problems/one-edit-distance/description/
-/// Given two strings S and T, determine if they are both one edit distance apart.
-while (i >=0 && j >=0)
-{
-    if (s[i] == t[j])
-    {
-        i--;
-        j--;
-    }
-    else
-    {
-        // delete case
-        if (s.Substring(0, i) == t.Substring(0,j+1))   // yic note both s   i for len  current len-1, j+1 is totla len
-        {
-            return true;
-        }
-        // insert case
-        else if ((s.Substring(0,i+1) + t[j]) == t.Substring(0, j + 1))
-        {
-            return true;
-        }
-        // replace case
-        else if ((s.Substring(0,i) + t[j]) == t.Substring(0, j + 1))
-        {
-            return true;
-        }
-        return false;
-    }
-}
+
 
 /// Given a string S and a string T, count the number of distinct subsequences of S which equals T.
 /// A subsequence of a string is a new string which is formed from the original string by deleting some(can be none) of the characters without disturbing the relative positions of the remaining characters. (ie, "ACE" is a subsequence of "ABCDE" while "AEC" is not).
