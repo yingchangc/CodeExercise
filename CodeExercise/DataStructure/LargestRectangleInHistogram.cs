@@ -21,7 +21,7 @@ namespace CodeExercise.DataStructure
         /// 
         ///  H  2  1  5  6  2  3
         /// idx 0  1  2  3  4  5 
-         /// 
+        /// 
         /// only put increase height into stack
         /// 
         /// case1
@@ -33,6 +33,51 @@ namespace CodeExercise.DataStructure
         /// </summary>
         /// <param name="heights"></param>
         /// <returns></returns>
+        public int LargestRectangleAreaPractice(int[] heights)
+        {
+            Stack<Item> monotomicStk = new Stack<Item>();
+            int maxArea = 0;
+
+            monotomicStk.Push(new Item(-1, 0));  // init for compute using pre idx
+
+            for (int i =0; i < heights.Length; i++)
+            {
+                //mono increase >=
+                if (heights[i] >= monotomicStk.Peek().height)
+                {
+                    monotomicStk.Push(new Item(i, heights[i]));
+                }
+                else
+                {
+                    // worst case stk will still hold init 0 height at -1.
+                    while(monotomicStk.Count > 0 && monotomicStk.Peek().height > heights[i])
+                    {
+                        var curr = monotomicStk.Pop();
+                        int area = curr.height * (i - (monotomicStk.Peek().loc + 1));  // next loc - (pre loc+1)
+                        maxArea = Math.Max(maxArea, area);
+                    }
+
+                    monotomicStk.Push(new Item(i, heights[i]));
+                }
+            }
+
+            // reach end,  compute from last, each loc, (since is mono increase, can only look forward.)
+            // init (loc:-1; height:0),  smallest (loc:2, height:4)   <-- need to compute whole range
+            int len = heights.Length;
+            while (monotomicStk.Count > 2)
+            {
+                var curr = monotomicStk.Pop();
+                int area = curr.height * (len - (monotomicStk.Peek().loc+1));  // len - loc (0 idx)
+                maxArea = Math.Max(maxArea, area);
+            }
+
+            var smallest = monotomicStk.Pop();
+            maxArea = Math.Max(maxArea, smallest.height * len);
+
+            return maxArea;
+        }
+
+
         public int LargestRectangleArea(int[] heights)
         {
             Stack<Item> monotomicStk = new Stack<Item>();

@@ -43,15 +43,15 @@ namespace CodeExercise.DFS
         public void NextPermutationSolver(int[] nums)
         {
             int len = nums.Length;
-            int pre = nums[len - 1];
-            int i;
+            
+            int i = len - 2;
 
             // find the first loc not ascending from right
-            for (i = len-2; i >=0; i--)
+            while (i >= 0)
             {
-                if (nums[i] >= pre)
+                if (nums[i] >= nums[i + 1])
                 {
-                    pre = nums[i];
+                    i--;
                 }
                 else
                 {
@@ -59,13 +59,12 @@ namespace CodeExercise.DFS
                 }
             }
 
-            if (i >=0)
+            if (i >= 0)
             {
                 int anchor = i;
 
-                for (int j = len-1; j >anchor; j--)
+                for (int j = len - 1; j > anchor; j--)
                 {
-                    // find num that is just greater than nums[anchor] so that the high bit change is smallest
                     if (nums[j] > nums[anchor])
                     {
                         swap(nums, j, anchor);
@@ -73,10 +72,10 @@ namespace CodeExercise.DFS
                     }
                 }
 
-                // then, reverse anchor+1 ~len-1
+                // reverse anchor+1 ~len-1
                 int left = anchor + 1;
                 int right = len - 1;
-                while(left <right)
+                while (left < right)
                 {
                     swap(nums, left, right);
                     left++;

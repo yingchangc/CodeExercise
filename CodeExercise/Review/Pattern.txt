@@ -1733,3 +1733,28 @@ private List<string> DFSHelper2(string s, int index, IList<string> wordDict, Dic
     return currAns;
 
 }
+
+/// 76
+/// Given a string S and a string T, find the minimum window in S which will contain all the characters in T in complexity O(n). 
+/// For example,
+/// S = "ADOBECODEBANC"
+/// T = "ABC"
+/// Minimum window is "BANC". 
+sol:
+
+   lookup dictionary for T, because T can be "BBB"\
+   use score (ie tLen) to control innder while loop out condition
+   for (i:0~len)
+      while(j ~ len  && score > 0)
+
+
+	  // i is about to move
+		if (lookup.ContainsKey(s[i]))
+		{
+			lookup[s[i]]++;
+
+			if (lookup[s[i]] > 0)    // yic 
+			{
+				score++;
+			}
+		}

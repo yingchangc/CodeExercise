@@ -60,19 +60,11 @@ namespace CodeExercise.DP
                 int left = i;
                 int right = i;
 
-                while(left>=0 && right <len)
+                while (left >= 0 && right < len)
                 {
-                    if(s[left] == s[right])
+                    if (s[left] == s[right])
                     {
-                        if (left == right)
-                        {
-                            memo[left, right] = true;
-                        }
-                        else
-                        {
-                            memo[left, right] = memo[left + 1, right - 1]; // check inner
-                        }
-                        
+                        memo[left, right] = true;
                         left--;
                         right++;
                     }
@@ -84,20 +76,13 @@ namespace CodeExercise.DP
 
                 //even
                 left = i;
-                right = i+1;
+                right = i + 1;
 
                 while (left >= 0 && right < len)
                 {
                     if (s[left] == s[right])
                     {
-                        if (left+1 == right)
-                        {
-                            memo[left, right] = true;
-                        }
-                        else
-                        {
-                            memo[left, right] = memo[left + 1, right - 1];
-                        }
+                        memo[left, right] = true;
                         left--;
                         right++;
                     }

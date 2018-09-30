@@ -1132,6 +1132,7 @@ sol:
    for (i:0~len)
       while(j ~ len  && score > 0)
 
+
 /// leetcode 340
 /// https://www.lintcode.com/problem/longest-substring-with-at-most-k-distinct-characters/description
 /// Given a string s, find the length of the longest substring T that contains at most k distinct characters.
@@ -1145,16 +1146,16 @@ Note:
 
  
 /// Given a string S and a string T, count the number of distinct subsequences of S which equals T.
-        /// A subsequence of a string is a new string which is formed from the original string by deleting some(can be none) of the characters without disturbing the relative positions of the remaining characters. (ie, "ACE" is a subsequence of "ABCDE" while "AEC" is not).
-        /// 
-        /// Here is an example:
-        /// S = "rabbbit", T = "rabbit"
-        /// 
-        /// Return 3.
-        /// 
-        /// Sol:
-        /// DFS + memo  visit[i,j]   when if S[i] = T[j] move i, j, otherwise move i at curr level
-        /// F[i,j]   start from A[i] and B[j] number of choices
+/// A subsequence of a string is a new string which is formed from the original string by deleting some(can be none) of the characters without disturbing the relative positions of the remaining characters. (ie, "ACE" is a subsequence of "ABCDE" while "AEC" is not).
+/// 
+/// Here is an example:
+/// S = "rabbbit", T = "rabbit"
+/// 
+/// Return 3.
+/// 
+/// Sol:
+/// DFS + memo  visit[i,j]   when if S[i] = T[j] move i, j, otherwise move i at curr level
+/// F[i,j]   start from A[i] and B[j] number of choices
 
 
 /// 283. Move Zeroes

@@ -93,10 +93,10 @@ namespace CodeExercise.DP
 
             for (int i = 0; i < nums.Length; i++)
             {
-                int newLoc = Math.Min(nums.Length - 1, i + nums[i]);
+                int newLoc = i + nums[i];
                 maxJumpLoc = Math.Max(maxJumpLoc, newLoc);
 
-                if (i == cend)
+                if (i >= cend && i != (nums.Length - 1))
                 {
                     // *YIC reach max it can be, in the current [begin to end] someone need to jump
                     jump++;
@@ -106,8 +106,7 @@ namespace CodeExercise.DP
 
             }
 
-            // the fist jump to [0] does not count
-            return jump -1;
+            return jump;
 
             //  int[] minJumpArr = new int[nums.Length];
             //minJumpArr[0] = 0;  // init with first loc

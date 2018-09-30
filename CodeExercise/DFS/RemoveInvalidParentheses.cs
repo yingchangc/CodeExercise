@@ -121,7 +121,6 @@ namespace CodeExercise.DFS
 
             // yic  left++  and left-- when close it, otherwise right ++
             findLeftRightMinEditCount(s, out leftCount, out rightCount);
-            int openCount = 0;
 
             if (leftCount == rightCount && rightCount == 0)
             {
