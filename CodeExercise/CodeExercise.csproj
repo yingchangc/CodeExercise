@@ -236,6 +236,7 @@
     <Compile Include="SystemDesign\MiniCassandra.cs" />
     <Compile Include="SystemDesign\MiniUber.cs" />
     <Compile Include="SystemDesign\MiniYelp.cs" />
+    <Compile Include="SystemDesign\ProducerConsumer.cs" />
     <Compile Include="SystemDesign\RateLimiter.cs" />
     <Compile Include="SystemDesign\StandardBloomFilter.cs" />
     <Compile Include="SystemDesign\TinyUrl.cs" />

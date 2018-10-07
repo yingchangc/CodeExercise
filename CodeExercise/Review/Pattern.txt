@@ -342,8 +342,44 @@ inorder, left, mid right, ex. use gloal is Valid flag
 两种方法的区别
 从程序实现角度分治法的递归函数，通常有一个返回值，遍历法通常没有。
 
+https://www.jiuzhang.com/tutorial/algorithm/403
+
+Inorder  (all left, and pop, try add right and its all left)
+public List<Integer> inorderTraversal(TreeNode root) {
+    Stack<TreeNode> stack = new Stack<>();
+    ArrayList<Integer> result = new ArrayList<>();
+        
+    while (root != null) {
+        stack.push(root);
+        root = root.left;
+    }
+    
+    while (!stack.isEmpty()) {
+        TreeNode node = stack.pop();
+        result.add(node.val);
+            
+        node = node.right;
+        while (node!=null) {
+            stack.push(node);
+            node = node.left;
+        }
+    }
+    return result;
+}
 
 
+[preorder]  (stk push root, add right then left.)
+stack.push(root);
+while (!stack.empty()) {
+    TreeNode node = stack.pop();
+    preorder.add(node.val);
+    if (node.right != null) {
+        stack.push(node.right);
+    }
+    if (node.left != null) {
+        stack.push(node.left);
+    }
+}
 ///
 /// 23. Merge k Sorted Lists
 /// https://leetcode.com/problems/merge-k-sorted-lists/description/

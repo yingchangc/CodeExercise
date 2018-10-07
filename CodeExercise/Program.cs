@@ -2788,9 +2788,32 @@ namespace CodeExercise
             var ans = question.FlipDigit(arr);
         }
 
+        static void Run_ProducerConsumer()
+        {
+            SystemDesign.ProducerConsumer question = new SystemDesign.ProducerConsumer();
+            question.Simulate();
+            Console.WriteLine("--------------");
+            question.Simulate();
+            Console.WriteLine("--------------");
+            question.Simulate();
+            Console.WriteLine("--------------");
+            question.Simulate();
+        }
+
         static void Main(string[] args)
         {
+            // TCP面试常见题 https://blog.csdn.net/libaineu2004/article/details/78850227
+
+            //RockMQ  producer consumer https://www.jianshu.com/p/453c6e7ff81c
+            //算法大全（3） 二叉树 http://www.cnblogs.com/Jax/archive/2009/12/28/1633691.html
+
+
+            // http://blog.sina.com.cn/s/blog_eb52001d0102v1si.html
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html           
+
+            Run_ProducerConsumer();
+
+
             //340
             Run_LongestSubstringAtMostKDistinctChar();
             //4

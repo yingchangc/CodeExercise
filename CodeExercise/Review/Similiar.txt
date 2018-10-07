@@ -178,8 +178,39 @@ https://github.com/yuzhangcmu/LeetCode_algorithm/blob/master/tree/TreeDemo.java
         getNodeNumKthLevelRec, getNodeNumKthLevel
 7. 求二叉树中叶子节点的个数：
         getNodeNumLeafRec, getNodeNumLeaf
+
+public static int getNodeNumLeafRec(TreeNode root) {
+    if (root == null) {
+        return 0;
+    }
+        
+    if (root.left == null && root.right == null) {
+        return 1;
+    }
+        
+    return getNodeNumLeafRec(root.left) + getNodeNumLeafRec(root.right);
+}
+
 8. 判断两棵二叉树是否相同的树：
         isSameRec, isSame
+
+public static boolean isSameRec(TreeNode r1, TreeNode r2) {
+    // both are null.
+    if (r1 == null && r2 == null) {
+        return true;
+    }
+        
+    // one is null.
+    if (r1 == null || r2 == null) {
+        return false;
+    }
+        
+    // 1. the value of the root should be the same;
+    // 2. the left tree should be the same.
+    // 3. the right tree should be the same.
+    return r1.val == r2.val && 
+            isSameRec(r1.left, r2.left) && isSameRec(r1.right, r2.right);
+}
 9. 判断二叉树是不是平衡二叉树：isAVLRec
 10. 求二叉树的镜像（破坏和不破坏原来的树两种情况）：
      mirrorRec, mirrorCopyRec
