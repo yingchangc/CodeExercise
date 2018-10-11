@@ -20,6 +20,8 @@ namespace CodeExercise.SystemDesign
         private SemaphoreSlim semaphore = new SemaphoreSlim(1, 1);
         private Random rd = new Random();
 
+        private object obj;
+
         private int maxCakeAvaliable;
 
         
@@ -28,32 +30,44 @@ namespace CodeExercise.SystemDesign
         {
             bool succeeded = false;
             string cakeName = string.Empty;
-            while (!succeeded)
-            {
-                try
-                {
-                    await semaphore.WaitAsync();
 
-                    var tempCakeCont = Interlocked.Read(ref CakeCount);
-                    if (CakeCount > 0)
-                    {
-                        Interlocked.Decrement(ref CakeCount);
-                        cakeName = CakeQueue.LastOrDefault();
-                        CakeQueue.RemoveLast();
-                        PrintCakeCount(Thread.CurrentThread.ManagedThreadId + ":BuyCake");
-                        succeeded = true;
-                    }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("BuyCake Exception {0}." + e);
-                }
-                finally
-                {
-                    semaphore.Release();
-                    await Task.Delay(rd.Next(10));
-                }
+            //var currentCakeCount = Interlocked.Read(ref CakeCount);
+            long currCakeCount = CakeCount;
+            var spinner = new SpinWait();
+            while (((currCakeCount = Interlocked.Read(ref CakeCount)) <= 0)
+                    || (Interlocked.CompareExchange(ref CakeCount, currCakeCount - 1, currCakeCount) != currCakeCount))
+            {
+                spinner.SpinOnce();        
             }
+            PrintCakeCount(Thread.CurrentThread.ManagedThreadId + ":BuyCake: before Count" + currCakeCount);
+
+
+            //while (!succeeded)
+            //{
+            //    try
+            //    {
+            //        await semaphore.WaitAsync();
+
+            //        var tempCakeCont = Interlocked.Read(ref CakeCount);
+            //        if (CakeCount > 0)
+            //        {
+            //            Interlocked.Decrement(ref CakeCount);
+            //            cakeName = CakeQueue.LastOrDefault();
+            //            CakeQueue.RemoveLast();
+            //            PrintCakeCount(Thread.CurrentThread.ManagedThreadId + ":BuyCake");
+            //            succeeded = true;
+            //        }
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        Console.WriteLine("BuyCake Exception {0}." + e);
+            //    }
+            //    finally
+            //    {
+            //        semaphore.Release();
+            //        await Task.Delay(rd.Next(10));
+            //    }
+            //}
 
             return cakeName;
         }
@@ -66,35 +80,45 @@ namespace CodeExercise.SystemDesign
         // can 
         public async Task PruduceCake()
         {
-            bool succeeded = false;
-            // Asynchronously wait to enter the Semaphore.If no-one has been granted access to the Semaphore, 
-            // code execution will proceed, otherwise this thread waits here until the semaphore is released
-
-            while (!succeeded)
+            var spinner = new SpinWait();
+            long currCakeCount = 0;
+            while (((currCakeCount = Interlocked.Read(ref CakeCount)) > maxCakeAvaliable) ||
+                (Interlocked.CompareExchange(ref CakeCount, currCakeCount + 1, currCakeCount) != currCakeCount))     
             {
-                await semaphore.WaitAsync();
-                try
-                {
-                    if (CakeCount < maxCakeAvaliable)
-                    {
-                        Interlocked.Increment(ref CakeCount);
-                        CakeQueue.AddFirst("Cake" + DateTime.Now.Millisecond);
-                        succeeded = true;
-                        PrintCakeCount(Thread.CurrentThread.ManagedThreadId + ":ProduceCake");
-                    }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Produce Cake Exception {0}." + e);
-                }
-                finally
-                {
-                    //When the task is ready, release the semaphore. It is vital to ALWAYS release the semaphore when we are ready, or else we will end up with a Semaphore that is forever locked.
-                    //This is why it is important to do the Release within a try...finally clause; program execution may crash or take a different path, this way you are guaranteed execution
-                    semaphore.Release();
-                    await Task.Delay(rd.Next(10));
-                }
+                spinner.SpinOnce();
             }
+
+            PrintCakeCount(Thread.CurrentThread.ManagedThreadId + ":ProduceCake: before Count:" + currCakeCount);
+
+            //bool succeeded = false;
+            //// Asynchronously wait to enter the Semaphore.If no-one has been granted access to the Semaphore, 
+            //// code execution will proceed, otherwise this thread waits here until the semaphore is released
+
+            //while (!succeeded)
+            //{
+            //    await semaphore.WaitAsync();
+            //    try
+            //    {
+            //        if (CakeCount < maxCakeAvaliable)
+            //        {
+            //            Interlocked.Increment(ref CakeCount);
+            //            CakeQueue.AddFirst("Cake" + DateTime.Now.Millisecond);
+            //            succeeded = true;
+            //            PrintCakeCount(Thread.CurrentThread.ManagedThreadId + ":ProduceCake");
+            //        }
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        Console.WriteLine("Produce Cake Exception {0}." + e);
+            //    }
+            //    finally
+            //    {
+            //        //When the task is ready, release the semaphore. It is vital to ALWAYS release the semaphore when we are ready, or else we will end up with a Semaphore that is forever locked.
+            //        //This is why it is important to do the Release within a try...finally clause; program execution may crash or take a different path, this way you are guaranteed execution
+            //        semaphore.Release();
+            //        await Task.Delay(rd.Next(10));
+            //    }
+            //}
 
         }
     }
@@ -110,7 +134,7 @@ namespace CodeExercise.SystemDesign
             List<Task> tasks = new List<Task>();
 
             int count = 40;
-            for (int i = 0; i < 40; i++)
+            for (int i = 0; i < count; i++)
             {
                 if (i % 2 == 0)
                 {
@@ -138,13 +162,13 @@ namespace CodeExercise.SystemDesign
         private Task CustomerBuyCake()
         {
             Task.Delay(rd.Next(100));
-            return store.BuyCake();
+            return Task.Run(() => store.BuyCake());
         }
 
         private Task ChefProduceCake()
         {
             Task.Delay(rd.Next(100)).Wait();
-            return store.PruduceCake();
+            return Task.Run(()=>store.PruduceCake());
         }
     }
 
