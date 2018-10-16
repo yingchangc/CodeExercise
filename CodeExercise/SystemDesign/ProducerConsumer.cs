@@ -9,10 +9,13 @@ namespace CodeExercise.SystemDesign
 {
     class CakeStore
     {
+
         public CakeStore(int maxCount)
         {
             this.maxCakeAvaliable = maxCount;
-            this.CakeCount = 0;
+            this.CakeCount = maxCount;
+            semaphoreProducer = new SemaphoreSlim(0, maxCakeAvaliable);   // init, max  (0, 5)
+            semaphoreConsumer = new SemaphoreSlim(maxCakeAvaliable, maxCakeAvaliable);  // (init, max) (5,5)  can consume immediately
         }
 
         private long CakeCount;
@@ -20,28 +23,34 @@ namespace CodeExercise.SystemDesign
         private SemaphoreSlim semaphore = new SemaphoreSlim(1, 1);
         private Random rd = new Random();
 
-        private object obj;
-
         private int maxCakeAvaliable;
 
-        
+        private SemaphoreSlim semaphoreProducer;  
+        private SemaphoreSlim semaphoreConsumer;  // init, max 
 
         public async Task<string> BuyCake()
         {
-            bool succeeded = false;
             string cakeName = string.Empty;
+            semaphoreConsumer.Wait();   // max 5 init can enter
 
-            //var currentCakeCount = Interlocked.Read(ref CakeCount);
-            long currCakeCount = CakeCount;
-            var spinner = new SpinWait();
-            while (((currCakeCount = Interlocked.Read(ref CakeCount)) <= 0)
-                    || (Interlocked.CompareExchange(ref CakeCount, currCakeCount - 1, currCakeCount) != currCakeCount))
-            {
-                spinner.SpinOnce();        
-            }
-            PrintCakeCount(Thread.CurrentThread.ManagedThreadId + ":BuyCake: before Count" + currCakeCount);
+            var currCakeCount = Interlocked.Decrement(ref CakeCount);
+            Console.WriteLine(Thread.CurrentThread.ManagedThreadId + ":BuyCake: current Count" + currCakeCount);
 
+            semaphoreProducer.Release();  // now producer can have room to produce
 
+            //[1]
+            ////var currentCakeCount = Interlocked.Read(ref CakeCount);
+            //long currCakeCount = CakeCount;
+            //var spinner = new SpinWait();
+            //while (((currCakeCount = Interlocked.Read(ref CakeCount)) <= 0)
+            //        || (Interlocked.CompareExchange(ref CakeCount, currCakeCount - 1, currCakeCount) != currCakeCount))
+            //{
+            //    spinner.SpinOnce();        
+            //}
+            //PrintCakeCount(Thread.CurrentThread.ManagedThreadId + ":BuyCake: before Count" + currCakeCount);
+
+            //[2]
+            //bool succeeded = false;
             //while (!succeeded)
             //{
             //    try
@@ -80,16 +89,25 @@ namespace CodeExercise.SystemDesign
         // can 
         public async Task PruduceCake()
         {
-            var spinner = new SpinWait();
-            long currCakeCount = 0;
-            while (((currCakeCount = Interlocked.Read(ref CakeCount)) > maxCakeAvaliable) ||
-                (Interlocked.CompareExchange(ref CakeCount, currCakeCount + 1, currCakeCount) != currCakeCount))     
-            {
-                spinner.SpinOnce();
-            }
+            semaphoreProducer.Wait();   // inti 0 means full cakes and cannot produce
 
-            PrintCakeCount(Thread.CurrentThread.ManagedThreadId + ":ProduceCake: before Count:" + currCakeCount);
+            var currCakeCount = Interlocked.Increment(ref CakeCount);
+            Console.WriteLine(Thread.CurrentThread.ManagedThreadId + ":PruduceCake: current Count" + currCakeCount);
 
+            semaphoreConsumer.Release(); //now consumer can move
+
+            //[1]
+            //var spinner = new SpinWait();
+            //long currCakeCount = 0;
+            //while (((currCakeCount = Interlocked.Read(ref CakeCount)) > maxCakeAvaliable) ||
+            //    (Interlocked.CompareExchange(ref CakeCount, currCakeCount + 1, currCakeCount) != currCakeCount))     
+            //{
+            //    spinner.SpinOnce();
+            //}
+
+            //PrintCakeCount(Thread.CurrentThread.ManagedThreadId + ":ProduceCake: before Count:" + currCakeCount);
+
+            //[2]
             //bool succeeded = false;
             //// Asynchronously wait to enter the Semaphore.If no-one has been granted access to the Semaphore, 
             //// code execution will proceed, otherwise this thread waits here until the semaphore is released
