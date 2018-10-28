@@ -31,7 +31,6 @@ namespace CodeExercise.Window
             int j = 0;
 
             int minLen = nums.Length;
-            int currlen = 0;
             int currSum = 0;
             bool foundAns = false;       // yic  for no ans case
 
@@ -40,18 +39,16 @@ namespace CodeExercise.Window
                 while (j < nums.Length && currSum < s)
                 {
                     currSum += nums[j++];
-                    currlen++;
                 }
 
                 if (currSum >= s)
                 {
                     foundAns = true;
-                    minLen = Math.Min(minLen, currlen);
-
-                    // now i can move forward
-                    currlen--;
-                    currSum -= nums[i];
+                    minLen = Math.Min(minLen, j-i);   
                 }
+
+                // now i can move forward
+                currSum -= nums[i];
             }
 
             return foundAns ? minLen : 0;

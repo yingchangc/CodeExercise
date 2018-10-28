@@ -410,7 +410,7 @@ public class Solution {
         
         Queue<ListNode> heap = new PriorityQueue<ListNode>(lists.size(), ListNodeComparator);
         for (int i = 0; i < lists.size(); i++) {
-            if (lists.get(i) != null) {         // yic incase listNode is null
+            if (lists.get(i) != null) {         // yic in case listNode is null
                 heap.add(lists.get(i));
             }
         }
@@ -927,29 +927,22 @@ private int countRank(int[,] matrix, int mid)
 /// For example, given the array[2, 3, 1, 2, 4, 3] and s = 7,
 ///  the subarray[4, 3] has the minimal length under the problem constraint.
 [code]
-int currlen = 0;
-int currSum = 0;
-bool foundAns = false;       // yic  for no ans case
-int j = 0;
-
-for (int i = 0; i <nums.Length; i++)
-{
-    while (j < nums.Length && currSum < s)
-    {
-        currSum += nums[j++];
-        currlen++;
+int sum =0;
+int ans = Integer.MAX_VALUE;
+for(i = 0; i < nums.length; i++) {
+    while(j < nums.length && sum < s) {
+        sum += nums[j];
+        j ++;
     }
-
-    if (currSum >= s)
-    {
-        foundAns = true;
-        minLen = Math.Min(minLen, currlen);
-
-        // now i can move forward
-        currlen--;
-        currSum -= nums[i];
+    if(sum >=s) {
+        ans = Math.min(ans, j - i);
     }
+    sum -= nums[i];
 }
+if(ans == Integer.MAX_VALUE)
+    ans = -1;
+return ans;
+
 
 /// 152. Maximum Product Subarray
 /// Find the contiguous subarray within an array (containing at least one number) which has the largest product. 

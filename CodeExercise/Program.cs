@@ -2800,6 +2800,31 @@ namespace CodeExercise
             question.Simulate();
         }
 
+        //460
+        static void Run_LFUCache()
+        {
+            OOD.LFUCache cache = new OOD.LFUCache(2 /* capacity */ );
+
+            cache.Put(1, 1);
+            cache.Put(2, 2);
+            var ans = cache.Get(1);       // returns 1
+            cache.Put(3, 3);    // evicts key 2
+            ans = cache.Get(2);       // returns -1 (not found)
+            ans = cache.Get(3);       // returns 3.
+            cache.Put(4, 4);    // evicts key 1.
+            ans = cache.Get(1);       // returns -1 (not found)
+            ans = cache.Get(3);       // returns 3
+            ans = cache.Get(4);       // returns 4
+        }
+
+        //692
+        static void Run_TopKFreqent()
+        {
+            DataStructure.TopKFrequent question = new DataStructure.TopKFrequent();
+            var words = new List<string>(){ "the", "day", "is", "sunny", "the", "the", "the", "sunny", "is", "is", "zom" };
+            var ans = question.TopKFrequentSolver(words.ToArray(), 4);
+        }
+
         static void Main(string[] args)
         {
             // TCP面试常见题 https://blog.csdn.net/libaineu2004/article/details/78850227
@@ -2810,9 +2835,14 @@ namespace CodeExercise
 
             // http://blog.sina.com.cn/s/blog_eb52001d0102v1si.html
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html           
+            //692
+            Run_TopKFreqent();
+            //460
+            Run_LFUCache();
 
             Run_ProducerConsumer();
 
+            
 
             //340
             Run_LongestSubstringAtMostKDistinctChar();

@@ -45,7 +45,7 @@ namespace CodeExercise.DataStructure
         /// 
         /// sol: 
         /// 
-        /// insert to pq with longest dist order, when exceed k, pop
+        /// insert to pq with longest dist order (max heap), when exceed k, pop
         /// 
         /// after insert all,  the pq remains size of k
         /// 
