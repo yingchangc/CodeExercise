@@ -40,6 +40,69 @@ namespace CodeExercise.DP
         /// <param name="s"></param>
         /// <param name="p"></param>
         /// <returns></returns>
+        public static IList<int> FindAnagramsPractice(string s, string p)
+        {
+            List<int> res = new List<int>();
+
+            if (s == null || p == null || s.Length == 0 || s.Length < p.Length)
+            {
+                return res;
+            }
+
+            Dictionary<char, int> lookup = new Dictionary<char, int>();
+
+            for (int i = 0; i < p.Length; i++)
+            {
+                if (!lookup.ContainsKey(p[i]))
+                {
+                    lookup.Add(p[i], 0);
+                }
+                lookup[p[i]]++;
+            }
+
+            int totalCount = p.Length;
+
+            int j = 0;
+            for(int i = 0; i < s.Length; i++)
+            {
+                while (j < s.Length && (j-i+1) <= p.Length)
+                {
+                    if (!lookup.ContainsKey(s[j]))
+                    {
+                        j++;
+                        break;
+                    }
+                    
+                    if (lookup[s[j]] > 0)
+                    {
+                        totalCount--;
+                    }
+
+                    lookup[s[j]]--;
+
+                    if (((j - i + 1) == p.Length) && totalCount == 0)
+                    {
+                        res.Add(i);
+                    }
+
+                    j++;
+                }
+
+                // ready to move i
+                if (lookup.ContainsKey(s[i]))
+                {
+                    lookup[s[i]]++;
+
+                    if (lookup[s[i]] > 0)
+                    {
+                        totalCount++;
+                    }
+                }
+            }
+
+            return res;
+
+        }
         public static IList<int> FindAnagrams(string s, string p)
         {
             List<int> results = new List<int>();

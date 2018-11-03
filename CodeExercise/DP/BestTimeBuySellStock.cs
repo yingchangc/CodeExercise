@@ -139,6 +139,7 @@ namespace CodeExercise.DP
             // 1,3  (bought) to keep  update p[i]-p[i-1]
             // F[iday,jstate] = max(F[i-1][j] + P[i]-P[i-1], F[i-1][j-1])
 
+            // Note: it is okay to swap the for loop i  and j,  to conform with conin exchange, where coin is outside to prevent duplicat  target 10,  3 --7   vs 7 --3
             for (int i = 1; i < N; i++)
             {
                 for (int j = 1; j <5; j++)

@@ -43,8 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BFS\BinaryTreeRightSideView.cs" />
     <Compile Include="BFS\BinaryTreeZigzagLevelOrderTraversal.cs" />
     <Compile Include="BFS\BuildPostOffice.cs" />
+    <Compile Include="BFS\CanReachTheEndpoint.cs" />
     <Compile Include="BFS\CloneGraph.cs" />
     <Compile Include="BFS\KnightShortestPath.cs" />
     <Compile Include="BFS\RemoveSubstrings.cs" />
@@ -56,6 +58,7 @@
     <Compile Include="BinarySearch\FindBadVersion.cs" />
     <Compile Include="BinarySearch\FindKClosestElements.cs" />
     <Compile Include="BinarySearch\FindPeakElement.cs" />
+    <Compile Include="BinarySearch\IntervalSearch.cs" />
     <Compile Include="BinarySearch\KthLargestElementInArray.cs" />
     <Compile Include="BinarySearch\LastPositionofTarget.cs" />
     <Compile Include="BinarySearch\MaximumNumberinMountainSequence.cs" />
@@ -66,6 +69,7 @@
     <Compile Include="BinarySearch\SearchInsertPosition.cs" />
     <Compile Include="BinarySearch\WoodCut.cs" />
     <Compile Include="BitManipulation\DivideTwoIntegers.cs" />
+    <Compile Include="BST\BSTSummary.cs" />
     <Compile Include="Connection.cs" />
     <Compile Include="DataStructure\AccountsMerge.cs" />
     <Compile Include="DataStructure\AirplaneInSky.cs" />
@@ -107,6 +111,7 @@
     <Compile Include="DataStructure\NumberConnectedComponentsInUG.cs" />
     <Compile Include="DataStructure\NumberOfIsland.cs" />
     <Compile Include="DataStructure\NumberOfIsland2.cs" />
+    <Compile Include="DataStructure\ProductOfArrayExceptSelf.cs" />
     <Compile Include="DataStructure\RandomizedSet.cs" />
     <Compile Include="DataStructure\RangeSumQuery.cs" />
     <Compile Include="DataStructure\RangeSumQuery2D.cs" />
@@ -139,6 +144,7 @@
     <Compile Include="DFS\GenerateParentheses.cs" />
     <Compile Include="DFS\KthSmallestElementInBST.cs" />
     <Compile Include="DFS\LCABinaryTree.cs" />
+    <Compile Include="DFS\MaxmumSubtree.cs" />
     <Compile Include="DFS\MinimumSubtree.cs" />
     <Compile Include="DFS\NextClosestTime.cs" />
     <Compile Include="DFS\NextPermutation.cs" />
@@ -244,6 +250,7 @@
     <Compile Include="SystemDesign\TinyUrl.cs" />
     <Compile Include="SystemDesign\Typehead.cs" />
     <Compile Include="SystemDesign\WebLogger.cs" />
+    <Compile Include="TopologicalSort\AlienDictionary.cs" />
     <Compile Include="TopologicalSort\CourseSchedule.cs" />
     <Compile Include="TopologicalSort\SequenceReconstruction.cs" />
     <Compile Include="TopologicalSort\TopologicalSorting.cs" />

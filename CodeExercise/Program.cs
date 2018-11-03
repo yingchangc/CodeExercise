@@ -2619,8 +2619,50 @@ namespace CodeExercise
         static void Run_WindowSum()
         {
             TwoPointers.WindowSum question = new TwoPointers.WindowSum();
-            int[] nums = { 1, 2, 7, 8, 5 };
-            var ans = question.WinSum(nums, 3);
+            int[] nums = { 0, 1, 2, 3, 4};
+            var ans = question.WinSumPractice(nums, 3);
+           // var ans = question.WinSum(nums, 3);
+        }
+
+
+        //1564
+        static void Run_IntervalSeaerch()
+        {
+            BinarySearch.IntervalSearch question = new BinarySearch.IntervalSearch();
+            List<List<int>> intervalList = new List<List<int>>();
+            intervalList.Add(new List<int>() { 100, 1100 });
+            intervalList.Add(new List<int>() { 1000, 2000 });
+            intervalList.Add(new List<int>() { 5500, 6500 });
+
+            var ans = question.IsInterval(intervalList, 6000);
+        }
+
+        // 1479 Can Reach The Endpoint
+        static void Run_CanReachTheEndpoint()
+        {
+            BFS.CanReachTheEndpoint question = new BFS.CanReachTheEndpoint();
+            int[,] map = new int[3,3];  //[1,1,1],
+            map[0, 0] = 1;              //[1,1,1],
+            map[1, 0] = 1;              //[1,1,9]
+            map[2, 0] = 1;
+            map[0, 1] = 1;
+            map[1, 1] = 1;
+            map[2, 1] = 1;
+            map[0, 2] = 1;
+            map[1, 2] = 1;
+            map[2, 2] = 9;
+            var ans = question.CanReachEndpoint(map);
+        }
+
+        //269
+        static void AlienDictionary()
+        {
+            TopologicalSort.AlienDictionary question = new TopologicalSort.AlienDictionary();
+            
+            //string[] words = { "wrt", "wrf", "er", "ett", "rftt" };
+            string[] words = { "z", "z" };
+            var ans = question.AlienOrder(words);
+            
         }
 
         // lint 573
@@ -2788,6 +2830,30 @@ namespace CodeExercise
             var ans = question.FlipDigit(arr);
         }
 
+        static void Run_MaxSubtree()
+        {
+            ///
+            ///      1
+            ///    /   \
+            ///  -2     -3
+            ///  / \   /  \
+            /// -4     5   6
+            ///
+            ///
+
+            TreeNode root = new TreeNode(1);
+            root.left = new TreeNode(-2);
+            root.right = new TreeNode(-3);
+            root.left.left = new TreeNode(-4);
+
+            root.right.left = new TreeNode(5);
+            root.right.right = new TreeNode(6);
+
+            DFS.MaxmumSubtree question = new DFS.MaxmumSubtree();
+            var ans = question.FindSubtree(root);
+
+        }
+
         static void Run_ProducerConsumer()
         {
             SystemDesign.ProducerConsumer question = new SystemDesign.ProducerConsumer();
@@ -2825,13 +2891,30 @@ namespace CodeExercise
             var ans = question.TopKFrequentSolver(words.ToArray(), 4);
         }
 
+        static void Run_BSTSummary()
+        {
+            BST.BSTSummary question = new BST.BSTSummary();
+            question.RunTest();
+        }
         static void Main(string[] args)
         {
             // TCP面试常见题 https://blog.csdn.net/libaineu2004/article/details/78850227
 
             //RockMQ  producer consumer https://www.jianshu.com/p/453c6e7ff81c
             //算法大全（3） 二叉树 http://www.cnblogs.com/Jax/archive/2009/12/28/1633691.html
+            //https://github.com/yuzhangcmu/LeetCode/blob/master/tree/TreeDemo.java
 
+            Run_BSTSummary();
+            //269
+            AlienDictionary();
+            //1479
+            Run_CanReachTheEndpoint();
+            //1564
+            Run_IntervalSeaerch();
+            //604
+            Run_WindowSum();
+
+            Run_MaxSubtree();
 
             // http://blog.sina.com.cn/s/blog_eb52001d0102v1si.html
             // C# big o http://c-sharp-snippets.blogspot.com/2010/03/runtime-complexity-of-net-generic.html           
@@ -2930,8 +3013,7 @@ namespace CodeExercise
             // lint 382
             Run_TriangleCount();
 
-            //604
-            Run_WindowSum();
+            
             //464
             Run_SortIntegers();
 

@@ -23,6 +23,37 @@ namespace CodeExercise.TwoPointers
         /// <param name="nums"></param>
         /// <param name="k"></param>
         /// <returns></returns>
+        public int[] WinSumPractice(int[] nums, int k)
+        {
+            int len = nums.Length;
+            if (k > len)
+            {
+                return null;
+            }
+
+            int j = 0;
+            int sum = 0;
+
+            List<int> ans = new List<int>();
+            for (int i = 0; i < len; i++)
+            {
+                while(j < len && (j-i+1) <= k)
+                {
+                    sum += nums[j];
+
+                    if ((j-i+1) == k)
+                    {
+                        ans.Add(sum);
+                    }
+                    j++;
+                }
+
+                sum -= nums[i];
+            }
+
+            return ans.ToArray();
+        }
+
         public int[] WinSum(int[] nums, int k)
         {
             int len = nums.Length;
