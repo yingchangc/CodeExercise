@@ -8,21 +8,132 @@ namespace CodeExercise.BST
 {
     class BSTSummary
     {
-        public void RunTest()
+        private TreeNode BuildDefaultRoot()
         {
             //    1
             //   /  \  
             //  2    3
             // / \   / \ 
             //4   5  6  7 
+            //     \
+            //      8
             TreeNode root = new TreeNode(1);
             root.left = new TreeNode(2);
             root.left.left = new TreeNode(4);
             root.left.right = new TreeNode(5);
+            root.left.right.right = new TreeNode(8);
+
             root.right = new TreeNode(3);
             root.right.left = new TreeNode(6);
             root.right.right = new TreeNode(7);
 
+            return root;
+        }
+
+        // sequential insert
+        private TreeNode SequentialBuildRootFromArray(int[] arr)
+        {
+            if (arr ==null)
+            {
+                return null;
+            }
+
+            TreeNode root = new TreeNode(arr[0]);
+            
+            for(int i = 1; i < arr.Length; i ++)
+            {
+                InsertSequential(root, arr[i]);
+            }
+
+            return root;
+        }
+
+        private TreeNode InsertSequential(TreeNode node, int val)
+        {
+            if (node ==null)
+            {
+                return new TreeNode(val);
+            }
+
+            if (val <= node.val)
+            {
+                node.left = InsertSequential(node.left, val);
+            }
+            else
+            {
+                node.right = InsertSequential(node.right, val);
+            }
+
+            return node;
+        }
+
+        private TreeNode BuildRootFromSortedArray(int[] sortedArr)
+        {
+            return Insert(sortedArr, 0, sortedArr.Length-1);
+        }
+
+        private TreeNode Insert(int[] arr, int left, int right)
+        {
+            if (left > right)
+            {
+                return null;
+            }
+
+            int mid = left + (right - left) / 2;
+            var curr = new TreeNode(arr[mid]);
+
+            curr.left = Insert(arr, left, mid - 1);
+            curr.right = Insert(arr, mid + 1, right);
+            return curr;
+        }
+
+        public void RunTest()
+        {
+            int[] arrForDistance = { 1, 2, 3, 4 };
+            TreeNode rootForDistance = BuildRootFromSortedArray(arrForDistance);
+
+            var maxDistance = GetMaxDistanceRec(rootForDistance);
+
+
+            int[] arrForLCA = { 1, 2 };
+            TreeNode rootForLCA = SequentialBuildRootFromArray(arrForLCA);
+
+            var ansLCA = LACRec(rootForLCA, new TreeNode(1), new TreeNode(2));
+
+            /*
+             *                  4
+             *               2     6
+             *              1  3   5  7
+             * */
+            int[] arr1 = { 1, 2, 3, 4, 5, 6, 7 };
+            int[] arr2 = { 1, 2, 3, 4, 5, 6, 7, 8};
+            TreeNode root1 = BuildRootFromSortedArray(arr1);
+            TreeNode root2 = BuildRootFromSortedArray(arr2);
+            bool isame = isSameRec(root1, root2);
+
+            int[] arr3 = { 4, 2,6,1,3,5,7};
+            TreeNode root3 = SequentialBuildRootFromArray(arr3);
+            isame = isSameRec(root1, root3);
+            //    1
+            //   /  \  
+            //  2    3
+            // / \   / \ 
+            //4   5  6  7 
+            //     \
+            //      8
+            TreeNode root = new TreeNode(1);
+            root.left = new TreeNode(2);
+            root.left.left = new TreeNode(4);
+            root.left.right = new TreeNode(5);
+            root.left.right.right = new TreeNode(8);
+
+            root.right = new TreeNode(3);
+            root.right.left = new TreeNode(6);
+            root.right.right = new TreeNode(7);
+
+            
+
+            int leafNodeCount = GetNodeNumLeaf(root);
             int KLevelNode = GetNodeNumKthLevel(root, 3);
             var inorder = InorderTraversal(root);
             var postorder = PostorderTraversal(root);
@@ -31,6 +142,328 @@ namespace CodeExercise.BST
             var depth = GetDepth(root);
         }
 
+
+        //783. Minimum Distance Between BST Nodes
+        //https://leetcode.com/problems/minimum-distance-between-bst-nodes/description/
+        /// <summary>
+        /// Input: root = [4,2,6,1,3,null,null]
+        ///Output: 1
+        ///Explanation:
+        ///Note that root is a TreeNode object, not an array.
+        ///
+        ///The given tree[4, 2, 6, 1, 3, null, null] is represented by the following diagram:
+        ///
+        ///          4
+        ///        /   \
+        ///      2      6
+        ///     / \    
+        ///    1   3  
+        ///
+        ///while the minimum difference in this tree is 1, it occurs between node 1 and node 2, also between node 3 and node 2.
+        ///
+        /// sol:
+        /// bescause it is bst,  inorder should be sorted
+        /// 
+        /// </summary>
+        /// <param name="root"></param>
+        /// <returns></returns>
+        public int MinDiffInBST(TreeNode root)
+        {
+            if (root ==null)
+            {
+                return Int32.MaxValue;
+            }
+
+            Stack<TreeNode> stk = new Stack<TreeNode>();
+            InsertAllLeft(root, stk);
+
+            TreeNode pre = null;
+            int mindiff = Int32.MaxValue;
+            while(stk.Count>0)
+            {
+                var temp = stk.Pop();
+
+                if (pre != null)
+                {
+                    mindiff = Math.Min(mindiff, (temp.val - pre.val));
+                }
+
+                pre = temp;
+
+                InsertAllLeft(temp.right, stk);
+            }
+
+            return mindiff;
+        }
+
+        
+        
+
+        /*
+    *  * 12. 求二叉树中节点的最大距离：getMaxDistanceRec
+    *  
+    *  首先我们来定义这个距离：
+    *  距离定义为：两个节点间边的数目.
+    *  如：
+    *     1
+    *    / \
+    *   2   3
+    *        \
+    *         4
+    *   这里最大距离定义为2，4的距离，为3.      
+    * 求二叉树中节点的最大距离 即二叉树中相距最远的两个节点之间的距离。 (distance / diameter) 
+    * 递归解法：
+    * 返回值设计：
+    * 返回1. 深度， 2. 当前树的最长距离  node count 
+    */
+        public int GetMaxDistanceRec(TreeNode root)
+        {
+            if (root == null)
+            {
+                return 0;
+            }
+
+            var resut = GetMaxDistanceHelper(root);
+
+            return resut.maxNodeCount-1;  // -1 for distance
+        }
+
+        public ResultNode GetMaxDistanceHelper(TreeNode node)
+        {
+            if (node ==null)
+            {
+                return new ResultNode();
+            }
+
+            var left = GetMaxDistanceHelper(node.left);
+            var right = GetMaxDistanceHelper(node.right);
+
+            int currDistance = 1 + left.Depth + right.Depth;
+            int currDepth = 1 + Math.Max(left.Depth, right.Depth);
+
+            if (currDistance > left.maxNodeCount && currDistance > right.maxNodeCount)
+            {
+                return new ResultNode(maxDist: currDistance, depth: currDepth);
+            }
+            else if (left.maxNodeCount >= right.maxNodeCount)
+            {
+                return new ResultNode(maxDist: left.maxNodeCount, depth: currDepth);
+            }
+            else
+            {
+                return new ResultNode(maxDist: right.maxNodeCount, depth: currDepth);
+            }
+        }
+
+        public class ResultNode
+        {
+            public int maxNodeCount = Int32.MinValue;
+            public int Depth = 0;
+            public ResultNode()
+            {
+               
+            }
+
+            public ResultNode(int maxDist, int depth)
+            {
+                this.maxNodeCount = maxDist;
+                this.Depth = depth;
+            }
+        }
+
+
+        bool GlobalFoundLAC = false;
+
+        /* 11. 求二叉树中两个节点的最低公共祖先节点：
+     * Recursion Version:
+     * LACRec
+     * 1. If found in the left tree, return the Ancestor.
+     * 2. If found in the right tree, return the Ancestor.
+     * 3. If Didn't find any of the node, return null.
+     * 4. If found both in the left and the right tree, return the root.
+     * */
+        public TreeNode LACRec(TreeNode root, TreeNode node1, TreeNode node2)
+        {
+            if (root == null || node1 == null || node2 == null)
+            {
+                return null;
+            }
+
+            TreeNode ans = LACRecHelper(root, node1, node2);
+            if (GlobalFoundLAC == true)
+            {
+                return ans;
+            }
+            return null;
+        }
+        public TreeNode LACRecHelper(TreeNode root, TreeNode node1, TreeNode node2)
+        {
+            if (root == null)
+            {
+                return null;
+            }
+
+            TreeNode left = null;
+            TreeNode right = null;
+
+            if ((root.val == node1.val) && (root.val == node2.val))
+            {
+                GlobalFoundLAC = true;
+                return root;
+            }
+            else if (root.val == node1.val)
+            {
+                left = root;
+                right = LACRecHelper(root.right, node1, node2);
+            }
+            else if (root.val == node2.val)
+            {
+                left  = LACRecHelper(root.left, node1, node2);
+                right = root;
+            }
+            else
+            {
+                left = LACRecHelper(root.left, node1, node2);
+                right = LACRecHelper(root.right, node1, node2);
+            }
+
+            if (left != null && right != null)
+            {
+                GlobalFoundLAC = true;
+                return root;
+            }
+            return left != null ? left : right;
+        }
+
+
+       
+
+        public TreeNode mirrorCopy(TreeNode root)
+        {
+            if (root ==null)
+            {
+                return null;
+            }
+
+            TreeNode leftCopy = mirrorCopy(root.left);
+            TreeNode rightCopy = mirrorCopy(root.right);
+
+            TreeNode curr = new TreeNode(root.val);
+            curr.left = leftCopy;
+            curr.right = rightCopy;
+
+            return curr;
+
+        }
+
+
+
+        bool GlobalIsAVL = true;
+
+        /*
+ * 
+ *  9. 判断二叉树是不是平衡二叉树：isAVLRec
+ *     1. 左子树，右子树的高度差不能超过1
+ *     2. 左子树，右子树都是平衡二叉树。 
+ *      
+ */
+        public bool isAVLRec(TreeNode root)
+        {
+            if (root == null)
+            {
+                return true;
+            }
+
+            LongestPath(root);
+
+            return GlobalIsAVL;
+
+        }
+
+        private int LongestPath(TreeNode node)
+        {
+            if (node == null)
+            {
+                return 0;
+            }
+
+            int leftDepth = LongestPath(node.left);
+            int rightDepth = LongestPath(node.right);
+
+            if (Math.Abs(leftDepth - rightDepth) > 1)
+            {
+                GlobalIsAVL = false;
+            }
+
+            return 1 + Math.Max(leftDepth, rightDepth);
+
+        }
+
+        /*
+     * 8. 判断两棵二叉树是否相同的树。 
+     * 递归解法：  
+     * （1）如果两棵二叉树都为空，返回真 
+     * （2）如果两棵二叉树一棵为空，另一棵不为空，返回假  
+     * （3）如果两棵二叉树都不为空，如果对应的左子树和右子树都同构返回真，其他返回假 
+     * 
+     * 
+     * /*
+     * 8. 判断两棵二叉树是否相同的树。
+     * 迭代解法 
+     * 我们直接用中序遍历来比较就好啦 
+     * */
+        public bool isSameRec(TreeNode r1, TreeNode r2)
+        {
+            if (r1 == null && r2 == null)
+            {
+                return true;
+            }
+            else if (r1 ==null || r2 == null)
+            {
+                return false;
+            }
+            else if (r1.val != r2.val)
+            {
+                return false;
+            }
+
+            return isSameRec(r1.left, r2.left) && isSameRec(r1.right, r2.right);
+        }
+
+        /*
+            * 7. getNodeNumLeaf
+         */
+        public int GetNodeNumLeaf(TreeNode root)
+        {
+            if (root == null)
+            {
+                return 0;
+            }
+
+            Queue<TreeNode> que = new Queue<TreeNode>();
+            que.Enqueue(root);
+
+            int levelCount = 0;
+            while(que.Count > 0)
+            {
+                levelCount = que.Count;
+
+                for (int i = 0; i <levelCount; i++)
+                {
+                    var temp = que.Dequeue();
+                    if (temp.left != null)
+                    {
+                        que.Enqueue(temp.left);
+                    }
+                    if (temp.right != null)
+                    {
+                        que.Enqueue(temp.right);
+                    }
+                }
+            }
+
+            return levelCount;
+        }
         /*
  *  * 6. 求二叉树第K层的节点个数：getNodeNumKthLevelRec, getNodeNumKthLevel 
  * */
