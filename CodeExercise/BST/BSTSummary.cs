@@ -89,6 +89,28 @@ namespace CodeExercise.BST
 
         public void RunTest()
         {
+            /*
+             *                5
+             *             4     20 
+             *           2     19     21
+             *                18
+             *               17
+             *              16
+             *             15
+             *            14   
+             */
+            int[] arrForLongest1 = { 5,4,20,2,19,21,18,17,16,15,14 };
+            TreeNode rootForLongest1 = SequentialBuildRootFromArray(arrForLongest1);
+            var longgest1 = FindLongest(rootForLongest1);
+
+            int[] arrForLongest = { 10, 2, 14, 1, 9, 12, 18, 8, 19, 7, 6, 5, 4 };
+            TreeNode rootForLongest = SequentialBuildRootFromArray(arrForLongest);
+            var longgest = FindLongest(rootForLongest);
+
+            int[] arrForComplete = { 4,2,6,1,3,7};
+            TreeNode rootForComplete = SequentialBuildRootFromArray(arrForComplete);
+            bool isCompleteFalse = IsCompleteBinaryTreeRec(rootForComplete);
+
             int[] arrForDistance = { 1, 2, 3, 4 };
             TreeNode rootForDistance = BuildRootFromSortedArray(arrForDistance);
 
@@ -131,7 +153,8 @@ namespace CodeExercise.BST
             root.right.left = new TreeNode(6);
             root.right.right = new TreeNode(7);
 
-            
+
+            bool isCompleteNo = IsCompleteBinaryTreeRec(root);
 
             int leafNodeCount = GetNodeNumLeaf(root);
             int KLevelNode = GetNodeNumKthLevel(root, 3);
@@ -142,6 +165,126 @@ namespace CodeExercise.BST
             var depth = GetDepth(root);
         }
 
+        /* 
+         * 15. 找出二叉树中最长连续子串(即全部往左的连续节点，或是全部往右的连续节点）findLongest
+        * 第一种解法：
+        * 返回左边最长，右边最长，及左子树最长，右子树最长。
+        * 
+        *                 10
+        *             2       14  
+        *            / \     / \
+        *           1   9   12   18
+        *               /          19
+        *              8            
+        *             /
+        *            7
+        *           6
+        *          5 
+        *         4     
+        *        
+        *           
+        * */
+       public int FindLongest(TreeNode root)
+       {
+           var res = FindLongestHelper(root);
+           return res.maxLengthSofar;
+       }
+
+       private ResultLongest FindLongestHelper(TreeNode node)
+       {
+           if (node == null)
+           {
+               return new ResultLongest(allLeft: 0, allRight: 0, maxLen: 0);
+           }
+
+           var left = FindLongestHelper(node.left);
+           var right = FindLongestHelper(node.right);
+
+           int currAllLeft = 1 + left.allNodesToLeft;
+           int currAllRight = 1 + right.allNodesToRight;
+
+           int currLevelLongst = currAllLeft >= currAllRight ? currAllLeft : currAllRight;
+
+           currLevelLongst = Math.Max(currLevelLongst, Math.Max(left.maxLengthSofar, right.maxLengthSofar));
+
+           return new ResultLongest(allLeft: currAllLeft, allRight: currAllRight, maxLen: currLevelLongst);
+
+       }
+
+       public class ResultLongest
+       {
+           public int allNodesToLeft = 0;
+           public int allNodesToRight = 0;
+           public int maxLengthSofar = 0;
+
+           public ResultLongest(int allLeft, int allRight, int maxLen)
+           {
+               this.allNodesToLeft = allLeft;
+               this.allNodesToRight = allRight;
+               this.maxLengthSofar = maxLen;
+           }
+       }
+       /*
+   * 14. 判断二叉树是不是完全二叉树：isCompleteBinaryTreeRec
+   * 
+   * 
+   *    我们可以分解为：
+   *    CompleteBinary Tree 的条件是：
+   *    1. 左右子树均为Perfect binary tree, 并且两者Height相同
+   *    2. 左子树为CompleteBinaryTree, 右子树为Perfect binary tree，并且两者Height差1
+   *    3. 左子树为Perfect Binary Tree,右子树为CompleteBinaryTree, 并且Height 相同
+   *    
+   *    Base 条件：
+   *    (1) root = null: 为perfect & complete BinaryTree, Height -1;
+   *    
+   *    而 Perfect Binary Tree的条件：
+   *    左右子树均为Perfect Binary Tree,并且Height 相同。
+   * */
+        public bool IsCompleteBinaryTreeRec(TreeNode root)
+        {
+            if (root == null)
+            {
+                return true;
+            }
+
+            Queue<TreeNode> que = new Queue<TreeNode>();
+            que.Enqueue(root);
+
+            bool shouldHaveStopped = false;
+
+            while(que.Count > 0)
+            {
+                int levelCount = que.Count;
+                for(int i =0; i <levelCount; i++)
+                {
+                    var temp = que.Dequeue();
+                    if (temp.left != null)
+                    {
+                        if (shouldHaveStopped == true)
+                        {
+                            return false;
+                        }
+                        que.Enqueue(temp.left);
+                    }
+                    else
+                    {
+                        shouldHaveStopped = true;
+                    }
+
+                    if (temp.right != null)
+                    {
+                        if (shouldHaveStopped == true)
+                        {
+                            return false;
+                        }
+                        que.Enqueue(temp.right);
+                    }
+
+                }  
+            }
+
+            return true;
+        }
 
         //783. Minimum Distance Between BST Nodes
         //https://leetcode.com/problems/minimum-distance-between-bst-nodes/description/
