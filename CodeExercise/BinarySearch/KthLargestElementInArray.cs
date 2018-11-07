@@ -90,7 +90,8 @@ namespace CodeExercise.BinarySearch
             }
             else
             {
-                return nums[(left + right) / 2];
+                return nums[right + 1];
+                //return nums[(left + right) / 2];
             }
         }
 
