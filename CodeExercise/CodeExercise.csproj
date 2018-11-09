@@ -76,6 +76,7 @@
     <Compile Include="DataStructure\ConnectingGraph.cs" />
     <Compile Include="DataStructure\ContinuousSubArraySum.cs" />
     <Compile Include="DataStructure\DataStreamMedian.cs" />
+    <Compile Include="DataStructure\DrawTwoColorToAdjacentNode.cs" />
     <Compile Include="DataStructure\ExpandExpression.cs" />
     <Compile Include="DataStructure\FindDuplicateNumber.cs" />
     <Compile Include="DataStructure\FirstUniqueCharacterinaString.cs" />
@@ -111,6 +112,7 @@
     <Compile Include="DataStructure\NumberConnectedComponentsInUG.cs" />
     <Compile Include="DataStructure\NumberOfIsland.cs" />
     <Compile Include="DataStructure\NumberOfIsland2.cs" />
+    <Compile Include="DataStructure\PalindromeLinkedList.cs" />
     <Compile Include="DataStructure\ProductOfArrayExceptSelf.cs" />
     <Compile Include="DataStructure\RandomizedSet.cs" />
     <Compile Include="DataStructure\RangeSumQuery.cs" />
@@ -118,6 +120,7 @@
     <Compile Include="DataStructure\Rehashing.cs" />
     <Compile Include="DataStructure\ReverseWordsinaString2.cs" />
     <Compile Include="DataStructure\RotateImage.cs" />
+    <Compile Include="DataStructure\SellersWithMostDupItem.cs" />
     <Compile Include="DataStructure\ShortestRangeInKSortedArrays.cs" />
     <Compile Include="DataStructure\Skyline.cs" />
     <Compile Include="DataStructure\SlidingWindow.cs" />

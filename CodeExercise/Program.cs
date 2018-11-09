@@ -2891,6 +2891,40 @@ namespace CodeExercise
             var ans = question.TopKFrequentSolver(words.ToArray(), 4);
         }
 
+        static void Run_AmazonMock()
+        {
+            DataStructure.SellersWithMostDupItem question = new DataStructure.SellersWithMostDupItem();
+            List<string> input = new List<string>(){ "s1,p1", "s1,p2", "s1,p3", "s2,p2", "s2,p3", "s3,p3", "s4, p4"};
+            var ans = question.FindSellers(input);
+
+
+            BFS.GraphNode n1 = new BFS.GraphNode(1);
+            BFS.GraphNode n2 = new BFS.GraphNode(2);
+            BFS.GraphNode n3 = new BFS.GraphNode(3);
+
+            //           n1
+            //         /       \
+            //     n2           n3
+            // 
+            n1.neighbors.Add(n2);
+            n2.neighbors.Add(n1);
+            n1.neighbors.Add(n3);
+            n3.neighbors.Add(n1);
+
+            BFS.DrawTwoColorToAdjacentNode question2 = new BFS.DrawTwoColorToAdjacentNode();
+            var ans2 = question2.CanDrawTowColorInNode(n1);
+
+            //           n1  (r)
+            //         /       \
+            //     n2 (b)   --     n3 (b)       cannot do it
+            // 
+
+            n2.neighbors.Add(n3);
+            n3.neighbors.Add(n2);
+            ans2 = question2.CanDrawTowColorInNode(n1);
+        }
+
+
         static void Run_BSTSummary()
         {
             BST.BSTSummary question = new BST.BSTSummary();
@@ -2898,11 +2932,15 @@ namespace CodeExercise
         }
         static void Main(string[] args)
         {
+            //https://neil.fraser.name/writing/sync/ Differential Synchronization
             // TCP面试常见题 https://blog.csdn.net/libaineu2004/article/details/78850227
 
             //RockMQ  producer consumer https://www.jianshu.com/p/453c6e7ff81c
             //算法大全（3） 二叉树 http://www.cnblogs.com/Jax/archive/2009/12/28/1633691.html
             //https://github.com/yuzhangcmu/LeetCode/blob/master/tree/TreeDemo.java
+
+            // Amazon
+            Run_AmazonMock();
 
             Run_BSTSummary();
             //269
