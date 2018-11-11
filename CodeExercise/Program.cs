@@ -716,6 +716,14 @@ namespace CodeExercise
             ans = question.NumIslandsUF(grid2);
         }
 
+        //347
+        static void Run_TopKFrequent()
+        {
+            DataStructure.TopKFreqWords question = new DataStructure.TopKFreqWords();
+            int[] nums = { 1,2 };
+            var ans = question.TopKFrequent(nums, 2);
+        }
+
         //lintcode 434   leetcode 305
         static void Run_NumberOfIsland2()
         {
@@ -2891,6 +2899,25 @@ namespace CodeExercise
             var ans = question.TopKFrequentSolver(words.ToArray(), 4);
         }
 
+        //149
+        static void Run_PointsInLine()
+        {
+            DataStructure.MaxPointsOnLine question = new DataStructure.MaxPointsOnLine();
+            List<DataStructure.Point> ps = new List<DataStructure.Point>()
+            {
+                new DataStructure.Point(84,250),
+                new DataStructure.Point(0,0),
+                new DataStructure.Point(1,0),
+                new DataStructure.Point(0,-70),
+                new DataStructure.Point(0,-70),
+                new DataStructure.Point(1,-1),
+                new DataStructure.Point(21,10),
+                new DataStructure.Point(42,90),
+                new DataStructure.Point(-42,230),
+            };
+            var ans = question.MaxPoints(ps.ToArray());
+        }
+
         static void Run_AmazonMock()
         {
             DataStructure.SellersWithMostDupItem question = new DataStructure.SellersWithMostDupItem();
@@ -2938,8 +2965,12 @@ namespace CodeExercise
             //RockMQ  producer consumer https://www.jianshu.com/p/453c6e7ff81c
             //算法大全（3） 二叉树 http://www.cnblogs.com/Jax/archive/2009/12/28/1633691.html
             //https://github.com/yuzhangcmu/LeetCode/blob/master/tree/TreeDemo.java
-
+            //347
+            Run_TopKFrequent();
+            //200
+            Run_NumberOfIsland();
             // Amazon
+            Run_PointsInLine();
             Run_AmazonMock();
 
             Run_BSTSummary();
@@ -3427,8 +3458,7 @@ namespace CodeExercise
 
             
 
-            //200
-            Run_NumberOfIsland();
+            
             //378
             Run_KthSmallestElementInMatrix();
             // 55

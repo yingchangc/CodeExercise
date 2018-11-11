@@ -70,6 +70,7 @@
     <Compile Include="BinarySearch\WoodCut.cs" />
     <Compile Include="BitManipulation\DivideTwoIntegers.cs" />
     <Compile Include="BST\BSTSummary.cs" />
+    <Compile Include="BST\GraphBipartite.cs" />
     <Compile Include="Connection.cs" />
     <Compile Include="DataStructure\AccountsMerge.cs" />
     <Compile Include="DataStructure\AirplaneInSky.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="DataStructure\LongestPalindromicSubstring.cs" />
     <Compile Include="DataStructure\MaxBinaryTree.cs" />
     <Compile Include="DataStructure\MaximumSubmatrix.cs" />
+    <Compile Include="DataStructure\MaxPointsOnLine.cs" />
     <Compile Include="DataStructure\MaxRectangle.cs" />
     <Compile Include="DataStructure\MedianKSortedArrays.cs" />
     <Compile Include="DataStructure\MergeKSortedArrays.cs" />
@@ -131,6 +133,7 @@
     <Compile Include="DataStructure\SubarraySumClosest.cs" />
     <Compile Include="DataStructure\SurroundedRegions.cs" />
     <Compile Include="DataStructure\TopKFrequent.cs" />
+    <Compile Include="DataStructure\TopKFreqWords.cs" />
     <Compile Include="DataStructure\TopKLargestNumbers.cs" />
     <Compile Include="DataStructure\TrapRainWater.cs" />
     <Compile Include="DataStructure\Trie.cs" />
