@@ -89,7 +89,7 @@ namespace CodeExercise
                 int num1HalfV = nums1[start1 + half - 1];
                 int num2HalfV = nums2[start2 + half - 1];
 
-                // redice size to half by rmove smaller half
+                // reduce size to half by rmove smaller half
                 if (num1HalfV <= num2HalfV)
                 {
                     return FindKthFromSortedArrays(nums1, nums2, start1 + half, start2, kth - half);
