@@ -38,6 +38,63 @@ namespace CodeExercise.SweepingLine
         /// <param name="seqA"></param>
         /// <param name="seqB"></param>
         /// <returns></returns>
+        public List<Interval> TimeIntersectionSolverPractice(List<Interval> seqA, List<Interval> seqB)
+        {
+            SortedDictionary<int, int> seqLookup = new SortedDictionary<int, int>();  // time, agg ops
+
+            foreach(var duration in seqA)
+            {
+                if (!seqLookup.ContainsKey(duration.start))
+                {
+                    seqLookup.Add(duration.start, 0);
+                }
+                if (!seqLookup.ContainsKey(duration.end))
+                {
+                    seqLookup.Add(duration.end, 0);
+                }
+
+                seqLookup[duration.start]++;
+                seqLookup[duration.end]--;
+            }
+            foreach (var duration in seqB)
+            {
+                if (!seqLookup.ContainsKey(duration.start))
+                {
+                    seqLookup.Add(duration.start, 0);
+                }
+                if (!seqLookup.ContainsKey(duration.end))
+                {
+                    seqLookup.Add(duration.end, 0);
+                }
+
+                seqLookup[duration.start]++;
+                seqLookup[duration.end]--;
+            }
+
+            List<Interval> ans = new List<Interval>();
+            Interval curr = null;
+            int count = 0;
+            foreach(var time in seqLookup.Keys)
+            {
+                count += seqLookup[time];
+                if (count == 2)
+                {
+                    curr = new Interval();
+                    curr.start = time;
+                }
+                else if (curr != null && count < 2)
+                {
+                    curr.end = time;
+                    ans.Add(new Interval(curr.start, curr.end));
+                    
+                    //reset
+                    curr = null;
+                }
+            }
+
+            return ans;
+
+        }
         public List<Interval> TimeIntersectionSolver(List<Interval> seqA, List<Interval> seqB)
         {
             List<IntervalItem> items = new List<IntervalItem>();

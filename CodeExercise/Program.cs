@@ -2801,21 +2801,23 @@ namespace CodeExercise
             tempA1.end = 2;
 
             Interval tempA2 = new Interval();
-            tempA2.start = 10;
-            tempA2.end = 15;
+            tempA2.start = 5;
+            tempA2.end = 100;
             seqA.Add(tempA1);
             seqA.Add(tempA2);
 
             List<Interval> seqB = new List<Interval>();
             Interval tempB1 = new Interval();
-            tempB1.start = 3;
-            tempB1.end = 5;
+            tempB1.start = 1;
+            tempB1.end = 6;
             Interval tempB2 = new Interval();
             tempB2.start = 7;
             tempB2.end = 9;
+            seqB.Add(tempB1);
             seqB.Add(tempB2);
 
-            var ans = question.TimeIntersectionSolver(seqA, seqB);
+            var ans = question.TimeIntersectionSolverPractice(seqA, seqB);
+            var ans2 = question.TimeIntersectionSolver(seqA, seqB);
         }
 
         //302
@@ -2957,14 +2959,44 @@ namespace CodeExercise
             BST.BSTSummary question = new BST.BSTSummary();
             question.RunTest();
         }
+
+        //273
+        static void Run_IntegerEnglishWords()
+        {
+            DataStructure.IntegerEnglishWords question = new DataStructure.IntegerEnglishWords();
+            var ans = question.NumberToWords(30);
+        }
+
+        //56
+        static void Run_MergeIntervals()
+        {
+            SweepingLine.MergeIntervals question = new SweepingLine.MergeIntervals();
+            List<Interval> input = new List<Interval>()
+            {
+                new Interval() { start = 1, end = 4},
+                new Interval() { start = 0, end = 4}
+
+            };
+            var ans = question.Merge(input);
+        }
+
         static void Main(string[] args)
         {
+            var testV = 1 << 3;
+
             //https://neil.fraser.name/writing/sync/ Differential Synchronization
             // TCP面试常见题 https://blog.csdn.net/libaineu2004/article/details/78850227
 
             //RockMQ  producer consumer https://www.jianshu.com/p/453c6e7ff81c
             //算法大全（3） 二叉树 http://www.cnblogs.com/Jax/archive/2009/12/28/1633691.html
             //https://github.com/yuzhangcmu/LeetCode/blob/master/tree/TreeDemo.java
+
+            //821
+            Run_TimeIntersection();
+            //56
+            Run_MergeIntervals();
+            //273
+            Run_IntegerEnglishWords();
             //347
             Run_TopKFrequent();
             //200
@@ -3027,8 +3059,7 @@ namespace CodeExercise
             //302
             Run_SmallestRectangleEnclosingBlackPixels();
 
-            //821
-            Run_TimeIntersection();
+            
 
             //84
             Run_LargestRectangle();

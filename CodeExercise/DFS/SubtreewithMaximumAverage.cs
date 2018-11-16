@@ -17,8 +17,6 @@ namespace CodeExercise.DFS
 
         }
 
-        private TreeNode subtree = null;
-        private ResultType subtreeResult = null;
         /// <summary>
         /// 597. Subtree with Maximum Average
         ///Given a binary tree, find the subtree with maximum average.Return the root of the subtree.

@@ -86,6 +86,7 @@
     <Compile Include="DataStructure\HashFunction.cs" />
     <Compile Include="DataStructure\HighFive.cs" />
     <Compile Include="DataStructure\InsertInterval.cs" />
+    <Compile Include="DataStructure\IntegerEnglishWords.cs" />
     <Compile Include="DataStructure\IntersectionOfArrays.cs" />
     <Compile Include="DataStructure\IntersectionofTwoArrays.cs" />
     <Compile Include="DataStructure\KClosestPoints.cs" />
@@ -232,11 +233,13 @@
     <Compile Include="OOD\ElevatorSystem.cs" />
     <Compile Include="OOD\LFUCache.cs" />
     <Compile Include="OOD\LRUCache.cs" />
+    <Compile Include="Probability\ReservoirSampling.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DP\SubSets.cs" />
     <Compile Include="SweepingLine\MaximumAverageSubarray.cs" />
     <Compile Include="SweepingLine\MeetingRooms.cs" />
+    <Compile Include="SweepingLine\MergeIntervals.cs" />
     <Compile Include="SweepingLine\TimeIntersection.cs" />
     <Compile Include="SystemDesign\ConsistentHash.cs" />
     <Compile Include="SystemDesign\ConsistentHashing2.cs" />

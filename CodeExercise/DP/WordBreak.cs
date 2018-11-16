@@ -20,6 +20,37 @@ namespace CodeExercise.DP
         /// <param name="s"></param>
         /// <param name="wordDict"></param>
         /// <returns></returns>
+        public bool CheckWordBreakPractice(string s, IList<string> wordDict)
+        {
+            return DFSHelper(s, 0, wordDict, new bool[s.Length]);
+        }
+
+        public bool DFSHelper(string s, int index, IList<string> wordDict, bool[] visited)
+        {
+            if (index > s.Length)
+            {
+                return true;
+            }
+
+            if (visited[index])
+            {
+                return false;
+            }
+
+            for (int i = index; i < s.Length; i++)
+            {
+                var subStr = s.Substring(index, i - index + 1);
+                if (wordDict.Contains(subStr) && DFSHelper(s, i+1, wordDict, visited))
+                {
+                    return true;
+                }
+            }
+
+            visited[index] = true;
+
+            return false;
+        }
+
         public bool CheckWordBreak(string s, IList<string> wordDict)
         {
             visited = new Dictionary<int, bool>();    // [index, isWord?]

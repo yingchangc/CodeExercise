@@ -46,6 +46,34 @@ namespace CodeExercise.SweepingLine
         /// </summary>
         /// <param name="intervals"></param>
         /// <returns></returns>
+        public int MinMeetingRoomsPractice(Interval[] intervals)
+        {
+            SortedDictionary<int, int> lookup = new SortedDictionary<int, int>();
+            foreach(var intval in intervals)
+            {
+                if (!lookup.ContainsKey(intval.start))
+                {
+                    lookup.Add(intval.start, 0);
+                }
+                if (!lookup.ContainsKey(intval.end))
+                {
+                    lookup.Add(intval.end, 0);
+                }
+                lookup[intval.start]++;
+                lookup[intval.end]--;
+            }
+
+            int currRoom = 0;
+            int maxroom = 0;
+            foreach (var key in lookup.Keys)
+            {
+                currRoom += lookup[key];
+                maxroom = Math.Max(maxroom, currRoom);
+            }
+
+            return maxroom;
+        }
+
         public int MinMeetingRooms(Interval[] intervals)
         {
             List<IntervalItem> collection = new List<IntervalItem>();

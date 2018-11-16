@@ -220,33 +220,29 @@ namespace CodeExercise.DataStructure
         /// <returns></returns>
         public int SubarraySumK(int[] nums, int k)
         {
-            Dictionary<int, int> lookup = new Dictionary<int, int>();  // {val, count}
+            Dictionary<int, int> lookup = new Dictionary<int, int>();  // val, occurr freq
+
             lookup.Add(0, 1);
 
+            int count = 0;
             int sum = 0;
-            int ans = 0;
-            for (int i = 0; i < nums.Length; i++)
+            for(int i = 0; i < nums.Length; i++)
             {
                 sum += nums[i];
-
-                // count curr sum-k number,   2  2  [4]    k = 2,    ans  = 2      becasue can be 4-2'    4-2''
-                if (lookup.ContainsKey(sum-k))
+                if (lookup.ContainsKey(sum - k))
                 {
-                    ans += lookup[sum - k];
+                    count+= lookup[sum-k];
                 }
 
-                // put sum into lookup
                 if (!lookup.ContainsKey(sum))
                 {
-                    lookup.Add(sum, 1);
+                    lookup.Add(sum, 0);    // accumulate sum at index i
                 }
-                else
-                {
-                    lookup[sum]++;
-                }                
+                lookup[sum]++;
             }
 
-            return ans;
+            return count;
+
 
         }
     }
