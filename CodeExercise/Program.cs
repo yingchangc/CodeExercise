@@ -2998,11 +2998,25 @@ namespace CodeExercise
             var ans = question.AddBoldTag("aaabbcc", dict);
         }
 
+        //138
+        static void Run_CopyRandomList()
+        {
+            LL.CopyRandomList question = new LL.CopyRandomList();
+            LL.RandomListNode head = new LL.RandomListNode(1);
+
+            var ans = question.CopyRandomListSolver(head);
+        }
+
+        //973
+        static void Run_ReorderLogFiles()
+        {
+            StringRelated.ReorderLogFiles question = new StringRelated.ReorderLogFiles();
+            string[] intput = { "a1 9 2 3 1", "g1 act car", "zo4 4 7", "ab1 off key dog", "a8 act zoo" };
+            var res = question.ReorderLogFilesSolverInplace(intput);
+        }
+
         static void Main(string[] args)
         {
-            int[,] test = { { 1, 1, 1 }, { 1, 1, 1 } };
-            var len1 = test.GetLength(0);
-            var len2 = test.GetLength(1);
 
             //https://neil.fraser.name/writing/sync/ Differential Synchronization
             // TCP面试常见题 https://blog.csdn.net/libaineu2004/article/details/78850227
@@ -3010,6 +3024,13 @@ namespace CodeExercise
             //RockMQ  producer consumer https://www.jianshu.com/p/453c6e7ff81c
             //算法大全（3） 二叉树 http://www.cnblogs.com/Jax/archive/2009/12/28/1633691.html
             //https://github.com/yuzhangcmu/LeetCode/blob/master/tree/TreeDemo.java
+
+            //973
+            Run_ReorderLogFiles();
+
+            //138
+            Run_CopyRandomList();
+
             //616
             Run_AddBoldTag();
 

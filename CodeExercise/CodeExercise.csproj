@@ -223,6 +223,7 @@
     <Compile Include="KMPSubstringSearch.cs" />
     <Compile Include="DFS\LetterCombinationsPhoneNumber.cs" />
     <Compile Include="ListNode.cs" />
+    <Compile Include="LL\CopyRandomList.cs" />
     <Compile Include="matrixQuestion\WordSearch.cs" />
     <Compile Include="MedianOfTwoSortedArray.cs" />
     <Compile Include="DP\PermutationIntArray.cs" />
@@ -245,6 +246,7 @@
     <Compile Include="DP\SubSets.cs" />
     <Compile Include="StringRelated\AddBoldTaginString.cs" />
     <Compile Include="StringRelated\IsomorphicStrings.cs" />
+    <Compile Include="StringRelated\ReorderLogFiles.cs" />
     <Compile Include="StringRelated\ReorganizeString.cs" />
     <Compile Include="SweepingLine\MaximumAverageSubarray.cs" />
     <Compile Include="SweepingLine\MeetingRooms.cs" />
