@@ -6,6 +6,47 @@ using System.Threading.Tasks;
 
 namespace CodeExercise.DataStructure
 {
+    class RotateString
+    {
+        /// <summary>
+        /// 796. Rotate String
+        /// https://leetcode.com/problems/rotate-string/description/
+        /// We are given two strings, A and B.
+        /// 
+        /// A shift on A consists of taking string A and moving the leftmost character to the rightmost position.For example, if A = 'abcde', then it will be 'bcdea' after one shift on A.Return True if and only if A can become B after some number of shifts on A.
+        /// 
+        /// Example 1:
+        /// Input: A = 'abcde', B = 'cdeab'
+        /// Output: true
+        /// 
+        /// Example 2:
+        /// Input: A = 'abcde', B = 'abced'
+        /// Output: false
+        /// 
+        /// 
+        /// Sol: 
+        /// 
+        ///  B contains in (A+A)    O(N^2)      contains  can be optionmized by strstr
+        ///  
+        /// Space O(N)     
+        /// </summary>
+        /// <param name="A"></param>
+        /// <param name="B"></param>
+        /// <returns></returns>
+        public bool CanRotateString(string A, string B)
+        {
+            if (A.Length != B.Length)
+            {
+                return false;
+            }
+
+            var temp = A + A;
+
+            return temp.Contains(B);
+        }
+    }
+
+
     class StrStr
     {
         private static readonly int HashSlots = 1000;
@@ -97,6 +138,7 @@ namespace CodeExercise.DataStructure
 
                 }
             }
+            
 
             return -1;
 

@@ -2980,9 +2980,29 @@ namespace CodeExercise
             var ans = question.Merge(input);
         }
 
+        static void Run_NthToLastNode()
+        {
+            DataStructure.NthToLastNode question = new DataStructure.NthToLastNode();
+            DataStructure.ListNode head = new DataStructure.ListNode(1);
+            head.next = new DataStructure.ListNode(2);
+            head.next.next = new DataStructure.ListNode(3);
+            var ans = question.FindNtoLastNode(head, 3);
+        }
+
+        //616
+        static void Run_AddBoldTag()
+        {
+            StringRelated.AddBoldTaginString question = new StringRelated.AddBoldTaginString();
+            string[] dict = { "aaa", "aab", "bc" };
+
+            var ans = question.AddBoldTag("aaabbcc", dict);
+        }
+
         static void Main(string[] args)
         {
-            var testV = 1 << 3;
+            int[,] test = { { 1, 1, 1 }, { 1, 1, 1 } };
+            var len1 = test.GetLength(0);
+            var len2 = test.GetLength(1);
 
             //https://neil.fraser.name/writing/sync/ Differential Synchronization
             // TCP面试常见题 https://blog.csdn.net/libaineu2004/article/details/78850227
@@ -2990,6 +3010,10 @@ namespace CodeExercise
             //RockMQ  producer consumer https://www.jianshu.com/p/453c6e7ff81c
             //算法大全（3） 二叉树 http://www.cnblogs.com/Jax/archive/2009/12/28/1633691.html
             //https://github.com/yuzhangcmu/LeetCode/blob/master/tree/TreeDemo.java
+            //616
+            Run_AddBoldTag();
+
+            Run_NthToLastNode();
 
             //821
             Run_TimeIntersection();
