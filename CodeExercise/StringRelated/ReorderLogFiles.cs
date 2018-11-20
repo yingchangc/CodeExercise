@@ -33,6 +33,8 @@ namespace CodeExercise.StringRelated
         /// </summary>
         /// <param name="logs"></param>
         /// <returns></returns>
+
+        // digit part is wrong for C#, probably need to sort speprately
         public string[] ReorderLogFilesSolverInplace(string[] logs)
         {
             Array.Sort(logs, new LogComparer());
@@ -68,6 +70,10 @@ namespace CodeExercise.StringRelated
                 }
                 else
                 {
+                    if (context1 == context2)
+                    {
+                        return id1.CompareTo(id2);
+                    }
                     return context1.CompareTo(context2);
                 }
             }

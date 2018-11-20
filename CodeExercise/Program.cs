@@ -3014,7 +3014,13 @@ namespace CodeExercise
             string[] intput = { "a1 9 2 3 1", "g1 act car", "zo4 4 7", "ab1 off key dog", "a8 act zoo" };
             var res = question.ReorderLogFilesSolverInplace(intput);
         }
-
+        //755
+        static void Run_PourWater()
+        {
+            DataStructure.PourWater question = new DataStructure.PourWater();
+            int[] height = { 2, 1, 1, 2, 1, 2, 2};
+            var ans = question.PourWaterSolver(height, 4, 5);
+        }
         static void Main(string[] args)
         {
 
@@ -3024,7 +3030,8 @@ namespace CodeExercise
             //RockMQ  producer consumer https://www.jianshu.com/p/453c6e7ff81c
             //算法大全（3） 二叉树 http://www.cnblogs.com/Jax/archive/2009/12/28/1633691.html
             //https://github.com/yuzhangcmu/LeetCode/blob/master/tree/TreeDemo.java
-
+            //755
+            Run_PourWater();
             //973
             Run_ReorderLogFiles();
 

@@ -8,6 +8,7 @@ namespace CodeExercise.DataStructure
 {
     class LargestRectangleInHistogram
     {
+        int globalMin = 0;
         /// <summary>
         /// 84
         /// https://leetcode.com/problems/largest-rectangle-in-histogram/solution/
@@ -35,48 +36,84 @@ namespace CodeExercise.DataStructure
         /// <returns></returns>
         public int LargestRectangleAreaPractice(int[] heights)
         {
-            Stack<Item> monotomicStk = new Stack<Item>();
+            if (heights == null || heights.Length == 0)
+            {
+                return 0;
+            }
+            Stack<LocH> mono = new Stack<LocH>();
+
+            mono.Push(new LocH(0, heights[0]));
+
+            globalMin = heights[0];  // yic
+
             int maxArea = 0;
 
-            monotomicStk.Push(new Item(-1, 0));  // init for compute using pre idx
 
-            for (int i =0; i < heights.Length; i++)
+
+            for (int i = 1; i < heights.Length; i++)
             {
-                //mono increase >=
-                if (heights[i] >= monotomicStk.Peek().height)
+                if (mono.Peek().height <= heights[i])
                 {
-                    monotomicStk.Push(new Item(i, heights[i]));
+                    // increasing, keep add
+                    mono.Push(new LocH(i, heights[i]));
                 }
                 else
                 {
-                    // worst case stk will still hold init 0 height at -1.
-                    while(monotomicStk.Count > 0 && monotomicStk.Peek().height > heights[i])
-                    {
-                        var curr = monotomicStk.Pop();
-                        int area = curr.height * (i - (monotomicStk.Peek().loc + 1));  // next loc - (pre loc+1)
-                        maxArea = Math.Max(maxArea, area);
-                    }
-
-                    monotomicStk.Push(new Item(i, heights[i]));
+                    int temp = KeepMonoAndComputeArea(mono, i, heights[i]);
+                    maxArea = Math.Max(temp, maxArea);
+                    globalMin = Math.Min(globalMin, heights[i]);
                 }
             }
 
-            // reach end,  compute from last, each loc, (since is mono increase, can only look forward.)
-            // init (loc:-1; height:0),  smallest (loc:2, height:4)   <-- need to compute whole range
-            int len = heights.Length;
-            while (monotomicStk.Count > 2)
+            // add virtial end wall to pop mono stack
+            int tempMaxArea = KeepMonoAndComputeArea(mono, heights.Length, -1);
+            maxArea = Math.Max(tempMaxArea, maxArea);
+
+            // still need to compute globalMin to all area speical case
+            maxArea = Math.Max(maxArea, globalMin * heights.Length);
+
+            return maxArea;
+        }
+        private int KeepMonoAndComputeArea(Stack<LocH> mono, int right, int rH)
+        {
+            int maxArea = 0;
+            // keep mono and compute area
+            while (mono.Count > 0 && mono.Peek().height > rH)
             {
-                var curr = monotomicStk.Pop();
-                int area = curr.height * (len - (monotomicStk.Peek().loc+1));  // len - loc (0 idx)
-                maxArea = Math.Max(maxArea, area);
+                var curr = mono.Pop();
+                int width;
+                if (mono.Count == 0)
+                {
+                    width = right;   // already global min so far, 
+                }
+                else
+                {
+                    width = (right - mono.Peek().loc - 1);  // take  pre loc and next loc as width   ex  H 0   2  5 
+                                                            //                                           L 0 1 2  3  
+                }
+
+
+                int currArea = curr.height * width;
+                maxArea = Math.Max(maxArea, currArea);
             }
 
-            var smallest = monotomicStk.Pop();
-            maxArea = Math.Max(maxArea, smallest.height * len);
+            // add new height in
+            mono.Push(new LocH(right, rH));
 
             return maxArea;
         }
 
+        public class LocH
+        {
+            public int loc;
+            public int height;
+
+            public LocH(int loc, int height)
+            {
+                this.loc = loc;
+                this.height = height;
+            }
+        }
 
         public int LargestRectangleArea(int[] heights)
         {

@@ -48,6 +48,7 @@
     <Compile Include="BFS\BuildPostOffice.cs" />
     <Compile Include="BFS\CanReachTheEndpoint.cs" />
     <Compile Include="BFS\CloneGraph.cs" />
+    <Compile Include="BFS\FloodFill.cs" />
     <Compile Include="BFS\KnightShortestPath.cs" />
     <Compile Include="BFS\MaxAreaofIsland.cs" />
     <Compile Include="BFS\RemoveSubstrings.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="DataStructure\NumberOfIsland.cs" />
     <Compile Include="DataStructure\NumberOfIsland2.cs" />
     <Compile Include="DataStructure\PalindromeLinkedList.cs" />
+    <Compile Include="DataStructure\PourWater.cs" />
     <Compile Include="DataStructure\ProductOfArrayExceptSelf.cs" />
     <Compile Include="DataStructure\RandomizedSet.cs" />
     <Compile Include="DataStructure\RangeSumQuery.cs" />
@@ -185,6 +187,7 @@
     <Compile Include="DP\DigitalFlip.cs" />
     <Compile Include="DP\DistinctSubsequences.cs" />
     <Compile Include="DP\FindMinimumInRotatedSortedArray.cs" />
+    <Compile Include="DP\FrogJump.cs" />
     <Compile Include="DP\GroupAnagrams.cs" />
     <Compile Include="DP\HouseRobber.cs" />
     <Compile Include="DP\InterleavingString.cs" />
@@ -278,6 +281,7 @@
     <Compile Include="Tree\DiameterOfBT.cs" />
     <Compile Include="Tree\LowestCommonAncestor.cs" />
     <Compile Include="Tree\TreeNode.cs" />
+    <Compile Include="TwoPointers\ContainerWithMostWater.cs" />
     <Compile Include="TwoPointers\MiddleofLinkedList.cs" />
     <Compile Include="TwoPointers\MoveZeros.cs" />
     <Compile Include="TwoPointers\PartitionArray.cs" />
