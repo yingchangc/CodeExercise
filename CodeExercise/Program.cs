@@ -3021,6 +3021,15 @@ namespace CodeExercise
             int[] height = { 2, 1, 1, 2, 1, 2, 2};
             var ans = question.PourWaterSolver(height, 4, 5);
         }
+
+
+        //60
+        static void Run_PermutationSequence()
+        {
+            DP.PermutationSequence question = new DP.PermutationSequence();
+            var ans = question.GetPermutation(n:3, k:3);
+        }
+
         static void Main(string[] args)
         {
 
@@ -3030,6 +3039,9 @@ namespace CodeExercise
             //RockMQ  producer consumer https://www.jianshu.com/p/453c6e7ff81c
             //算法大全（3） 二叉树 http://www.cnblogs.com/Jax/archive/2009/12/28/1633691.html
             //https://github.com/yuzhangcmu/LeetCode/blob/master/tree/TreeDemo.java
+            //60
+            Run_PermutationSequence();
+
             //755
             Run_PourWater();
             //973

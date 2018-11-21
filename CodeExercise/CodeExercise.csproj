@@ -188,6 +188,7 @@
     <Compile Include="DP\DistinctSubsequences.cs" />
     <Compile Include="DP\FindMinimumInRotatedSortedArray.cs" />
     <Compile Include="DP\FrogJump.cs" />
+    <Compile Include="DP\GrayCode.cs" />
     <Compile Include="DP\GroupAnagrams.cs" />
     <Compile Include="DP\HouseRobber.cs" />
     <Compile Include="DP\InterleavingString.cs" />
@@ -210,6 +211,7 @@
     <Compile Include="DP\PalindromePartition.cs" />
     <Compile Include="DP\PalindromePermutation.cs" />
     <Compile Include="DP\PerfectSquare.cs" />
+    <Compile Include="DP\PermutationSequence.cs" />
     <Compile Include="DP\RegularExpression.cs" />
     <Compile Include="DP\ScrambleString.cs" />
     <Compile Include="DP\StoneGame.cs" />
@@ -227,6 +229,7 @@
     <Compile Include="DFS\LetterCombinationsPhoneNumber.cs" />
     <Compile Include="ListNode.cs" />
     <Compile Include="LL\CopyRandomList.cs" />
+    <Compile Include="LL\RemoveDuplicatesfromSortedList.cs" />
     <Compile Include="matrixQuestion\WordSearch.cs" />
     <Compile Include="MedianOfTwoSortedArray.cs" />
     <Compile Include="DP\PermutationIntArray.cs" />
