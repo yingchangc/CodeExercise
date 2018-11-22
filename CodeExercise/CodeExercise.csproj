@@ -114,6 +114,7 @@
     <Compile Include="DataStructure\MergeTwoSortedLists.cs" />
     <Compile Include="DataStructure\MinimumSpanningTree.cs" />
     <Compile Include="DataStructure\MinStack.cs" />
+    <Compile Include="DataStructure\MonotonicArray.cs" />
     <Compile Include="DataStructure\MovingAverage.cs" />
     <Compile Include="DataStructure\MyQueue.cs" />
     <Compile Include="DataStructure\NthToLastNode.cs" />
@@ -230,6 +231,7 @@
     <Compile Include="ListNode.cs" />
     <Compile Include="LL\CopyRandomList.cs" />
     <Compile Include="LL\RemoveDuplicatesfromSortedList.cs" />
+    <Compile Include="matrixQuestion\SetMatrixZeroes.cs" />
     <Compile Include="matrixQuestion\WordSearch.cs" />
     <Compile Include="MedianOfTwoSortedArray.cs" />
     <Compile Include="DP\PermutationIntArray.cs" />
@@ -251,6 +253,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DP\SubSets.cs" />
     <Compile Include="StringRelated\AddBoldTaginString.cs" />
+    <Compile Include="StringRelated\IntegertoRoman.cs" />
     <Compile Include="StringRelated\IsomorphicStrings.cs" />
     <Compile Include="StringRelated\ReorderLogFiles.cs" />
     <Compile Include="StringRelated\ReorganizeString.cs" />
