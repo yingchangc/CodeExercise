@@ -351,5 +351,53 @@ namespace CodeExercise.DP
 
             return true;
         }
+
+        public IList<IList<string>> Partition131(string s)
+        {
+
+            List<List<string>> ans = new List<List<string>>();
+            DFSHelper(s, ans, new List<string>());
+
+            return ans.ToArray();
+        }
+
+        private void DFSHelper(string s, List<List<string>> ans, List<string> currPath)
+        {
+            if (string.IsNullOrEmpty(s))
+            {
+                // must copy ctor
+                ans.Add(new List<string>(currPath));
+                return;
+            }
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                string prefix = s.Substring(0, i + 1);
+                if (IsPalindromeHelper(s, 0, i))
+                {
+                    currPath.Add(prefix);
+
+                    DFSHelper(s.Substring(i + 1), ans, currPath);
+
+                    currPath.RemoveAt(currPath.Count - 1);
+                }
+            }
+        }
+
+        private bool IsPalindromeHelper(string s, int left, int right)
+        {
+            while (left < right)
+            {
+                if (s[left] != s[right])
+                {
+                    return false;
+                }
+
+                left++;
+                right--;
+            }
+
+            return true;
+        }
     }
 }
