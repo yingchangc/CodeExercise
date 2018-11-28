@@ -3030,15 +3030,27 @@ namespace CodeExercise
             var ans = question.GetPermutation(n:3, k:3);
         }
 
+        //720
+        static void Run_LongestWordDictionary()
+        {
+            DataStructure.LongestWordDictionary question = new DataStructure.LongestWordDictionary();
+
+            string[] input = { "k", "lg", "it", "oidd", "oid", "oiddm", "kfk", "y", "mw", "kf", "l", "o", "mwaqz", "oi", "ych", "m", "mwa" };
+
+            var ans = question.LongestWordPractice(input);
+
+        }
+
         static void Main(string[] args)
         {
-
             //https://neil.fraser.name/writing/sync/ Differential Synchronization
             // TCP面试常见题 https://blog.csdn.net/libaineu2004/article/details/78850227
 
             //RockMQ  producer consumer https://www.jianshu.com/p/453c6e7ff81c
             //算法大全（3） 二叉树 http://www.cnblogs.com/Jax/archive/2009/12/28/1633691.html
             //https://github.com/yuzhangcmu/LeetCode/blob/master/tree/TreeDemo.java
+            //720
+            Run_LongestWordDictionary();
             //60
             Run_PermutationSequence();
 

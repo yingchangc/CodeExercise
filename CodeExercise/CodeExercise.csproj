@@ -88,12 +88,14 @@
     <Compile Include="DataStructure\FirstUniqueCharacterinaString.cs" />
     <Compile Include="DataStructure\Flatten2D Vector.cs" />
     <Compile Include="DataStructure\FlattenBinaryTreeToLL.cs" />
+    <Compile Include="DataStructure\FriendCircles.cs" />
     <Compile Include="DataStructure\HashFunction.cs" />
     <Compile Include="DataStructure\HighFive.cs" />
     <Compile Include="DataStructure\InsertInterval.cs" />
     <Compile Include="DataStructure\IntegerEnglishWords.cs" />
     <Compile Include="DataStructure\IntersectionOfArrays.cs" />
     <Compile Include="DataStructure\IntersectionofTwoArrays.cs" />
+    <Compile Include="DataStructure\IntersectionTwoArrays2.cs" />
     <Compile Include="DataStructure\KClosestPoints.cs" />
     <Compile Include="DataStructure\KthSmallestElementInMatrix.cs" />
     <Compile Include="DataStructure\LargestRectangleInHistogram.cs" />
@@ -102,6 +104,7 @@
     <Compile Include="DataStructure\LoadBalancer.cs" />
     <Compile Include="DataStructure\LongestCommonPrefix.cs" />
     <Compile Include="DataStructure\LongestPalindromicSubstring.cs" />
+    <Compile Include="DataStructure\LongestWordDictionary.cs" />
     <Compile Include="DataStructure\MaxBinaryTree.cs" />
     <Compile Include="DataStructure\MaximumSubmatrix.cs" />
     <Compile Include="DataStructure\MaxPointsOnLine.cs" />
@@ -257,11 +260,14 @@
     <Compile Include="DP\SubSets.cs" />
     <Compile Include="StringRelated\AddBoldTaginString.cs" />
     <Compile Include="StringRelated\BaseballGame.cs" />
+    <Compile Include="StringRelated\DecodeString.cs" />
     <Compile Include="StringRelated\IntegertoRoman.cs" />
     <Compile Include="StringRelated\IsomorphicStrings.cs" />
     <Compile Include="StringRelated\PartitionLabels.cs" />
+    <Compile Include="StringRelated\RearrangeString.cs" />
     <Compile Include="StringRelated\ReorderLogFiles.cs" />
     <Compile Include="StringRelated\ReorganizeString.cs" />
+    <Compile Include="StringRelated\UniqueEmailAddresses.cs" />
     <Compile Include="SweepingLine\MaximumAverageSubarray.cs" />
     <Compile Include="SweepingLine\MeetingRooms.cs" />
     <Compile Include="SweepingLine\MergeIntervals.cs" />
