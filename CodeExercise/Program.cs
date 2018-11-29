@@ -3041,14 +3041,31 @@ namespace CodeExercise
 
         }
 
+        // 787
+        static void Run_FlightCost()
+        {
+            //[[0, 1, 100], [1,2,100], [0,2,500]]
+            int[][] flight = new int[3][];
+            flight[0] = new int[3] { 0,1,100};
+            flight[1] = new int[3] { 1,2,100};
+            flight[2] = new int[3] { 0, 2, 500 };
+            DP.CheapestFlightsWithinKStops question = new DP.CheapestFlightsWithinKStops();
+            var ans = question.FindCheapestPrice(3, flight, 0, 2, 1);
+
+
+        }
+
         static void Main(string[] args)
         {
+
             //https://neil.fraser.name/writing/sync/ Differential Synchronization
             // TCP面试常见题 https://blog.csdn.net/libaineu2004/article/details/78850227
 
             //RockMQ  producer consumer https://www.jianshu.com/p/453c6e7ff81c
             //算法大全（3） 二叉树 http://www.cnblogs.com/Jax/archive/2009/12/28/1633691.html
             //https://github.com/yuzhangcmu/LeetCode/blob/master/tree/TreeDemo.java
+            //787
+            Run_FlightCost();
             //720
             Run_LongestWordDictionary();
             //60
