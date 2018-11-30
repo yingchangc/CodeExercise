@@ -301,6 +301,7 @@
     <Compile Include="Tree\LowestCommonAncestor.cs" />
     <Compile Include="Tree\TreeNode.cs" />
     <Compile Include="TwoPointers\ContainerWithMostWater.cs" />
+    <Compile Include="TwoPointers\FruitIntoBaskets.cs" />
     <Compile Include="TwoPointers\MiddleofLinkedList.cs" />
     <Compile Include="TwoPointers\MoveZeros.cs" />
     <Compile Include="TwoPointers\PartitionArray.cs" />

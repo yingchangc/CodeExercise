@@ -268,6 +268,7 @@ namespace CodeExercise.BST
                     }
                     else
                     {
+                        // 一旦某元素没有左节点或是右节点，则之后所有的元素都不应有子元素。
                         shouldHaveStopped = true;
                     }
 
@@ -278,6 +279,10 @@ namespace CodeExercise.BST
                             return false;
                         }
                         que.Enqueue(temp.right);
+                    }
+                    else
+                    {
+                        shouldHaveStopped = true;
                     }
 
                 }  
@@ -492,8 +497,8 @@ namespace CodeExercise.BST
             TreeNode rightCopy = mirrorCopy(root.right);
 
             TreeNode curr = new TreeNode(root.val);
-            curr.left = leftCopy;
-            curr.right = rightCopy;
+            curr.right = leftCopy;
+            curr.left = rightCopy;
 
             return curr;
 
