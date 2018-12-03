@@ -11,6 +11,7 @@ namespace CodeExercise.DP
         /// <summary>
         /// leetcode 340
         /// https://www.lintcode.com/problem/longest-substring-with-at-most-k-distinct-characters/description
+        /// https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/
         /// Given a string s, find the length of the longest substring T that contains at most k distinct characters.
         /// 
         /// Example
@@ -24,31 +25,40 @@ namespace CodeExercise.DP
         /// <returns></returns>
         public int LengthOfLongestSubstringKDistinct(String s, int k)
         {
-            Dictionary<char, int> memo = new Dictionary<char, int>();
+            Dictionary<char, int> lookup = new Dictionary<char, int>();
 
             int j = 0;
             int maxLen = 0;
 
+            string ans = "";
+
             for (int i = 0; i < s.Length; i++)
             {
-                while (j < s.Length && (memo.Keys.Count < k || (memo.Keys.Count == k && memo.ContainsKey(s[j]))))    // < count < k or count ==k  but old key
+                while (j < s.Length && lookup.Keys.Count <= k)
                 {
-                    if (!memo.ContainsKey(s[j]))
+                    char c = s[j];
+                    if (!lookup.ContainsKey(c))
                     {
-                        memo.Add(s[j], 0);
+                        lookup.Add(c, 0);
                     }
-                    memo[s[j]]++;
+                    lookup[c]++;
 
-                    maxLen = Math.Max(maxLen, j-i+1);
+                    if (lookup.Keys.Count <= k && maxLen < (j - i + 1))
+                    {
+                        maxLen = j - i + 1;
+                        ans = s.Substring(i, maxLen);
+                    }
                     j++;
                 }
 
-                // now ready to move i
-                memo[s[i]]--;
-                if (memo[s[i]] == 0)
+                // ready to move i
+                lookup[s[i]]--;
+
+                if (lookup[s[i]] == 0)
                 {
-                    memo.Remove(s[i]);
+                    lookup.Remove(s[i]);
                 }
+
             }
 
             return maxLen;

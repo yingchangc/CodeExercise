@@ -288,6 +288,35 @@ namespace CodeExercise.TwoPointers
         /// <param name="nums"></param>
         /// <param name="target"></param>
         /// <returns></returns>
+        public int[] twoSum7_diff(int[] nums, int target)
+        {
+            Array.Sort(nums);
+
+            int len = nums.Length;
+            int j = 0;
+
+            
+            for (int i = 0; i < len; i++)
+            {
+                while(j < len && (nums[j] - nums[i]) <= target)
+                {
+                    int temp = (nums[j] - nums[i]);
+
+                    if (temp == target && (i != j))
+                    {
+                        int[] ans = new int[2] { nums[i], nums[j]};
+                        return ans;
+                    }
+                    j++;
+                }
+
+                // ready to move i forward
+
+            }
+
+            return null;
+        }
+
         public int[] twoSum7_diffHashmap(int[] nums, int target)
         {
             int len = nums.Length;

@@ -9,6 +9,58 @@ namespace CodeExercise.TwoPointers
     class ThreeSum
     {
         /// <summary>
+        /// 259. 3Sum Smaller
+        /// https://leetcode.com/problems/3sum-smaller/submissions/
+        /// 
+        /// Given an array of n integers nums and a target, find the number of index triplets i, j, k with 0 <= i < j < k < n that satisfy the condition nums[i] + nums[j] + nums[k] < target.
+        /// 
+        /// Example:
+        /// 
+        /// Input: nums = [-2,0,1,3], and target = 2
+        /// Output: 2 
+        /// Explanation: Because there are two triplets which sums are less than 2:
+        ///      [-2,0,1]
+        ///      [-2,0,3]
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public int ThreeSumSmaller(int[] nums, int target)
+        {
+
+            Array.Sort(nums, (x, y) => x.CompareTo(y));
+
+            int len = nums.Length;
+
+            int ans = 0;
+
+            for (int i = 0; i < len; i++)
+            {
+                int left = i + 1;
+                int right = len - 1;
+
+                while (left < right)
+                {
+                    int temp = nums[i] + nums[left] + nums[right];
+
+                    if (temp < target)
+                    {
+                        ans += (right - left);
+                        left++;
+                    }
+                    else
+                    {
+                        right--;
+                    }
+                }
+            }
+
+
+            return ans;
+
+        }
+
+        /// <summary>
         /// 59. 3Sum Closest
         /// https://www.lintcode.com/problem/3sum-closest/description
         /// Given an array S of n integers, find three integers in S such that the sum is closest to a given number, target. 

@@ -74,6 +74,8 @@
     <Compile Include="BST\AllNodesDistanceKBinaryTree.cs" />
     <Compile Include="BST\BSTSummary.cs" />
     <Compile Include="BST\GraphBipartite.cs" />
+    <Compile Include="BST\MergeTwoBinaryTrees.cs" />
+    <Compile Include="BST\SymmetricTree.cs" />
     <Compile Include="Connection.cs" />
     <Compile Include="DataStructure\AccountsMerge.cs" />
     <Compile Include="DataStructure\AirplaneInSky.cs" />
@@ -98,6 +100,7 @@
     <Compile Include="DataStructure\IntersectionofTwoArrays.cs" />
     <Compile Include="DataStructure\IntersectionTwoArrays2.cs" />
     <Compile Include="DataStructure\KClosestPoints.cs" />
+    <Compile Include="DataStructure\KthLargestElementInStream.cs" />
     <Compile Include="DataStructure\KthSmallestElementInMatrix.cs" />
     <Compile Include="DataStructure\LargestRectangleInHistogram.cs" />
     <Compile Include="DataStructure\LinkedListCycleII.cs" />
@@ -168,6 +171,7 @@
     <Compile Include="DFS\LCABinaryTree.cs" />
     <Compile Include="DFS\MaxmumSubtree.cs" />
     <Compile Include="DFS\MinimumSubtree.cs" />
+    <Compile Include="DFS\NetworkDelayTime.cs" />
     <Compile Include="DFS\NextClosestTime.cs" />
     <Compile Include="DFS\NextPermutation.cs" />
     <Compile Include="DFS\NQueens.cs" />
@@ -265,6 +269,7 @@
     <Compile Include="StringRelated\DecodeString.cs" />
     <Compile Include="StringRelated\IntegertoRoman.cs" />
     <Compile Include="StringRelated\IsomorphicStrings.cs" />
+    <Compile Include="StringRelated\LongestSubstringAtLeastKRepeatingCharacters.cs" />
     <Compile Include="StringRelated\PartitionLabels.cs" />
     <Compile Include="StringRelated\RearrangeString.cs" />
     <Compile Include="StringRelated\ReorderLogFiles.cs" />
@@ -302,6 +307,7 @@
     <Compile Include="Tree\TreeNode.cs" />
     <Compile Include="TwoPointers\ContainerWithMostWater.cs" />
     <Compile Include="TwoPointers\FruitIntoBaskets.cs" />
+    <Compile Include="TwoPointers\LongPressedName.cs" />
     <Compile Include="TwoPointers\MiddleofLinkedList.cs" />
     <Compile Include="TwoPointers\MoveZeros.cs" />
     <Compile Include="TwoPointers\PartitionArray.cs" />

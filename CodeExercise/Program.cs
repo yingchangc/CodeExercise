@@ -2960,6 +2960,35 @@ namespace CodeExercise
             question.RunTest();
         }
 
+        static void Run_TowSumDiff()
+        {
+            TwoPointers.TwoSum question = new TwoPointers.TwoSum();
+
+            int[] input = { 2, 7, 15, 24 };
+            var ans = question.twoSum7_diff(input, 17);
+        }
+
+
+        //743. Network Delay Time
+        static void Run_NetworkDelayTime()
+        {
+            DFS.NetworkDelayTime question = new DFS.NetworkDelayTime();
+
+            var times = new int[3, 3];
+            times[0, 0] = 2;
+            times[0, 1] = 1;
+            times[0, 2] = 1;
+
+            times[1, 0] = 2;
+            times[1, 1] = 3;
+            times[1, 2] = 1;
+
+            times[2, 0] = 3;
+            times[2, 1] = 4;
+            times[2, 2] = 1;
+
+            var ans = question.NetworkDelayTimesolver(times, 4, 2);
+        }
         //273
         static void Run_IntegerEnglishWords()
         {
@@ -3046,13 +3075,27 @@ namespace CodeExercise
         {
             //[[0, 1, 100], [1,2,100], [0,2,500]]
             int[][] flight = new int[3][];
-            flight[0] = new int[3] { 0,1,100};
-            flight[1] = new int[3] { 1,2,100};
-            flight[2] = new int[3] { 0, 2, 500 };
             DP.CheapestFlightsWithinKStops question = new DP.CheapestFlightsWithinKStops();
-            var ans = question.FindCheapestPrice(3, flight, 0, 2, 1);
+            //flight[0] = new int[3] { 0,1,100};
+            //flight[1] = new int[3] { 1,2,100};
+            //flight[2] = new int[3] { 0, 2, 500 };
+            //var ans = question.FindCheapestPrice(3, flight, 0, 2, 1);
+
+            flight[0] = new int[3] { 0, 1, 2 };
+            flight[1] = new int[3] { 1, 2, 1 };
+            flight[2] = new int[3] { 2, 0, 10 };
+            
+            
+            var ans = question.FindCheapestPrice(3, flight, 1, 2, 1);
 
 
+        }
+
+        // 395
+        static void Run_LongestSubstringAtLeastKRepeatingCharacters()
+        {
+            StringRelated.LongestSubstringAtLeastKRepeatingCharacters question = new StringRelated.LongestSubstringAtLeastKRepeatingCharacters();
+            var ans = question.LongestSubstring("bbaaacbd", 3);
         }
 
         static void Main(string[] args)
@@ -3064,8 +3107,19 @@ namespace CodeExercise
             //RockMQ  producer consumer https://www.jianshu.com/p/453c6e7ff81c
             //算法大全（3） 二叉树 http://www.cnblogs.com/Jax/archive/2009/12/28/1633691.html
             //https://github.com/yuzhangcmu/LeetCode/blob/master/tree/TreeDemo.java
+            //395
+            Run_LongestSubstringAtLeastKRepeatingCharacters();
+
             //787
             Run_FlightCost();
+
+            //743
+            Run_NetworkDelayTime();
+
+            Run_TowSumDiff();
+            
+            
+            
             //720
             Run_LongestWordDictionary();
             //60

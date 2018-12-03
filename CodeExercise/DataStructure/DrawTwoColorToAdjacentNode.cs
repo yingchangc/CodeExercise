@@ -20,10 +20,12 @@ namespace CodeExercise.BFS
    
     class DrawTwoColorToAdjacentNode
     {
-        
+
         /// <summary>
         /// In a graph, you have 2 colors to paint on a node, adjacent node cannot have the same color,
         /// If node are the same,
+        /// 
+        /// similiar question   "IsBipartite"
         /// </summary>
         /// <param name="node"></param>
         /// <returns></returns>

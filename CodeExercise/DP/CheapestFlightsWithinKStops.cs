@@ -36,10 +36,113 @@ namespace CodeExercise.DP
         /// <returns></returns>
         public int FindCheapestPrice(int n, int[][] flights, int src, int dst, int K)
         {
+            Dictionary<int, HashSet<ToNode>> lookup = new Dictionary<int, HashSet<ToNode>>();
+
+            int len = flights.GetLength(0);
+            for (int i = 0; i < len; i++)
+            {
+                var flight = flights[i];
+                var source = flight[0];
+                var dstation = flight[1];
+                var wt = flight[2];
+                if (!lookup.ContainsKey(source))
+                {
+                    lookup.Add(source, new HashSet<ToNode>());
+                }
+                lookup[source].Add(new ToNode(dstation, wt));
+            }
+
+
+            Queue<ToNode> pq = new Queue<ToNode>();
+            Dictionary<int, int> visited = new Dictionary<int, int>();
+
+            pq.Enqueue(new ToNode(src, 0));
+
+            int day = 0;
+
+
+            while (pq.Count > 0 && day <= K+1)
+            {
+                int levelCount = pq.Count;
+
+                for (int i = 0; i < levelCount; i++)
+                {
+                    var node = pq.Dequeue();
+
+                    var currArriveTime = node.wt;
+
+                    if (!visited.ContainsKey(node.label))
+                    {
+                        visited.Add(node.label, currArriveTime);
+                    }
+
+                    if (visited[node.label] > currArriveTime)
+                    {
+                        visited[node.label] = currArriveTime;
+                    }
+
+
+                    // no neighbor
+                    if (!lookup.ContainsKey(node.label))
+                    {
+                        continue;
+                    }
+
+                    var neighbors = lookup[node.label];
+
+                    foreach (var neighborNode in neighbors)
+                    {
+
+                        pq.Enqueue(new ToNode(neighborNode.label, currArriveTime + neighborNode.wt));
+                    }
+                }
+
+
+                day++;
+            }
+
+           
+
+            if (visited.ContainsKey(dst))
+            {
+                return visited[dst];
+            }
+
+            return -1;
+        }
+
+
+        
+
+        public class ToNode
+        {
+            public int label;
+            public int wt;
+
+            public ToNode(int label, int wt)
+            {
+                this.label = label;
+                this.wt = wt;
+            }
+
+        }
+
+
+        /// <summary>
+        /// DP solution
+        /// </summary>
+        /// <param name="n"></param>
+        /// <param name="flights"></param>
+        /// <param name="src"></param>
+        /// <param name="dst"></param>
+        /// <param name="K"></param>
+        /// <returns></returns>
+        public int FindCheapestPriceDP(int n, int[][] flights, int src, int dst, int K)
+        {
             // F[kday][city] = F[kday-1][city-1] + cost[city-1, city]  vs  F[kday-1][city]
 
             int numEdges = flights.GetLength(0);
-            int[,] F = new int[K + 1, n];
+            int[,] F = new int[K + 2, n];
 
             int[,] costs = new int[n, n];
 
@@ -48,7 +151,15 @@ namespace CodeExercise.DP
             {
                 for (int j = 0; j < n; j++)
                 {
-                    costs[i, j] = int.MaxValue;
+                    if (i == j)
+                    {
+                        costs[i, j] = 0;
+                    }
+                    else
+                    {
+                        costs[i, j] = int.MaxValue;
+                    }
+                    
                 }
             }
 
@@ -63,7 +174,7 @@ namespace CodeExercise.DP
             }
 
             // init F to max
-            for (int d = 0; d <= K; d++)
+            for (int d = 0; d <= K+1; d++)
             {
                 for (int city = 0; city < n; city++)
                 {
@@ -75,17 +186,13 @@ namespace CodeExercise.DP
             F[0, src] = 0;
 
             // DP compute F
-            for (int d = 1; d <= K; d++)
+            for (int d = 1; d <= K+1; d++)
             {
                 for (int depart = 0; depart < n; depart++)
                 {
                     for (int arrive = 0; arrive < n; arrive++)
                     {
-                        if (arrive == depart)
-                        {
-                            continue;
-                        }
-
+ 
                         int flightCost = 0;
                         if (F[d - 1, depart] == int.MaxValue || costs[depart, arrive] == int.MaxValue)
                         {
@@ -96,18 +203,19 @@ namespace CodeExercise.DP
                             flightCost = F[d - 1, depart] + costs[depart, arrive];
                         }
 
-                        F[d, arrive] = Math.Min(flightCost, F[d, arrive]);
+                        F[d, arrive] = Math.Min(F[d, arrive], Math.Min(flightCost, F[d-1, arrive]));
                     }
 
                 }
             }
 
             int ans = int.MaxValue;
-            for (int d = 1; d <= K; d++)
+            for (int d = 1; d <= K+1; d++)
             {
                 ans = Math.Min(ans, F[d, dst]);
             }
-            return ans;
+
+            return ans < int.MaxValue ? ans : -1;
         }
     }
 }
