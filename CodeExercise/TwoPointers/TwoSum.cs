@@ -98,6 +98,102 @@ namespace CodeExercise.TwoPointers
         }
 
         /// <summary>
+        /// 653. Two Sum IV - Input is a BST
+        /// https://leetcode.com/problems/two-sum-iv-input-is-a-bst/submissions/
+        /// 
+        /// Given a Binary Search Tree and a target number, return true if there exist two elements in the BST such that their sum is equal to the given target.
+        /// 
+        /// Example 1:
+        /// Input: 
+        ///     5
+        ///    / \
+        ///   3   6
+        ///  / \   \
+        /// 2   4   7
+        /// 
+        /// Target = 9
+        /// 
+        /// Output: True
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="k"></param>
+        /// <returns></returns>
+        public bool FindTarget_HashSet(TreeNode root, int k)
+        {
+            return InorderHelper(root, k, new HashSet<int>());
+        }
+
+        public bool InorderHelper(TreeNode node, int k, HashSet<int> lookup)
+        {
+            if (node == null)
+            {
+                return false;
+            }
+
+            if (InorderHelper(node.left, k, lookup))
+            {
+                return true;
+            }
+
+            int target = k - node.val;
+            if (lookup.Contains(target))
+            {
+                return true;
+            }
+
+            lookup.Add(node.val);
+
+            if (InorderHelper(node.right, k, lookup))
+            {
+                return true;
+            }
+
+            return false;
+
+        }
+
+        public bool FindTargetBST(TreeNode root, int k)
+        {
+            List<int> sorted = new List<int>();
+            Inorder(root, sorted);
+            var arr = sorted.ToArray();
+
+            int left = 0;
+            int right = arr.Length - 1;
+
+            while (left < right)
+            {
+                int sum = (arr[left] + arr[right]);
+                if (sum == k)
+                {
+                    return true;
+                }
+                else if (sum < k)
+                {
+                    left++;
+                }
+                else
+                {
+                    right--;
+                }
+            }
+
+            return false;
+        }
+
+        private void Inorder(TreeNode node, List<int> sortedArr)
+        {
+            if (node == null)
+            {
+                return;
+            }
+
+            Inorder(node.left, sortedArr);
+            sortedArr.Add(node.val);
+            Inorder(node.right, sortedArr);
+        }
+
+        /// <summary>
         /// 609. Two Sum - Less than or equal to target
         /// https://www.lintcode.com/en/old/problem/two-sum-less-than-or-equal-to-target/
         /// Given an array of integers, find how many pairs in the array such that their sum is less than or equal to a specific target number.

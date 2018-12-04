@@ -74,6 +74,7 @@
     <Compile Include="BST\AllNodesDistanceKBinaryTree.cs" />
     <Compile Include="BST\BSTSummary.cs" />
     <Compile Include="BST\GraphBipartite.cs" />
+    <Compile Include="BST\InorderSuccessor.cs" />
     <Compile Include="BST\MergeTwoBinaryTrees.cs" />
     <Compile Include="BST\SymmetricTree.cs" />
     <Compile Include="Connection.cs" />

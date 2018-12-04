@@ -31,47 +31,36 @@ namespace CodeExercise.LL
                 return null;
             }
 
-            Queue<RandomListNode> que = new Queue<RandomListNode>();
-            Dictionary<RandomListNode, RandomListNode> lookup = new Dictionary<RandomListNode, RandomListNode>();
+            Dictionary<RandomListNode, RandomListNode> lookup = new Dictionary<RandomListNode, RandomListNode>(); // orig copy
 
-            que.Enqueue(head);
+            var temp = head;
 
-            var copy = new RandomListNode(head.label);
-            lookup.Add(head, copy);
-
-            while (que.Count > 0)
+            // make new node lookup
+            while (temp != null)
             {
-                var curr = que.Dequeue();
-                copy = lookup[curr];
+                lookup.Add(temp, new RandomListNode(temp.label));
+                temp = temp.next;
+            }
 
-                var next = curr.next;
-                var rand = curr.random;
+            temp = head;
 
-                // yic for each graph has reject null case, but we need to handle null next   
-                if (next!=null && !lookup.ContainsKey(next))
+            while (temp != null)
+            {
+                var next = temp.next;
+                var rnd = temp.random;
+
+                if (next != null)
                 {
-                    var copyNext = new RandomListNode(next.label);
-                    lookup.Add(next, copyNext);
-                    copy.next = copyNext;
-                    que.Enqueue(next);     // yic enqueue next  (NOT copiedNext)
-                }
-                else if (next != null)
-                {
-                    copy.next = lookup[next];
+                    lookup[temp].next = lookup[next];
                 }
 
+                if (rnd != null)
+                {
+                    lookup[temp].random = lookup[rnd];
+                }
 
-                if (rand != null && !lookup.ContainsKey(rand))
-                {
-                    var copyRand = new RandomListNode(rand.label);
-                    lookup.Add(rand, copyRand);
-                    copy.random = copyRand;
-                    que.Enqueue(rand);
-                }
-                else if (rand!= null)
-                {
-                    copy.random = lookup[rand];
-                }
+
+                temp = temp.next;
             }
 
             return lookup[head];
