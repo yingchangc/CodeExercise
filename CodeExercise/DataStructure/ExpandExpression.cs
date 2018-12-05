@@ -25,7 +25,7 @@ namespace CodeExercise.DataStructure
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
-        public string ExpressionExpandSolver(string s)
+        public string ExpressionExpand_old(string s)
         {
             Stack<char> stk = new Stack<char>();
             int len = s.Length;
@@ -80,82 +80,57 @@ namespace CodeExercise.DataStructure
             return ans;
         }
 
-        public string ExpressionExpand_old(string s)
+        public string ExpressionExpandSolver(string s)
         {
             Stack<string> stk = new Stack<string>();
-            StringBuilder sb = new StringBuilder();
-            int repeacCount = 0;
 
-            foreach(char c in s)
+            var currStr = "";
+            foreach (char c in s)
             {
-                if (Char.IsDigit(c))
+                if (c == '[')
                 {
-                    repeacCount = 10 * repeacCount + c - '0';
+                    stk.Push(currStr);
+                    currStr = "";  // yic reset
                 }
-                else if (c == '[')
+                else if (c == ']')
                 {
-                    stk.Push(repeacCount.ToString());
-                    repeacCount = 0;                       // YIC  reset to 0
-                }
-                else if (c == ']')          // 5[2[ab4[c]]]
-                {
-                    string str = stk.Pop();                     // c
-                    int repeat = Convert.ToInt32(stk.Pop());    // 4
+                    var pre = stk.Pop();
 
-                    sb.Clear();     // yic reuse sb
-                    while(repeat > 0)
+
+                    // a b 2 0 
+                    int factor = 1;
+                    int repeat = 0;
+                    int i;
+                    for (i = pre.Length - 1; i >= 0; i--)
                     {
-                        sb.Append(str);
-                        repeat--;
-                    }
-                    
-                    // append with ab
-                    if (stk.Count > 0)
-                    {
-                        string top = stk.Peek();
-                        int dummy;
-                        if (Int32.TryParse(top, out dummy) != true)    // apppend with pre str
+                        if (char.IsDigit(pre[i]))
                         {
-                            top += sb.ToString();
-                            stk.Pop();    // remove
-                            stk.Push(top);
+                            repeat += (int.Parse(pre[i].ToString()) * factor);
+                            factor *= 10;
                         }
                         else
                         {
-                            stk.Push(sb.ToString());         // pre str is a number. just put directly
-                        }          
+                            break;
+                        }
                     }
-                    else
+
+                    string prefix = pre.Substring(0, i + 1);
+
+                    var repeatCurr = "";
+                    while (repeat > 0)
                     {
-                        stk.Push(sb.ToString());
+                        repeatCurr += currStr;
+                        repeat--;
                     }
-                    
+                    currStr = prefix + repeatCurr;
                 }
                 else
                 {
-                    if (stk.Count > 0)
-                    {
-                        string top = stk.Peek();
-                        int dummy;
-                        if (Int32.TryParse(top, out dummy) != true)    // apppend with pre str
-                        {
-                            top += c;
-                            stk.Pop();    // remove
-                            stk.Push(top);
-                        }
-                        else
-                        {
-                            stk.Push(c.ToString());         // pre str is a number. just put directly
-                        }
-                    }
-                    else
-                    {
-                        stk.Push(c.ToString());
-                    }  
+                    currStr += c; // a b c 4   ... [
                 }
             }
 
-            return stk.Pop(); 
+            return currStr;
         }
     }
 }

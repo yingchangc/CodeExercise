@@ -91,5 +91,68 @@ namespace CodeExercise.BFS
 
             return true;
         }
+
+
+        public class GraphNode2
+        {
+            public int color;   // -1, 1, 0
+            public GraphNode2[] neighbors;
+
+            public GraphNode2()
+            {
+                color = -1;
+            }
+        }
+
+        //    A    : 0
+        // C  B   D : 1
+        //    D
+        // 2018 12 04 morris chuang
+        public bool validGraphSolver(GraphNode2 node)
+        {
+
+            if (node == null)
+            {
+                return false;
+            }
+
+            Queue<GraphNode2> que = new Queue<GraphNode2>();
+
+            int currColor = 0;
+            int nextColor = 1;
+            node.color = currColor;
+
+            que.Enqueue(node);
+
+            while (que.Count > 0)
+            {
+                int levelcount = que.Count;   // 3
+
+                for (int i = 0; i < levelcount; i++)
+                {
+                    var curr = que.Dequeue();    // B  
+
+                    foreach (var neighbor in curr.neighbors)    // BCD
+                    {
+                        if (neighbor.color == -1)
+                        {
+                            neighbor.color = nextColor;     // 1
+                            que.Enqueue(neighbor);   //B  
+                        }
+                        else if (neighbor.color == currColor)      //  1  == 1
+                        {
+                            return false;
+                        }
+                    }
+
+                }
+
+                currColor = nextColor;    // c :0   n: 1       c:1  n :0       
+                nextColor = 1 - nextColor;
+            }
+
+            return true;
+
+        }
     }
 }

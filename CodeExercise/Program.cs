@@ -562,7 +562,11 @@ namespace CodeExercise
         // 91
         static void Run_DecodeWays()
         {
-            string EncodeStr = "12";
+            string EncodeStr = "102";
+
+            DP.DecodeString question1 = new DP.DecodeString();
+            var ans1= question1.NumDecodings(EncodeStr);
+
             DP.DecodeWays question = new DP.DecodeWays();
             int ans = question.NumDecodings(EncodeStr);
 
@@ -3098,6 +3102,7 @@ namespace CodeExercise
             var ans = question.LongestSubstring("bbaaacbd", 3);
         }
 
+       
         static void Main(string[] args)
         {
 
@@ -3107,6 +3112,10 @@ namespace CodeExercise
             //RockMQ  producer consumer https://www.jianshu.com/p/453c6e7ff81c
             //算法大全（3） 二叉树 http://www.cnblogs.com/Jax/archive/2009/12/28/1633691.html
             //https://github.com/yuzhangcmu/LeetCode/blob/master/tree/TreeDemo.java
+
+            // 91 
+            Run_DecodeWays();
+
             //395
             Run_LongestSubstringAtLeastKRepeatingCharacters();
 
@@ -3596,9 +3605,6 @@ namespace CodeExercise
 
             // 198 and 740
             Run_HouseRobber_DeleteAndEarn();
-
-            //91
-            Run_DecodeWays();
             
             //361
             Run_BombEnemy();

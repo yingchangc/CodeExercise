@@ -197,6 +197,7 @@
     <Compile Include="DP\ContainerWithMostWater.cs" />
     <Compile Include="DP\CopyBooks.cs" />
     <Compile Include="DP\CountingBits.cs" />
+    <Compile Include="DP\DecodeString.cs" />
     <Compile Include="DP\DecodeWays.cs" />
     <Compile Include="DP\DigitalFlip.cs" />
     <Compile Include="DP\DistinctSubsequences.cs" />
