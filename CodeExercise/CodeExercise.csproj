@@ -76,6 +76,7 @@
     <Compile Include="BST\GraphBipartite.cs" />
     <Compile Include="BST\InorderSuccessor.cs" />
     <Compile Include="BST\MergeTwoBinaryTrees.cs" />
+    <Compile Include="BST\PrintBinaryTree.cs" />
     <Compile Include="BST\SymmetricTree.cs" />
     <Compile Include="Connection.cs" />
     <Compile Include="DataStructure\AccountsMerge.cs" />
@@ -86,12 +87,14 @@
     <Compile Include="DataStructure\DailyTemperatures.cs" />
     <Compile Include="DataStructure\DataStreamMedian.cs" />
     <Compile Include="DataStructure\DrawTwoColorToAdjacentNode.cs" />
+    <Compile Include="DataStructure\ExclusiveTimeFunctions.cs" />
     <Compile Include="DataStructure\ExpandExpression.cs" />
     <Compile Include="DataStructure\FindAllNumbersDisappearedInArray.cs" />
     <Compile Include="DataStructure\FindDuplicateNumber.cs" />
     <Compile Include="DataStructure\FirstUniqueCharacterinaString.cs" />
     <Compile Include="DataStructure\Flatten2D Vector.cs" />
     <Compile Include="DataStructure\FlattenBinaryTreeToLL.cs" />
+    <Compile Include="DataStructure\FlattenNestedListIterator.cs" />
     <Compile Include="DataStructure\FriendCircles.cs" />
     <Compile Include="DataStructure\HashFunction.cs" />
     <Compile Include="DataStructure\HighFive.cs" />
@@ -138,6 +141,7 @@
     <Compile Include="DataStructure\RangeSumQuery.cs" />
     <Compile Include="DataStructure\RangeSumQuery2D.cs" />
     <Compile Include="DataStructure\Rehashing.cs" />
+    <Compile Include="DataStructure\RevealCardsIncreasingOrder.cs" />
     <Compile Include="DataStructure\ReverseWordsinaString2.cs" />
     <Compile Include="DataStructure\RotateImage.cs" />
     <Compile Include="DataStructure\SellersWithMostDupItem.cs" />
@@ -252,6 +256,7 @@
     <Compile Include="Number\ArrayAverage.cs" />
     <Compile Include="Number\FastPower.cs" />
     <Compile Include="Number\FindPivotIndex.cs" />
+    <Compile Include="Number\FractionRecurringDecimal.cs" />
     <Compile Include="Number\LargestNumberAtLeastTwiceOthers.cs" />
     <Compile Include="Number\MergeSortedArray.cs" />
     <Compile Include="Number\PrimeFactorization.cs" />

@@ -63,5 +63,7 @@ namespace CodeExercise.BinarySearch
             }
             return left;
         }
+
+
     }
 }

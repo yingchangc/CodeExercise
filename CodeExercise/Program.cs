@@ -3102,7 +3102,36 @@ namespace CodeExercise
             var ans = question.LongestSubstring("bbaaacbd", 3);
         }
 
-       
+        //636
+        static void Run_ExclusiveTime()
+        {
+            DataStructure.ExclusiveTimeFunctions question = new DataStructure.ExclusiveTimeFunctions();
+            List<string> input = new List<string>() { "0:start:0", "1:start:2", "1:end:5", "0:end:6" };
+            var ans = question.ExclusiveTime(2, input);
+        }
+
+        //655
+        static void PrintBinaryTree()
+        {
+            BST.PrintBinaryTree question = new BST.PrintBinaryTree();
+
+            TreeNode root = new TreeNode(1);
+            root.left = new TreeNode(2);
+            root.right = new TreeNode(3);
+            root.left.right = new TreeNode(4);
+
+            var ans = question.PrintTree(root);
+        }
+
+        //166
+        static void Run_FcrationRecurring()
+        {
+            Number.FractionRecurringDecimal question = new Number.FractionRecurringDecimal();
+            var ans = question.FractionToDecimal(4, 333);
+        }
+
+        
+
         static void Main(string[] args)
         {
 
@@ -3113,6 +3142,15 @@ namespace CodeExercise
             //算法大全（3） 二叉树 http://www.cnblogs.com/Jax/archive/2009/12/28/1633691.html
             //https://github.com/yuzhangcmu/LeetCode/blob/master/tree/TreeDemo.java
 
+
+            //166
+            Run_FcrationRecurring();
+
+            //655
+            PrintBinaryTree();
+
+            //636
+            Run_ExclusiveTime();
             // 91 
             Run_DecodeWays();
 
