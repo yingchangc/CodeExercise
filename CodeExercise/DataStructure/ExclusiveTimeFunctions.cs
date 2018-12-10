@@ -60,42 +60,37 @@ namespace CodeExercise.DataStructure
             Stack<int> stk = new Stack<int>();
 
             int[] ans = new int[n];
+            int preT = 0;
 
-            var token = logs[0].Split(':');
-            int preT = int.Parse(token[2]);
-            int runId = int.Parse(token[0]);
-            stk.Push(runId);
 
-            for (int i = 1; i < logs.Count; i++)
+            for (int i = 0; i < logs.Count; i++)
             {
-                token = logs[i].Split(':');
+                var token = logs[i].Split(':');
                 int currT = int.Parse(token[2]);
                 int newId = int.Parse(token[0]);
                 bool isStart = string.Compare(token[1], "start") == 0;
 
                 if (!isStart)
                 {
-                    // end  the next start time will be +1
                     currT++;
                 }
 
-                ans[runId] += currT - preT;
+                // yic for all cases like this starting thread, (pre all ended)
+                // "0:start:0","0:end:0", --- stk will be empty now  "1:start:1","1:end:1"
+                if (stk.Count > 0)
+                {
+                    int runId = stk.Peek();
+                    ans[runId] += currT - preT;
+                }
+
 
                 if (isStart)
                 {
                     stk.Push(newId);
-                    runId = newId;
                 }
                 else
                 {
                     stk.Pop();
-
-                    // not last one
-                    if (stk.Count > 0)
-                    {
-                        runId = stk.Peek();
-                    }
-                    
                 }
 
                 preT = currT;

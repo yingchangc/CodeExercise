@@ -3106,8 +3106,8 @@ namespace CodeExercise
         static void Run_ExclusiveTime()
         {
             DataStructure.ExclusiveTimeFunctions question = new DataStructure.ExclusiveTimeFunctions();
-            List<string> input = new List<string>() { "0:start:0", "1:start:2", "1:end:5", "0:end:6" };
-            var ans = question.ExclusiveTime(2, input);
+            List<string> input = new List<string>() { "0:start:0","0:end:0","1:start:1","1:end:1","2:start:2","2:end:2","2:start:3","2:end:3" };
+            var ans = question.ExclusiveTime(3, input);
         }
 
         //655
@@ -3130,7 +3130,15 @@ namespace CodeExercise
             var ans = question.FractionToDecimal(4, 333);
         }
 
-        
+        // 934 ShortestBridge
+        static void Run_ShortestBridge()
+        {
+            int[][] A = new int[2][];
+            A[0] = new int[2] { 0, 1};
+            A[1] = new int[2] { 1, 0 };
+            BFS.ShortestBridge question = new BFS.ShortestBridge();
+            var ans = question.ShortestBridgeSolver(A);
+        }
 
         static void Main(string[] args)
         {
@@ -3141,7 +3149,11 @@ namespace CodeExercise
             //RockMQ  producer consumer https://www.jianshu.com/p/453c6e7ff81c
             //算法大全（3） 二叉树 http://www.cnblogs.com/Jax/archive/2009/12/28/1633691.html
             //https://github.com/yuzhangcmu/LeetCode/blob/master/tree/TreeDemo.java
+            //636
+            Run_ExclusiveTime();
 
+            //934
+            Run_ShortestBridge();
 
             //166
             Run_FcrationRecurring();
@@ -3149,8 +3161,7 @@ namespace CodeExercise
             //655
             PrintBinaryTree();
 
-            //636
-            Run_ExclusiveTime();
+            
             // 91 
             Run_DecodeWays();
 

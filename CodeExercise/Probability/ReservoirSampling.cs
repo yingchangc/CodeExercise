@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CodeExercise.Probability
 {
-    class ReservoirSampling
+    class ReservoirSampling  //[reservoir sampling]
     {
         /// <summary>
         /// https://www.geeksforgeeks.org/reservoir-sampling/
