@@ -3123,6 +3123,22 @@ namespace CodeExercise
             var ans = question.PrintTree(root);
         }
 
+        // 652
+        static void Run_FindDupSubtree()
+        {
+            BST.FindDuplicateSubtrees question = new BST.FindDuplicateSubtrees();
+
+            TreeNode root = new TreeNode(1);
+            root.left = new TreeNode(1);
+            root.right = new TreeNode(1);
+            root.left.left = new TreeNode(1);
+
+            root.right.right = new TreeNode(1);
+            root.right.right.right = new TreeNode(1);
+
+            var ans = question.FindDuplicateSubtreesSolver(root);
+        }
+
         //166
         static void Run_FcrationRecurring()
         {
@@ -3149,6 +3165,9 @@ namespace CodeExercise
             //RockMQ  producer consumer https://www.jianshu.com/p/453c6e7ff81c
             //算法大全（3） 二叉树 http://www.cnblogs.com/Jax/archive/2009/12/28/1633691.html
             //https://github.com/yuzhangcmu/LeetCode/blob/master/tree/TreeDemo.java
+            //652
+            Run_FindDupSubtree();
+
             //636
             Run_ExclusiveTime();
 

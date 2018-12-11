@@ -74,6 +74,7 @@
     <Compile Include="BitManipulation\DivideTwoIntegers.cs" />
     <Compile Include="BST\AllNodesDistanceKBinaryTree.cs" />
     <Compile Include="BST\BSTSummary.cs" />
+    <Compile Include="BST\FindDuplicateSubtrees.cs" />
     <Compile Include="BST\GraphBipartite.cs" />
     <Compile Include="BST\InorderSuccessor.cs" />
     <Compile Include="BST\MergeTwoBinaryTrees.cs" />
@@ -136,6 +137,7 @@
     <Compile Include="DataStructure\NumberOfIsland.cs" />
     <Compile Include="DataStructure\NumberOfIsland2.cs" />
     <Compile Include="DataStructure\PalindromeLinkedList.cs" />
+    <Compile Include="DataStructure\PartitionKEqualSumSubsets.cs" />
     <Compile Include="DataStructure\PourWater.cs" />
     <Compile Include="DataStructure\ProductOfArrayExceptSelf.cs" />
     <Compile Include="DataStructure\RandomizedSet.cs" />
@@ -291,6 +293,7 @@
     <Compile Include="SweepingLine\TimeIntersection.cs" />
     <Compile Include="SystemDesign\ConsistentHash.cs" />
     <Compile Include="SystemDesign\ConsistentHashing2.cs" />
+    <Compile Include="SystemDesign\DesignHitCounter.cs" />
     <Compile Include="SystemDesign\DesignTweeter.cs" />
     <Compile Include="SystemDesign\Geohash.cs" />
     <Compile Include="SystemDesign\GFSClient.cs" />

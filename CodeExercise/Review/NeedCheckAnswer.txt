@@ -842,3 +842,48 @@ for(int i = len-2; i>=0; i--)
 {
     rightDir[i] = rightDir[i + 1] * nums[i + 1];
 }
+
+
+
+
+698. Partition to K Equal Sum Subsets
+/// https://leetcode.com/problems/partition-to-k-equal-sum-subsets/
+/// Given an array of integers nums and a positive integer k, find whether it's possible to divide this array into k non-empty subsets whose sums are all equal.
+/// 
+/// Example 1:
+/// Input: nums = [4, 3, 2, 3, 5, 2, 1], k = 4
+/// Output: True
+/// Explanation: It's possible to divide it into 4 subsets (5), (1, 4), (2,3), (2,3) with equal sums.
+
+make sure can have total % K == 0   
+make k bucket,  for each DFS level, index of nums i,  try put in any bucket, and move on to next level
+see if we can walk a nums
+
+
+
+/// <summary>
+/// 652. Find Duplicate Subtrees
+/// https://leetcode.com/problems/find-duplicate-subtrees/
+/// Given a binary tree, return all duplicate subtrees. For each kind of duplicate subtrees, you only need to return the root node of any one of them.
+/// 
+/// Two trees are duplicate if they have the same structure with same node values.
+/// 
+/// Example 1:
+/// 
+///         1
+///        / \
+///       2   3
+///      /   / \
+///     4   2   4
+///        /
+///       4
+/// The following are two duplicate subtrees:
+/// 
+///       2
+///      /
+///     4
+/// and
+/// 
+///     4
+
+each level   serialize left +right +val   (post order)  and check if dicitonary lookup contains it
