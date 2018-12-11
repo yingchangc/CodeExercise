@@ -265,6 +265,7 @@
     <Compile Include="Number\LargestNumberAtLeastTwiceOthers.cs" />
     <Compile Include="Number\MergeSortedArray.cs" />
     <Compile Include="Number\PrimeFactorization.cs" />
+    <Compile Include="Number\ReachingPoints.cs" />
     <Compile Include="Number\ReverseInteger.cs" />
     <Compile Include="Number\ShuffleCard.cs" />
     <Compile Include="Number\TriangleCount .cs" />

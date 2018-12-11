@@ -2103,8 +2103,8 @@ namespace CodeExercise
 
             BFS.SerializeDeserializeBinaryTree question = new BFS.SerializeDeserializeBinaryTree();
             string data = question.serialize(root);
-
-            var newBT = question.deserializePractice(data);
+            var teet = question.deserialize("#");
+            var newBT = question.deserialize(data);
         }
 
         //103
@@ -3165,6 +3165,9 @@ namespace CodeExercise
             //RockMQ  producer consumer https://www.jianshu.com/p/453c6e7ff81c
             //算法大全（3） 二叉树 http://www.cnblogs.com/Jax/archive/2009/12/28/1633691.html
             //https://github.com/yuzhangcmu/LeetCode/blob/master/tree/TreeDemo.java
+            //297
+            Run_SerializeDeserializeBinaryTree();
+
             //652
             Run_FindDupSubtree();
 
@@ -3296,8 +3299,7 @@ namespace CodeExercise
             //721
             Run_AccountMerge();
 
-            //297
-            Run_SerializeDeserializeBinaryTree();
+            
             //53
             Run_MaxSumSubarray();
 
