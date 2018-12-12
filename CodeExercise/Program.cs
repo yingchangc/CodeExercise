@@ -3158,6 +3158,18 @@ namespace CodeExercise
 
         static void Main(string[] args)
         {
+            char c = (char)(1);
+            int i = 1;
+            c = Convert.ToChar(i);
+
+            int num = 5;
+            var numstr = num.ToString();
+            var c1 = numstr.ToCharArray()[0]; 
+
+            if (c == c1)
+            {
+                Console.WriteLine("same");
+            }
 
             //https://neil.fraser.name/writing/sync/ Differential Synchronization
             // TCP面试常见题 https://blog.csdn.net/libaineu2004/article/details/78850227

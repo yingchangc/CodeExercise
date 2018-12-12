@@ -51,6 +51,7 @@
     <Compile Include="BFS\FloodFill.cs" />
     <Compile Include="BFS\KnightShortestPath.cs" />
     <Compile Include="BFS\MaxAreaofIsland.cs" />
+    <Compile Include="BFS\MineSweeper.cs" />
     <Compile Include="BFS\RemoveSubstrings.cs" />
     <Compile Include="BFS\SearchGraphNode.cs" />
     <Compile Include="BFS\SerializeDeserializeBinaryTree.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="DataStructure\IntersectionofTwoArrays.cs" />
     <Compile Include="DataStructure\IntersectionTwoArrays2.cs" />
     <Compile Include="DataStructure\KClosestPoints.cs" />
+    <Compile Include="DataStructure\KdiffPairsInArray.cs" />
     <Compile Include="DataStructure\KthLargestElementInStream.cs" />
     <Compile Include="DataStructure\KthSmallestElementInMatrix.cs" />
     <Compile Include="DataStructure\LargestRectangleInHistogram.cs" />
@@ -269,6 +271,7 @@
     <Compile Include="Number\ReverseInteger.cs" />
     <Compile Include="Number\ShuffleCard.cs" />
     <Compile Include="Number\TriangleCount .cs" />
+    <Compile Include="OOD\DesignSnakeGame.cs" />
     <Compile Include="OOD\ElevatorSystem.cs" />
     <Compile Include="OOD\LFUCache.cs" />
     <Compile Include="OOD\LRUCache.cs" />

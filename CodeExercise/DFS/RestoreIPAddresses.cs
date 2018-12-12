@@ -38,6 +38,8 @@ namespace CodeExercise.DFS
                 return;
             }
 
+            
+
             for (int i = index; i < s.Length; i++)
             {
                 string cutStr = s.Substring(index, i - index + 1);
