@@ -75,6 +75,7 @@
     <Compile Include="BitManipulation\DivideTwoIntegers.cs" />
     <Compile Include="BST\AllNodesDistanceKBinaryTree.cs" />
     <Compile Include="BST\BSTSummary.cs" />
+    <Compile Include="BST\ConvertBSTGreaterTree.cs" />
     <Compile Include="BST\FindDuplicateSubtrees.cs" />
     <Compile Include="BST\GraphBipartite.cs" />
     <Compile Include="BST\InorderSuccessor.cs" />
@@ -257,6 +258,7 @@
     <Compile Include="LL\CopyRandomList.cs" />
     <Compile Include="LL\RemoveDuplicatesfromSortedList.cs" />
     <Compile Include="matrixQuestion\SetMatrixZeroes.cs" />
+    <Compile Include="matrixQuestion\SpiralMatrix.cs" />
     <Compile Include="matrixQuestion\WordSearch.cs" />
     <Compile Include="MedianOfTwoSortedArray.cs" />
     <Compile Include="DP\PermutationIntArray.cs" />
@@ -290,6 +292,7 @@
     <Compile Include="StringRelated\RearrangeString.cs" />
     <Compile Include="StringRelated\ReorderLogFiles.cs" />
     <Compile Include="StringRelated\ReorganizeString.cs" />
+    <Compile Include="StringRelated\SubstringWithConcatenationAllWords.cs" />
     <Compile Include="StringRelated\UniqueEmailAddresses.cs" />
     <Compile Include="SweepingLine\MaximumAverageSubarray.cs" />
     <Compile Include="SweepingLine\MeetingRooms.cs" />

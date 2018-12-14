@@ -269,7 +269,7 @@ namespace CodeExercise
         static void Run_lengthOfLongestSubstringTwoDistinct()
         {
             var test = new DP.SubStringRelated();
-            int maxlength = test.lengthOfLongestSubstringTwoDistinct("eceba");
+            int maxlength = test.LengthOfLongestSubstringTwoDistinct("eceba");
         }
 
         // 76
@@ -3156,20 +3156,22 @@ namespace CodeExercise
             var ans = question.ShortestBridgeSolver(A);
         }
 
+        // 30 SubstringWithConcatenationAllWords
+        static void Run_SubstringWithConcatenationAllWords()
+        {
+            string s = "ababaab";
+            string[] words = { "ab", "ba", "ba" };
+            StringRelated.SubstringWithConcatenationAllWords question = new StringRelated.SubstringWithConcatenationAllWords();
+            var ans = question.FindSubstring(s, words);
+        }
+
         static void Main(string[] args)
         {
-            char c = (char)(1);
-            int i = 1;
-            c = Convert.ToChar(i);
+            Dictionary<char, List<int>> look = new Dictionary<char, List<int>>();
+            look.Add('a', new List<int>() { 1,2});
+            look.Add('b', new List<int>() { 3});
 
-            int num = 5;
-            var numstr = num.ToString();
-            var c1 = numstr.ToCharArray()[0]; 
-
-            if (c == c1)
-            {
-                Console.WriteLine("same");
-            }
+            int tt = look.Values.Count;
 
             //https://neil.fraser.name/writing/sync/ Differential Synchronization
             // TCP面试常见题 https://blog.csdn.net/libaineu2004/article/details/78850227
@@ -3177,6 +3179,8 @@ namespace CodeExercise
             //RockMQ  producer consumer https://www.jianshu.com/p/453c6e7ff81c
             //算法大全（3） 二叉树 http://www.cnblogs.com/Jax/archive/2009/12/28/1633691.html
             //https://github.com/yuzhangcmu/LeetCode/blob/master/tree/TreeDemo.java
+            //30
+            Run_SubstringWithConcatenationAllWords();
             //297
             Run_SerializeDeserializeBinaryTree();
 

@@ -37,22 +37,37 @@ namespace CodeExercise.TwoPointers
             int len1 = name.Length;
             int len2 = typed.Length;
 
-            int i = 0;
-            int j = 0;
+            if (len1 > len2)
+            {
+                return false;
+            }
+
+            if (name[0] != typed[0])
+            {
+                return false;
+            }
+
+            int i = 1;
+            int j = 1;
+            char pre = name[0];
             while (i < len1 && j < len2)
             {
                 if (name[i] == typed[j])
                 {
+                    pre = name[i];
                     i++;
-                    j++;
-                }
-                else if (i > 0 && name[i - 1] == typed[j]) // i just finish pre
-                {
                     j++;
                 }
                 else
                 {
-                    return false;
+                    if (typed[j] == pre)
+                    {
+                        j++;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
             }
 
@@ -60,10 +75,9 @@ namespace CodeExercise.TwoPointers
             {
                 return false;
             }
-
-            if (j < len2)
+            else
             {
-                while (j < len2 && name[i - 1] == typed[j])
+                while (j < len2 && pre == typed[j])
                 {
                     j++;
                 }

@@ -7,14 +7,13 @@ using System.Threading.Tasks;
 namespace CodeExercise.DP
 {
     /// <summary>
-    /// https://www.youtube.com/watch?v=lFG63nc9zrQ
-    /// https://leetcode.com/problems/find-all-anagrams-in-a-string/discuss/  
-    /// 
+    /// https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-characters/submissions/
     /// https://leetcode.com/problems/minimum-window-substring/
     /// https://leetcode.com/problems/longest-substring-without-repeating-characters/
     /// https://leetcode.com/problems/substring-with-concatenation-of-all-words/
     /// https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-characters/
     /// https://leetcode.com/problems/find-all-anagrams-in-a-string/
+    /// https://leetcode.com/problems/fruit-into-baskets/
     /// 
     /// TODO 
     /// gas station
@@ -67,25 +66,22 @@ namespace CodeExercise.DP
             {
                 while (j < s.Length && (j-i+1) <= p.Length)
                 {
-                    if (!lookup.ContainsKey(s[j]))
+                    if (lookup.ContainsKey(s[j]))
                     {
-                        j++;
-                        break;
-                    }
-                    
-                    if (lookup[s[j]] > 0)
-                    {
-                        totalCount--;
-                    }
+                        if (lookup[s[j]] > 0)
+                        {
+                            totalCount--;
+                        }
 
-                    lookup[s[j]]--;
-
-                    if (((j - i + 1) == p.Length) && totalCount == 0)
-                    {
-                        res.Add(i);
+                        lookup[s[j]]--;
                     }
 
                     j++;
+                }
+
+                if (totalCount == 0)
+                {
+                    res.Add(i);
                 }
 
                 // ready to move i

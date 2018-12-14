@@ -9,7 +9,8 @@ namespace CodeExercise.DP
     class SubStringRelated
     {
         /// <summary>
-        /// 159    
+        /// 159. Longest Substring with At Most Two Distinct Characters 
+        /// https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-characters/submissions/
         /// NOTE: YIC Not run in leetcode
         /// Longest Substring with At Most Two Distinct Characters
         /// https://www.youtube.com/watch?v=CIQzMlDwHnM
@@ -20,55 +21,46 @@ namespace CodeExercise.DP
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
-        public int lengthOfLongestSubstringTwoDistinct(String s)
+        public int LengthOfLongestSubstringTwoDistinct(string s)
         {
-            Dictionary<char, int> charLocDict = new Dictionary<char, int>();
-            int start = 0;
-            int end = 0;
+            Dictionary<char, int> lookup = new Dictionary<char, int>();
 
-            int maxLength = 0;
+            int len = s.Length;
+            int j = 0;
 
-            while (end < s.Length)
+            int ans = 0;
+
+            for (int i = 0; i < len; i++)
             {
-                char c = s[end];
-                if (!charLocDict.ContainsKey(c))
+                while (j < len && lookup.Keys.Count <= 2)
                 {
-                    if (charLocDict.Keys.Count < 2)
+                    var c = s[j];
+                    if (!lookup.ContainsKey(c))
                     {
-                        charLocDict[c] = end;    // can add more char
-                        maxLength = Math.Max(maxLength, end - start + 1);   // can be single char for all string
+                        lookup.Add(c, 0);
                     }
-                    else
+                    lookup[c]++;
+
+                    if (lookup.Keys.Count <= 2)
                     {
-                        // need to remove and update start
-                        // find the left most from the dict  
-                        // our dict has the most right loc of each char, just find the left one    [c e]   
-                        int leftmost = s.Length;
-                        char toRemoveKey = new char();
-                        foreach (char k in charLocDict.Keys)
-                        {
-                            if (leftmost > charLocDict[k])
-                            {
-                                leftmost = charLocDict[k];
-                                toRemoveKey = k;
-                            }
-                        }
-                        start = leftmost + 1;
-                        charLocDict.Remove(toRemoveKey);
-                        charLocDict[c] = end;
-                        maxLength = Math.Max(maxLength, end - start + 1);
+                        ans = Math.Max(ans, (j - i + 1));
                     }
+
+                    j++;
                 }
-                else
+
+                // ready to move
+                lookup[s[i]]--;
+
+                if (lookup[s[i]] == 0)
                 {
-                    charLocDict[c] = end;  // update new loc
-                    maxLength = Math.Max(maxLength, end - start + 1);
+                    lookup.Remove(s[i]);
                 }
-                end++;
             }
 
-            return maxLength;
+            return ans;
         }
+
 
         //TODO
         //30
@@ -84,6 +76,8 @@ namespace CodeExercise.DP
         /// S = "ADOBECODEBANC"
         /// T = "ABC"
         /// Minimum window is "BANC". 
+        /// 
+        /// YIC: Also need to check "AnagramSubstring" problem
         /// 
         /// https://leetcode.com/problems/minimum-window-substring/description/
         /// 
