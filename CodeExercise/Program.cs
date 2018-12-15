@@ -995,13 +995,17 @@ namespace CodeExercise
         {
             //394
             DP.CoinsInALine question = new DP.CoinsInALine();
+            //396
+            int[] values395 = { 1, 20, 4 };
+            var ans396 = question.firstWillWin3Practice(values395);
+
+
             var ans394 = question.firstWillWin(7);
 
             int[] values = { 1, 2, 3, 4, 5, 6, 7, 8, 13, 11, 10, 9 };
             //395
             var ans395 = question.firstWillWin2(values);
-            //396
-            var ans396=question.firstWillWin3(values);
+            
 
         }
 
@@ -3179,6 +3183,9 @@ namespace CodeExercise
             //RockMQ  producer consumer https://www.jianshu.com/p/453c6e7ff81c
             //算法大全（3） 二叉树 http://www.cnblogs.com/Jax/archive/2009/12/28/1633691.html
             //https://github.com/yuzhangcmu/LeetCode/blob/master/tree/TreeDemo.java
+            //396 394
+            Run_CoinseInALine();
+
             //30
             Run_SubstringWithConcatenationAllWords();
             //297
@@ -3626,8 +3633,7 @@ namespace CodeExercise
             Run_LongestPalindromicSubstring();
             //221
             Run_MaxSquare();
-            //396 394
-            Run_CoinseInALine();
+            
 
             //87
             Run_ScrambleString();

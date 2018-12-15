@@ -110,6 +110,48 @@ namespace CodeExercise.DP
         /// </summary>
         /// <param name="values"></param>
         /// <returns></returns>
+        public bool firstWillWin3Practice(int[] values)
+        {
+            int len = values.Length;
+
+            int[,] F = new int[len, len];
+
+            for (int i = 0; i < len; i++)
+            {
+                F[i, i] = values[i];
+            }
+
+            for (int i = 0; i < len-1; i ++)
+            {
+                F[i, i + 1] = Math.Max(values[i], values[i + 1]); 
+            }
+
+            for (int range = 3; range <= len; range++)
+            {
+                for (int i = 0; i <= len - range; i++)
+                {
+                    int j = i+ len -1;
+
+                    F[i, j] = Math.Max(F[i, j],
+                                       values[i] + Math.Min(F[i + 2, j], F[i + 1, j - 1]));
+
+                    F[i, j] = Math.Max(F[i, j],
+                                       values[j] + Math.Min(F[i + 1, j-1], F[i, j - 2]));
+
+                }
+            }
+
+            int firstSum = F[0, len - 1];
+
+            int totalSum = 0;
+            for (int i = 0; i < len; i++)
+            {
+                totalSum += values[i];
+            }
+
+            return (firstSum * 2 >= totalSum);
+        }
+
         public bool firstWillWin3(int[] values)
         {
             int N = values.GetLength(0);
