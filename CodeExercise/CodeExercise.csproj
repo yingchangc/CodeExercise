@@ -73,6 +73,7 @@
     <Compile Include="BinarySearch\SearchInsertPosition.cs" />
     <Compile Include="BinarySearch\WoodCut.cs" />
     <Compile Include="BitManipulation\DivideTwoIntegers.cs" />
+    <Compile Include="BitManipulation\Number1Bits.cs" />
     <Compile Include="BST\AllNodesDistanceKBinaryTree.cs" />
     <Compile Include="BST\BSTSummary.cs" />
     <Compile Include="BST\ConvertBSTGreaterTree.cs" />

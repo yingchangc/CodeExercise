@@ -50,7 +50,7 @@ namespace CodeExercise.DP
 
         private string SortString(string input)
         {
-            char[] characters = input.ToArray();
+            char[] characters = input.ToCharArray();
             Array.Sort(characters);
             return new string(characters);
         }

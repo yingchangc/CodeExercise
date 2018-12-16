@@ -72,7 +72,7 @@ namespace CodeExercise.DP
         }
 
 
-        
+
 
         //45
         /// https://www.youtube.com/watch?v=cETfFsSTGJI
@@ -85,6 +85,36 @@ namespace CodeExercise.DP
         /// minJumArr  =   [0, 1, 1, 2, 2]
         ///The minimum number of jumps to reach the last index is 2. (Jump 1 step from index 0 to 1, then 3 steps to the last index.)
         /// keep track the min of each index
+        public static int JumpPractice_slow(int[] nums)
+        {
+            Dictionary<int, HashSet<int>> lookup = new Dictionary<int, HashSet<int>>();   // loc, {froms}
+            Dictionary<int, int> minSteps = new Dictionary<int, int>(); // loc  minstep
+            for (int i = 0; i < nums.Length; i++)
+            {
+                lookup.Add(i, new HashSet<int>());
+                minSteps.Add(i, int.MaxValue);
+            }
+
+            minSteps[0] = 0;
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                int canJumpRange = nums[i];
+
+                for (int k = 1; k <= canJumpRange; k++)
+                {
+                    if ((i + k) < nums.Length)
+                    {
+                        lookup[i + k].Add(i); // add from
+                        minSteps[i + k] = Math.Min(minSteps[i + k], minSteps[i] + 1);
+                    }
+
+                }
+            }
+
+            return minSteps[nums.Length - 1];
+        }
+
         public static int Jump(int[] nums)
         {
             int maxJumpLoc = 0;

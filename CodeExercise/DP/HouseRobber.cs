@@ -218,6 +218,58 @@ namespace CodeExercise.DP
         /// 
         /// <param name="nums"></param>
         /// <returns></returns>
+        public int DeleteAndEarnPractice(int[] nums)
+        {
+
+            SortedDictionary<int, int> lookup = new SortedDictionary<int, int>();
+            CountSum(nums, lookup);
+
+            // house rob way
+            int[,] F = new int[lookup.Keys.Count + 1, 2];
+            F[0, 0] = 0;
+            F[0, 1] = 0;
+
+            int i = 1;
+            //Each element nums[i] is an integer in the range [1, 10000].
+            int preNum = -1;
+
+            // 2, 3, 4
+            foreach (var num in lookup.Keys)
+            {
+                if (num == (preNum + 1))
+                {
+                    // take 
+                    F[i, 1] = lookup[num] + F[i - 1, 0];  // pre cannot take
+                                                          // don't take
+                    F[i, 0] = Math.Max(F[i - 1, 0], F[i - 1, 1]);
+                }
+                else
+                {
+                    // take curr
+                    F[i, 1] = lookup[num] + Math.Max(F[i - 1, 0], F[i - 1, 1]);  // pre cant take bcase of gap
+                                                                                 // don't take curr
+                    F[i, 0] = Math.Max(F[i - 1, 0], F[i - 1, 1]);
+                }
+                i++;
+                preNum = num;
+            }
+
+            return Math.Max(F[lookup.Keys.Count, 1], F[lookup.Keys.Count, 0]);
+
+        }
+
+        private void CountSum(int[] nums, SortedDictionary<int, int> lookup)
+        {
+            foreach (var num in nums)
+            {
+                if (!lookup.ContainsKey(num))
+                {
+                    lookup.Add(num, 0);
+                }
+                lookup[num] += num;
+            }
+        }
+
         public int DeleteAndEarn(int[] nums)
         {
             if (nums.Length == 0)

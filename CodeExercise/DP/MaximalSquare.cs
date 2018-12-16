@@ -23,7 +23,7 @@ namespace CodeExercise.DP
         ///Return 4.
         ///
         ///   1 0
-        ///   1 1     check left up and diag,  find can be it selft because up block the longest length
+        ///   1 1     check left up and diag,  find can be itself because up block the longest length
         /// 
         /// sol 
         /// 
