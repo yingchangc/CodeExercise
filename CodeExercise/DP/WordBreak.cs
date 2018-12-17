@@ -27,7 +27,7 @@ namespace CodeExercise.DP
 
         public bool DFSHelper(string s, int index, IList<string> wordDict, bool[] visited)
         {
-            if (index > s.Length)
+            if (index >= s.Length)
             {
                 return true;
             }
@@ -37,6 +37,8 @@ namespace CodeExercise.DP
                 return false;
             }
 
+            visited[index] = true;
+
             for (int i = index; i < s.Length; i++)
             {
                 var subStr = s.Substring(index, i - index + 1);
@@ -45,8 +47,7 @@ namespace CodeExercise.DP
                     return true;
                 }
             }
-
-            visited[index] = true;
+     
 
             return false;
         }

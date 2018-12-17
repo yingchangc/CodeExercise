@@ -98,135 +98,63 @@ namespace CodeExercise.DP
             return F[M, N];
         }
 
-        public bool IsMatch_recursive2(string s, string p)
+        
+
+        public bool IsMatch_Recursive(string s, string p)
         {
-            int M = s.Length;
-            int N = p.Length;
-            bool[,] visited = new bool[M, N];
+            int lenS = s.Length;
+            int lenP = p.Length;
 
-            bool[,] F = new bool[M, N];
-
-            var ans = IsMatchHelper2(s, p, visited, F, 0, 0);
-
-            return ans;
+            return DFSHelper(s, lenS - 1, p, lenP - 1, new bool[lenS, lenP]);
         }
 
-        private bool IsMatchHelper2(string s, string p, bool[,] visited,  bool[,] memo, int i, int j)
+
+        private bool DFSHelper(string s, int idxS, string p, int idxP, bool[,] visited)
         {
-            int sLen = s.Length;
-            int pLen = p.Length;
-            if (i == sLen && j == pLen)  // both ran out
+            if (idxS < 0 && idxP < 0)
             {
                 return true;
             }
 
-            if (j == p.Length)   // yic: only pattern ran out
+            if (idxP < 0)
             {
                 return false;
             }
-            if (i == s.Length)  // yic s ran out
+
+            if (idxS < 0)
             {
-                if (p[j] == '*')
+                if (p[idxP] == '*')
                 {
-                    return IsMatchHelper2(s, p, visited, memo, i, j + 1);  // match 0 case
+                    return DFSHelper(s, idxS, p, idxP - 1, visited);
                 }
                 return false;
             }
 
-            if (visited[i,j])
-            {
-                return memo[i, j];
-            }
-
-            bool canMatch = false;
-
-            if (s[i] == p[j])
-            {
-                canMatch = IsMatchHelper2(s, p, visited, memo, i + 1, j + 1);
-            }
-            else if (p[j] == '?')
-            {
-                canMatch = IsMatchHelper2(s, p, visited, memo, i + 1, j + 1);
-            }
-            else if (p[j] == '*')
-            {
-                canMatch = IsMatchHelper2(s, p, visited, memo, i, j + 1)   // match 0
-                        || IsMatchHelper2(s, p, visited, memo, i+1, j + 1)   // match 1
-                        || IsMatchHelper2(s, p, visited, memo, i+1, j);  // match many
-            }
-            else
-            {
-                //s[i]!=p[j]
-                canMatch = false;
-            }
-            visited[i, j] = true;
-            memo[i, j] = canMatch;
-
-            return canMatch;
-        }
-
-
-        public bool IsMatch_recursive(string s, string p)
-        {
-            int M = s.Length;
-            int N = p.Length;
-            bool[,] visited = new bool[M+1, N+1];
-
-            bool[,] F = new bool[M + 1, N + 1];
-
-            var ans = IsMatchHelper(s, p, visited, F, M, N);
-
-            return ans;
-        }
-
-        private bool IsMatchHelper(string s, string p, bool[,] visited, bool[,] F, int i , int j)
-        {
-            // base condidition
-            if (i ==0 & j == 0)
-            {
-                return true;
-            }
-            else if (i == 0)
-            {
-                if (p[j-1] == '*')    // yic corner case   for "ab"  <-- "**ab",  need to keep walk down
-                {
-                    return IsMatchHelper(s, p, visited, F, i, j - 1);
-                }
-                return false;
-            }
-            else if (j == 0)   // i >0   j==0
+            if (visited[idxS, idxP])
             {
                 return false;
             }
-            else if (visited[i,j])
+
+            visited[idxS, idxP] = true;
+
+            if (s[idxS] == p[idxP])
             {
-                return F[i, j];
+                return DFSHelper(s, idxS - 1, p, idxP - 1, visited);
+            }
+            else if (p[idxP] == '?')
+            {
+                return DFSHelper(s, idxS - 1, p, idxP - 1, visited);
+            }
+            else if (p[idxP] == '*')
+            {
+                bool match0 = DFSHelper(s, idxS, p, idxP - 1, visited);
+                bool match1 = DFSHelper(s, idxS - 1, p, idxP - 1, visited);
+                bool matchM = DFSHelper(s, idxS - 1, p, idxP, visited);
+
+                return match0 || match1 || matchM;
             }
 
-            visited[i, j] = true;
-            
-            // char matching
-            if (s[i-1] == p[j-1])
-            {
-                F[i, j] = IsMatchHelper(s,p,visited,F,i-1,j-1);    
-            }
-            else if (p[j-1] == '?')
-            {
-                F[i, j] = IsMatchHelper(s, p, visited, F, i - 1, j - 1);
-            }
-            else if (p[j-1] == '*')
-            {
-                F[i, j] = IsMatchHelper(s, p, visited, F, i, j - 1) // pattern  0 match   "ab" <-- "ab*"
-                        || IsMatchHelper(s, p, visited, F, i - 1, j - 1)  // pattern  1 match   "ab" <-- "a*"
-                        || IsMatchHelper(s, p, visited, F, i-1, j);    // pattern multi mathc  "abb"  <-- "a*"  
-            }
-            else
-            {
-                F[i, j] = false;
-            } 
-
-
-            return F[i, j];
+            return false;
         }
     }
 }

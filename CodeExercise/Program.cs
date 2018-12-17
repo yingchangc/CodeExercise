@@ -373,7 +373,7 @@ namespace CodeExercise
             // 746
             int[] cost = { 1, 100, 1, 1, 1, 100, 1, 1, 100, 1 };
             DP.MinCostClimbingStairs question = new DP.MinCostClimbingStairs();
-            int ans = question.MinCostClimbingStairsSolver(cost);
+            int ans = question.MinCostClimbingStairs_Back(cost);
 
             // 70
             ans = question.ClimbStairs(6);
@@ -1511,7 +1511,7 @@ namespace CodeExercise
         static void Run_WildcardMatching()
         {
             DP.WildcardMatching question = new DP.WildcardMatching();
-            var ans1 = question.IsMatch_recursive2("aa", "*");
+            var ans1 = question.IsMatch_Recursive("aa", "*");
             var ans2 = question.IsMatch("ABx", "A?*");
         }
 

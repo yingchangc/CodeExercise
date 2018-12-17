@@ -8,6 +8,52 @@ namespace CodeExercise.DP
 {
     public class PalindromePartition
     {
+        // start look into range j 
+        // scan i : 0~ j     if S[i~j] is palindrome
+        // F[j] = MIN(F[j], F[i-1] + 1)
+        public int MinCutPractice_dp(string s)
+        {
+
+            int len = s.Length;
+
+            int[] F = new int[s.Length + 1];
+
+            for (int i = 0; i <= len; i++)
+            {
+                // cut all segments
+                F[i] = i;
+            }
+
+            for (int j = 1; j <= len; j++)
+            {
+                for (int i = 1; i <= j; i++)
+                {
+                    if (IsPalindrome(s, i - 1, j - 1))
+                    {
+                        F[j] = Math.Min(F[j], F[i - 1] + 1);
+                    }
+                }
+            }
+
+            return F[s.Length] - 1;  // "a b c"   make 2 cut   a | b | c
+        }
+
+        private bool IsPalindrome(string s, int left, int right)
+        {
+            while (left < right)
+            {
+                if (s[left] != s[right])
+                {
+                    return false;
+                }
+
+                left++;
+                right--;
+            }
+
+            return true;
+        }
+
         /// <summary>
         /// 132
         /// Given a string s, partition s such that every substring of the partition is a palindrome. 

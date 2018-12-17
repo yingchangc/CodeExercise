@@ -9,6 +9,7 @@ namespace CodeExercise
     public class PalindromePermutation
     {
         /// <summary>
+        /// https://leetcode.com/problems/palindrome-permutation-ii/
         /// 267. Palindrome Permutation II
         /// Given a string s, return all the palindromic permutations (without duplicates) of it. Return an empty list if no palindromic permutation could be form.
         /// 

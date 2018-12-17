@@ -12,6 +12,9 @@ namespace CodeExercise.DP
         /// 70
         /// You are climbing a stair case. It takes n steps to reach to the top.
         /// Each time you can either climb 1 or 2 steps.In how many distinct ways can you climb to the top?
+        /// 
+        /// 
+        /// 
         /// Note: Given n will be a positive integer.
         /// </summary>
         /// just like fib[n] = fib[n-1] + fib[n-2]
@@ -96,46 +99,72 @@ namespace CodeExercise.DP
         /// </summary>
         /// <param name="cost"></param>
         /// <returns></returns>
-        public int MinCostClimbingStairsSolver(int[] cost)
+        public int MinCostClimbingStairs_DP(int[] cost)
         {
-            // A better solution
-            /*
-            int minCostClimbingStairs(vector < int > &cost) {
-                int n = (int)cost.size();
-                vector<int> dp(n);
-                dp[0] = cost[0];
-                dp[1] = cost[1];
-                for (int i = 2; i < n; ++i)
-                    dp[i] = cost[i] + min(dp[i - 2], dp[i - 1]);
-                return min(dp[n - 2], dp[n - 1]);
+            if (cost == null || cost.Length == 0)
+            {
+                return 0;
             }
-            */
 
+            int len = cost.Length;
 
-            Dictionary<int, int> lookup = new Dictionary<int, int>(); // index , best cost
-            
-            return Math.Min(BestPreviousCostHelper(cost, cost.Length-1, lookup), BestPreviousCostHelper(cost, cost.Length-2, lookup));
+            if (len == 1)
+            {
+                return cost[0];
+            }
+            if (len == 2)
+            {
+                return Math.Min(cost[0], cost[1]);
+            }
+
+            int[] F = new int[len];
+            F[0] = cost[0];
+            F[1] = cost[1];
+
+            for (int i = 2; i < len; i++)
+            {
+                F[i] = Math.Min(F[i - 1], F[i - 2]) + cost[i];
+            }
+
+            //                
+            //  1 2 3 [top]
+            return Math.Min(F[len - 1], F[len - 2]);
+
 
         }
 
-        private int BestPreviousCostHelper(int[] cost, int index, Dictionary<int, int> lookup)
+        public int MinCostClimbingStairs_Back(int[] cost)
+        {
+            return DFSHelper(cost, cost.Length, new Dictionary<int, int>());
+        }
+
+        public int DFSHelper(int[] cost, int index, Dictionary<int, int> visited)
         {
             if (index <= 1)
             {
                 return cost[index];
             }
 
-            if (lookup.ContainsKey(index))
+            if (visited.ContainsKey(index))
             {
-                return lookup[index];
+                return visited[index];
             }
 
-            int preBestCost = Math.Min(BestPreviousCostHelper(cost, index - 1, lookup), BestPreviousCostHelper(cost, index - 2, lookup));
 
-            int finalcost = cost[index] + preBestCost;
-            lookup[index] = finalcost;
+            int climb1Cost = DFSHelper(cost, index - 1, visited);
+            int climb2Cost = DFSHelper(cost, index - 2, visited);
 
-            return finalcost;
+            if (index < cost.Length)
+            {
+                visited.Add(index, Math.Min(climb1Cost, climb2Cost) + cost[index]);
+            }
+            else
+            {
+                // top
+                visited.Add(index, Math.Min(climb1Cost, climb2Cost));
+            }
+
+            return visited[index];
         }
     }
 }

@@ -83,47 +83,42 @@ namespace CodeExercise.DP
             return memo[M - 1, N - 1];
         }
 
-        public int MinPathSumSolverOld(int[,] grid)
+        public int MinPathSum(int[,] grid)
         {
-            int m = grid.GetLength(0);
-            int n = grid.GetLength(1);
+            int lenY = grid.GetLength(0);
+            int lenX = grid.GetLength(1);
 
-            Dictionary<int, int> memo = new Dictionary<int, int>();  //store as 1d array
+            int[,] F = new int[lenY, lenX];
+            bool[,] visited = new bool[lenY + 1, lenX + 1];
 
-            return MinPathHelper(grid, 0, 0, m, n, memo);
+            return DFSHelper_BackTrack(lenX - 1, lenY - 1, grid, F, visited);
         }
 
-        private int MinPathHelper(int[,] grid, int currentI, int currentJ, int m, int n, Dictionary<int, int> memo)
+        private int DFSHelper_BackTrack(int x, int y, int[,] grid, int[,] F, bool[,] visited)
         {
-            // stop condition
-            if (memo.ContainsKey(currentI + currentJ*m))
+            if (x == 0 && y == 0)
             {
-                return memo[currentI + currentJ * m];
+                return grid[y, x];
             }
 
-            int currentV = grid[currentI, currentJ];
-            if (currentI == (m-1) && currentJ == (n-1))
+            if (x < 0 || y < 0)
             {
-                memo[currentI + currentJ * m] = currentV;
-                return currentV;
+                return int.MaxValue;
             }
 
-            int currentBest = Int32.MaxValue;
-
-            // try right
-            if ((currentI + 1) < m)
+            if (visited[y, x])
             {
-                currentBest = Math.Min((currentV + MinPathHelper(grid, currentI+1, currentJ, m, n, memo)), currentBest);
+                return F[y, x];
             }
 
-            // try down
-            if ((currentJ + 1) < n)
-            {
-                currentBest = Math.Min(currentV + MinPathHelper(grid, currentI, currentJ+1, m, n, memo), currentBest);
-            }
+            int pathSumU = DFSHelper_BackTrack(x, y - 1, grid, F, visited);
+            int pathSumL = DFSHelper_BackTrack(x - 1, y, grid, F, visited);
 
-            memo[currentI + currentJ * m] = currentBest;
-            return currentBest;
+
+            visited[y, x] = true;
+            F[y, x] = Math.Min(pathSumU, pathSumL) + grid[y, x];
+
+            return F[y, x];
         }
     }
 }

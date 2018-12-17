@@ -104,6 +104,44 @@ namespace CodeExercise.DP
             }
         }
 
+
+        // time exceeded
+        public int FindMaxFormDFSMemo(string[] strs, int m, int n)
+        {
+            int mxLen = DFSHelperMemo(strs, 0, m, n, new bool[strs.Length, m+1,n+1], new int[strs.Length,m+1,n+1]);
+
+            return mxLen;
+
+        }
+
+        private int DFSHelperMemo(string[] strs, int idx, int m, int n, bool[,,] visited, int[,,] memo)
+        {
+            if (idx >= strs.Length)
+            {
+                return 0;
+            }
+
+            int mxCount = 0;
+
+            for (int i = idx; i < strs.Length; i++)
+            {
+                int strM = 0;
+                int strN = 0;
+                GetZeroOnesInStr(strs[i], out strM, out strN);
+
+                if ((m - strM) >=0 && (n - strN) >= 0)
+                {
+                    var temp = DFSHelperMemo(strs, i + 1, (m - strM), (n - strN), visited, memo);
+                    mxCount = Math.Max(mxCount, temp+1);   //+1 means take str[i]
+                }
+            }
+
+            visited[idx, m, n] = true;
+            memo[idx, m, n] = mxCount;
+
+            return memo[idx, m, n];
+        }
+
         /// <summary>
         /// DFS  can timeout
         /// </summary>
