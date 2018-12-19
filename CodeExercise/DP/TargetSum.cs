@@ -66,60 +66,40 @@ namespace CodeExercise.DP
         /// <returns></returns>
         public int FindTargetSumWays(int[] nums, int S)
         {
-            Dictionary<int, Dictionary<int, int>> memo = new Dictionary<int, Dictionary<int, int>>();  // (indexLevel-> (presum, Ways))
-            InitMemoization(nums, memo);
+            int[] ops = { -1, 1 };
 
-            int[] operatorArr = new int[2];
-            operatorArr[0] = 1;
-            operatorArr[1] = -1;
+            Dictionary<int, Dictionary<int, int>> visited = new Dictionary<int, Dictionary<int, int>>();
 
-            int preSum = 0;
-            int index = 0;
-            int ans = FindTargetSumHelper(nums, operatorArr, preSum, S, index, memo);
-
-            return ans;
+            return DFSHelper(nums, 0, 0, S, ops, visited);
         }
 
-        
-
-        private int FindTargetSumHelper(int[] nums, int[] operatorArr, int preSum, int target, int index, Dictionary<int, Dictionary<int,int>> memo)
+        private int DFSHelper(int[] nums, int idx, int preSum, int S, int[] ops, Dictionary<int, Dictionary<int, int>> visited)
         {
-            // stop condition
-            if (index >= nums.Length)
+            if (idx >= nums.Length)
             {
-                if (preSum == target)
-                {
-                    return 1;
-                }
-                return 0;
-            }
-            else if (memo[index].ContainsKey(preSum))
-            {
-                return memo[index][preSum];  // we have compuate before, when preSum at current index, we know how many ways
+                return (preSum == S) ? 1 : 0;
             }
 
-            int currentLevelWays = 0;
-
-            foreach(int op in operatorArr)
+            if (visited.ContainsKey(idx) && visited[idx].ContainsKey(preSum))
             {
-                int temp = op * nums[index] + preSum;
-                int ways = FindTargetSumHelper(nums, operatorArr, temp, target, index + 1, memo);
-                currentLevelWays += ways;
+                return visited[idx][preSum];
             }
 
-            memo[index][preSum] = currentLevelWays;
+            int currLevelWays = 0;
 
-            return currentLevelWays;
-        }
-
-
-        private void InitMemoization(int[] nums, Dictionary<int, Dictionary<int, int>> memo)
-        {
-            int len = nums.Length;
-            for (int i = 0; i < len; i++)
+            foreach (var op in ops)
             {
-                memo[i] = new Dictionary<int, int>();
+                var curr = nums[idx] * op;
+                currLevelWays += DFSHelper(nums, idx + 1, curr + preSum, S, ops, visited);
             }
+
+            if (!visited.ContainsKey(idx))
+            {
+                visited.Add(idx, new Dictionary<int, int>());
+            }
+            visited[idx].Add(preSum, currLevelWays);
+
+            return currLevelWays;
         }
     }
 }

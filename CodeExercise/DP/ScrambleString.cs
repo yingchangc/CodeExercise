@@ -18,7 +18,7 @@ namespace CodeExercise.DP
         ///       /    \
         ///      gr    eat
         ///     / \    /  \
-        ///    g r  e at
+        ///    g   r  e   at
         ///               / \
         ///              a   t
         ///    To scramble the string, we may choose any non-leaf node and swap its two children.

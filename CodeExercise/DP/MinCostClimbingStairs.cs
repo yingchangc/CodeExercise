@@ -25,8 +25,7 @@ namespace CodeExercise.DP
         /// use fib
         /// <param name="n"></param>
         /// <returns></returns>
-        public int ClimbStairs(int n)
-        {
+       
 
             // fib way
             //if (n <=2)
@@ -47,35 +46,29 @@ namespace CodeExercise.DP
             //return pre;
 
 
-            // with memo
-            if (n == 0)
-            {
-                return 0;
-            }
-
-            Dictionary<int, int> lookup = new Dictionary<int, int>();  // (nth, ways)
-
-            return climbHelper(n, lookup);
+        public int ClimbStairs(int n)
+        {
+            return DFSHelper(n, new Dictionary<int, int>());
         }
 
-        private int climbHelper(int n, Dictionary<int, int> lookup)
+        private int DFSHelper(int n, Dictionary<int, int> visited)
         {
-            // base condition
-            if (n <=2)
+            if (n <= 1)
             {
-                return n;
+                return 1;
             }
 
-            if (lookup.ContainsKey(n))
+            if (visited.ContainsKey(n))
             {
-                return lookup[n];
+                return visited[n];
             }
 
-            int steps = climbHelper(n-1, lookup) + climbHelper(n-2, lookup);
+            int count2 = DFSHelper(n - 2, visited);
+            int count1 = DFSHelper(n - 1, visited);
 
-            lookup[n] = steps;
+            visited[n] = count2 + count1;
 
-            return steps;
+            return visited[n];
         }
 
         /// <summary>
@@ -135,7 +128,22 @@ namespace CodeExercise.DP
 
         public int MinCostClimbingStairs_Back(int[] cost)
         {
-            return DFSHelper(cost, cost.Length, new Dictionary<int, int>());
+
+            if (cost == null || cost.Length == 0)
+            {
+                return 0;
+            }
+
+            Dictionary<int, int> visited = new Dictionary<int, int>();
+
+            int len = cost.Length;
+
+            if (len <= 1)
+            {
+                return cost[0];
+            }
+
+            return DFSHelper(cost, cost.Length, visited);
         }
 
         public int DFSHelper(int[] cost, int index, Dictionary<int, int> visited)
@@ -154,15 +162,15 @@ namespace CodeExercise.DP
             int climb1Cost = DFSHelper(cost, index - 1, visited);
             int climb2Cost = DFSHelper(cost, index - 2, visited);
 
-            if (index < cost.Length)
+            if (index == cost.Length)
             {
-                visited.Add(index, Math.Min(climb1Cost, climb2Cost) + cost[index]);
+                visited.Add(index, Math.Min(climb1Cost, climb2Cost));  // already top 
             }
             else
             {
-                // top
-                visited.Add(index, Math.Min(climb1Cost, climb2Cost));
+                visited.Add(index, Math.Min(climb1Cost, climb2Cost) + cost[index]);
             }
+
 
             return visited[index];
         }
