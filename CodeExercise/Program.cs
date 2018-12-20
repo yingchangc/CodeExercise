@@ -1540,6 +1540,15 @@ namespace CodeExercise
             question.SolveSudoku(input);
         }
 
+        // 286
+        static void Run_WallAndGate()
+        {
+            BFS.WallsAndGates question = new BFS.WallsAndGates();
+            int[,] input = { { 2147483647, -1, 0, 2147483647 }, { 2147483647, 2147483647, 2147483647, -1 }, { 2147483647, -1, 2147483647, -1 }, { 0, -1, 2147483647, 2147483647 } };
+
+            question.WallsAndGatesSolver(input);
+        } 
+
         // lint138,  leetcode 325
         static void Run_SubarraySum()
         {
@@ -3201,6 +3210,9 @@ namespace CodeExercise
             //RockMQ  producer consumer https://www.jianshu.com/p/453c6e7ff81c
             //算法大全（3） 二叉树 http://www.cnblogs.com/Jax/archive/2009/12/28/1633691.html
             //https://github.com/yuzhangcmu/LeetCode/blob/master/tree/TreeDemo.java
+
+            //286
+            Run_WallAndGate();
 
             //37
             Run_SolveSudoku();
