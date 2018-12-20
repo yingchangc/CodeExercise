@@ -8,6 +8,74 @@ namespace CodeExercise.DFS
 {
     class WordPattern
     {
+        /// <summary>
+        /// 290. Word Pattern
+        /// https://leetcode.com/problems/word-pattern/
+        /// Given a pattern and a string str, find if str follows the same pattern.
+        /// 
+        /// Here follow means a full match, such that there is a bijection between a letter in pattern and a non-empty word in str.
+        /// 
+        /// Example 1:
+        /// 
+        /// Input: pattern = "abba", str = "dog cat cat dog"
+        /// Output: true
+        /// Example 2:
+        /// 
+        /// Input:pattern = "abba", str = "dog cat cat fish"
+        /// Output: false
+        /// Example 3:
+        /// 
+        /// Input: pattern = "aaaa", str = "dog cat cat dog"
+        /// Output: false
+        /// Example 4:
+        /// 
+        /// Input: pattern = "abba", str = "dog dog dog dog"
+        /// Output: false
+        /// </summary>
+        /// <param name="pattern"></param>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public bool WordPatternOne(string pattern, string str)
+        {
+            var tokens = str.Split(' ');
+
+            if (pattern.Length != tokens.Length)
+            {
+                return false;
+            }
+
+            Dictionary<char, string> lookup = new Dictionary<char, string>();
+            HashSet<string> uniqueStr = new HashSet<string>();
+
+            int len = pattern.Length;
+
+            for (int i = 0; i < len; i++)
+            {
+                char key = pattern[i];
+
+                if (lookup.ContainsKey(key))
+                {
+                    var matchStr = lookup[key];
+
+                    if (string.Compare(matchStr, tokens[i]) != 0)
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (uniqueStr.Contains(tokens[i]))
+                    {
+                        return false;
+                    }
+                    uniqueStr.Add(tokens[i]);
+                    lookup.Add(key, tokens[i]);
+                }
+            }
+
+            return true;
+
+        }
 
         Dictionary<char, string> lookup;
         HashSet<string> used;

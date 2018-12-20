@@ -86,6 +86,7 @@
     <Compile Include="Connection.cs" />
     <Compile Include="DataStructure\AccountsMerge.cs" />
     <Compile Include="DataStructure\AirplaneInSky.cs" />
+    <Compile Include="DataStructure\AsteroidCollision.cs" />
     <Compile Include="DataStructure\ConnectingGraph.cs" />
     <Compile Include="DataStructure\ContinuousSubArraySum.cs" />
     <Compile Include="DataStructure\CustomSortString.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="DataStructure\ExpandExpression.cs" />
     <Compile Include="DataStructure\FindAllNumbersDisappearedInArray.cs" />
     <Compile Include="DataStructure\FindDuplicateNumber.cs" />
+    <Compile Include="DataStructure\FirstMissingPositive.cs" />
     <Compile Include="DataStructure\FirstUniqueCharacterinaString.cs" />
     <Compile Include="DataStructure\Flatten2D Vector.cs" />
     <Compile Include="DataStructure\FlattenBinaryTreeToLL.cs" />
@@ -260,6 +262,8 @@
     <Compile Include="LL\RemoveDuplicatesfromSortedList.cs" />
     <Compile Include="matrixQuestion\SetMatrixZeroes.cs" />
     <Compile Include="matrixQuestion\SpiralMatrix.cs" />
+    <Compile Include="matrixQuestion\SudokuSolver.cs" />
+    <Compile Include="matrixQuestion\ValidSudoku.cs" />
     <Compile Include="matrixQuestion\WordSearch.cs" />
     <Compile Include="MedianOfTwoSortedArray.cs" />
     <Compile Include="DP\PermutationIntArray.cs" />

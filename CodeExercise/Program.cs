@@ -1522,6 +1522,24 @@ namespace CodeExercise
             var ans = question.IsMatch("ac", "ac*");
         }
 
+        //36
+        static void Run_IsValidSudoku()
+        {
+            matrixQuestion.ValidSudoku question = new matrixQuestion.ValidSudoku();
+
+            char[,] input = { { '5', '3', '.', '.', '7', '.', '.', '.', '.' }, { '6', '.', '.', '1', '9', '5', '.', '.', '.' }, { '.', '9', '8', '.', '.', '.', '.', '6', '.' }, { '8', '.', '.', '.', '6', '.', '.', '.', '3' }, { '4', '.', '.', '8', '.', '3', '.', '.', '1' }, { '7', '.', '.', '.', '2', '.', '.', '.', '6' }, { '.', '6', '.', '.', '.', '.', '2', '8', '.' }, { '.', '.', '.', '4', '1', '9', '.', '.', '5' }, { '.', '.', '.', '.', '8', '.', '.', '7', '9' } };
+            var ans = question.IsValidSudoku(input);
+        }
+        
+        // 37
+        static void Run_SolveSudoku()
+        {
+            matrixQuestion.SudokuSolver question = new matrixQuestion.SudokuSolver();
+            char[,] input = { { '5', '3', '4', '6', '7', '8', '9', '1', '2' }, { '6', '7', '2', '1', '9', '5', '3', '4', '8' }, { '1', '9', '8', '3', '4', '2', '5', '6', '7' }, { '8', '5', '9', '7', '6', '1', '4', '2', '3' }, { '4', '2', '6', '8', '5', '3', '7', '9', '1' }, { '7', '1', '3', '9', '2', '4', '8', '5', '6' }, { '9', '6', '1', '5', '3', '7', '2', '8', '4' }, { '2', '8', '7', '4', '1', '9', '6', '3', '5' }, { '3', '4', '5', '.', '8', '.', '.', '7', '9' } };
+
+            question.SolveSudoku(input);
+        }
+
         // lint138,  leetcode 325
         static void Run_SubarraySum()
         {
@@ -3183,6 +3201,12 @@ namespace CodeExercise
             //RockMQ  producer consumer https://www.jianshu.com/p/453c6e7ff81c
             //算法大全（3） 二叉树 http://www.cnblogs.com/Jax/archive/2009/12/28/1633691.html
             //https://github.com/yuzhangcmu/LeetCode/blob/master/tree/TreeDemo.java
+
+            //37
+            Run_SolveSudoku();
+            //36
+            Run_IsValidSudoku();
+
             //396 394
             Run_CoinseInALine();
 
