@@ -31,7 +31,7 @@ namespace CodeExercise.StringRelated
         /// Explanation: It is not possible to rearrange the string.
         /// 
         /// 
-        /// Similiar question to "ReorganizeString"
+        /// Similiar question to "TaskScheduler"
         /// </summary>
         /// <param name="s"></param>
         /// <param name="k"></param>

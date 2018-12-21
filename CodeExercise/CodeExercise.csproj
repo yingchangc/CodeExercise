@@ -76,6 +76,7 @@
     <Compile Include="BitManipulation\DivideTwoIntegers.cs" />
     <Compile Include="BitManipulation\Number1Bits.cs" />
     <Compile Include="BST\AllNodesDistanceKBinaryTree.cs" />
+    <Compile Include="BST\BinaryTreeVerticalOrderTraversal.cs" />
     <Compile Include="BST\BSTSummary.cs" />
     <Compile Include="BST\ConvertBSTGreaterTree.cs" />
     <Compile Include="BST\FindDuplicateSubtrees.cs" />
@@ -270,6 +271,7 @@
     <Compile Include="MedianOfTwoSortedArray.cs" />
     <Compile Include="DP\PermutationIntArray.cs" />
     <Compile Include="Number\ArrayAverage.cs" />
+    <Compile Include="Number\ExcelSheetolumnTitle.cs" />
     <Compile Include="Number\FastPower.cs" />
     <Compile Include="Number\FindPivotIndex.cs" />
     <Compile Include="Number\FractionRecurringDecimal.cs" />

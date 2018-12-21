@@ -3204,6 +3204,9 @@ namespace CodeExercise
 
             int tt = look.Values.Count;
 
+            char c = 'A';
+            c++;
+
             //https://neil.fraser.name/writing/sync/ Differential Synchronization
             // TCP面试常见题 https://blog.csdn.net/libaineu2004/article/details/78850227
 
