@@ -3196,6 +3196,51 @@ namespace CodeExercise
             var ans = question.FindSubstring(s, words);
         }
 
+        //690
+        static void Run_EmployeeImportance()
+        {
+            DataStructure.EmployeeImportance question = new DataStructure.EmployeeImportance();
+            DataStructure.EmployeeImportance.Employee e1 = new DataStructure.EmployeeImportance.Employee();
+            DataStructure.EmployeeImportance.Employee e2 = new DataStructure.EmployeeImportance.Employee();
+            DataStructure.EmployeeImportance.Employee e3 = new DataStructure.EmployeeImportance.Employee();
+
+            List<DataStructure.EmployeeImportance.Employee> employees = new List<DataStructure.EmployeeImportance.Employee>()
+            {
+                e1,e2,e3
+            };
+            e1.id = 1;
+            e1.importance = 5;
+            e1.subordinates = new List<int>() { 2, 3 };
+
+            e2.id = 2;
+            e2.importance = 3;
+            e2.subordinates = new List<int>() {  };
+
+            e3.id = 3;
+            e3.importance = 3;
+            e3.subordinates = new List<int>() { };
+
+            var ans = question.GetImportance(employees, 1);
+        }
+
+        // 659
+        static void Run_SplitArrayIntoConsecutiveSubsequences()
+        {
+            Number.SplitArrayIntoConsecutiveSubsequences question = new Number.SplitArrayIntoConsecutiveSubsequences();
+            int[] nums = { 1, 2, 3, 3, 4, 5 };
+            var ans = question.IsPossible(nums);
+        }
+
+        //463
+        static void Run_IslandPerimeter()
+        {
+            BFS.IslandPerimeter question = new BFS.IslandPerimeter();
+
+            int[,] input = { { 0, 1, 0, 0 }, { 1, 1, 1, 0 }, { 0, 1, 0, 0 }, { 1, 1, 0, 0 } };
+
+            var ans = question.IslandPerimeterSolver(input);
+        }
+
         static void Main(string[] args)
         {
             Dictionary<char, List<int>> look = new Dictionary<char, List<int>>();
@@ -3206,6 +3251,7 @@ namespace CodeExercise
 
             char c = 'A';
             c++;
+            Char.ToUpper(c);
 
             //https://neil.fraser.name/writing/sync/ Differential Synchronization
             // TCP面试常见题 https://blog.csdn.net/libaineu2004/article/details/78850227
@@ -3213,6 +3259,13 @@ namespace CodeExercise
             //RockMQ  producer consumer https://www.jianshu.com/p/453c6e7ff81c
             //算法大全（3） 二叉树 http://www.cnblogs.com/Jax/archive/2009/12/28/1633691.html
             //https://github.com/yuzhangcmu/LeetCode/blob/master/tree/TreeDemo.java
+
+            //463
+            Run_IslandPerimeter();
+            //659
+            Run_SplitArrayIntoConsecutiveSubsequences();
+            //690
+            Run_EmployeeImportance();
 
             //286
             Run_WallAndGate();
