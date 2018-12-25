@@ -3241,6 +3241,18 @@ namespace CodeExercise
             var ans = question.IslandPerimeterSolver(input);
         }
 
+        //25
+        static void Run_ReverseKLL()
+        {
+            ListNode head = new ListNode(1);
+            head.next = new ListNode(2);
+            head.next.next = new ListNode(3);
+            head.next.next.next = new ListNode(4);
+            head.next.next.next.next =new ListNode(5);
+            LL.ReverseKLL question = new LL.ReverseKLL();
+            var ans = question.ReverseKGroup(head,2);
+        }
+
         static void Main(string[] args)
         {
             Dictionary<char, List<int>> look = new Dictionary<char, List<int>>();
@@ -3260,6 +3272,8 @@ namespace CodeExercise
             //算法大全（3） 二叉树 http://www.cnblogs.com/Jax/archive/2009/12/28/1633691.html
             //https://github.com/yuzhangcmu/LeetCode/blob/master/tree/TreeDemo.java
 
+            //25
+            Run_ReverseKLL();
             //463
             Run_IslandPerimeter();
             //659

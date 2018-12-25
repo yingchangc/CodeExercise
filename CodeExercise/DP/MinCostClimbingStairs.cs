@@ -72,6 +72,45 @@ namespace CodeExercise.DP
         }
 
         /// <summary>
+        /// 70. Climbing Stairs
+        /// You are climbing a stair case. It takes n steps to reach to the top.
+        /// 
+        /// Each time you can either climb 1 or 2 steps.In how many distinct ways can you climb to the top?
+        /// 
+        ///        Note: Given n will be a positive integer.
+        /// 
+        ///        Example 1:
+        /// 
+        /// Input: 2
+        /// Output: 2
+        /// Explanation: There are two ways to climb to the top.
+        /// 1. 1 step + 1 step
+        /// 2. 2 steps
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public int ClimbStairs_DP(int n)
+        {
+            if (n <= 2)
+            {
+                return n;
+            }
+
+            int[] f = new int[n];
+            f[0] = 1;
+            f[1] = 1;
+
+            for (int i = 2; i < n; i++)
+            {
+                f[i] = f[i - 1] + f[i - 2];
+            }
+
+            return f[n - 1] + f[n - 2];
+
+
+        }
+
+        /// <summary>
         /// 746
         /// On a staircase, the i-th step has some non-negative cost cost[i] assigned (0 indexed). 
         ///         Once you pay the cost, you can either climb one or two steps.You need to find minimum cost to reach the top of the floor, and you can either start from the step with index 0, or the step with index 1. 

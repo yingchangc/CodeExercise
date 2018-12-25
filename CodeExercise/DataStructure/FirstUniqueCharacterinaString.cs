@@ -8,6 +8,33 @@ namespace CodeExercise.DataStructure
 {
     class FirstUniqueCharacterinaString
     {
+        public int FirstUniqChar_Best(string s)
+        {
+            Dictionary<char, int> lookup = new Dictionary<char, int>();
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (!lookup.ContainsKey(s[i]))
+                {
+                    lookup.Add(s[i], 0);
+                }
+                lookup[s[i]]++;
+            }
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (lookup[s[i]] == 1)
+                {
+                    return i;
+                }
+
+            }
+
+            return -1;
+
+        }
+
+
         public class HelperNode
         {
             public char val;

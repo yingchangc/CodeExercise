@@ -150,6 +150,7 @@
     <Compile Include="DataStructure\NumberOfIsland2.cs" />
     <Compile Include="DataStructure\PalindromeLinkedList.cs" />
     <Compile Include="DataStructure\PartitionKEqualSumSubsets.cs" />
+    <Compile Include="DataStructure\PascalTriangle2.cs" />
     <Compile Include="DataStructure\PourWater.cs" />
     <Compile Include="DataStructure\ProductOfArrayExceptSelf.cs" />
     <Compile Include="DataStructure\RandomizedSet.cs" />
@@ -164,6 +165,7 @@
     <Compile Include="DataStructure\ShortestRangeInKSortedArrays.cs" />
     <Compile Include="DataStructure\Skyline.cs" />
     <Compile Include="DataStructure\SlidingWindow.cs" />
+    <Compile Include="DataStructure\SmallestRange.cs" />
     <Compile Include="DataStructure\SortList.cs" />
     <Compile Include="DataStructure\SparseMatrixMultiplication.cs" />
     <Compile Include="DataStructure\StackUsingQueues.cs" />
@@ -179,6 +181,7 @@
     <Compile Include="DataStructure\Trie.cs" />
     <Compile Include="DataStructure\UglyNumber.cs" />
     <Compile Include="DataStructure\ValidPalindrome.cs" />
+    <Compile Include="DataStructure\WiggleSort.cs" />
     <Compile Include="DataStructure\WordDictionarySearch.cs" />
     <Compile Include="DataStructure\WordSquare.cs" />
     <Compile Include="DFS\BalancedBinaryTree.cs" />
@@ -266,7 +269,9 @@
     <Compile Include="DFS\LetterCombinationsPhoneNumber.cs" />
     <Compile Include="ListNode.cs" />
     <Compile Include="LL\CopyRandomList.cs" />
+    <Compile Include="LL\PartitionList.cs" />
     <Compile Include="LL\RemoveDuplicatesfromSortedList.cs" />
+    <Compile Include="LL\ReverseKLL.cs" />
     <Compile Include="matrixQuestion\SetMatrixZeroes.cs" />
     <Compile Include="matrixQuestion\SpiralMatrix.cs" />
     <Compile Include="matrixQuestion\SudokuSolver.cs" />
@@ -312,6 +317,7 @@
     <Compile Include="SweepingLine\MaximumAverageSubarray.cs" />
     <Compile Include="SweepingLine\MeetingRooms.cs" />
     <Compile Include="SweepingLine\MergeIntervals.cs" />
+    <Compile Include="SweepingLine\SummaryRanges.cs" />
     <Compile Include="SweepingLine\TimeIntersection.cs" />
     <Compile Include="SystemDesign\ConsistentHash.cs" />
     <Compile Include="SystemDesign\ConsistentHashing2.cs" />
