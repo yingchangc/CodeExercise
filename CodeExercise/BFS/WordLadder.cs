@@ -226,7 +226,6 @@ namespace CodeExercise.BFS
                     foreach (string candidate in candidates)
                     {
                         queue.Enqueue(candidate);
-                        visited.Add(candidate);
                     }
                 }
                 len++;
@@ -234,86 +233,29 @@ namespace CodeExercise.BFS
             }
 
             return 0;
-
         }
-
-        public int LadderLength_old(string beginWord, string endWord, IList<string> wordList)
-        {
-            if (wordList == null)
-            {
-                return 0;
-            }
-
-            if (string.Compare(beginWord, endWord) == 0)
-            {
-                return 1;
-            }
-
-            HashSet<string> dictionary = new HashSet<string>(wordList);
-
-            HashSet<string> visited = new HashSet<string>();
-            Queue<string> queue = new Queue<string>();
-            queue.Enqueue(beginWord);
-            visited.Add(beginWord);
-
-            int len = 0;
-
-            // bfs level
-            while (queue.Count > 0)
-            {
-                int levelSize = queue.Count;
-                len++;
-
-                for (int i = 0; i < levelSize; i++)
-                {     
-                    string curr = queue.Dequeue();
-
-                    // get all possitble combinations
-                    // if already exists in pre level, don't count, since we care about the shortest path
-                    HashSet<string> candidates = getNextWords(curr, visited, dictionary);
-
-                    foreach (string candidate in candidates)
-                    {
-                        if (string.Compare(endWord, candidate) == 0)
-                        {
-                            // pre level len +1
-                            return len + 1;
-                        }
-
-                        queue.Enqueue(candidate);
-                        visited.Add(candidate);
-                    }
-                }
-
-            }
-
-            return 0;
-
-        }
-
 
         private HashSet<string> getNextWords(string word, HashSet<string> visited, HashSet<string> dictionary)
         {
-            HashSet<string> candidates = new HashSet<string>();  
+            string alpha = "abcdefghijklmnopqrstuvwxyz";
+            HashSet<string> candidates = new HashSet<string>();
 
             for (int i = 0; i < word.Length; i++)
             {
-                foreach(char x in "abcdefghijklmnopqrstuvwxyz")
+                var tempArr = word.ToCharArray();
+                foreach (char c in alpha)
                 {
-                    StringBuilder candidate = new StringBuilder(word);
+                    tempArr[i] = c;
 
-                    // not the same as curr word
-                    if (word[i] != x)
-                    {                  
-                        // replace and make as a candidate
-                        candidate[i] = x;
+                    string tempStr = new string(tempArr);
 
-                        if (!visited.Contains(candidate.ToString()) && dictionary.Contains(candidate.ToString()))
-                        {
-                            candidates.Add(candidate.ToString());
-                        }
-                        
+                    if (dictionary.Contains(tempStr) && !visited.Contains(tempStr))
+                    {
+                        candidates.Add(tempStr);
+                        visited.Add(tempStr);
                     }
+
+
                 }
             }
             return candidates;

@@ -42,55 +42,65 @@ namespace CodeExercise.SystemDesign
     /// </summary>
     class DesignHitCounter
     {
-        public class Second
-        {
-            public int sec;
-            public int hitCount;
+        int TotalCount;
 
-            public Second(int sec)
-            {
-                this.sec = sec;
-                this.hitCount = 1;
-            }
-
-        }
-
-        int TotalHit;
-        Queue<Second> que;
+        LinkedList<TimeUnit> dque;
         /** Initialize your data structure here. */
         public DesignHitCounter()
         {
-            TotalHit = 0;
-            que = new Queue<Second>();
+            dque = new LinkedList<TimeUnit>();
+            TotalCount = 0;
         }
 
         /** Record a hit.
             @param timestamp - The current timestamp (in seconds granularity). */
         public void Hit(int timestamp)
         {
-            if (que.Count > 0 && que.First().sec == timestamp)
+            LazyRetention(timestamp);
+
+            TotalCount++;
+
+            if (dque.Count > 0 && dque.First().time == timestamp)    // same time as newsttime
             {
-                que.First().hitCount++;
+                dque.First().freq++;
             }
             else
             {
-                que.Enqueue(new Second(timestamp));
+                var newTU = new TimeUnit(timestamp);
+                dque.AddFirst(newTU);
             }
-            
-            TotalHit++;
+
         }
 
         /** Return the number of hits in the past 5 minutes.
             @param timestamp - The current timestamp (in seconds granularity). */
         public int GetHits(int timestamp)
         {
-            while (que.Count > 0 && timestamp - que.First().sec >= 300)
-            {
-                var timeUnit = que.Dequeue();
-                TotalHit -= timeUnit.hitCount;
-            }
+            LazyRetention(timestamp);
 
-            return TotalHit;
+            return TotalCount;
+        }
+
+        private void LazyRetention(int currT)
+        {
+            while (dque.Count > 0 && dque.Last().time <= currT - 300)
+            {
+                var last = dque.Last();
+                TotalCount -= last.freq;
+                dque.RemoveLast();
+            }
+        }
+
+        public class TimeUnit
+        {
+            public int time;
+            public int freq;
+
+            public TimeUnit(int t)
+            {
+                time = t;
+                freq = 1;
+            }
         }
     }
 }

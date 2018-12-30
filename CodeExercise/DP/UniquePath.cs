@@ -9,6 +9,75 @@ namespace CodeExercise.DP
     class UniquePath
     {
         /// <summary>
+        /// Calculation The Sum Of Path
+        /// https://www.jiuzhang.com/solution/calculation-the-sum-of-path/
+        /// 输入一个矩阵的长度为 l，宽度为 w，和三个必经点，问有多少种方法可以从左上角走到右下角（每一步，只能向右或者向下走），输入保证合法，有解。答案对 1000000007 取模。
+        /// </summary>
+        /// <param name="lenX"></param>
+        /// <param name="lenY"></param>
+        /// <param name="points"></param>
+        /// <returns></returns>
+        public int NumofUniquePathsWithMustVisitNode(int lenY, int lenX, List<Point> points)
+        {
+            int ans = 1;
+
+            var preP = new Point(0, 0);
+
+            for (int i = 0; i < points.Count; i++)
+            {
+                var currP = points[i];
+                ans *= GetUniquePathHelper((currP.y - preP.y + 1), (currP.x - preP.x + 1));
+
+                preP = currP;
+            }
+
+            // final
+            ans *= GetUniquePathHelper((lenY-1 - preP.y + 1), (lenX-1 - preP.x + 1));
+
+            return ans;
+        }
+
+        private int GetUniquePathHelper(int m, int n)
+        {
+            int[,] F = new int[m, n];
+
+            for (int j = 0; j <m; j++)
+            {
+                for (int i = 0; i < n; i++)
+                {
+                    if (j == 0 && i ==0)
+                    {
+                        F[j, i] = 1;
+                    }
+
+                    if ((j-1) >= 0)
+                    {
+                        F[j, i] += F[j - 1,i];
+                    }
+
+                    if ((i-1) >= 0)
+                    {
+                        F[j, i] += F[j, i - 1];
+                    }
+                }
+            }
+
+            return F[m - 1, n - 1];
+        }
+
+        public class Point
+        {
+            public int x;
+            public int y;
+
+            public Point(int y, int x)
+            {
+                this.x = x;
+                this.y = y;
+            }
+        }
+
+        /// <summary>
         /// 62 
         /// Unique Paths
         /// A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).

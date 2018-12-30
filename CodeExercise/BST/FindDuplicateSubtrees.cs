@@ -32,6 +32,8 @@ namespace CodeExercise.BST
         /// and
         /// 
         ///     4
+        ///     
+        /// also check IsSubtree_Serlaizlie
         /// </summary>
         /// <param name="root"></param>
         /// <returns></returns>
@@ -56,8 +58,8 @@ namespace CodeExercise.BST
             var left = Traverse(node.left, lookup, ans);
             var right = Traverse(node.right, lookup, ans);
 
-            // yic must be in the post order
-            string levelStr = left + ","  + right + "," + node.val;  
+            // yic must be in the pre or post order
+            string levelStr = node.val + "," + left + "," + right;
 
             // consider  
             /*
@@ -67,7 +69,11 @@ namespace CodeExercise.BST
              *           # #                     #  #
              *     
              *      serialize
-             *          #X#X#       ==  ??       #X#X# 
+             *  in        #X#X#       ==  ??       #X#X# 
+             *          
+             *          
+             *  pre    xx###                    x#x##    
+             *  post  ##x#x                     ###xx    
              */
 
 

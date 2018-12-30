@@ -140,41 +140,90 @@ namespace CodeExercise.DataStructure
         /// <returns></returns>
         public IList<int> NumIslands2LeetCode(int m, int n, int[,] positions)
         {
-            List<int> ans = new List<int>();
+            UF uf = new UF(m * n);
 
-            UnionFindIsland2 uf = new UnionFindIsland2(m * n);
-
-            var deltasX = new int[] { 1, -1, 0, 0 };
-            var deltasY = new int[] { 0, 0, 1, -1};
+            int size = positions.GetLength(0);
 
             bool[,] grid = new bool[m, n];
 
-            int numPositions = positions.GetLength(0);
-            for (int i = 0; i < numPositions; i++)
+            int[] deltasY = { -1, 1, 0, 0 };
+            int[] deltasX = { 0, 0, -1, 1 };
+
+            var ans = new List<int>();
+
+
+            for (int i = 0; i < size; i++)
             {
                 int y = positions[i, 0];
                 int x = positions[i, 1];
 
-                uf.Count++;
                 grid[y, x] = true;
 
-                for(int k = 0; k < 4; k++)
-                {
-                    int ny = y + deltasY[k];
-                    int nx = x + deltasX[k];
+                uf.islandcount++;    // temp add island
 
-                    if ((ny >=0 && ny <m) && (nx >=0 && nx <n) && grid[ny,nx] == true)
+                // union to connected component
+                for (int j = 0; j < 4; j++)
+                {
+                    var ny = y + deltasY[j];
+                    var nx = x + deltasX[j];
+
+                    if (ny >= 0 && ny < m && nx >= 0 && nx < n && grid[ny, nx] == true)
                     {
-                        int locA = y * n + x;
-                        int locB = ny * n + nx;
-                        uf.Connect(locA, locB);
+                        int encodeNeighbor = ny * n + nx;
+                        int encodecurr = y * n + x;
+                        uf.Union(encodecurr, encodeNeighbor);   // might reduce islandcount        
                     }
                 }
 
-                ans.Add(uf.Count);
+                ans.Add(uf.islandcount);
             }
 
             return ans;
+        }
+
+
+        public class UF
+        {
+            private int[] ufarray;
+
+            public int islandcount;
+
+            public UF(int n)
+            {
+                ufarray = new int[n];
+                islandcount = 0;
+                for (int i = 0; i < n; i++)
+                {
+                    ufarray[i] = i;
+                }
+            }
+
+            public int Find(int n)
+            {
+                if (n != ufarray[n])
+                {
+                    int ancestor = Find(ufarray[n]);
+                    ufarray[n] = ancestor;
+                }
+
+                return ufarray[n];
+            }
+
+            public void Union(int a, int b)
+            {
+                int pa = Find(a);
+                int pb = Find(b);
+
+                if (pa != pb)
+                {
+                    ufarray[pb] = pa;
+                    islandcount--;
+                }
+
+
+            }
+
+
         }
     }
 }

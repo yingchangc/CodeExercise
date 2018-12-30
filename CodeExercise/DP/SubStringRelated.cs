@@ -152,85 +152,66 @@ namespace CodeExercise.DP
 
         }
 
-        public string MinWindowOld(string s, string t)
+        public string MinWindowLeetCode(string s, string t)
         {
-            int start = 0;
-            int end = 0;
-            int count = t.Length;
-
-            // put template in Dict with count
-            Dictionary<char, int> lookupCount = new Dictionary<char, int>();
+            var lookup = new Dictionary<char, int>();
             foreach (char c in t)
             {
-                if (lookupCount.ContainsKey(c))
+                if (!lookup.ContainsKey(c))
                 {
-                    lookupCount[c]++;
+                    lookup.Add(c, 0);
                 }
-                else
-                {
-                    lookupCount[c] = 1;
-                }
+                lookup[c]++;
             }
 
-            bool found = false;
-            int finalHead = 0;
-            Dictionary<char, int> charLocDict = new Dictionary<char, int>();
-            int minLength = int.MaxValue;
+            int score = t.Length;
 
-            // now walk end
-            while (end < s.Length)
+            string ans = "";
+
+            int len = int.MaxValue;
+
+            int j = 0;
+            for (int i = 0; i < s.Length; i++)
             {
-                char c = s[end];
-                if (lookupCount.ContainsKey(c))
+                while (j < s.Length && score > 0)
                 {
-                    lookupCount[c]--;
-
-                    if (lookupCount[c] >= 0)  // in t
+                    if (lookup.ContainsKey(s[j]))
                     {
-                        count--;
-                    }
-
-                    if (count == 0)
-                    {
-                        found = true;
-
-                        while (count == 0)
+                        var remaining = --lookup[s[j]];
+                        if (remaining >= 0)
                         {
-                            // keep find best answer
-                            // since start may not be optimal   aaabc  [abc]
-                            int temp = end - start + 1;
-                            if (minLength > temp)
-                            {
-                                minLength = temp;
-                                finalHead = start;
-                            }
-
-                            // move start to until invalid   ie count >1
-                            char schar = s[start];
-                            if (lookupCount.ContainsKey(schar))
-                            {
-                                lookupCount[schar]++;
-                                
-                                if (lookupCount[schar] > 0)
-                                {
-                                    count++;
-                                }
-                            }
-
-                            start++;
+                            score--;
                         }
                     }
+
+                    j++;
                 }
 
-                end++;   // always increase
+                if (score == 0)
+                {
+                    int newLen = j - i;
+
+                    if (len > newLen)
+                    {
+                        ans = s.Substring(i, newLen);
+                        len = newLen;
+                        //Console.WriteLine(ans);
+                    }
+                }
+
+                // i is ready to move forward
+                if (lookup.ContainsKey(s[i]))
+                {
+                    var remaining = ++lookup[s[i]];
+
+                    if (remaining > 0)
+                    {
+                        score++;
+                    }
+                }
             }
 
-            if (found)
-            {
-                return s.Substring(finalHead, minLength);
-            }
-
-            return "";
+            return ans;
         }
     }
 

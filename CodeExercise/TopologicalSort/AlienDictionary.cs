@@ -8,12 +8,8 @@ namespace CodeExercise.TopologicalSort
 {
     class AlienDictionary
     {
-
-        Dictionary<char, int> inbound = new Dictionary<char, int>();
-        Dictionary<char, List<char>> childrenLookup = new Dictionary<char, List<char>>();
-        HashSet<char> UniqueChars = new HashSet<char>();
         /// <summary>
-        /// 269. Alien Dictionary
+        /// /// 269. Alien Dictionary
         /// https://leetcode.com/problems/alien-dictionary/description/
         /// There is a new alien language which uses the latin alphabet. However, the order among letters are unknown to you. You receive a list of non-empty words from the dictionary, where words are sorted lexicographically by the rules of this new language. Derive the order of letters in this language.
         /// 
@@ -39,132 +35,120 @@ namespace CodeExercise.TopologicalSort
         /// </summary>
         /// <param name="words"></param>
         /// <returns></returns>
-        public string AlienOrder(string[] words)
+        public string AlienOrderPractice(string[] words)
         {
-            if (words ==null || words.Length <= 1)
+            if (words == null || words.Length ==0)
             {
                 return "";
             }
 
-            
 
+            var inbound = new Dictionary<char, int>();
+            var childLookup = new Dictionary<char, List<char>>();
+
+            var charSet = new HashSet<char>();
+            GetAllUniqueChar(words, charSet);
+            InitInBound(inbound, charSet);
+
+            // inbound, childlookup
             int count = words.Length;
-
-            for(int i = 0; i <count-1; i++)
+            for (int i = 1; i < count; i++)
             {
-                CompareTwoWords(words[i], words[i + 1]);
+                CompareWords(inbound, childLookup, words[i - 1], words[i]);
             }
+
+            StringBuilder sb = new StringBuilder();
 
             Queue<char> que = new Queue<char>();
 
-            foreach(var c in childrenLookup.Keys)
+            foreach (var c in charSet)
             {
-                if (!inbound.ContainsKey(c))
+                if (inbound[c] == 0)
                 {
+                    sb.Append(c);
                     que.Enqueue(c);
                 }
             }
 
-            string ans = string.Empty;
-
-            //GetUniqueChars(words);
-
-            while (que.Count > 0)
+            while(que.Count > 0)
             {
-                char c = que.Dequeue();
-                ans += c;
+                var curr = que.Dequeue();
 
-                // yic special handle for unique
-                //UniqueChars.Remove(c);
-
-                // yic  for the last char case
-                if (childrenLookup.ContainsKey(c))
+                if (!childLookup.ContainsKey(curr))
                 {
-                    var children = childrenLookup[c];
-                    foreach (var childC in children)
-                    {
-                        var remain = --inbound[childC];
+                    continue;
+                }
 
-                        if (remain == 0)
-                        {
-                            que.Enqueue(childC);
-                        }
+                var children = childLookup[curr];
+
+                foreach (var c in children)
+                {
+                    inbound[c]--;
+
+                    if (inbound[c] == 0)
+                    {
+                        que.Enqueue(c);
+                        inbound.Remove(c);
+                        sb.Append(c);
                     }
                 }
-                
             }
 
-            // for isolate chars z z
-            //if(AllInboundClear() && UniqueChars.Count > 0)
-            //{
-            //    foreach(char c in UniqueChars)
-            //    ans += c;
-            //}
+            if (sb.Length != charSet.Count)
+            {
+                return "";
+            }
 
+            return sb.ToString();
 
-            return ans;
         }
 
-        private void CompareTwoWords(string s1, string s2)
+        private void GetAllUniqueChar(string[] words, HashSet<char> charSet)
         {
-            int i = 0;
-            for(i= 0; i <s1.Length && i < s2.Length; i++)
+            foreach (var word in words)
             {
-                if (s1[i] != s2[i])
+                foreach (var c in word)
                 {
-                    break;
+                    charSet.Add(c); 
                 }
             }
+        }
 
-            //   ab       z
-            //   abc      z
-            if (i >= s1.Length || i >= s2.Length)
+        private void InitInBound(Dictionary<char, int> inbound, HashSet<char> charSet)
+        {
+            foreach (var c in charSet)
+            {
+                inbound.Add(c, 0);
+            }
+        }
+
+        private void CompareWords(Dictionary<char, int> inbound, Dictionary<char, List<char>> childLookup, string word1, string word2)
+        {
+            if (word1.Length == 0 || word2.Length == 0)
             {
                 return;
             }
 
-            // we...
-            // wr...
-            //     r -> +1
-            if (!inbound.ContainsKey(s2[i]))
+            for (int i = 0; i < word1.Length && i < word2.Length; i++)
             {
-                inbound.Add(s2[i], 0);
-            }
-            inbound[s2[i]]++;
-
-
-            // we...
-            // wr...
-            // e -> r
-            if (!childrenLookup.ContainsKey(s1[i]))
-            {
-                childrenLookup.Add(s1[i], new List<char>());
-            }
-            childrenLookup[s1[i]].Add(s2[i]);
-        }
-
-        private void GetUniqueChars(string[] words)
-        {
-            foreach(string word in words)
-            {
-                foreach(char c in word)
+                if (word1[i] != word2[i])
                 {
-                    UniqueChars.Add(c);
+                    if (!inbound.ContainsKey(word2[i]))
+                    {
+                        inbound.Add(word2[i],0);
+                    }
+                    inbound[word2[i]]++;
+                    
+                    if (!childLookup.ContainsKey(word1[i]))
+                    {
+                        childLookup.Add(word1[i], new List<char>());
+                    }
+                    childLookup[word1[i]].Add(word2[i]);
+                    break;
                 }
-            }
+            } 
         }
 
-        private bool AllInboundClear()
-        {
-            foreach(char c in inbound.Keys)
-            {
-                if (inbound[c] != 0)
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
+       
     }
 }

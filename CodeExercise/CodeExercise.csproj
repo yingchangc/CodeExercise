@@ -78,6 +78,7 @@
     <Compile Include="BST\AllNodesDistanceKBinaryTree.cs" />
     <Compile Include="BST\BinaryTreeVerticalOrderTraversal.cs" />
     <Compile Include="BST\BSTSummary.cs" />
+    <Compile Include="BST\ConstructBinaryTree.cs" />
     <Compile Include="BST\ConvertBSTGreaterTree.cs" />
     <Compile Include="BST\FindDuplicateSubtrees.cs" />
     <Compile Include="BST\GraphBipartite.cs" />
@@ -85,11 +86,14 @@
     <Compile Include="BST\IslandPerimeter.cs" />
     <Compile Include="BST\MergeTwoBinaryTrees.cs" />
     <Compile Include="BST\PrintBinaryTree.cs" />
+    <Compile Include="BST\Subtree AnotherTree.cs" />
+    <Compile Include="BST\SumRootLeafNumbers.cs" />
     <Compile Include="BST\SymmetricTree.cs" />
     <Compile Include="Connection.cs" />
     <Compile Include="DataStructure\AccountsMerge.cs" />
     <Compile Include="DataStructure\AirplaneInSky.cs" />
     <Compile Include="DataStructure\AsteroidCollision.cs" />
+    <Compile Include="DataStructure\CompareVersionNumbers.cs" />
     <Compile Include="DataStructure\ConnectingGraph.cs" />
     <Compile Include="DataStructure\ContinuousSubArraySum.cs" />
     <Compile Include="DataStructure\CustomSortString.cs" />
@@ -100,6 +104,7 @@
     <Compile Include="DataStructure\ExclusiveTimeFunctions.cs" />
     <Compile Include="DataStructure\ExpandExpression.cs" />
     <Compile Include="DataStructure\FindAllNumbersDisappearedInArray.cs" />
+    <Compile Include="DataStructure\FindCelebrity.cs" />
     <Compile Include="DataStructure\FindDuplicateNumber.cs" />
     <Compile Include="DataStructure\FirstMissingPositive.cs" />
     <Compile Include="DataStructure\FirstUniqueCharacterinaString.cs" />

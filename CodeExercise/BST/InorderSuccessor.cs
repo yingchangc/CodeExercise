@@ -30,25 +30,22 @@ namespace CodeExercise.BST
         /// <returns></returns>
         public TreeNode InorderSuccessorSolver(TreeNode root, TreeNode p)
         {
-            var temp = root;
             TreeNode ans = null;
-            while(temp != null)
+
+            TreeNode curr = root;
+
+            while (curr != null)
             {
-                // need to find bigger one
-                if (temp.val < p.val)
+                if (curr.val > p.val)
                 {
-                    temp = temp.right;
+                    // YIC can be candidate
+                    ans = curr;
+                    curr = curr.left;
                 }
-                else if (temp.val == p.val)
+                else
                 {
-                    // still need to find bigger one for ans 
-                    temp = temp.right;
-                }
-                else // (temp.val > p.val)
-                {
-                    // temp is bigger  can be candidate, eventually will get the closet one
-                    ans = temp;
-                    temp = temp.left;   // walk close to p (smaller)
+                    // curr <= p  
+                    curr = curr.right;
                 }
             }
 

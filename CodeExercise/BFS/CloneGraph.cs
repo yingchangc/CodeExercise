@@ -43,29 +43,30 @@ namespace CodeExercise.BFS
 
             Queue<UndirectedGraphNode> queue = new Queue<UndirectedGraphNode>();
             Dictionary<UndirectedGraphNode, UndirectedGraphNode> lookup = new Dictionary<UndirectedGraphNode, UndirectedGraphNode>();  // orig, copy
-            lookup.Add(node, new UndirectedGraphNode(node.label));
+
+            var visited = new HashSet<UndirectedGraphNode>();
 
             queue.Enqueue(node);
+            var nodeClone = new UndirectedGraphNode(node.label);
+            lookup.Add(node, nodeClone);
+            visited.Add(node);
 
-            while(queue.Count > 0)
+            while (queue.Count > 0)
             {
                 var top = queue.Dequeue();
                 var topClone = lookup[top];
+
                 foreach (var neighbor in top.neighbors)
                 {
-                    if (!lookup.ContainsKey(neighbor))
+                    if (!visited.Contains(neighbor))
                     {
-                        var neighbClone = new UndirectedGraphNode(neighbor.label);
-                        topClone.neighbors.Add(neighbClone);
-                        lookup.Add(neighbor, neighbClone); // orig, copy
                         queue.Enqueue(neighbor);
+                        var neighborClone = new UndirectedGraphNode(neighbor.label);
+                        lookup.Add(neighbor, neighborClone);
+                        visited.Add(neighbor);
                     }
-                    else
-                    {
-                        // Note: yic  the neighbor has been visited (checked) first by other nodes, but we still need to make connection for curr top (not the pre top)
-                        var neighbClone = lookup[neighbor];
-                        topClone.neighbors.Add(neighbClone);
-                    }
+                    var neighbClone = lookup[neighbor];
+                    topClone.neighbors.Add(neighbClone);
                 }
             }
 

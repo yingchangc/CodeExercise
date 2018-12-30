@@ -886,4 +886,126 @@ see if we can walk a nums
 /// 
 ///     4
 
-each level   serialize left +right +val   (post order)  and check if dicitonary lookup contains it
+each level   serialize left +right +val   (post,pre order)  and check if dicitonary lookup contains it
+also check IsSubtree_Serlaizlie
+
+/// 285. Inorder Successor in BST
+/// https://leetcode.com/problems/inorder-successor-in-bst/
+/// Given a binary search tree and a node in it, find the in-order successor of that node in the BST.
+/// 
+/// Note: If the given node has no in-order successor in the tree, return null.
+/// 
+/// Example 1:
+/// 
+/// Input: root = [2,1,3], p = 1
+/// 
+///   2
+///  / \
+/// 1   3
+
+while (curr != null)
+{
+    if (curr.val > p.val)
+    {
+        // YIC can be candidate
+        ans = curr;
+        curr = curr.left;
+    }
+    else
+    {
+        // curr <= p  
+        curr = curr.right;
+    }
+}
+
+ /// 273. Integer to English Words
+/// https://leetcode.com/problems/integer-to-english-words/description/
+/// Convert a non-negative integer to its english words representation. Given input is guaranteed to be less than 2^31 - 1.   (~2GB)
+/// Input: 1,234,567,891
+
+Process 3 digit
+ 
+if (num <= 20)
+else if (num < 100)
+else // (num >= 100)
+
+private void initLookup()
+        {
+            lookup.Add(0, "");
+            lookup.Add(1, "One");
+            lookup.Add(2, "Two");
+            lookup.Add(3, "Three");
+            lookup.Add(4, "Four");
+            lookup.Add(5, "Five");
+            lookup.Add(6, "Six");
+            lookup.Add(7, "Seven");
+            lookup.Add(8, "Eight");
+            lookup.Add(9, "Nine");
+            lookup.Add(10, "Ten");
+            lookup.Add(11, "Eleven");
+            lookup.Add(12, "Twelve");
+            lookup.Add(13, "Thirteen");
+            lookup.Add(14, "Fourteen");
+            lookup.Add(15, "Fifteen");
+            lookup.Add(16, "Sixteen");
+            lookup.Add(17, "Seventeen");
+            lookup.Add(18, "Eighteen");
+            lookup.Add(19, "Nineteen");
+            lookup.Add(20, "Twenty");
+            lookup.Add(30, "Thirty");
+            lookup.Add(40, "Forty");
+            lookup.Add(50, "Fifty");
+            lookup.Add(60, "Sixty");
+            lookup.Add(70, "Seventy");
+            lookup.Add(80, "Eighty");
+            lookup.Add(90, "Ninety");
+
+            digitlookup.Add(0, "");
+            digitlookup.Add(1, " Thousand");
+            digitlookup.Add(2, " Million");
+            digitlookup.Add(3, " Billion");
+
+////////////////////////////
+public class UF
+{
+    private int[] ufarray;
+
+    public int islandcount;
+
+    public UF(int n)
+    {
+        ufarray = new int[n];
+        islandcount = 0;
+        for (int i = 0; i < n; i++)
+        {
+            ufarray[i] = i;
+        }
+    }
+
+    public int Find(int n)
+    {
+        if (n != ufarray[n])
+        {
+            int ancestor = Find(ufarray[n]);
+            ufarray[n] = ancestor;
+        }
+
+        return ufarray[n];
+    }
+
+    public void Union(int a, int b)
+    {
+        int pa = Find(a);    // <--- yic  easy to forget
+        int pb = Find(b);
+
+        if (pa != pb)
+        {
+            ufarray[pb] = pa;
+            islandcount--;
+        }
+
+
+    }
+
+
+}

@@ -60,5 +60,58 @@ namespace CodeExercise.DataStructure
             return len;
 
         }
+
+        public string LongestPalindromePractice(string s)
+        {
+            if (string.IsNullOrEmpty(s))
+            {
+                return "";
+            }
+
+            string ans = "";
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                // odd
+                var oddstr = FindPalindromeFromCenter(s, i, i);
+                if (ans.Length < oddstr.Length)
+                {
+                    ans = oddstr;
+                }
+
+
+                // even
+                var evenstr = FindPalindromeFromCenter(s, i, i + 1);
+                if (ans.Length < evenstr.Length)
+                {
+                    ans = evenstr;
+                }
+            }
+
+            return ans;
+
+        }
+
+        private string FindPalindromeFromCenter(string s, int left, int right)
+        {
+            int start = 0;
+            int last = 0;
+            while (left >= 0 && right < s.Length)
+            {
+                if (s[left] == s[right])
+                {
+                    start = left;
+                    last = right;
+                    left--;
+                    right++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            return s.Substring(start, (last - start + 1));
+        }
     }
 }

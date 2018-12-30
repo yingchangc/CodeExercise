@@ -616,8 +616,18 @@ namespace CodeExercise
         //62, 63
         static void Run_UniquePaths()
         {
-            //62
             DP.UniquePath question = new DP.UniquePath();
+
+            var points = new List<DP.UniquePath.Point>()
+            {
+                new DP.UniquePath.Point(1,1),
+                new DP.UniquePath.Point(2,3),
+                new DP.UniquePath.Point(4,4),
+            };
+
+            var ans1 = question.NumofUniquePathsWithMustVisitNode(7, 7, points);
+            //62
+
             int ans = question.NumofUniquePaths(2, 2);
 
             int[,] grid = { {0,0,0},
@@ -731,33 +741,40 @@ namespace CodeExercise
         //lintcode 434   leetcode 305
         static void Run_NumberOfIsland2()
         {
+           
+            DataStructure.NumberOfIsland2 question = new DataStructure.NumberOfIsland2();
+
+            var paris2 = new List<DataStructure.Point> { new DataStructure.Point(1, 1),
+                                                        new DataStructure.Point(0, 1),
+                                                        new DataStructure.Point(3, 3),
+                                                        new DataStructure.Point(3, 4)};
+
+            //4
+            //5
+            //[[1, 1],[0,1],[3,3],[3,4]]
+            //Expected
+            //[1, 1, 2, 2]
+
             // Given n = 3, m = 3, array of pair A = [(0, 0),(0,1),(2,2),(2,1)].
             //return [1, 1, 2, 2].
             var paris = new List<DataStructure.Point> { new DataStructure.Point(0, 0),
                                                         new DataStructure.Point(0, 1),
                                                         new DataStructure.Point(2, 2),
                                                         new DataStructure.Point(2, 1)};
-            DataStructure.NumberOfIsland2 question = new DataStructure.NumberOfIsland2();
-            var ans = question.NumIslands2(3, 3, paris.ToArray());
 
+            var ans1 = question.NumIslands2(5, 4, paris2.ToArray());
 
-            var paris2 = new List<DataStructure.Point> { new DataStructure.Point(1, 1),
-                                                        new DataStructure.Point(0, 1),
-                                                        new DataStructure.Point(3, 3),
-                                                        new DataStructure.Point(3, 4)};
-            //4
-            //5
-            //[[1, 1],[0,1],[3,3],[3,4]]
-            //Expected
-            //[1, 1, 2, 2]
-            ans = question.NumIslands2(5, 4, paris2.ToArray());
-
-
-
-            int[,] positions = { { 0, 0 }, { 0, 1 }, { 1, 2 }, { 2, 1 } };
+            int[,] positions = { { 0, 1 }, { 1, 2 }, { 2,1 }, { 1, 0 }, { 0,2}, { 0,0}, { 1,1} };
 
             //[[0, 0], [0, 1], [1, 2], [2, 1]].
             var ans2 = question.NumIslands2LeetCode(3, 3, positions);
+
+
+            var ans = question.NumIslands2(3, 3, paris.ToArray());
+
+
+            
+           
 
         }
 
@@ -2702,9 +2719,9 @@ namespace CodeExercise
         {
             TopologicalSort.AlienDictionary question = new TopologicalSort.AlienDictionary();
             
-            //string[] words = { "wrt", "wrf", "er", "ett", "rftt" };
-            string[] words = { "z", "z" };
-            var ans = question.AlienOrder(words);
+            string[] words = { "wrt", "wrf", "er", "ett", "rftt" };
+            //string[] words = { "z", "z" };
+            var ans = question.AlienOrderPractice(words);
             
         }
 
@@ -3253,7 +3270,33 @@ namespace CodeExercise
             var ans = question.ReverseKGroup(head,2);
         }
 
-        static void Main(string[] args)
+        static void Run_BuildTree()
+        {
+            BST.ConstructBinaryTree question = new BST.ConstructBinaryTree();
+            //Input: Binary tree: [1,2,3,null,4]
+            ///        1
+            ///      /   \
+            ///     2     3
+            ///      \  
+            ///       4 
+            /// 
+            /// Output: "1(2()(4))(3)"
+            TreeNode root = new TreeNode(1);
+            root.left = new TreeNode(2);
+            root.right = new TreeNode(3);
+            root.left.right = new TreeNode(4);
+            var ans1 = question.Tree2Str(root);
+
+
+            int[] inorder = {4, 8, 10, 12, 14, 20, 22};
+            int[] levelorder = {20, 8, 22, 4, 12, 10, 14};
+            
+            var ans = question.BuildTree_InorderLevelorder(inorder, levelorder);
+
+        }
+
+
+    static void Main(string[] args)
         {
             Dictionary<char, List<int>> look = new Dictionary<char, List<int>>();
             look.Add('a', new List<int>() { 1,2});
@@ -3272,6 +3315,18 @@ namespace CodeExercise
             //算法大全（3） 二叉树 http://www.cnblogs.com/Jax/archive/2009/12/28/1633691.html
             //https://github.com/yuzhangcmu/LeetCode/blob/master/tree/TreeDemo.java
 
+            //305
+            Run_NumberOfIsland2();
+
+            //62,63
+            Run_UniquePaths();
+
+            //
+            Run_BuildTree();
+
+            //269
+            AlienDictionary();
+            
             //25
             Run_ReverseKLL();
             //463
@@ -3362,8 +3417,7 @@ namespace CodeExercise
             Run_AmazonMock();
 
             Run_BSTSummary();
-            //269
-            AlienDictionary();
+            
             //1479
             Run_CanReachTheEndpoint();
             //1564
@@ -3811,8 +3865,7 @@ namespace CodeExercise
             //64
             Run_MinimumPathSum();
 
-            //62,63
-            Run_UniquePaths();
+            
             // 79
             Run_WordSearch();
 
@@ -3823,8 +3876,7 @@ namespace CodeExercise
             Run_WordDictionary();
             //261
             Run_GraphValidTree();
-            //305
-            Run_NumberOfIsland2();
+            
 
             // lintcode 422
             Run_Trie();

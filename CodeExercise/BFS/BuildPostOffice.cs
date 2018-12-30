@@ -92,6 +92,8 @@ namespace CodeExercise.BFS
                                                             new Location(0,-1),
                                                             new Location(1,0),
                                                             new Location(-1,0)};
+
+            
             bool[,] visited = new bool[totalI, totalJ];
             int sum = 0;
 

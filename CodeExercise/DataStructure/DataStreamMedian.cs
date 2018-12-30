@@ -8,7 +8,7 @@ namespace CodeExercise.DataStructure
 {
     /// <summary>
     /// 295. Find         Median from Data Stream
-    /// 
+    /// https://leetcode.com/problems/find-median-from-data-stream/
     /// Median is the middle value in an ordered integer list. If the size of the list is even, there is no middle value. So the median is the mean of the two middle value.
     /// Examples: 
     /// [2,3,4] , the median is 3
@@ -29,83 +29,109 @@ namespace CodeExercise.DataStructure
     /// </summary>
     class DataStreamMedian
     {
-        SortedDictionary<int, int> maxHeap;
-        SortedDictionary<int, int> minHeap;
+        private SortedSet<Num> maxHeap;   // left
+        private SortedSet<Num> minHeap;   // right
 
-        int totalCount;    // yic, Easy to get wrong,  cannot use heap.count  because it is key, not real total count
-
+        /** initialize your data structure here. */
         public DataStreamMedian()
         {
-            maxHeap = new SortedDictionary<int, int>(Comparer<int>.Create((x, y) => y.CompareTo(x)));
-            minHeap = new SortedDictionary<int, int>(Comparer<int>.Create((x, y) => x.CompareTo(y)));
-            totalCount = 0;   // yic   this is to know where median is left or left+right
+            maxHeap = new SortedSet<Num>(new NumDescComparer());
+            minHeap = new SortedSet<Num>(new NumAscComparer());
         }
 
         public void AddNum(int num)
         {
-            totalCount++;
-            // add to left
-            AddToHeap(maxHeap, num);
 
-            // swap top
-            if (minHeap.Count > 0 && (maxHeap.Keys.First() > minHeap.Keys.First()))
+            maxHeap.Add(new Num(num));
+
+
+
+            if ((maxHeap.Count) > (minHeap.Count + 1))
             {
-                int num1 = maxHeap.Keys.First();
-                int num2 = minHeap.Keys.First();
-
-                RemoveFromHeap(maxHeap, num1);
-                RemoveFromHeap(minHeap, num2);
-
-                AddToHeap(maxHeap, num2);
-                AddToHeap(minHeap, num1);
+                // balance
+                var temp = maxHeap.First();
+                maxHeap.Remove(temp);
+                minHeap.Add(temp);
             }
-
-            // balance
-            // yic: since we always add to left first, even count means left has 2 more, so need to rebalance
-            if (totalCount %2 == 0)
+            else
             {
-                int num1 = maxHeap.Keys.First();
-                RemoveFromHeap(maxHeap, num1);
-                AddToHeap(minHeap, num1);
+                var tempL = maxHeap.First();
+
+                // yic
+                if (minHeap.Count == 0)
+                {
+                    return;
+                }
+
+                var tempR = minHeap.First();
+
+                // {1,10}  vs {5}
+                if (tempL.val > tempR.val)
+                {
+                    maxHeap.Remove(tempL);
+                    minHeap.Remove(tempR);
+
+                    maxHeap.Add(tempR);
+                    minHeap.Add(tempL);
+                }
             }
         }
 
         public double FindMedian()
         {
-            if (totalCount == 0)
+            if (maxHeap.Count == minHeap.Count)
             {
-                return 0;
+                var tempL = maxHeap.First();
+                var tempR = minHeap.First();
+
+                return (1.0 * tempL.val + 1.0 * tempR.val) / 2;
+            }
+            else
+            {
+                var tempL = maxHeap.First();
+                return tempL.val;
             }
 
-            if (totalCount %2 ==1)
-            {
-                // odd number
-                return maxHeap.Keys.First();
-            }
-
-            return (maxHeap.Keys.First() + minHeap.Keys.First()) / 2.0;
         }
 
-        private void AddToHeap(SortedDictionary<int, int> heap, int num)
+        public class Num
         {
-            if (!heap.ContainsKey(num))
+            public int val;
+            public Num(int number)
             {
-                heap.Add(num, 0);
+                val = number;
             }
-            heap[num]++;
         }
 
-        private void RemoveFromHeap(SortedDictionary<int, int> heap, int num)
+        public class NumAscComparer : IComparer<Num>
         {
-            if (heap.ContainsKey(num))
+            public int Compare(Num n1, Num n2)
             {
-                heap[num]--;
-
-                if (heap[num] == 0)
+                if (n1.val != n2.val)
                 {
-                    heap.Remove(num);
+                    return n1.val.CompareTo(n2.val);
+                }
+                else
+                {
+                    return n1.GetHashCode().CompareTo(n2.GetHashCode());
                 }
             }
         }
+
+        public class NumDescComparer : IComparer<Num>
+        {
+            public int Compare(Num n1, Num n2)
+            {
+                if (n1.val != n2.val)
+                {
+                    return n2.val.CompareTo(n1.val);
+                }
+                else
+                {
+                    return n1.GetHashCode().CompareTo(n2.GetHashCode());
+                }
+            }
+        }
+       
     }
 }
