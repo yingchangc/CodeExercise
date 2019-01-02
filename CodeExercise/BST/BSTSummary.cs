@@ -344,8 +344,8 @@ namespace CodeExercise.BST
             return mindiff;
         }
 
-        
-        
+
+
 
         /*
     *  * 12. 求二叉树中节点的最大距离：getMaxDistanceRec
@@ -364,60 +364,35 @@ namespace CodeExercise.BST
     * 返回值设计：
     * 返回1. 深度， 2. 当前树的最长距离  node count 
     */
+        int maxDiameter;
         public int GetMaxDistanceRec(TreeNode root)
         {
-            if (root == null)
+            maxDiameter = 0;
+
+            DiameterHelper(root);
+
+            return maxDiameter;
+        }
+
+        private int DiameterHelper(TreeNode node)
+        {
+            if (node == null)
             {
                 return 0;
             }
 
-            var resut = GetMaxDistanceHelper(root);
+            var leftDepth = DiameterHelper(node.left);
+            var rightDepth = DiameterHelper(node.right);
 
-            return resut.maxNodeCount-1;  // -1 for distance
+            int currDiameter = leftDepth + rightDepth;
+
+            maxDiameter = Math.Max(currDiameter, maxDiameter);
+
+            return 1 + Math.Max(leftDepth, rightDepth);  // return depth
+
         }
 
-        public ResultNode GetMaxDistanceHelper(TreeNode node)
-        {
-            if (node ==null)
-            {
-                return new ResultNode();
-            }
-
-            var left = GetMaxDistanceHelper(node.left);
-            var right = GetMaxDistanceHelper(node.right);
-
-            int currDistance = 1 + left.Depth + right.Depth;
-            int currDepth = 1 + Math.Max(left.Depth, right.Depth);
-
-            if (currDistance > left.maxNodeCount && currDistance > right.maxNodeCount)
-            {
-                return new ResultNode(maxDist: currDistance, depth: currDepth);
-            }
-            else if (left.maxNodeCount >= right.maxNodeCount)
-            {
-                return new ResultNode(maxDist: left.maxNodeCount, depth: currDepth);
-            }
-            else
-            {
-                return new ResultNode(maxDist: right.maxNodeCount, depth: currDepth);
-            }
-        }
-
-        public class ResultNode
-        {
-            public int maxNodeCount = Int32.MinValue;
-            public int Depth = 0;
-            public ResultNode()
-            {
-               
-            }
-
-            public ResultNode(int maxDist, int depth)
-            {
-                this.maxNodeCount = maxDist;
-                this.Depth = depth;
-            }
-        }
+        
 
 
         bool GlobalFoundLAC = false;

@@ -251,6 +251,7 @@
     <Compile Include="DP\MaxProductArray.cs" />
     <Compile Include="DP\MinCostClimbingStairs.cs" />
     <Compile Include="DP\MinimumPathSum.cs" />
+    <Compile Include="DP\MinimumWindowSubsequence.cs" />
     <Compile Include="DP\OnesAndZeroes.cs" />
     <Compile Include="DP\PaintHouse.cs" />
     <Compile Include="DP\PalindromePartition.cs" />
@@ -276,6 +277,7 @@
     <Compile Include="LL\CopyRandomList.cs" />
     <Compile Include="LL\PartitionList.cs" />
     <Compile Include="LL\RemoveDuplicatesfromSortedList.cs" />
+    <Compile Include="LL\RemoveNthNodeFromEndList.cs" />
     <Compile Include="LL\ReverseKLL.cs" />
     <Compile Include="matrixQuestion\SetMatrixZeroes.cs" />
     <Compile Include="matrixQuestion\SpiralMatrix.cs" />
@@ -297,7 +299,9 @@
     <Compile Include="Number\ShuffleCard.cs" />
     <Compile Include="Number\SplitArrayIntoConsecutiveSubsequences.cs" />
     <Compile Include="Number\TriangleCount .cs" />
+    <Compile Include="Number\ValidNumber.cs" />
     <Compile Include="OOD\DesignSnakeGame.cs" />
+    <Compile Include="OOD\DesignTicTacToe.cs" />
     <Compile Include="OOD\ElevatorSystem.cs" />
     <Compile Include="OOD\LFUCache.cs" />
     <Compile Include="OOD\LRUCache.cs" />

@@ -26,91 +26,99 @@ namespace CodeExercise.DataStructure
         /// <param name="tasks"></param>
         /// <param name="n"></param>
         /// <returns></returns>
-        public int LeastCharFreq(char[] tasks, int n)
+        public int LeastInterval(char[] tasks, int n)
         {
+            var pq = new SortedSet<Item>(new ItemComparer());
             Dictionary<char, int> lookup = new Dictionary<char, int>();
-
-            foreach (char c in tasks)
+            int taskLeft = 0;
+            foreach (var c in tasks)
             {
                 if (!lookup.ContainsKey(c))
                 {
                     lookup.Add(c, 0);
                 }
                 lookup[c]++;
+                taskLeft++;
             }
 
-            SortedSet<CharFreq> maxHeap = new SortedSet<CharFreq>(new CharFreqComparer());
-
+            // insert to PQ
             foreach (char c in lookup.Keys)
             {
-                maxHeap.Add(new CharFreq(c, lookup[c]));
+                pq.Add(new Item(c, lookup[c]));
             }
 
             int ans = 0;
-
-            while (maxHeap.Count > 0)
+            while (taskLeft > 1)
             {
-                List<CharFreq> temp = new List<CharFreq>();
-                for (int i = 0; i <= n; i++)  //yic  <= n because we need n space for next same
+                HashSet<Item> temp = new HashSet<Item>();  // temp collect pop item
+                for (int i = 0; i <= n; i++)  // <= n    
                 {
-                    if (maxHeap.Count > 0)
+                    if (pq.Count > 0)
                     {
-                        temp.Add(maxHeap.First());
-                        maxHeap.Remove(temp[i]);  // pop
-                        temp[i].freq--;
+                        var top = pq.First();
+                        pq.Remove(top);
+                        //Console.WriteLine("{0}:{1}", top.c, top.freq);
                         ans++;
+                        top.freq--;
+                        temp.Add(top);
+                        taskLeft--;
+
                     }
-                }
-
-                // Find the gap to fill
-                int inserted = temp.Count;
-                int gap = ((n + 1) - inserted);
-
-
-                // put remaining back
-                for (int i = 0; i < temp.Count; i++)
-                {
-                    if (temp[i].freq > 0)
+                    else
                     {
-                        maxHeap.Add(temp[i]);
+                        if (taskLeft > 0)
+                        {
+                            // don't have inventory. just add idle
+                            ans++;
+                        }
+
+                    }
+
+                }
+                //Console.WriteLine("----------------------");
+
+                // put back
+                foreach (var itm in temp)
+                {
+                    if (itm.freq > 0)
+                    {
+                        pq.Add(itm);
                     }
                 }
+            }
 
-                // yic for the last round, no need to add gap.
-                if (maxHeap.Count > 0)
-                {
-                    ans += gap;
-                }
-
+            if (taskLeft == 1)
+            {
+                // just add the last;
+                ans++;
             }
 
             return ans;
+
         }
 
-        public class CharFreq
+        public class Item
         {
             public char c;
             public int freq;
 
-            public CharFreq(char c, int freq)
+            public Item(char c, int freq)
             {
                 this.c = c;
                 this.freq = freq;
             }
-
-
         }
 
-        public class CharFreqComparer : IComparer<CharFreq>
+        public class ItemComparer : IComparer<Item>
         {
-            public int Compare(CharFreq x, CharFreq y)
+            public int Compare(Item i1, Item i2)
             {
-                if (x.freq != y.freq)
+                if (i1.freq != i2.freq)
                 {
-                    return y.freq.CompareTo(x.freq);
+                    return i2.freq.CompareTo(i1.freq);
                 }
 
-                return x.c.CompareTo(y.c);
+                return i1.c.CompareTo(i2.c);
             }
         }
     }

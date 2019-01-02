@@ -23,38 +23,33 @@ namespace CodeExercise.DP
         ///The number of ways decoding "12" is 2.  
         public int NumDecodings(string s)
         {
-            if (string.IsNullOrEmpty(s))
-            {
-                return 1;
-            }
+            int[] F = new int[s.Length + 1];
 
-            int[] F = new int[(s.Length + 1)];
-            F[0] = 1;     // empty string as 1 decode ways
+            F[0] = 1;
 
             for (int i = 1; i <= s.Length; i++)
             {
+                if (Has1Valid(s, i - 1))
+                {
+                    F[i] += F[i - 1];
+                }
 
-                F[i] = 0;
-
-                if ((i-2) >=0 && isValid2Char(s, i-2))
+                if (i >= 2 && Has2Valid(s, i - 2))
                 {
                     F[i] += F[i - 2];
                 }
 
-                if (isValid1Char(s, i-1))
-                {
-                    F[i] += F[i - 1];
-                }
             }
-
             return F[s.Length];
-
         }
 
-        private bool isValid1Char(string s, int startIndex)
+
+
+        private bool Has1Valid(string s, int startIdx)
         {
-            char first = s[startIndex];
-            if ((first - '1') >= 0 && (first - '0') <= 9)   // 1~9
+            string numStr = s.Substring(startIdx, 1);
+            int num;
+            if (Int32.TryParse(numStr, out num) && num > 0 && num <= 9)
             {
                 return true;
             }
@@ -62,21 +57,15 @@ namespace CodeExercise.DP
             return false;
         }
 
-        private bool isValid2Char(string s, int startIndex)
+        private bool Has2Valid(string s, int startIdx)
         {
-            char first = s[startIndex];
-            char second = s[startIndex+1];
+            string numStr = s.Substring(startIdx, 2);
+            int num;
 
-            if ((first - '1') == 0)    //10 ~19
+            if (Int32.TryParse(numStr, out num) && num >= 10 && num <= 26)
             {
-                return (second - '0') >= 0 && (second - '9') <= 0;
+                return true;
             }
-
-            if ((first - '2') == 0)    //20 ~26
-            {
-                return (second - '0') >= 0 && (second - '6') <= 0;
-            }
-
             return false;
         }
 

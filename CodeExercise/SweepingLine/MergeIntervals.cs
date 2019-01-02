@@ -8,6 +8,19 @@ namespace CodeExercise.SweepingLine
 {
     class MergeIntervals
     {
+
+        public class IntervalComparer : IComparer<Interval>
+        {
+            public int Compare(Interval i1, Interval i2)
+            {
+                if (i1.start != i2.start)
+                {
+                    return i1.start.CompareTo(i2.start);
+                }
+                return i1.end.CompareTo(i2.start);
+            }
+        }
+
         /// <summary>
         /// https://leetcode.com/problems/merge-intervals/description/
         /// 56. Merge Intervals
@@ -23,38 +36,35 @@ namespace CodeExercise.SweepingLine
         /// <returns></returns>
         public IList<Interval> Merge(IList<Interval> intervals)
         {
-            var copy = intervals.ToArray();
-            Array.Sort(copy, new Comparison<Interval>(
-                           (i1, i2) => i1.start.CompareTo(i2.start)   ));
             List<Interval> ans = new List<Interval>();
 
-            Interval curr = null;
-            foreach(var range in copy)
+            var intervalsArr = intervals.ToArray();
+            Array.Sort(intervalsArr, new IntervalComparer());
+
+            foreach (var itv in intervalsArr)
             {
                 if (ans.Count == 0)
                 {
-                    ans.Add(range);
+                    ans.Add(itv);
                 }
                 else
                 {
                     var last = ans[ans.Count - 1];
-                    if (last.end < range.start)
+                    if (last.end < itv.start)
                     {
-                        // 1 --- 3    4 ---5
-                        ans.Add(range);
+                        ans.Add(itv);
                     }
-                    else if (last.end < range.end)
+                    else
                     {
-                        // just update the last one
-                        ///  1---3   2---5
-                        last.end = range.end;
+                        //overlapped
+                        if (last.end < itv.end)
+                        {
+                            last.end = itv.end;
+                        }
                     }
                 }
             }
-
-          
-
-            return ans.ToArray();
+            return ans;
         }
     }
 }

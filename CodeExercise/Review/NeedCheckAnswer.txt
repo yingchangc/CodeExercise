@@ -1007,5 +1007,49 @@ public class UF
 
     }
 
-
 }
+
+
+
+/// 727. Minimum Window Subsequence
+/// https://leetcode.com/problems/minimum-window-subsequence/
+/// Given strings S and T, find the minimum (contiguous) substring W of S, so that T is a subsequence of W.
+/// 
+/// If there is no such window in S that covers all characters in T, return the empty string "". If there are multiple such minimum-length windows, return the one with the left-most starting index.
+/// 
+/// Example 1:
+/// 
+/// Input: 
+/// S = "abcdebdde", T = "bde"
+/// Output: "bcde"
+/// Explanation: 
+/// "bcde" is the answer because it occurs before "bdde" which has the same length.
+/// "deb" is not a smaller window because the elements of T in the window must occur in order.
+/// 
+/// 
+/// sol:
+/// [Faster DP]
+/// dp[i][j] stores the starting index of the substring where T has length i and S has length j.
+///
+///So dp[i][j would be:
+///if T[j - 1] == S[i - 1], this means we could borrow the start index from dp[j - 1][i - 1] to make the current substring valid;
+///else, we only need to borrow the start index from dp[j][i - 1]
+///        which could either exist or not.
+/// 
+/// 
+///    nu a  b  c  d  e  b  d  d  e
+/// nu  0 1  2  3  4  5  6  7  8  9
+///  b -1-1  1                         1 take from diag
+///  d -1
+///  e -1 
+///  
+/// 
+/// 
+///     nu a  b  c  d  e  b  d  d  e
+/// nu  0  1  2  3  4  5  6  7  8  9
+///  b -1 -1  1  1  1  1  5  5  5  5                
+///  d -1 -1 -1 -1  1  1  1  5  5  5                 
+///  e -1 -1 -1 -1 -1 {1} 1  1  1 {5}    
+///  
+/// 
+/// check the last row   {1} is starting idx, and e at loc 5     substring ({1}, 5-1)  find min len

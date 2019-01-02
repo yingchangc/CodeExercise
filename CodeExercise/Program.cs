@@ -1444,6 +1444,12 @@ namespace CodeExercise
             var ans = question.FindMaxForm(Array, 5, 3);
         }
 
+        static void ToTrim(string s)
+        {
+            s= s.Trim();
+        }
+
+
         //566 lint
         static void Run_GFSClient()
         {
@@ -2177,7 +2183,9 @@ namespace CodeExercise
             BFS.RemoveSubstrings question = new BFS.RemoveSubstrings();
             HashSet<string> substrs = new HashSet<string>();
             substrs.Add("ab");
-            substrs.Add("abcd");
+            substrs.Add("cd");
+
+            var ans1 = question.MinLengthIteration("ccdaabcdbb", substrs);
 
             var ans = question.MinLengthRecursive("abcabd", substrs);
         }
@@ -3298,6 +3306,8 @@ namespace CodeExercise
 
     static void Main(string[] args)
         {
+
+
             Dictionary<char, List<int>> look = new Dictionary<char, List<int>>();
             look.Add('a', new List<int>() { 1,2});
             look.Add('b', new List<int>() { 3});
@@ -3308,12 +3318,16 @@ namespace CodeExercise
             c++;
             Char.ToUpper(c);
 
+
             //https://neil.fraser.name/writing/sync/ Differential Synchronization
             // TCP面试常见题 https://blog.csdn.net/libaineu2004/article/details/78850227
 
             //RockMQ  producer consumer https://www.jianshu.com/p/453c6e7ff81c
             //算法大全（3） 二叉树 http://www.cnblogs.com/Jax/archive/2009/12/28/1633691.html
             //https://github.com/yuzhangcmu/LeetCode/blob/master/tree/TreeDemo.java
+
+            //624
+            Run_RemoveSubstrings();
 
             //305
             Run_NumberOfIsland2();
@@ -3451,8 +3465,7 @@ namespace CodeExercise
             //291
             Run_WordPattern();
 
-            //624
-            Run_RemoveSubstrings();
+           
 
             //474
             Run_OneAndZero();
