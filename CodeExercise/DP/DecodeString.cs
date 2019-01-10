@@ -9,6 +9,9 @@ namespace CodeExercise.DP
     class DecodeString
     {
         /**
+         * 
+         * (yic)  deprecated. use  Check "DecodeWays"
+         * 
  * Below is how we encode a string to number
  * 'a' -> 1
  * 'b' -> 2

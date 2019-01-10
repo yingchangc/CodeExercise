@@ -30,55 +30,45 @@ namespace CodeExercise.DataStructure
         /// <returns></returns>
         public List<string> FindSellers(List<string> sellerProdPairs)
         {
-            Dictionary<string, HashSet<string>> sellerProd = new Dictionary<string, HashSet<string>>();
-            Dictionary<string, int> prodSellFreq = new Dictionary<string, int>();
+            HashSet<string> allProds = new HashSet<string>();
             HashSet<string> dupProd = new HashSet<string>();
 
+            // get dup prods
             foreach(var pairStr in sellerProdPairs)
             {
                 var pair = pairStr.Split(',');
                 
-                // seller - {products}
-                if (!sellerProd.ContainsKey(pair[0]))
-                {
-                    sellerProd.Add(pair[0], new HashSet<string>());
-                }
-                sellerProd[pair[0]].Add(pair[1]);
-
                 // products freq
-                if (!prodSellFreq.ContainsKey(pair[1]))
+                if (!allProds.Contains(pair[1]))
                 {
-                    prodSellFreq.Add(pair[1], 0);
+                    allProds.Add(pair[1]);
                 }
-                prodSellFreq[pair[1]]++;
-
-                // find dup prods
-                if (prodSellFreq[pair[1]]> 1)
+                else
                 {
                     dupProd.Add(pair[1]);
-                }
+                }        
             }
 
             // find each seller's dup prod count
             int maxcount = 0;
             Dictionary<string, int> sellerDupCount = new Dictionary<string, int>();
-            foreach(var seller in sellerProd.Keys)
+            foreach (var pairStr in sellerProdPairs)
             {
-                var products = sellerProd[seller];
-                foreach(var prod in products)
-                {
-                    if (dupProd.Contains(prod))
-                    {
-                        if (!sellerDupCount.ContainsKey(seller))
-                        {
-                            sellerDupCount.Add(seller, 0);
-                        }
-                        sellerDupCount[seller]++;
+                var pair = pairStr.Split(',');
 
-                        maxcount = Math.Max(maxcount, sellerDupCount[seller]);
+                if (dupProd.Contains(pair[1]))
+                {
+                    if (!sellerDupCount.ContainsKey(pair[0]))
+                    {
+                        sellerDupCount.Add(pair[0], 0);
                     }
+                    var dupCount = ++sellerDupCount[pair[0]];
+                    maxcount = Math.Max(maxcount, dupCount);
                 }
             }
+
+            
+           
             List<string> ans = new List<string>();
             foreach(var seller in sellerDupCount.Keys)
             {

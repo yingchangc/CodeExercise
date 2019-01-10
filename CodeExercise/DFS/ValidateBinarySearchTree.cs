@@ -47,41 +47,41 @@ namespace CodeExercise.DFS
         /// </summary>
         /// <param name="root"></param>
         /// <returns></returns>
-        public bool IsValidBST(TreeNode root)
+        TreeNode pre;
+        bool isValid;
+        public bool IsValidBST_Traverse(TreeNode root)  // O(n)  O(1) space good at space
         {
-            if (root == null)
-            {
-                return true;
-            }
-            InorderTraversal(root);
+            isValid = true;
+            pre = null;
+            Inorder(root);
+
             return isValid;
         }
 
-        // global answer
-        private bool isValid = true;
-        private TreeNode lastNode = null;
-
-        private void InorderTraversal(TreeNode node)
+        private void Inorder(TreeNode node)
         {
-            // to left
-            if (node.left != null)
+            if (node == null)
             {
-                InorderTraversal(node.left);
+                return;
             }
-            
-            // compare & update
-            if (lastNode != null && lastNode.val >= node.val)
+
+            Inorder(node.left);
+
+            if (!isValid)
+            {
+                return;
+            }
+
+            if (pre != null && pre.val >= node.val)
             {
                 isValid = false;
+                return;
             }
 
-            lastNode = node;
+            pre = node;
 
-            // to right
-            if (node.right!=null)
-            {
-                InorderTraversal(node.right);
-            }
+            Inorder(node.right);
+
         }
 
         public bool IsValidBST_better(TreeNode root)

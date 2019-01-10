@@ -137,6 +137,7 @@ namespace CodeExercise.DFS
         {
             left = 0;
             right = 0;
+
             foreach(var c in s)
             {
                 if (c == '(')

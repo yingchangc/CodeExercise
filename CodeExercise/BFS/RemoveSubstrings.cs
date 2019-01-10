@@ -8,70 +8,6 @@ namespace CodeExercise.BFS
 {
     class RemoveSubstrings
     {
-        public int MinLengthIteration(string s, HashSet<string> dict)
-        {
-            Queue<string> que = new Queue<string>();
-
-            HashSet<string> visited = new HashSet<string>();
-
-            que.Enqueue(s);
-            visited.Add(s);
-
-            int minLen = s.Length;
-            string ans = s;
-
-            while(que.Count > 0)
-            {
-                var curr = que.Dequeue();
-
-                if (minLen > curr.Length)
-                {
-                    minLen = curr.Length;
-                    ans = curr;
-                }
-
-                var collection = RemoveHelper(curr, dict, visited);
-
-                foreach (var sub in collection)
-                {
-                    que.Enqueue(sub);
-                }
-            }
-
-            Console.WriteLine(ans);
-
-            return minLen;
-
-
-        }
-
-        private HashSet<string> RemoveHelper(string s, HashSet<string> dict, HashSet<string> visited)
-        {
-            HashSet<string> collection = new HashSet<string>();
-
-            foreach (var w in dict)
-            {
-                int idx = s.IndexOf(w,0);
-                while(idx != -1)
-                {
-                    var parsed = s.Substring(0, idx) + s.Substring(idx + w.Length);
-
-                    if (!visited.Contains(parsed))
-                    {
-                        collection.Add(parsed);
-                        visited.Add(parsed);
-                    }
-                    
-                    idx = s.IndexOf(w, idx+1);
-                }   
-            }
-            return collection;
-            
-        }
-
-
-        private int minLen = Int32.MaxValue;
-        private HashSet<string> visited = new HashSet<string>();
         /// <summary>
         /// 624. Remove Substrings
         /// https://www.lintcode.com/problem/remove-substrings/description
@@ -88,61 +24,63 @@ namespace CodeExercise.BFS
         /// 
         /// sol:
         /// remove substrs from orig string with diff index  stat locs
-        /// </summary>
-        /// <param name="s"></param>
-        /// <param name="dict"></param>
-        /// <returns></returns>
-        
-
-        public int MinLengthRecursive(string s, HashSet<string> dict)
-        {   
-            MinLengthHelper(s, dict);
-            return minLen;
-        }
-
-        private void MinLengthHelper(string s, HashSet<string> dict)
+        public int MinLengthIterationQue(string s, HashSet<string> dict)
         {
-            // yic  need this optimizaiton
-            if (visited.Contains(s))
-            {
-                return;
-            }
+            Queue<string> que = new Queue<string>();
+            HashSet<string> visited = new HashSet<string>();
 
-            minLen = Math.Min(s.Length, minLen);
+            que.Enqueue(s);
+            visited.Add(s);
 
-            foreach(string word in dict)
+            string ansStr = s;
+            int minLen = s.Length;
+
+            while(que.Count > 0)
             {
-                if (s.Contains(word))
+                var curr = que.Dequeue();
+
+                if (curr.Length < minLen)
                 {
-                    HashSet<string> shorterStrs = RemoveSubstr(s, word);
-                    foreach(string shorterStr in shorterStrs)
+                    minLen = curr.Length;
+                    ansStr = curr;
+                }
+
+                foreach(var w in dict)
+                {
+                    // yic must find candidates
+                    var candidates = FindCandidates(curr, w);
+                    
+                    foreach(var candidate in candidates)
                     {
-                        MinLengthHelper(shorterStr, dict);
+                        if (!visited.Contains(candidate))
+                        {
+                            visited.Add(candidate);
+                            que.Enqueue(candidate);
+                        }
                     }
-                                      
                 }
             }
 
-            visited.Add(s);
+            return minLen;
         }
 
-        // yic  need to get all substrings combination    abcdabd "ab" -> "cdabd"  and "abcdd" because order matters  
-        private HashSet<string> RemoveSubstr(string s, string word)
+        // yic remove order matters, so need to find all candidate at this level
+        private List<string> FindCandidates(string s, string word)
         {
             int startIdx = 0;
-            HashSet<string> collection = new HashSet<string>();
-            while(s.IndexOf(word, startIdx)!= -1)
+            List<string> candidates = new List<string>();
+            while((startIdx = s.IndexOf(word, startIdx)) != -1)
             {
-                int firstOccurrent = s.IndexOf(word, startIdx);
-                string shorterStr = s.Substring(0, firstOccurrent) + s.Substring(firstOccurrent + word.Length);
-                collection.Add(shorterStr);
-
-                startIdx = firstOccurrent + 1;
+                string prefix = s.Substring(0, startIdx);
+                string suffix = s.Substring(startIdx + word.Length);
+                candidates.Add(prefix + suffix);
+                startIdx++;
             }
-
-           
-
-            return collection;
+            return candidates;
         }
+
+
+        
+
     }
 }

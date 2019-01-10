@@ -30,78 +30,90 @@ namespace CodeExercise.DataStructure
         /// <returns></returns>
         public int MaxPoints(Point[] points)
         {
-            int count = points.Length;
-
-            if (count == 0)
+            if (points == null || points.Length < 1)
             {
                 return 0;
             }
-            if (count == 1)
+            else if (points.Length == 1)
             {
                 return 1;
             }
 
-            int maxPointInLine = 0;
+            int count = points.Length;
 
-            Dictionary<Point, Dictionary<double, int>> lookup = new Dictionary<Point, Dictionary<double, int>>(); // point,   {slope, count}
+            int gMax = 0;
 
             for (int i = 0; i < count; i++)
             {
-                var slopeCollection = new Dictionary<double, int>();
-                int samepoint = 0;
-                for(int j = i+1; j < count; j++)
+                int samePt = 0;
+                int levelMax = 0;
+                var lookup = new Dictionary<string, int>();  // slope, freq   at curr level
+
+                for (int j = i + 1; j < count; j++)
                 {
+                    // the same start p1, if same slope, it will be in the same line
+
+                    // same pt can be count as any slope
                     if (points[i].x == points[j].x && points[i].y == points[j].y)
                     {
-                        samepoint++;   // save later for all points
+                        samePt++;
+                        continue;   // yic
+                    }
+
+                    int deltaX = (points[j].x - points[i].x);
+                    int deltaY = (points[j].y - points[i].y);
+
+                    string nslope;
+                    if (deltaX == 0)
+                    {
+                        nslope = "INF";
+                    }
+                    else if (deltaY == 0)
+                    {
+                        nslope = "0";
                     }
                     else
                     {
-                        double slope = ComputeSlope(points[i], points[j]);
-                        if (!slopeCollection.ContainsKey(slope))
+                        int big = Math.Max(deltaX, deltaY);
+                        int small = Math.Min(deltaX, deltaY);
+                        int gcd = ComputeGCD(big, small);
+                        deltaX /= gcd;
+                        deltaY /= gcd;
+
+                        string sign = "+";
+                        if ((deltaX > 0 && deltaY < 0) || (deltaX < 0 && deltaY > 0))
                         {
-                            slopeCollection.Add(slope, 0);
+                            sign = "-";
                         }
-                        slopeCollection[slope]++;
+
+                        nslope = sign + Math.Abs(deltaX) + "," + Math.Abs(deltaY); // normalized slope as point
                     }
+
+                    if (!lookup.ContainsKey(nslope))
+                    {
+                        lookup.Add(nslope, 0);  // bo self i, because [0,0][0,0] same point case cannot get self
+                    }
+                    var freq = ++lookup[nslope];
+
+                    levelMax = Math.Max(freq, levelMax);
                 }
 
-                int localMax = 0;
-                foreach(var slopCount in slopeCollection.Values)
-                {
-                    localMax = Math.Max(localMax, slopCount);
-                }
+                levelMax += samePt;
 
-                maxPointInLine = Math.Max(maxPointInLine, 1 + samepoint + localMax);
+                gMax = Math.Max(gMax, levelMax + 1);  // yic add self
             }
 
-            return maxPointInLine;
+            return gMax;
         }
 
-        private double ComputeSlope(Point p1, Point p2)
+        int ComputeGCD(int big, int small)
         {
-            if (p1.x == p2.x)
-            {
-                return Double.MaxValue;
-            }
-
-            var diffX = p1.x - p2.x;
-            var diffY = p1.y - p2.y;
-
-            return (1.0*(p1.y - p2.y)) / (1.0*(p1.x - p2.x));
-
-        }
-
-        private int gcd(int big, int small)
-        {
-            if (small != 0)
-            {
-                return gcd(small, big % small);
-            }
-            else
+            if (small == 0)
             {
                 return big;
             }
+
+            return ComputeGCD(small, big % small);
         }
     }
 }

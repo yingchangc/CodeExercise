@@ -21,6 +21,69 @@ namespace CodeExercise.DFS
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
+        public List<List<string>> SplitStringSolver_Lint(string s)
+        {
+            return DFS(s, new Dictionary<string, List<List<string>>>());
+        }
+
+        private List<List<string>> DFS(string s, Dictionary<string, List<List<string>>> memo)
+        {
+            if (memo.ContainsKey(s))
+            {
+                return memo[s];
+            }
+
+            List<List<string>> res = new List<List<string>>();
+            if (s.Length <= 2)
+            {    
+                for (int len = 1; len <= s.Length; len++)
+                {
+                    List<string> curr = new List<string>();
+                    for (int i = 0; i <= s.Length-len; i++)
+                    {
+                        string str = s.Substring(i, len);
+                        curr.Add(str);
+                    }
+
+                    res.Add(curr);
+                }
+
+                memo.Add(s, res);
+
+                return res;
+            }
+
+            // take 1
+            var one = s.Substring(0, 1);
+            var oneChildren = DFS(s.Substring(1), memo);
+
+            foreach(var oneChild in oneChildren)
+            {
+                var curr = new List<string>();
+                curr.Add(one);
+                curr.AddRange(oneChild);
+
+                res.Add(curr);
+            }
+
+
+            var two = s.Substring(0, 2);
+            var twoChildren = DFS(s.Substring(2), memo);
+
+            foreach(var twoChild in twoChildren)
+            {
+                var curr = new List<string>();
+                curr.Add(two);
+                curr.AddRange(twoChild);
+                res.Add(curr);
+            }
+
+            memo.Add(s, res);
+
+            return res;
+        }
+
+
         public List<List<string>> SplitStringSolverPractice(string s)
         {
             return DFSHelperPractice(s, new Dictionary<string, List<List<string>>>());

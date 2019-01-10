@@ -41,21 +41,28 @@ namespace CodeExercise.BinarySearch
             int left = 1;
             int right = n;
 
-            while (left < right)
+            while (left + 1 < right)
             {
-                int mid = left + (right - left) / 2;   // to prevent overflow
-
+                int mid = left + (right - left) / 2;
                 if (IsBadVersion(mid))
                 {
                     right = mid;
                 }
                 else
                 {
-                    left = mid + 1;
+                    left = mid;
                 }
             }
 
-            return left;
+            if (IsBadVersion(left))
+            {
+                return left;
+            }
+            else if (IsBadVersion(right))
+            {
+                return right;
+            }
+            return -1;
         }
 
         private bool IsBadVersion(int n)

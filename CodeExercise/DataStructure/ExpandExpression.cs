@@ -12,6 +12,7 @@ namespace CodeExercise.DataStructure
         /// lint 575
         /// 575. Decode String
         /// http://www.lintcode.com/en/problem/expression-expand/
+        /// https://leetcode.com/problems/decode-string/
         /// Given an expression s includes numbers, letters and brackets. Number represents the number of repetitions inside the brackets(can be a string or another expression)．Please expand expression to be a string.
         /// 
         /// s = abc3[a] return abcaaa
@@ -25,6 +26,64 @@ namespace CodeExercise.DataStructure
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
+        public string ExpressionExpand_lint(string s)
+        {
+            Stack<char> stk = new Stack<char>();
+
+            foreach (char c in s)
+            {
+                if (c != ']')
+                {
+                    stk.Push(c);
+                }
+                else
+                {
+                    //(1) 2[abc]
+                    // get abc
+                    string curr = "";
+                    
+                    while(stk.Peek() != '[')
+                    {
+                        curr = stk.Pop() + curr;
+                    }
+
+                    // 2
+                    stk.Pop();  // pop [
+
+                    //3 get digit
+                    int factor = 0;
+                    int multi = 1;
+                    while(stk.Count > 0 && char.IsDigit(stk.Peek()))
+                    {
+                        factor = multi * (stk.Pop() - '0') + factor;
+                        multi *= 10;
+                    }
+
+                    // 4. get repeat
+                    string concateStr = string.Empty;
+                    for (int i = 0; i < factor; i++)
+                    {
+                        concateStr += curr;  //  abc  abc
+                    } 
+
+                    // 5 put back
+                    foreach(var w in concateStr)
+                    {
+                        stk.Push(w);
+                    }
+                }
+            }
+
+            string ans = "";
+
+            while(stk.Count > 0)
+            {
+                ans = stk.Pop() + ans;
+            }
+
+            return ans;
+        }
+
         public string ExpressionExpand_old(string s)
         {
             Stack<char> stk = new Stack<char>();

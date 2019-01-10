@@ -38,35 +38,31 @@ namespace CodeExercise.BFS
         {
             if (node == null)
             {
-                return null;
+                return node;
             }
 
-            Queue<UndirectedGraphNode> queue = new Queue<UndirectedGraphNode>();
-            Dictionary<UndirectedGraphNode, UndirectedGraphNode> lookup = new Dictionary<UndirectedGraphNode, UndirectedGraphNode>();  // orig, copy
-
+            var que = new Queue<UndirectedGraphNode>();
+            var lookup = new Dictionary<UndirectedGraphNode, UndirectedGraphNode>();
             var visited = new HashSet<UndirectedGraphNode>();
-
-            queue.Enqueue(node);
-            var nodeClone = new UndirectedGraphNode(node.label);
-            lookup.Add(node, nodeClone);
+            que.Enqueue(node);
+            lookup.Add(node, new UndirectedGraphNode(node.label));
             visited.Add(node);
 
-            while (queue.Count > 0)
+            while (que.Count > 0)
             {
-                var top = queue.Dequeue();
-                var topClone = lookup[top];
+                var curr = que.Dequeue();
+                var copy = lookup[curr];
 
-                foreach (var neighbor in top.neighbors)
+                foreach (var nb in curr.neighbors)
                 {
-                    if (!visited.Contains(neighbor))
+                    if (!visited.Contains(nb))
                     {
-                        queue.Enqueue(neighbor);
-                        var neighborClone = new UndirectedGraphNode(neighbor.label);
-                        lookup.Add(neighbor, neighborClone);
-                        visited.Add(neighbor);
+                        lookup.Add(nb, new UndirectedGraphNode(nb.label));
+                        visited.Add(nb);
+                        que.Enqueue(nb);
                     }
-                    var neighbClone = lookup[neighbor];
-                    topClone.neighbors.Add(neighbClone);
+                    var nbCpy = lookup[nb];
+                    copy.neighbors.Add(nbCpy);
                 }
             }
 

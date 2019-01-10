@@ -1050,10 +1050,10 @@ namespace CodeExercise
         static void Run_ExpandExpression()
         {
             DataStructure.ExpandExpression question = new DataStructure.ExpandExpression();
-            var ans = question.ExpressionExpandSolver("abc3[a]");
-            ans = question.ExpressionExpandSolver("3[abc]");
-            ans = question.ExpressionExpandSolver("4[ac]dy");
-            ans = question.ExpressionExpandSolver("3[2[ad]3[pf]]xyz");
+            var ans = question.ExpressionExpand_lint("abc3[a]");
+            ans = question.ExpressionExpand_lint("3[abc]");
+            ans = question.ExpressionExpand_lint("4[ac]dy");
+            ans = question.ExpressionExpand_lint("3[2[ad]3[pf]]xyz");
 
             if (ans == "adadpfpfpfadadpfpfpfadadpfpfpfxyz")
             {
@@ -2185,10 +2185,12 @@ namespace CodeExercise
             substrs.Add("ab");
             substrs.Add("cd");
 
-            var ans1 = question.MinLengthIteration("ccdaabcdbb", substrs);
+            var ans1 = question.MinLengthIterationQue("ccdaabcdbb", substrs);
 
-            var ans = question.MinLengthRecursive("abcabd", substrs);
+           
         }
+
+
 
         // lint 596
         static void Run_MinSubtree()
@@ -2267,7 +2269,7 @@ namespace CodeExercise
         {
             DFS.SplitString question = new DFS.SplitString();
             //var ans = question.SplitStringSolver("123");
-            var ans = question.SplitStringSolverPractice("123");
+            var ans = question.SplitStringSolver_Lint("12345");
         }
 
         //lint 570
@@ -3303,10 +3305,27 @@ namespace CodeExercise
 
         }
 
-
-    static void Main(string[] args)
+        //713
+        static void Run_SubarrayProductLessThanK()
         {
+            DFS.SubarrayProductLessThanK question = new DFS.SubarrayProductLessThanK();
+            int[] nums = { 10, 5, 2, 6 };
 
+            var ans = question.NumSubarrayProductLessThanK(nums, 100);
+        }
+
+        static void Main(string[] args)
+        {
+            string s1 = "123";
+            string s2 = "123";
+            if (string.Compare(s1, s2) == 0)
+            {
+                Console.Write("yes");
+            }
+            if (s1 == s2)
+            {
+                Console.Write("yes");
+            }    
 
             Dictionary<char, List<int>> look = new Dictionary<char, List<int>>();
             look.Add('a', new List<int>() { 1,2});
@@ -3325,9 +3344,22 @@ namespace CodeExercise
             //RockMQ  producer consumer https://www.jianshu.com/p/453c6e7ff81c
             //算法大全（3） 二叉树 http://www.cnblogs.com/Jax/archive/2009/12/28/1633691.html
             //https://github.com/yuzhangcmu/LeetCode/blob/master/tree/TreeDemo.java
+            // lint 575
+            Run_ExpandExpression();
 
             //624
             Run_RemoveSubstrings();
+
+            //680
+            Run_SplitString();
+
+            // Amazon
+            Run_PointsInLine();
+
+            Run_AmazonMock();
+            //713
+            Run_SubarrayProductLessThanK();
+            
 
             //305
             Run_NumberOfIsland2();
@@ -3426,9 +3458,8 @@ namespace CodeExercise
             Run_TopKFrequent();
             //200
             Run_NumberOfIsland();
-            // Amazon
-            Run_PointsInLine();
-            Run_AmazonMock();
+            
+            
 
             Run_BSTSummary();
             
@@ -3460,8 +3491,7 @@ namespace CodeExercise
             //57
             Run_InsertIntervals();
 
-            //680
-            Run_SplitString();
+            
             //291
             Run_WordPattern();
 
@@ -3487,8 +3517,7 @@ namespace CodeExercise
             //84
             Run_LargestRectangle();
             
-            // lint 575
-            Run_ExpandExpression();
+            
             // 692
             Run_MinimumSpanningTree();
 

@@ -73,9 +73,11 @@
     <Compile Include="BinarySearch\SearchInRotatedSortedArray.cs" />
     <Compile Include="BinarySearch\SearchInsertPosition.cs" />
     <Compile Include="BinarySearch\WoodCut.cs" />
+    <Compile Include="BitManipulation\AddBinary.cs" />
     <Compile Include="BitManipulation\DivideTwoIntegers.cs" />
     <Compile Include="BitManipulation\Number1Bits.cs" />
     <Compile Include="BST\AllNodesDistanceKBinaryTree.cs" />
+    <Compile Include="BST\BinaryTreeLongestConsecutiveSequence.cs" />
     <Compile Include="BST\BinaryTreeVerticalOrderTraversal.cs" />
     <Compile Include="BST\BSTSummary.cs" />
     <Compile Include="BST\ConstructBinaryTree.cs" />
@@ -89,6 +91,7 @@
     <Compile Include="BST\Subtree AnotherTree.cs" />
     <Compile Include="BST\SumRootLeafNumbers.cs" />
     <Compile Include="BST\SymmetricTree.cs" />
+    <Compile Include="BST\TrimBinarySearchTree.cs" />
     <Compile Include="Connection.cs" />
     <Compile Include="DataStructure\AccountsMerge.cs" />
     <Compile Include="DataStructure\AirplaneInSky.cs" />
@@ -211,6 +214,7 @@
     <Compile Include="DFS\SmallestRectangleEnclosingBlackPixels.cs" />
     <Compile Include="DFS\SplitString.cs" />
     <Compile Include="DFS\StringPermutation.cs" />
+    <Compile Include="DFS\SubarrayProductLessThanK.cs" />
     <Compile Include="DFS\SubtreewithMaximumAverage.cs" />
     <Compile Include="DFS\ValidateBinarySearchTree.cs" />
     <Compile Include="DFS\WordPattern.cs" />

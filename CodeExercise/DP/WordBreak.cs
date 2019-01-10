@@ -20,6 +20,48 @@ namespace CodeExercise.DP
         /// <param name="s"></param>
         /// <param name="wordDict"></param>
         /// <returns></returns>
+        public bool WordBreak_leetcode(string s, IList<string> wordDict)
+        {
+            var lookup = new HashSet<string>();
+            var memo = new HashSet<int>();
+
+            foreach (var w in wordDict)
+            {
+                lookup.Add(w);
+            }
+
+            return DFSHelper(s, 0, lookup, memo);
+        }
+
+        private bool DFSHelper(string s, int idx, HashSet<string> wordDict, HashSet<int> memo)
+        {
+            if (idx >= s.Length)
+            {
+                return true;
+            }
+
+            if (memo.Contains(idx))
+            {
+                return false;
+            }
+
+            for (int i = idx; i < s.Length; i++)
+            {
+                string prefix = s.Substring(idx, i - idx + 1);
+                if (wordDict.Contains(prefix))
+                {
+                    if (DFSHelper(s, i + 1, wordDict, memo))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            memo.Add(idx);
+
+            return false;
+        }
+
         public bool CheckWordBreakPractice(string s, IList<string> wordDict)
         {
             return DFSHelper(s, 0, wordDict, new bool[s.Length]);
@@ -159,90 +201,59 @@ namespace CodeExercise.DP
         /// <returns></returns>
         public IList<string> CheckWordBreakv2(string s, IList<string> wordDict)
         {
-            Dictionary<int, List<string>> visited = new Dictionary<int, List<string>>();
-            var res = DFSHelper2(s, 0, wordDict, visited);  
-            return res.ToArray();
-        }
 
-        private List<string> DFSHelper2(string s, int index, IList<string> wordDict, Dictionary<int, List<string>> visited)
-        {
-            if (visited.ContainsKey(index))
+            var memo = new Dictionary<int, List<string>>();
+            var wd = new HashSet<string>();
+            foreach (var w in wordDict)
             {
-                return visited[index];
+                wd.Add(w);
             }
 
-            List<string> currAns = new List<string>();
+            return DFSHelper(s, 0, wd, memo);
 
-            for (int i = index; i <s.Length; i++)
+        }
+
+        private List<string> DFSHelper(string s, int idx, HashSet<string> wordDict, Dictionary<int, List<string>> memo)
+        {
+            var collect = new List<string>();
+            if (idx >= s.Length)
             {
-                string substr = s.Substring(index, i - index + 1);
-                if (wordDict.Contains(substr))
-                {
-                    // reached last word
-                    if (i+1 >= s.Length)
-                    {
-                        currAns.Add(substr);
-                    }
-                    else
-                    {
-                        // not last word
-                        List<string> suffixStrs = DFSHelper2(s, i + 1, wordDict, visited);
+                collect.Add("");
+                return collect;
+            }
 
-                        foreach (var suffix in suffixStrs)
+            if (memo.ContainsKey(idx))
+            {
+                return memo[idx];
+            }
+
+            List<string> collection = new List<string>();
+            for (int i = idx; i < s.Length; i++)
+            {
+                string prefix = s.Substring(idx, i - idx + 1);
+
+                if (wordDict.Contains(prefix))
+                {
+                    var suffixCollection = DFSHelper(s, i + 1, wordDict, memo);
+
+                    // child collection must have item inorder to enter loop
+                    foreach (var suffix in suffixCollection)
+                    {
+                        if (suffix == "")
                         {
-                            // only add to ans if suffix has something
-                            currAns.Add(substr + " " + suffix);
+                            collection.Add(prefix);
+                        }
+                        else
+                        {
+                            collection.Add(prefix + " " + suffix);
                         }
                     }
-                    
                 }
             }
 
-            visited.Add(index, currAns);
+            memo.Add(idx, collection);
 
-            return currAns;
-
-        }
-
-        // note the return is the current level of s result, use visited to mem current s results
-        // no need to check empty str case, it will become emty currentAns and memorized
-        private List<string> CheckWordBreakv2Helper(string s, IList<string> wordDict, Dictionary<string, List<string>> visited)
-        {
-            if (visited.ContainsKey(s))
-            {
-                return visited[s];
-            }
-
-            List<string> currentAns = new List<string>();
-
-            if (wordDict.Contains(s))
-            {
-                currentAns.Add(s);
-
-                // update results list and keep going    ext "cannot" is a word, but can keep search "can" "not"
-            }
-
-            for (int i = 0; i < s.Length; i++)
-            {
-                string left = s.Substring(0, i);
-                string right = s.Substring(i);
-
-                if (wordDict.Contains(left))
-                {
-
-                    var resultsFromRight = CheckWordBreakv2Helper(right, wordDict, visited);
-                    
-                    foreach(string resultFromRight in resultsFromRight)
-                    {
-                        currentAns.Add(left + " " + resultFromRight);
-                    }
-                }
-            }
-
-            // update visited,  the currentAns can be null   ex due to s==empty string
-            visited[s] = currentAns;
-
-            return currentAns;
+            return collection;
         }
     }
 }

@@ -995,7 +995,7 @@ public class UF
 
     public void Union(int a, int b)
     {
-        int pa = Find(a);    // <--- yic  easy to forget
+        int pa = Find(a);    // <--- yic Find easy to forget
         int pb = Find(b);
 
         if (pa != pb)
@@ -1053,3 +1053,59 @@ public class UF
 ///  
 /// 
 /// check the last row   {1} is starting idx, and e at loc 5     substring ({1}, 5-1)  find min len
+
+
+/// 301. Remove Invalid Parentheses
+/// https://leetcode.com/problems/remove-invalid-parentheses/description/
+/// Remove the minimum number of invalid parentheses in order to make the input string valid. Return all possible results.
+/// Example
+/// "()())()" -> ["()()()", "(())()"]
+/// "(a)())()" -> ["(a)()()", "(a())()"]
+/// ")(" -> [""]
+/// 
+/// sol:
+/// 
+/// 1. get left and right extra parentheses count need to be removed. be aware of ")("  case
+/// 2. use leftextra and rightextra  and open as stop condition.
+/// 
+/// foreach s
+/// 
+/// if '('    use  then open++
+///          no use   then  leftExtra--.
+///          
+/// if ')'   use  then open--
+///          no use  rightExtra--
+///          
+/// 
+/// stop when   index >=len  , or leftExtra|rightExtra smaller than 0 (memans over substract)
+
+/// 713. Subarray Product Less Than K
+    /// https://leetcode.com/problems/subarray-product-less-than-k/
+    /// Your are given an array of positive integers nums.
+    /// 
+    /// Count and print the number of(contiguous) subarrays where the product of all the elements in the subarray is less than k.
+    /// 
+    /// Example 1:
+    /// Input: nums = [10, 5, 2, 6], k = 100
+    /// Output: 8
+    /// Explanation: The 8 subarrays that have product less than 100 are: [10], [5], [2], [6], [10, 5], [5, 2], [2, 6], [5, 2, 6].
+    /// Note that[10, 5, 2] is not included as the product of 100 is not strictly less than k.
+
+	
+            int prod = 1;
+            int count = 0;
+            int left = 0;
+            for (int j = 0; j < len; j++)
+            {
+                prod *= nums[j];
+
+                while (prod >= k)
+                {
+                    prod /= nums[left++];
+                }
+
+                int toAdd = (j - left + 1);
+                // Console.WriteLine(toAdd);
+                count += toAdd;
+
+            }
