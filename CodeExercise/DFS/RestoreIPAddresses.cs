@@ -22,54 +22,63 @@ namespace CodeExercise.DFS
         /// <returns></returns>
         public IList<string> RestoreIpAddressesSolver(string s)
         {
+            return DFSHelper(s, 0, new Dictionary<string, List<string>>());
+        }
+
+        // memo replies on curr "string" and "level"
+        private List<string> DFSHelper(string s, int level, Dictionary<string, List<string>> memo)
+        {
             List<string> ans = new List<string>();
-            DFSHelper(s, 0, 0, "", ans);
-            return ans.ToArray();
-        }
 
-        private void DFSHelper(string s, int index, int section, string currPath, List<string> ans)
-        {
-            if (section == 4)
+            if (level == 4)
             {
-                if (index >= s.Length)
+                if (s.Length == 0)
                 {
-                    ans.Add(currPath.Substring(1)); // skip the first .
+                    ans.Add("");
+                    return ans;
                 }
-                return;
+                return ans;
             }
 
-            
+            var key = s + "," + level; 
 
-            for (int i = index; i < s.Length; i++)
+            if (memo.ContainsKey(key))
             {
-                string cutStr = s.Substring(index, i - index + 1);
+                return memo[key];
+            }
 
-                // invalid  00, 01 >255
-                if (!isValildIP(cutStr))
+            // take number
+            for (int i = 1; i <= 3 && i <= s.Length; i++)   // yic "&& i <= s.Length"
+            {
+                var num = int.Parse(s.Substring(0, i));
+                if (i == 2 && !(num >= 10 && num <= 99))
                 {
-                    break;
+                    continue;
+                }
+                if (i == 3 && !(num >= 100 && num <= 255))
+                {
+                    continue;
                 }
 
-                DFSHelper(s, i + 1, section + 1, (currPath + "." + cutStr), ans);
+                List<string> subnum = DFSHelper(s.Substring(i), level + 1, memo);
+
+                foreach (var subn in subnum)
+                {
+                    if (subn != "")
+                    {
+                        ans.Add(num + "." + subn);
+                    }
+                    else
+                    {
+                        ans.Add(num.ToString());
+                    }
+                }
             }
+
+            memo.Add(key, ans);
+
+            return ans;
         }
-
-        // yic  this is core of this question
-        private bool isValildIP(string cutStr)
-        {
-            if (cutStr.Length > 1 && cutStr[0] == '0')
-            {
-                return false;
-            }
-
-            int val = Convert.ToInt32(cutStr);
-            
-            if (val > 255)
-            {
-                return false;
-            }
-
-            return true;
-        }
+        
     }
 }

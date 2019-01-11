@@ -2276,10 +2276,9 @@ namespace CodeExercise
         static void Run_FindMissingNumbers()
         {
             DFS.FindMissingNumber question = new DFS.FindMissingNumber();
-            string testStr = "111098765432";
-            var ans = question.FindMissing2(11, testStr);
+            string testStr = "19201234567891011121314151618";
+            var ans = question.FindMissing2(20, testStr);
 
-            
 
             int[] num = { 3, 1, 0 };
             var ans2 = question.MissingNumber(num);
@@ -2304,7 +2303,7 @@ namespace CodeExercise
         static void Run_RestporeIPAddress()
         {
             DFS.RestoreIPAddresses question = new DFS.RestoreIPAddresses();
-            var ans = question.RestoreIpAddressesSolver("010010");
+            var ans = question.RestoreIpAddressesSolver("25525511135");
 
         }
 
@@ -3128,7 +3127,7 @@ namespace CodeExercise
 
             string[] input = { "k", "lg", "it", "oidd", "oid", "oiddm", "kfk", "y", "mw", "kf", "l", "o", "mwaqz", "oi", "ych", "m", "mwa" };
 
-            var ans = question.LongestWordPractice(input);
+            var ans = question.LongestWord(input);
 
         }
 
@@ -3344,6 +3343,11 @@ namespace CodeExercise
             //RockMQ  producer consumer https://www.jianshu.com/p/453c6e7ff81c
             //算法大全（3） 二叉树 http://www.cnblogs.com/Jax/archive/2009/12/28/1633691.html
             //https://github.com/yuzhangcmu/LeetCode/blob/master/tree/TreeDemo.java
+            //93
+            Run_RestporeIPAddress();
+            // 570
+            Run_FindMissingNumbers();
+
             // lint 575
             Run_ExpandExpression();
 
@@ -3641,8 +3645,7 @@ namespace CodeExercise
             
             //22
             Run_GenerateParenthesis();
-            //93
-            Run_RestporeIPAddress();
+            
             //139,140
             Run_WordBreak();
             //301
@@ -3656,8 +3659,7 @@ namespace CodeExercise
             Run_SubSetsWithDup();
             
 
-            // 570
-            Run_FindMissingNumbers();
+            
             
             
 

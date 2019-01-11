@@ -24,75 +24,70 @@ namespace CodeExercise.DFS
         /// <param name="n"></param>
         /// <param name="str"></param>
         /// <returns></returns>
+        private int missed = 0;
+
         public int FindMissing2(int n, string str)
         {
-            bool[] visited = new bool[n + 1];
-            totalNum = n;
-            int temp = n;
-            while(temp > 0)
+            int scan = 1;
+            for (int i = 2; i <=n; i++)
             {
-                digit++;
-                temp /= 10;
+                scan = scan ^ i;
             }
 
-            dfs(str, visited, 0);
+            var res = DFS(str, scan, n, new HashSet<int>());
 
-            if (foundFlag)
+            if (res)
             {
-                return ans;
+                return missed;
             }
+
             return -1;
         }
 
-        private void dfs(string str, bool[] visited, int index)
+        private bool DFS(string str, int scan, int n, HashSet<int> visited)
         {
-            if (foundFlag || index >= str.Length)
+            if (str.Length == 0)
             {
-                if (foundFlag == true)
+                missed = scan;
+                return true;
+            }
+
+            // take1
+            var one = str.Substring(0, 1);
+            int oneNum = int.Parse(one);
+            if (oneNum > 0 && oneNum < 10 && !visited.Contains(oneNum))
+            {
+                visited.Add(oneNum);
+                var res1 = DFS(str.Substring(1), scan ^ oneNum, n, visited);
+                if (res1 == true)
                 {
-                    return;
+                    return true;
                 }
-                foundFlag = true;
-                ans = FindMissing(visited);
-                return;
+                visited.Remove(oneNum);
             }
 
-            // yic case when "0"345
-            if (str[index] == '0')
-            {
-                return;
-            }
 
-            for(int i =1; i <= digit; i++)
+            if (str.Length >=2)
             {
-                if ((index +i-1) <str.Length) // yic index+i-1   (i : width) is the end idx location
+                var two = str.Substring(0, 2);
+
+                int twonum = int.Parse(two);
+                if (twonum >= 10 && twonum <= n && !visited.Contains(twonum))
                 {
-                    string valstr = str.Substring(index, i);
-                    int val = Convert.ToInt32(valstr);
-
-                    if (0<val &&  val <= totalNum && !visited[val])   // yic cannot consider 0
+                    visited.Add(twonum);
+                    bool res2 = DFS(str.Substring(2), scan ^ twonum, n, visited);
+                    if (res2)
                     {
-                        visited[val] = true;
-                        dfs(str, visited, index + i);
-                        visited[val] = false;   // yic take back
+                        return true;
                     }
-                }    
-            }
-        }
-
-        
-
-        private int FindMissing(bool[] visited)
-        {
-            for (int i=1; i <= totalNum; i++)
-            {
-                if(!visited[i])
-                {
-                    return i;
+                    visited.Remove(twonum);
                 }
             }
-            return -1;
+
+            return false;
+
         }
+
 
         /// <summary>
         /// 268. Missing Number
