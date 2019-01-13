@@ -55,7 +55,8 @@ namespace CodeExercise
 
         static void Run_EditDistanceQuestion()
         {
-            bool isOneEditDistance = EditDistance.IsOneEditDistance("marts", "mart");
+            bool isOneEditDistance = EditDistance.IsOneEditDistance("a", "");
+            isOneEditDistance = EditDistance.IsOneEditDistance("marts", "mart");
             isOneEditDistance = EditDistance.IsOneEditDistance("mart", "marts");
             isOneEditDistance = EditDistance.IsOneEditDistance("mart", "mark");
             isOneEditDistance = EditDistance.IsOneEditDistance("cb", "ab");
@@ -1305,7 +1306,7 @@ namespace CodeExercise
         static void Run_ScrambleString()
         {
             DP.ScrambleString question = new DP.ScrambleString();
-            var ans = question.IsScramble("eat", "tae");
+            var ans = question.IsScramble("bba", "abb");
         }
 
         //221
@@ -3343,6 +3344,16 @@ namespace CodeExercise
             //RockMQ  producer consumer https://www.jianshu.com/p/453c6e7ff81c
             //算法大全（3） 二叉树 http://www.cnblogs.com/Jax/archive/2009/12/28/1633691.html
             //https://github.com/yuzhangcmu/LeetCode/blob/master/tree/TreeDemo.java
+            Run_EditDistanceQuestion();
+
+            //87
+            Run_ScrambleString();
+
+            //132
+            Run_Palindrome_Partitioning_II();
+            //131
+            Run_Palindrome_Partitioning();
+
             //93
             Run_RestporeIPAddress();
             // 570
@@ -3503,8 +3514,7 @@ namespace CodeExercise
 
             //474
             Run_OneAndZero();
-            //132
-            Run_Palindrome_Partitioning_II();
+            
 
             //843
             Run_DigitalFlip();
@@ -3817,7 +3827,7 @@ namespace CodeExercise
             // 14
             Run_LongestCommonPrefix();
 
-            Run_EditDistanceQuestion();
+            
 
             //lint 77
             Run_LongestCommonSubsequence();
@@ -3839,8 +3849,7 @@ namespace CodeExercise
             Run_MaxSquare();
             
 
-            //87
-            Run_ScrambleString();
+            
             //312
             Run_BurstBalloon();
             //355
@@ -4015,8 +4024,7 @@ namespace CodeExercise
             
             // 409
             Run_Longest_Palindrome();
-            //131
-            Run_Palindrome_Partitioning();
+            
             //267
             Run_PalindromePermutation();
             

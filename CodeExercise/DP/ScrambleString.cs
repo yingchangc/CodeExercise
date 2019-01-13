@@ -57,6 +57,77 @@ namespace CodeExercise.DP
         /// <returns></returns>
         public bool IsScramble(string s1, string s2)
         {
+            return IsHelper(s1, s2);
+        }
+
+        private bool IsHelper(string s1, string s2)
+        {
+            if (!SameChars(s1, s2))
+            {
+                return false;
+            }
+
+            if (string.Compare(s1, s2) == 0)
+            {
+                return true;
+            }
+
+            int len = s1.Length;
+
+            for (int w = 1; w <= len - 1; w++)
+            {
+                if (IsHelper(s1.Substring(0, w), s2.Substring(0, w)) && IsHelper(s1.Substring(w), s2.Substring(w)))
+                {
+                    return true;
+                }
+
+                if (IsHelper(s1.Substring(0, w), s2.Substring(len - w)) && IsHelper(s1.Substring(w), s2.Substring(0, len-w)))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private bool SameChars(string s1, string s2)
+        {
+            if (s1.Length != s2.Length)
+            {
+                return false;
+            }
+
+            var lookup = new Dictionary<char, int>();
+            foreach (char c in s1)
+            {
+                if (!lookup.ContainsKey(c))
+                {
+                    lookup.Add(c, 0);
+                }
+                lookup[c]++;
+            }
+
+            foreach (char c in s2)
+            {
+                if (!lookup.ContainsKey(c))
+                {
+                    return false;
+                }
+
+                lookup[c]--;
+
+                if (lookup[c] < 0)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+
+        // DP F
+        public bool IsScrambleSolver(string s1, string s2)
+        {
             int M = s1.Length;
             int N = s2.Length;
 

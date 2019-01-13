@@ -54,8 +54,8 @@ namespace CodeExercise.DP
             return true;
         }
 
-        /// <summary>
-        /// 132
+        /// 132. Palindrome Partitioning II
+        /// https://leetcode.com/problems/palindrome-partitioning-ii/
         /// Given a string s, partition s such that every substring of the partition is a palindrome. 
         ///        Return the minimum cuts needed for a palindrome partitioning of s.
         ///        For example, given s = "aab",
@@ -244,38 +244,7 @@ namespace CodeExercise.DP
             return memorizationCutNum[s.Length - 1];
         }
 
-        public static int MinCutSlow(string s)
-        {
-            int[,] Cut = new int[s.Length, s.Length];
-
-            for(int columnInc = 0; columnInc < s.Length; columnInc++)
-            {
-                for (int row=0; (row + columnInc) < s.Length; row++)
-                {
-                    int i = row;
-                    int j = row + columnInc;
-
-                    string substr = s.Substring(i, (j - i + 1));
-                    if (isPalindrome(substr))
-                    {
-                        Cut[i, j] = 0;
-                    }
-                    else
-                    {
-                        int min = int.MaxValue;
-                        for (int k = i; k <= j - 1; k++)
-                        {
-                            min = Math.Min(min, (Cut[i, k] + Cut[k + 1, j]));
-                        }
-
-                        Cut[i, j] = 1 + min;
-                    }
-                }
-                
-            }
-            printCutArray(Cut,s);
-            return Cut[0, s.Length - 1];
-        }
+        
 
         private static void printCutArray(int[,] cut, string s)
         {
@@ -290,7 +259,9 @@ namespace CodeExercise.DP
         }
 
         /// <summary>
-        /// 131
+        /// 131. Palindrome Partitioning
+        /// https://leetcode.com/problems/palindrome-partitioning/submissions/
+        /// https://www.lintcode.com/problem/palindrome-partitioning/description
         /// Given a string s, partition s such that every substring of the partition is a palindrome. 
         ///        Return all possible palindrome partitioning of s.
         ///        For example, given s = "aab",
@@ -304,98 +275,92 @@ namespace CodeExercise.DP
         /// <returns></returns>
         public static IList<IList<string>> Partition(string s)
         {
+            bool[,] pLookup = IsPartitionLookup(s);
+            var memo = new Dictionary<int, List<List<string>>>();
+            var ans2= DFS(s, pLookup, 0, memo);
+            return ans2.ToArray();
+        }
+
+        private static bool[,] IsPartitionLookup(string s)
+        {
+            bool[,] F = new bool[s.Length, s.Length];
+            
+            for (int len = 1; len <= s.Length; len++)
+            {
+                for (int i = 0; i <= s.Length-len; i++)
+                {
+                    int left = i;
+                    int right = i + len - 1;
+                    if (len ==1)
+                    {
+                        F[left, right] = true;
+                    }
+                    else if (len ==2)
+                    {
+                        if (s[left] == s[right])
+                        {
+                            F[left, right] = true;
+                        }
+                    }
+                    else
+                    {
+                        if (s[left] == s[right])
+                        {
+                            F[left, right] = F[left + 1, right - 1];  // depends on smaller region
+                        }
+                    }
+                }     
+            }
+            return F;
+        }
+
+        private static List<List<string>> DFS(string s, bool[,] pLookup, int idx, Dictionary<int, List<List<string>>> memo)
+        {
             List<List<string>> ans = new List<List<string>>();
-            List<string> currPath = new List<string>();
-            DFSHelper1(s, ans, currPath, 0);
-            return ans.ToArray();
-        }
 
-        private static void DFSHelper1(string s, List<List<string>> ans, List<string> currPath, int index)
-        {
-            if (index >= s.Length)
+            if (idx >= s.Length)
             {
-                List<string> copy = new List<string>(currPath);
-                ans.Add(copy);
-                return;
+                var sub = new List<string>() { "" };
+                ans.Add(sub);
+                return ans;
             }
 
-            for (int i = index; i < s.Length; i++)
+            if (memo.ContainsKey(idx))
             {
-                if (IsPalindrome1(s, index, i))
+                return memo[idx];
+            }
+
+            for (int i = idx; i < s.Length; i++)
+            {
+                if (pLookup[idx, i] == true)
                 {
-                    currPath.Add(s.Substring(index, (i - index + 1)));
-                    DFSHelper1(s, ans, currPath, i + 1);
-                    currPath.RemoveAt(currPath.Count - 1);    // remove
+                    var prefix = s.Substring(idx, i - idx + 1);
+                    var suffix = s.Substring(i + 1);
+
+                    if (string.IsNullOrEmpty(suffix))
+                    {
+                        var temp = new List<string>() { prefix};
+                        ans.Add(temp);
+                    }
+                    else
+                    {
+                        var suffixCandidate = DFS(s, pLookup, i + 1, memo);
+                        foreach (var candidiate in suffixCandidate)
+                        {
+                            var temp = new List<string>();
+                            temp.Add(prefix);
+                            temp.AddRange(candidiate);
+                            ans.Add(temp);
+                        }
+                    }
+                    
                 }
             }
-        }
 
-        private static bool IsPalindrome1(string s, int left, int right)
-        {
-            while(left<right)
-            {
-                if (s[left] == s[right])
-                {
-                    left++;
-                    right--;
-                }
-                else
-                {
-                    return false;
-                }
-            }
+            memo.Add(idx, ans);
 
-            return true;
-        }
+            return ans;
 
-        public static IList<IList<string>> PartitionOld(string s)
-        {
-            List<List<string>> results = new List<List<string>>();
-            List<string> path = new List<string>();
-            PalindromePartitionHelper(s, 0, results, path);
-
-            return results.ToArray();
-        }
-
-        private static void PalindromePartitionHelper(string s, int index, List<List<string>> results, List<string> path)
-        {
-            if (index == s.Length)
-            {
-                List<string> clone = new List<string>(path);
-                results.Add(clone);
-                return;
-            }
-
-            for(int i = index; i < s.Length; i++)
-            {
-                int subLen = (i - index) + 1;
-                string sub = s.Substring(index, subLen);
-                
-                if (isPalindrome(sub))
-                {
-                    path.Add(sub);
-                    PalindromePartitionHelper(s, i + 1, results, path);
-                    path.RemoveAt(path.Count - 1);         //* YIC remove the last one from List<string>  can't path.Remove(sub) it will remove the first match from front.
-                }
-            }
-        }
-
-        private static bool isPalindrome(string s)
-        {
-            int start = 0;
-            int last = s.Length - 1;
-
-            while (start <= last)
-            {
-                if (s[start] != s[last])
-                {
-                    return false;
-                }
-                start++;
-                last--;
-            }
-
-            return true;
         }
 
         public IList<IList<string>> Partition131(string s)

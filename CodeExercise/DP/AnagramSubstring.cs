@@ -9,6 +9,7 @@ namespace CodeExercise.DP
     /// <summary>
     /// https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-characters/submissions/
     /// https://leetcode.com/problems/minimum-window-substring/
+    /// https://leetcode.com/problems/minimum-window-subsequence/
     /// https://leetcode.com/problems/longest-substring-without-repeating-characters/
     /// https://leetcode.com/problems/substring-with-concatenation-of-all-words/
     /// https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-characters/
@@ -39,136 +40,62 @@ namespace CodeExercise.DP
         /// <param name="s"></param>
         /// <param name="p"></param>
         /// <returns></returns>
-        public static IList<int> FindAnagramsPractice(string s, string p)
+        public static IList<int> FindAnagrams(string s, string p)
         {
-            List<int> res = new List<int>();
-
-            if (s == null || p == null || s.Length == 0 || s.Length < p.Length)
-            {
-                return res;
-            }
-
-            Dictionary<char, int> lookup = new Dictionary<char, int>();
-
-            for (int i = 0; i < p.Length; i++)
-            {
-                if (!lookup.ContainsKey(p[i]))
-                {
-                    lookup.Add(p[i], 0);
-                }
-                lookup[p[i]]++;
-            }
-
-            int totalCount = p.Length;
+            List<int> ans = new List<int>();
 
             int j = 0;
-            for(int i = 0; i < s.Length; i++)
+
+            var lookup = new Dictionary<char, int>();
+            foreach (char c in p)
             {
-                while (j < s.Length && (j-i+1) <= p.Length)
+                if (!lookup.ContainsKey(c))
+                {
+                    lookup.Add(c, 0);
+                }
+                lookup[c]++;
+            }
+
+            var score = p.Length;
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                while (j < s.Length && (j - i) < p.Length)
                 {
                     if (lookup.ContainsKey(s[j]))
                     {
                         if (lookup[s[j]] > 0)
                         {
-                            totalCount--;
+                            score--;
                         }
 
                         lookup[s[j]]--;
                     }
 
                     j++;
+
                 }
 
-                if (totalCount == 0)
+                if ((j - i) == p.Length && score == 0)
                 {
-                    res.Add(i);
+                    ans.Add(i);
                 }
 
-                // ready to move i
+                // i is about to move
                 if (lookup.ContainsKey(s[i]))
                 {
                     lookup[s[i]]++;
 
                     if (lookup[s[i]] > 0)
                     {
-                        totalCount++;
+                        score++;
                     }
                 }
             }
 
-            return res;
-
-        }
-        public static IList<int> FindAnagrams(string s, string p)
-        {
-            List<int> results = new List<int>();
-            Dictionary<char, int> lookupCounts = new Dictionary<char, int>();
-            int count = p.Length;
-
-            updateDictionary(lookupCounts, p);
-
-            int start = 0;
-            int end = 0;
-
-            while (end < s.Length)
-            {     
-                // [1]perform substract part  
-                if (lookupCounts.ContainsKey(s[end]))
-                {
-                    lookupCounts[s[end]]--;
-
-                    // make sure no over substract
-                    if (lookupCounts[s[end]] >= 0)
-                    {
-                        count--;
-                    }
-
-                    // find a result (compare p.length)?  no need to check length
-                    if (count == 0)
-                    {
-                        results.Add(start);
-                    }
-                }
-
-                // [2]perform move.
-                // should we also move start or just end only?
-                if ((end - start + 1) == p.Length)
-                {
-                    // ready to move "start" forward, but let's take start count back if necessary
-                    if (lookupCounts.ContainsKey(s[start]))
-                    {
-                        lookupCounts[s[start]]++;
-
-                        // not over substract  aaaabc    p:abc     a(0)
-                        if (lookupCounts[s[start]] > 0)  /// > 0 becasue it means we have take the value back
-                        {
-                            count++;
-                        }  
-                    }
-                    start++;
-                }
-
-                // always move end
-                end++;
-                
-            }
-
-            return results.ToArray();
+            return ans;
         }
 
-        private static void updateDictionary(Dictionary<char, int> lookup, string p)
-        {
-            foreach (char c in p)
-            {
-                if (lookup.ContainsKey(c))
-                {
-                    lookup[c]++;
-                }
-                else
-                {
-                    lookup.Add(c, 1);
-                }
-            }
-        }
+        
     }
 }

@@ -25,7 +25,7 @@ namespace CodeExercise.DFS
         public int NumSubarrayProductLessThanK(int[] nums, int k)
         {
 
-            if (k <= 1)
+            if (k <= 1)   // [1 1 1]   1
             {
                 return 0;
             }
@@ -39,12 +39,12 @@ namespace CodeExercise.DFS
             {
                 prod *= nums[j];
 
-                while (prod >= k)
+                while (prod >= k)   
                 {
                     prod /= nums[left++];
                 }
 
-                int toAdd = (j - left + 1);
+                int toAdd = (j - left + 1);          // 10 5 2  if k=101     10*5*2 or 5*2  or 2   
                 // Console.WriteLine(toAdd);
                 count += toAdd;
 

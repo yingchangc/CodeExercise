@@ -19,25 +19,24 @@ namespace CodeExercise.DP
     {
         public int LengthOfLongestSubstring(string s)
         {
-            bool[] memo = new bool[256];  // map from character's ASCII to its last occured index
+            var visited = new HashSet<char>();
 
             int j = 0;
-            int currLen = 0;
+
             int maxLen = 0;
 
             for (int i = 0; i < s.Length; i++)
             {
-                while (j < s.Length && memo[s[j]] == false)   // yic note is s[j]
+                while (j < s.Length && !visited.Contains(s[j]))
                 {
-                    memo[s[j++]] = true;
-                    currLen++;
+                    visited.Add(s[j]);
+                    j++;
                 }
 
-                maxLen = Math.Max(maxLen, currLen);
+                maxLen = Math.Max(maxLen, (j - i));
 
-                // now i can move forward
-                currLen--;
-                memo[s[i]] = false;
+                // i is about to mve
+                visited.Remove(s[i]);
             }
 
             return maxLen;

@@ -59,7 +59,7 @@ namespace CodeExercise.TwoPointers
             int j = 0;
             for (int i = 0; i < len; i++)
             {
-                while (j < len && lookup.Keys.Count <= 2)
+                while (j < len && (lookup.Keys.Count < 3))
                 {
                     var fruitT = tree[j];
                     if (!lookup.ContainsKey(fruitT))
@@ -68,16 +68,21 @@ namespace CodeExercise.TwoPointers
                     }
                     lookup[fruitT]++;
 
-                    if (lookup.Keys.Count <= 2)
-                    {
-                        // yic update ans here.
-                        ans = Math.Max(ans, ComputeFruitCount(lookup));
-                    }
                     j++;
                 }
 
-                // ready to move i forward; 
-                // yic  just remove 1 fruit    not whole type,  can 1 0 1 1 '2' 1 1  when 2 comes in, we jsut want to remove first 1, not all 1s
+                if (lookup.Keys.Count <= 2)
+                {
+                    var temp = ComputeFruitCount(lookup);
+                    ans = Math.Max(ans, temp);
+                }
+                else
+                {
+                    var temp = ComputeFruitCount(lookup);
+                    ans = Math.Max(ans, temp - 1);     // j add extra to make key count = 3
+                }
+
+                // ready to move i forward
                 var fruitType = tree[i];
                 var fruitT_Left = (--lookup[fruitType]);
 

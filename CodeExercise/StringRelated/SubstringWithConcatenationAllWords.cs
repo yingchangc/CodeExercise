@@ -35,26 +35,15 @@ namespace CodeExercise.StringRelated
         /// <returns></returns>
         public IList<int> FindSubstring(string s, string[] words)
         {
-            List<int> ans = new List<int>();
-            int wordsCount = words.Length;
-
-            // [1] initial condition check
-            if (string.IsNullOrEmpty(s) || wordsCount == 0)
+            if (words.Length == 0)
             {
-                return ans;
+                return new List<int>();
             }
 
-            int singleWordLen = words[0].Length;
+            int wLen = words[0].Length;
 
-            int patternLen = singleWordLen * wordsCount;
-            if (s.Length < patternLen)
-            {
-                return ans;
-            }
-
-            // [2] word:freq
-            Dictionary<string, int> lookup = new Dictionary<string, int>();
-            foreach(string w in words)
+            var lookup = new Dictionary<string, int>();  // may have multiple
+            foreach (var w in words)
             {
                 if (!lookup.ContainsKey(w))
                 {
@@ -63,45 +52,46 @@ namespace CodeExercise.StringRelated
                 lookup[w]++;
             }
 
-            // [3] check scan i 0~ len-patternLen
-            for (int i = 0; i <= s.Length - patternLen; i++)
+            List<int> ans = new List<int>();
+            for (int i = 0; i <= (s.Length - wLen * words.Length); i++)
             {
-                if (Helper(s.Substring(i, patternLen), lookup, singleWordLen))
+                if (CanMatch(s, i, lookup, wLen, words.Length))
                 {
                     ans.Add(i);
                 }
-
             }
 
             return ans;
-
         }
 
-        private bool Helper(string str, Dictionary<string, int> lookup, int wordLen)
+        private bool CanMatch(string s, int idx, Dictionary<string, int> lookup, int wLen, int wCount)
         {
-            Dictionary<string, int> seen = new Dictionary<string, int>();
+            var record = new Dictionary<string, int>();
 
-            for (int i=0; i <= str.Length-wordLen; i+=wordLen)
+            for (int i = idx; i < idx + wLen * wCount; i += wLen)
             {
-                var currW = str.Substring(i, wordLen);
-                if (!lookup.ContainsKey(currW))
+                string sub = s.Substring(i, wLen);
+                if (lookup.ContainsKey(sub))
                 {
-                    return false;
-                }
+                    if (!record.ContainsKey(sub))
+                    {
+                        record.Add(sub, 0);
+                    }
+                    record[sub]++;
 
-                if (!seen.ContainsKey(currW))
-                {
-                    seen.Add(currW, 0);
+                    if (record[sub] > lookup[sub])
+                    {
+                        return false;
+                    }
                 }
-                seen[currW]++;               // ba ab ab     ["ab" "ab" "ba"]    
-
-                if (seen[currW] > lookup[currW])    // exceed dictionary count
+                else
                 {
                     return false;
                 }
             }
 
             return true;
+
         }
     }
 }

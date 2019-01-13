@@ -31,66 +31,142 @@ namespace CodeExercise
         /// <param name="s"></param>
         /// <param name="t"></param>
         /// <returns></returns>
+        /// 
         public static bool IsOneEditDistance(string s, string t)
         {
-            int M = s.Length;
-            int N = t.Length;
+            var distDiff = Math.Abs(s.Length - t.Length);
 
-            if (Math.Abs(M-N) > 1)
+            if (distDiff > 1)
             {
                 return false;
             }
 
-            
-            return IsOneEditDistanceHelper(s, t);
+            int lenS = s.Length;
+            int lenT = t.Length;
+
+            if (lenT > lenS)
+            {
+                return IsHelper(t, s);   // put longer as source
+            }
+            return IsHelper(s, t);
+
         }
 
-
-        // helper input guarantee (s.len - t.len) <=1
-        private static bool IsOneEditDistanceHelper(string s, string t)
+        private static  bool IsHelper(string s, string t)
         {
-            if (s == t)
+            int lenS = s.Length;  // should be longer
+            int lenT = t.Length;
+
+            for (int i = 0; i < lenT; i++) // yic use shorter
+            {
+
+                if (s[i] != t[i])
+                {
+                    //var insertOk = IsExactMatch(s, i, t, i + 1);   // S is longer, no need to check
+                    var deleteOk = IsExactMatch(s, i + 1, t, i);
+                    var replaceOk = IsExactMatch(s, i + 1, t, i + 1);
+
+                    if (!deleteOk && !replaceOk)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+
+                }
+            }
+
+            if (lenS != lenT)  //delete the last char in S  ex, abc  ab
+            {
+                return true;
+            }
+
+
+            return false;
+        }
+
+        private static bool IsExactMatch(string s, int idxS, string t, int idxT)
+        {
+            int lenS = s.Length - idxS;
+            int lenT = t.Length - idxT;
+
+            if (lenS != lenT)
             {
                 return false;
             }
 
-            int i = s.Length-1;   // index  off len by 1
-            int j = t.Length-1;
-
-            
-
-            while (i >=0 && j >=0)
+            for (int i = 0; i < lenS; i++)
             {
-                if (s[i] == t[j])
+                if (s[idxS + i] != t[idxT + i])
                 {
-                    i--;
-                    j--;
-                }
-                else
-                {
-                    // delete case
-                    if (s.Substring(0, i) == t.Substring(0,j+1))   // yic note both s   i for len  current len-1, j+1 is totla len
-                    {
-                        return true;
-                    }
-                    // insert case
-                    else if ((s.Substring(0,i+1) + t[j]) == t.Substring(0, j + 1))
-                    {
-                        return true;
-                    }
-                    // replace case
-                    else if ((s.Substring(0,i) + t[j]) == t.Substring(0, j + 1))
-                    {
-                        return true;
-                    }
                     return false;
                 }
             }
+            return true;
 
-            // YIC:  for case like "a" vs ""  => true    "a" vs "a"   return false
-            return s != t;
-            
         }
+        //public static bool IsOneEditDistance(string s, string t)
+        //{
+        //    int M = s.Length;
+        //    int N = t.Length;
+
+        //    if (Math.Abs(M-N) > 1)
+        //    {
+        //        return false;
+        //    }
+
+
+        //    return IsOneEditDistanceHelper(s, t);
+        //}
+
+
+        //// helper input guarantee (s.len - t.len) <=1
+        //private static bool IsOneEditDistanceHelper(string s, string t)
+        //{
+        //    if (s == t)
+        //    {
+        //        return false;
+        //    }
+
+        //    int i = s.Length-1;   // index  off len by 1
+        //    int j = t.Length-1;
+
+
+
+        //    while (i >=0 && j >=0)
+        //    {
+        //        if (s[i] == t[j])
+        //        {
+        //            i--;
+        //            j--;
+        //        }
+        //        else
+        //        {
+        //            // delete case
+        //            if (s.Substring(0, i) == t.Substring(0,j+1))   // yic note both s   i for len  current len-1, j+1 is totla len
+        //            {
+        //                return true;
+        //            }
+        //            // insert case
+        //            else if ((s.Substring(0,i+1) + t[j]) == t.Substring(0, j + 1))
+        //            {
+        //                return true;
+        //            }
+        //            // replace case
+        //            else if ((s.Substring(0,i) + t[j]) == t.Substring(0, j + 1))
+        //            {
+        //                return true;
+        //            }
+        //            return false;
+        //        }
+        //    }
+
+        //    // YIC:  for case like "a" vs ""  => true    "a" vs "a"   return false
+        //    return s != t;
+
+        //}
 
 
         /// <summary>

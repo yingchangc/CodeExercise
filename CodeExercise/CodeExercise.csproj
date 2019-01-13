@@ -88,6 +88,7 @@
     <Compile Include="BST\IslandPerimeter.cs" />
     <Compile Include="BST\MergeTwoBinaryTrees.cs" />
     <Compile Include="BST\PrintBinaryTree.cs" />
+    <Compile Include="BST\SecondMinNodeInBTree.cs" />
     <Compile Include="BST\Subtree AnotherTree.cs" />
     <Compile Include="BST\SumRootLeafNumbers.cs" />
     <Compile Include="BST\SymmetricTree.cs" />
