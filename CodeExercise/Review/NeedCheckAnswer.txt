@@ -1109,3 +1109,141 @@ public class UF
                 count += toAdd;
 
             }
+
+[Stock]
+public int MaxProfitWithCooldown(int[] prices)
+{
+    if (prices == null || prices.Length == 0)
+    {
+        return 0;
+    }
+
+    int preSell = 0;
+    int preCool = 0;
+    int preBuy = -prices[0];
+
+    for (int i = 1; i < prices.Length; i++)
+    {
+        int sell = Math.Max(preSell, preBuy + prices[i]);
+        int buy = Math.Max(preBuy, preCool - prices[i]);
+        int cool = Math.Max(preCool, preSell);
+
+        preSell = sell;
+        preBuy = buy;
+        preCool = cool;
+    }
+
+    return Math.Max(preSell, preCool);
+}
+https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/
+public int MaxProfit2(int[] prices)
+{
+    if (prices == null || prices.Length == 0)
+    {
+        return 0;
+    }
+
+    int preSell = 0;
+    int preBuy = -prices[0];
+
+    for (int i = 1; i < prices.Length; i++)
+    {
+        int sell = Math.Max(preSell, preBuy + prices[i]);
+        int buy = Math.Max(preBuy, preSell - prices[i]);
+
+        preSell = sell;
+        preBuy = buy;
+    }
+
+    return preSell;
+}
+
+
+public int MaxProfit6WithFee(int[] prices, int fee)
+{
+    if (prices == null || prices.Length == 0)
+    {
+        return 0;
+    }
+
+    int len = prices.Length;
+
+    int preBuy = -prices[0];
+    int preSell = 0;
+
+    for (int i = 1; i < len; i++)   // from day 2
+    {
+        int buy = Math.Max(preBuy, preSell - prices[i]);
+        int sell = Math.Max(preSell, preBuy + prices[i] - fee);
+
+        preBuy = buy;
+        preSell = sell;
+    }
+
+    return preSell;
+}
+
+ public int MaxProfit4(int k, int[] prices) {
+    int N = prices.GetLength(0);
+
+        if (N == 0)
+        {
+            return 0;
+        }
+
+        if (2*k >= N)
+        {
+            // MaxProfit3   have transaction each day   (each transation contains 1 buy 1 sell)
+            return MaxProfit4Helper(prices);
+        }
+
+        int[,] F = new int[N, 2*k+1];    // +1 include the initial state
+
+        for (int i = 0; i < N; i++)
+        {
+            for (int j = 0; j <= 2*k; j++)
+            {
+                F[i, j] = 0;
+            }
+        }
+
+           
+
+        for (int i = 1; i < N; i++)
+        {
+            for (int j = 1; j <= 2*k; j++)
+            {
+                if (j%2 == 0)
+                {
+                    // state 0 2 4 2k  (sold)   can be keep sold state  or just sold
+                    // F[iDay, jState] = max( F[i-1, j] , F[i-1, j-1] + P[i] - P[i-1])
+                    F[i, j] = Math.Max(F[i-1, j], F[i-1, j-1] + prices[i] - prices[i-1]);
+                }
+                else
+                {
+                    // state 1 3 5 2k-1  (bought)   can be keep bought state (need to keep update the diff)  or just bought
+                    // F[i,j] = max (F[i-1,j] + P[i]-P[i-1],  F[i-1, j-1])
+                    F[i, j] = Math.Max(F[i - 1, j] + prices[i] - prices[i - 1], F[i - 1, j - 1]);
+                }
+            }
+        }
+
+        int ans = 0;
+        for (int j = 0; j <= 2*k; j++)
+        {
+            if (j%2 == 0)
+            {
+                ans = Math.Max(ans, F[N - 1, j]);
+            }
+                
+        }
+
+        return ans;
+}
+
+
+ /// 358. Rearrange String k Distance Apart
+ /// https://leetcode.com/problems/rearrange-string-k-distance-apart/description/
+
+ /// 621. Task Scheduler
+/// https://leetcode.com/problems/task-scheduler/description/

@@ -206,28 +206,71 @@ namespace CodeExercise.DP
         /// <returns></returns>
         public int MaxProfit6WithFee(int[] prices, int fee)
         {
-            int N = prices.GetLength(0);
-
-            if (N == 0)
+            if (prices == null || prices.Length == 0)
             {
                 return 0;
             }
 
-            int preS0 = 0;
-            int preS1 = -1 * prices[0];
+            int len = prices.Length;
 
-            for (int i = 0; i < N; i++)
+            int preBuy = -prices[0];
+            int preSell = 0;
+
+            for (int i = 1; i < len; i++)   // from day 2
             {
-                int price = prices[i];
+                int buy = Math.Max(preBuy, preSell - prices[i]);
+                int sell = Math.Max(preSell, preBuy + prices[i] - fee);
 
-                int atS0 = Math.Max(preS1 + price - fee, preS0);
-                int atS1 = Math.Max(preS0 - price, preS1);
-
-                preS0 = atS0;
-                preS1 = atS1;
+                preBuy = buy;
+                preSell = sell;
             }
 
-            return preS0;
+            return preSell;
+        }
+
+        public int MaxProfit6_outfoMemory(int[] prices, int fee)
+        {
+            if (prices == null || prices.Length == 0)
+            {
+                return 0;
+            }
+            int days = prices.Length;
+
+            int tran = days / 2;
+            if (days % 2 != 0)
+            {
+                tran++;
+            }
+
+            int[,] F = new int[days, 2 * tran + 1];
+
+            for (int d = 1; d < days; d++)
+            {
+                for (int a = 1; a <= 2 * tran; a++)
+                {
+                    if (a % 2 == 0)
+                    {
+                        // sell
+                        F[d, a] = Math.Max(F[d - 1, a], F[d - 1, a - 1] + prices[d] - prices[d - 1] - fee);
+                    }
+                    else
+                    {
+                        // buy
+                        F[d, a] = Math.Max(F[d - 1, a] + prices[d] - prices[d - 1], F[d - 1, a - 1]);
+                    }
+                }
+            }
+
+            int ans = 0;
+            for (int a = 0; a <= 2 * tran; a++)
+            {
+                if (a % 2 == 0)
+                {
+                    ans = Math.Max(ans, F[days - 1, a]);
+                }
+            }
+
+            return ans;
         }
 
 
@@ -283,85 +326,79 @@ namespace CodeExercise.DP
         /// <returns></returns>
         public int MaxProfit5(int[] prices)
         {
-            int N = prices.GetLength(0);
-            if (N == 0)
+            // buy  F[d,a] = Max( F[d-1,a] + (prices[d]-prices[d-1]), F[d-1,i-1] )      keep vs from Cool
+            // sell F[d,a] = F[d-1,a-1] + (prices[d]-prices[d-1])
+            // cool F[d,a] = Max(F[d-1,a], F[d-1,a-1]      keep  vs from sell
+
+            if (prices == null || prices.Length == 0)
             {
                 return 0;
             }
 
-            int k = N / 3 + 1;
+            int days = prices.Length;
+            int tran = days / 3;
 
-            int[,] F = new int[N, 3*k];
-
-            for (int i = 0; i < N; i++)
+            if (days % 3 != 0)
             {
-                for (int j = 0; j < 3*k; j++)
-                {
-                    F[i, j] = 0;
-                }
+                tran++;
             }
 
-            for (int i = 1; i < N; i++)
+            int[,] F = new int[days, 3 * tran + 1];
+
+            for (int d = 1; d < days; d++)
             {
-                for (int j = 1; j < 3*k; j++)
+                for (int a = 1; a <= 3 * tran; a++)
                 {
-                    if (j % 3 == 1)  // bought;    kept in bought status  or just bought
-                    {
-                        F[i, j] = Math.Max(F[i - 1, j] + prices[i] - prices[i - 1], F[i - 1, j - 1]);
+                    if (a % 3 == 1)
+                    {  // buy
+                        F[d, a] = Math.Max(F[d - 1, a] + prices[d] - prices[d - 1], F[d - 1, a - 1]);
                     }
-                    else if (j % 3 == 2)   // just sold
+                    else if (a % 3 == 2)
                     {
-                        F[i, j] = F[i - 1, j - 1] + prices[i] - prices[i - 1];
+                        // sell
+                        F[d, a] = F[d - 1, a - 1] + prices[d] - prices[d - 1];
                     }
                     else
                     {
-                        // j == 3  cool down;  just cool down  or keept in cool down
-                        F[i, j] = Math.Max(F[i - 1, j - 1], F[i - 1, j]);
+                        //cool
+                        F[d, a] = Math.Max(F[d - 1, a], F[d - 1, a - 1]);
                     }
                 }
             }
-
             int ans = 0;
-            for (int j = 1; j < 3*k; j++)
+            for (int a = 0; a <= 3 * tran; a++)
             {
-                if ((j % 3) != 1)
+                if (a % 3 != 1)
                 {
-                    ans = Math.Max(ans, F[N - 1, j]);
+                    ans = Math.Max(ans, F[days - 1, a]);
                 }
-                
             }
-
             return ans;
         }
 
         public int MaxProfitWithCooldown(int[] prices)
         {
-            int len = prices.Length;
-
-            if (len == 0)
+            if (prices == null || prices.Length == 0)
             {
                 return 0;
             }
 
-            // s_  is the max profit of current state, I can be at any state from pre_s
-            // set base condition for preveious state
-            int pre_s0 = 0;
-            int pre_s1 = Int32.MinValue;
-            int pre_s2 = Int32.MinValue;
+            int preSell = 0;
+            int preCool = 0;
+            int preBuy = -prices[0];
 
-            for (int i = 0; i < len; i++)
+            for (int i = 1; i < prices.Length; i++)
             {
-                int price = prices[i];
-                int at_s0 = Math.Max(pre_s0, pre_s2);   // come from : rest_s0  or rest from s2
-                int at_s1 = Math.Max(pre_s0 - price, pre_s1);  // come from : buy from s0, or rest from s1
-                int at_s2 = pre_s1 + price;
+                int sell = Math.Max(preSell, preBuy + prices[i]);
+                int buy = Math.Max(preBuy, preCool - prices[i]);
+                int cool = Math.Max(preCool, preSell);
 
-                pre_s0 = at_s0;
-                pre_s1 = at_s1;
-                pre_s2 = at_s2;
+                preSell = sell;
+                preBuy = buy;
+                preCool = cool;
             }
 
-            return Math.Max(pre_s0, pre_s2);   // s1 is just buying (substract) from s1 or keep as is, is smallest 
+            return Math.Max(preSell, preCool);
         }
 
         /// <summary>
@@ -438,6 +475,7 @@ namespace CodeExercise.DP
         }
 
         /// <summary>
+        /// 122. Best Time to Buy and Sell Stock II
         /// 122 https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/description/
         /// Say you have an array for which the ith element is the price of a given stock on day i.
         //Design an algorithm to find the maximum profit.You may complete as many transactions as you like (ie, buy one and sell one share of the stock multiple times). However, you may not engage in multiple transactions at the same time(ie, you must sell the stock before you buy again).
@@ -448,6 +486,28 @@ namespace CodeExercise.DP
         /// </summary>
         /// <param name="prices"></param>
         /// <returns></returns>
+        public int MaxProfit2_AlignToCoolDownAndFee(int[] prices)
+        {
+            if (prices == null || prices.Length == 0)
+            {
+                return 0;
+            }
+
+            int preSell = 0;
+            int preBuy = -prices[0];
+
+            for (int i = 1; i < prices.Length; i++)
+            {
+                int sell = Math.Max(preSell, preBuy + prices[i]);
+                int buy = Math.Max(preBuy, preSell - prices[i]);
+
+                preSell = sell;
+                preBuy = buy;
+            }
+
+            return preSell;
+        }
+
         public int MaxProfit2(int[] prices)
         {
 
@@ -470,5 +530,7 @@ namespace CodeExercise.DP
 
             return maxProfit;
         }
+
+
     }
 }

@@ -78,6 +78,7 @@
     <Compile Include="BitManipulation\Number1Bits.cs" />
     <Compile Include="BST\AllNodesDistanceKBinaryTree.cs" />
     <Compile Include="BST\BinaryTreeLongestConsecutiveSequence.cs" />
+    <Compile Include="BST\BinaryTreeTilt.cs" />
     <Compile Include="BST\BinaryTreeVerticalOrderTraversal.cs" />
     <Compile Include="BST\BSTSummary.cs" />
     <Compile Include="BST\ConstructBinaryTree.cs" />
@@ -181,6 +182,7 @@
     <Compile Include="DataStructure\StrStr.cs" />
     <Compile Include="DataStructure\SubarraySum.cs" />
     <Compile Include="DataStructure\SubarraySumClosest.cs" />
+    <Compile Include="DataStructure\SubdomainVisitCount.cs" />
     <Compile Include="DataStructure\SurroundedRegions.cs" />
     <Compile Include="DataStructure\TaskScheduler.cs" />
     <Compile Include="DataStructure\TopKFrequent.cs" />
