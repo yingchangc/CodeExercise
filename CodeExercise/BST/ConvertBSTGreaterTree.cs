@@ -55,5 +55,39 @@ namespace CodeExercise.BST
                 node = node.right;
             }
         }
+
+
+        /// <summary>
+        /// Similiar way as 
+        /// https://leetcode.com/problems/validate-binary-search-tree/
+        /// </summary>
+        private TreeNode nextSum;
+        public TreeNode ConvertBST_practice(TreeNode root)
+        {
+
+            nextSum = null;
+
+            ReverseOrder(root);
+
+            return root;
+        }
+
+        private void ReverseOrder(TreeNode node)
+        {
+            if (node == null)
+            {
+                return;
+            }
+
+            ReverseOrder(node.right);
+
+            if (nextSum != null)
+            {
+                node.val += nextSum.val;
+            }
+            nextSum = node;
+
+            ReverseOrder(node.left);
+        }
     }
 }

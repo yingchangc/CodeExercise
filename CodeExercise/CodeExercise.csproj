@@ -152,6 +152,7 @@
     <Compile Include="DataStructure\MinStack.cs" />
     <Compile Include="DataStructure\MonotonicArray.cs" />
     <Compile Include="DataStructure\MovingAverage.cs" />
+    <Compile Include="DataStructure\MultiplyStrings.cs" />
     <Compile Include="DataStructure\MyQueue.cs" />
     <Compile Include="DataStructure\NestedListWeightSum.cs" />
     <Compile Include="DataStructure\NthToLastNode.cs" />
