@@ -165,6 +165,50 @@ namespace CodeExercise.BST
             var depth = GetDepth(root);
         }
 
+        /// <summary>
+        /// 701. Insert into a Binary Search Tree
+        /// https://leetcode.com/problems/insert-into-a-binary-search-tree/
+        /// Given the root node of a binary search tree (BST) and a value to be inserted into the tree, insert the value into the BST. Return the root node of the BST after the insertion. It is guaranteed that the new value does not exist in the original BST.
+        /// 
+        /// Note that there may exist multiple valid ways for the insertion, as long as the tree remains a BST after insertion.You can return any of them.
+        /// 
+        /// For example,
+        /// 
+        ///        Given the tree:
+        ///         4
+        ///        / \
+        ///       2   7
+        ///      / \
+        ///     1   3
+        /// And the value to insert: 5
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="val"></param>
+        /// <returns></returns>
+        public TreeNode InsertIntoBST(TreeNode root, int val)
+        {
+            return Helper(root, val);
+        }
+
+        private TreeNode Helper(TreeNode n, int val)
+        {
+            if (n == null)
+            {
+                return new TreeNode(val);
+            }
+
+            if (val <= n.val)
+            {
+                n.left = Helper(n.left, val);
+            }
+            else
+            {
+                n.right = Helper(n.right, val);
+            }
+
+            return n;
+        }
+
         /* 
          * 15. 找出二叉树中最长连续子串(即全部往左的连续节点，或是全部往右的连续节点）findLongest
         * 第一种解法：
@@ -184,7 +228,7 @@ namespace CodeExercise.BST
         *        
         *           
         * */
-       public int FindLongest(TreeNode root)
+        public int FindLongest(TreeNode root)
        {
            var res = FindLongestHelper(root);
            return res.maxLengthSofar;

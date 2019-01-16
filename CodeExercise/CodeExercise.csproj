@@ -120,6 +120,7 @@
     <Compile Include="DataStructure\HappyNumber.cs" />
     <Compile Include="DataStructure\HashFunction.cs" />
     <Compile Include="DataStructure\HighFive.cs" />
+    <Compile Include="DataStructure\Indeed.cs" />
     <Compile Include="DataStructure\InsertInterval.cs" />
     <Compile Include="DataStructure\IntegerEnglishWords.cs" />
     <Compile Include="DataStructure\IntersectionOfArrays.cs" />
