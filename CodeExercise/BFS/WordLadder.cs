@@ -131,7 +131,7 @@ namespace CodeExercise.BFS
             for(int i = 0; i < curr.Length; i++)
             {
                 StringBuilder sb = new StringBuilder(curr);
-
+                
                 foreach(char c in letters)
                 {
                     if (c == curr[i])

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CodeExercise.DataStructure
 {
-
+    // todo  https://coderpad.io/DATRW6Q7
     class Indeed
     {
         /* 

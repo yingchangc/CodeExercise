@@ -20,6 +20,30 @@ namespace CodeExercise.LL
         /// </summary>
         /// <param name="head"></param>
         /// <returns></returns>
+        public ListNode DeleteDuplicatesPractice(ListNode head)
+        {
+            if (head == null)
+            {
+                return null;
+            }
+
+            var anchor = head;
+            var curr = head;
+
+            while (curr != null)
+            {
+                while (curr != null && (anchor == curr || (anchor != curr && anchor.val == curr.val)))
+                {
+                    curr = curr.next;
+                }
+
+                anchor.next = curr;
+                anchor = curr;
+            }
+
+            return head;
+        }
+
         public ListNode DeleteDuplicates(ListNode head)
         {
             if (head == null)

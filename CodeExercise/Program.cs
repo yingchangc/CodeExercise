@@ -281,6 +281,15 @@ namespace CodeExercise
 
         }
 
+        // zillow
+        static void Run_PrefixExpression()
+        {
+            StringRelated.PrefixExpression test = new StringRelated.PrefixExpression();
+            var ans = test.ComputePrfixExpression("*+ABC");
+            var ans2 = test.ComputePrfixExpression("-*+ABC*-DE+FG");
+            Console.WriteLine(ans2);
+        }
+
         // 79
         static void Run_WordSearch()
         {
@@ -3345,6 +3354,9 @@ namespace CodeExercise
             //算法大全（3） 二叉树 http://www.cnblogs.com/Jax/archive/2009/12/28/1633691.html
             //https://github.com/yuzhangcmu/LeetCode/blob/master/tree/TreeDemo.java
             Run_EditDistanceQuestion();
+
+            //zillow
+            Run_PrefixExpression();
 
             //87
             Run_ScrambleString();

@@ -52,6 +52,7 @@
     <Compile Include="BFS\KnightShortestPath.cs" />
     <Compile Include="BFS\MaxAreaofIsland.cs" />
     <Compile Include="BFS\MineSweeper.cs" />
+    <Compile Include="BFS\ReachingPoints.cs" />
     <Compile Include="BFS\RemoveSubstrings.cs" />
     <Compile Include="BFS\SearchGraphNode.cs" />
     <Compile Include="BFS\SerializeDeserializeBinaryTree.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="BST\InorderSuccessor.cs" />
     <Compile Include="BST\IslandPerimeter.cs" />
     <Compile Include="BST\MergeTwoBinaryTrees.cs" />
+    <Compile Include="BST\PathSum.cs" />
     <Compile Include="BST\PrintBinaryTree.cs" />
     <Compile Include="BST\SecondMinNodeInBTree.cs" />
     <Compile Include="BST\Subtree AnotherTree.cs" />
@@ -320,12 +322,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DP\SubSets.cs" />
     <Compile Include="StringRelated\AddBoldTaginString.cs" />
+    <Compile Include="StringRelated\AddString.cs" />
     <Compile Include="StringRelated\BaseballGame.cs" />
+    <Compile Include="StringRelated\BasicCalculator.cs" />
     <Compile Include="StringRelated\DecodeString.cs" />
+    <Compile Include="StringRelated\EvaluateReversePolishNotation.cs" />
     <Compile Include="StringRelated\IntegertoRoman.cs" />
     <Compile Include="StringRelated\IsomorphicStrings.cs" />
     <Compile Include="StringRelated\LongestSubstringAtLeastKRepeatingCharacters.cs" />
     <Compile Include="StringRelated\PartitionLabels.cs" />
+    <Compile Include="StringRelated\PrefixExpression.cs" />
     <Compile Include="StringRelated\RearrangeString.cs" />
     <Compile Include="StringRelated\ReorderLogFiles.cs" />
     <Compile Include="StringRelated\ReorganizeString.cs" />
