@@ -290,6 +290,7 @@
     <Compile Include="LL\RemoveDuplicatesfromSortedList.cs" />
     <Compile Include="LL\RemoveNthNodeFromEndList.cs" />
     <Compile Include="LL\ReverseKLL.cs" />
+    <Compile Include="LL\SwapNodesPairs.cs" />
     <Compile Include="matrixQuestion\SetMatrixZeroes.cs" />
     <Compile Include="matrixQuestion\SpiralMatrix.cs" />
     <Compile Include="matrixQuestion\SudokuSolver.cs" />
@@ -360,6 +361,7 @@
     <Compile Include="SystemDesign\RateLimiter.cs" />
     <Compile Include="SystemDesign\StandardBloomFilter.cs" />
     <Compile Include="SystemDesign\TinyUrl.cs" />
+    <Compile Include="SystemDesign\TokenBucket.cs" />
     <Compile Include="SystemDesign\Typehead.cs" />
     <Compile Include="SystemDesign\WebLogger.cs" />
     <Compile Include="TopologicalSort\AlienDictionary.cs" />

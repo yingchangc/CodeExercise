@@ -79,9 +79,6 @@ namespace CodeExercise.DP
         {
 
             string currStr = node.currentString;
-
-            
-
             char lastChar = currStr[currStr.Length - 1];
 
             // note
@@ -120,7 +117,7 @@ namespace CodeExercise.DP
         }
 
 
-        class TrieTree
+        public class TrieTree
         {
             public TrieNode root;
 
@@ -149,7 +146,7 @@ namespace CodeExercise.DP
             }
         }
 
-        class TrieNode
+        public class TrieNode
         {
             public TrieNode()
             {

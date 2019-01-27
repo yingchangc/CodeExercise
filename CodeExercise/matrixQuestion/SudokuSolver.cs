@@ -20,6 +20,110 @@ namespace CodeExercise.matrixQuestion
         /// Empty cells are indicated by the character '.'.
         /// </summary>
         /// <param name="board"></param>
+        public void SolveSudokuLeetCode(char[][] board)
+        {
+
+            Console.WriteLine(board.Length * board[0].Length);
+
+            DFSSolver(board, 0, board.Length, board[0].Length);
+
+        }
+
+        private bool DFSSolver(char[][] board, int i, int lenY, int lenX)
+        {
+            if (i >= lenY * lenX)
+            {
+                return true;
+            }
+
+            int locY = i / lenX;
+            int locX = i % lenX;
+
+            if (board[locY][locX] != '.')
+            {
+                return DFSSolver(board, i + 1, lenY, lenX);
+            }
+
+            char[] cs = { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+            for (int k = 0; k < 9; k++)
+            {
+                board[locY][locX] = cs[k];
+
+                if (isValidSoFar(board, locY, locX, lenY, lenX) && DFSSolver(board, k + 1, lenY, lenX))
+                {
+                    return true;
+                }
+
+                board[locY][locX] = '.';
+            }
+
+            return false;
+
+        }
+
+        private bool isValidSoFar(char[][] board, int locY, int locX, int lenY, int lenX)
+        {
+            // row 
+            var visitedR = new HashSet<char>();
+            for (int i = 0; i < lenX; i++)
+            {
+                if (visitedR.Contains(board[locY][i]))
+                {
+                    return false;
+                }
+
+                if (board[locY][i] != '.')
+                {
+                    visitedR.Add(board[locY][i]);
+                }
+
+            }
+
+            // col 
+            var visitedC = new HashSet<char>();
+            for (int j = 0; j < lenY; j++)
+            {
+                if (visitedC.Contains(board[j][locX]))
+                {
+                    return false;
+                }
+
+                if (board[j][locX] != '.')
+                {
+                    visitedC.Add(board[j][locX]);
+                }
+
+            }
+
+
+            // sq
+            var visitedSq = new HashSet<char>();
+
+            int rgX = locX / 3;
+            int rgY = locY / 3;
+
+            for (int j = rgY * 3; j < (rgY + 1) * 3; j++)
+            {
+                for (int i = rgX * 3; i < (rgX + 1) * 3; i++)
+                {
+                    if (visitedSq.Contains(board[j][i]))
+                    {
+                        return false;
+                    }
+
+                    if (board[j][i] != '.')
+                    {
+                        visitedSq.Add(board[j][i]);
+                    }
+
+                }
+            }
+
+            return true;
+        }
+
+        //---------------------------------------------------------------
+
         public void SolveSudoku(char[,] board)
         {
 
